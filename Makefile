@@ -1,5 +1,5 @@
 init:
-	npm install ; mkdir public ; cd public ; mkdir uploaded ; cd uploaded ; mkdir sources ; cd .. ; npm install
+	npm install ; cd public ; mkdir uploaded ; cd uploaded ; mkdir sources ; cd .. ; npm install
 .PHONY: init
 
 dev:
