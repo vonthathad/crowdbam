@@ -1,1 +1,2 @@
-//COMMENT GLOBAL
+Init:
+make init
