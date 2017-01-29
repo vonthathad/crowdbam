@@ -47,6 +47,8 @@ exports.list = function(req,res){
     var match = {};
     conds.push({public: true});
     if(req.query.category) conds.push({categories : req.query.category});
+    if(req.query.follow) conds.push({follows : parseInt(req.query.follow)});
+    if(req.query.user) conds.push({creator : parseInt(req.query.user)});
     if(req.query.text) {
         conds.push({$or:[
             {title: { $regex: req.query.text, $options: 'i' }},
