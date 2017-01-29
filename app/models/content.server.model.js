@@ -17,7 +17,7 @@ var ContentSchema = new Schema({
         type: Date
     },
     type: {
-        type: Number,
+        type: String,
         ref: 'Type',
         required: 'Type cannot be blank'
     },

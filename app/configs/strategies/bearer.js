@@ -14,7 +14,8 @@ module.exports = function(){
                 if (decoded === undefined) {
                     return done(null,false);
                 }
-                User.findById(decoded.uid,function(err,user){
+                console.log(decoded.email);
+                User.findUserByEmail(decoded.email,function(err,user){
                     if(!user)
                         return done(null,false);
                     return done(null,user);

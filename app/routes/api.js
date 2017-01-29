@@ -2,6 +2,46 @@
  * Created by andh on 1/28/17.
  */
 var passport = require('passport');
+var users = require('../controllers/user.server.controller');
+var categories = require('../controllers/category.server.controller');
+var contents = require('../controllers/content.server.controller');
+var challenges = require('../controllers/challenge.server.controller');
+var types = require('../controllers/type.server.controller');
 module.exports = function (router) {
     router.use(passport.authenticate('bearer', {session: false}));
+    /* CHALLENGE */
+    router.route('/challenges')
+        .get(challenges.list)
+        .post(users.requiresLogin,challenges.create);
+    router.route('/challenges/:challengeID')
+        .get(challenges.get)
+        .put(users.requiresLogin,challenges.hasAuthorization,challenges.update)
+        .delete(users.requiresLogin,challenges.hasAuthorization,challenges.remove);
+    router.param('challengeID', challenges.challengeByID);
+    /* CATEGORY */
+    router.route('/categories')
+        .get(categories.list)
+        .post(users.requiresManager,categories.create);
+    router.route('/categories/:categoryURL')
+        .get(categories.get)
+        .put(users.requiresManager,categories.update)
+        .delete(users.requiresManager,categories.remove);
+    router.param('categoryURL', categories.categoryByURL);
+
+    /* TYPE */
+    router.route('/types')
+        .get(types.list)
+        .post(users.requiresManager,types.create);
+    router.route('/types/:typeURL')
+        .get(types.get)
+        .put(users.requiresManager,types.update)
+        .delete(users.requiresManager,types.remove);
+    router.param('typeURL', types.typeByURL);
+
+    /* CONTENT */
+    router.route('/contents/:typeURL/:challengeID')
+        .post(users.requiresLogin,contents.hasAuthorization,contents.create)
+        .get(contents.get)
+        .put(users.requiresLogin,contents.hasAuthorization,contents.update)
+        .delete(users.requiresLogin,contents.hasAuthorization,contents.remove);
 };

@@ -63,7 +63,7 @@ exports.authSignup = function (req, res) {
             //message = "Hãy kiểm tra email của bạn để xác nhận tài khoản";
             //req.flash('error', message);
             return res.status(200).send({
-                user: result,
+                token: result.token,
                 message: "Hãy kiểm tra email của bạn để xác nhận tài khoản"
             });
             //return res.redirect('/signup');
@@ -513,12 +513,21 @@ exports.renderAction = function (req, res) {
 exports.requiresLogin = function (req, res, next) {
     if (req.user === 'guest' || !req.isAuthenticated()) {
         return res.status(401).send({
-            message: 'Người dùng chưa đăng nhập'
+            message: "User doesn't login"
         });
     } else if (req.user === 'ban') {
         return res.status(401).send({
-            message: 'Tài khoản đã bị khóa do nghi ngờ vi phạm'
+            message: "Your account is banned"
         });
     }
     next();
 };
+exports.requiresManager = function(req,res,next){
+    if (req.user.role == 'manager' || req.user.role == 'admin'){
+        next();
+    } else {
+        return res.status(401).send({
+            message: "You doesn't have a permission"
+        });
+    }
+}

@@ -37,6 +37,10 @@ var UserSchema = new Schema({
         type: Boolean,
         default: false
     },
+    role: {
+        type: String,
+        default: 'user'
+    },
     provider: {
         type: String,
         required: 'Provider is required'
@@ -64,7 +68,7 @@ UserSchema.pre('save', function(next) {
 UserSchema.statics.findUserByEmail = function(email, callback) {
     this.findOne({
         email: email
-    }, callback);
+    },'-password -salt', callback);
 };
 UserSchema.methods.hashPassword = function(password) {
     return crypto.pbkdf2Sync(password, this.salt, 10000,

@@ -29,13 +29,15 @@ var ChallengeSchema = new Schema({
         type: String,
         trim: true,
         unique: true,
+        index: true,
+        sparse: true,
         match: [/^[A-Za-z_.-]{3,20}$/, "Please fill a valid challenge's url"]
     },
-    category: {
-        type: Number,
-        ref: 'Category',
-        required: 'Category of challenge is required'
-    },
+    categories: [{
+        type: String,
+        required: 'Category of challenge is required',
+        ref: 'Category'
+    }],
     shares: [{
         type: Number,
         ref: 'User',
@@ -52,14 +54,18 @@ var ChallengeSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    prize: Number,
+    prize: {
+        type: Number,
+        required: 'Prize of challenge is required',
+        min: 0
+    },
     creator: {
         type: Number,
         ref: 'User',
-        default: []
+        required: 'Creator of challenge is required'
     },
     types: [{
-        type: Number,
+        type: String,
         ref: 'Type',
         default: []
     }],
@@ -72,6 +78,11 @@ ChallengeSchema.plugin(autoIncrement.plugin, {
     model: 'Challenge',
     startAt: 1
 });
+ChallengeSchema.statics.findChallengeByURL = function(email, callback) {
+    this.findOne({
+        email: email
+    },'-password -salt', callback);
+};
 // GameSchema.plugin(random);
 ChallengeSchema.index({ title: 'text',description: 'text'});
 ChallengeSchema.set('toJSON',{getters: true,virtuals: true});
