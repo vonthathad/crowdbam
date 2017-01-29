@@ -10,5 +10,12 @@ module.exports = function(callback) {
         callback();
     });
     require('../models/user.server.model');
+    require('../models/category.server.model');
+    require('../models/challenge.server.model');
+    require('../models/comment.server.model');
+    require('../models/content.server.model');
+    require('../models/solution.server.model');
+    require('../models/timeline.server.model');
+    require('../models/type.server.model');
     return db;
 };
