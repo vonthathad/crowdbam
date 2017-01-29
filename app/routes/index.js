@@ -5,7 +5,18 @@ var pa
 /* GET home page. */
 module.exports = function (app) {
   app.post('/auth/signup', users.authSignup);
-  
+  app.route('/action/verify/:token')
+      .get(users.verifyEmail);
+  app.route('/action/verify')
+      .post(users.resendVerificationEmail);
+  app.route('/action/reset/:token')
+      .get(users.resetPage);
+  app.route('/action/reset')
+      .post(users.resetPassword);
+  app.route('/action/password/:token')
+      //.get(users.renderReset)
+      .get(users.renderPassword)
+      .post(users.resetDone);
 /////////// LOCAL LOGIN
   app.post('/auth/signin',passport.authenticate('local'), users.authSignin);
   
@@ -22,7 +33,7 @@ module.exports = function (app) {
   });
 
   app.get('/', function (req, res, next) {
-    res.render('index', {app: config.app});
+    res.render('index', {message: null, app: config.app, channel: config.server.channel});
   });
 
 }

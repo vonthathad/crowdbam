@@ -43,7 +43,9 @@ var UserSchema = new Schema({
     },
     providerId: String,
     providerData: {},
-    token: String
+    token: String,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 });
 
 UserSchema.plugin(autoIncrement.plugin, {
@@ -59,9 +61,14 @@ UserSchema.pre('save', function(next) {
     }
     next();
 });
+UserSchema.statics.findUserByEmail = function(email, callback) {
+    this.findOne({
+        email: email
+    }, callback);
+};
 UserSchema.methods.hashPassword = function(password) {
     return crypto.pbkdf2Sync(password, this.salt, 10000,
-        64).toString('base64');
+        64,'sha1').toString('base64');
 };
 
 UserSchema.statics.findUniqueUsername = function(username, suffix,

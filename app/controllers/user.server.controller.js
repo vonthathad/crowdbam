@@ -10,16 +10,21 @@ var User = require('mongoose').model('User'),
     crypto = require('crypto'),
     paging = 7;
 var getErrorMessage = function (err) {
-    var message = 'Xảy ra lỗi. Vui lòng thử lại sau';
+    console.log(err);
+    var messages = [];
     if (err.code) {
         switch (err.code) {
             case 11000:
             case 11001:
-                message = 'Email đã tồn tại';
+                messages = ['Email or username is exist'];
                 break;
         }
+    } else {
+        for (var errName in err.errors) {
+            if (err.errors[errName].message) messages.push(err.errors[errName].message);
+        }
     }
-    return message;
+    return messages;
 };
 exports.authLogout = function (req, res) {
     req.logout();
@@ -37,7 +42,7 @@ exports.authSignup = function (req, res) {
         user.password = req.body.password;
         user.provider = 'local';
         user.isVerified = false;
-        user.avatar = "https://www.funstart.net/sources/ninja.png";
+        user.avatar = "/assets/img/avatar.png";
         var tokenDt = {
             email: req.body.email
         };
@@ -45,10 +50,10 @@ exports.authSignup = function (req, res) {
         user.token = userToken;
         user.save(function (err, result) {
             if (err) {
-                var message = getErrorMessage(err);
-                console.log(message);
+                var messages = getErrorMessage(err);
+
                 return res.status(400).send({
-                    message: message
+                    messages: messages
                 });
             }
             var tokenData = {
@@ -79,26 +84,26 @@ exports.verifyEmail = function (req, res, next) {
     };
     Jwt.verify(token, privateKey, function (err, decoded) {
         if (decoded === undefined) {
-            message = "Mã token này không tồn tại";
-            return res.render(process.env.NODE_ENV + '/index', { user: null, message: message, app: app, channel: config.server.channel });
+            message = "Token has expired :(";
+            return res.render('index', { message: message, app: config.app, channel: config.server.channel });
         }
         User.findOne({ email: decoded.email }, function (err, user) {
             if (err) {
-                message = "Không tồn tại token, hoặc đã hết hạn";
-                return res.render(process.env.NODE_ENV + '/index', { user: null, message: message, app: app, channel: config.server.channel });
+                message = "Token has expired :(";
+                return res.render('index', { message: message, app: config.app, channel: config.server.channel });
             }
             if (user === null) {
-                message = "Tài khoản không tồn tại";
-                return res.render(process.env.NODE_ENV + '/index', { user: null, message: message, app: app, channel: config.server.channel });
+                message = "Account doesn't exist";
+                return res.render('index', { message: message, app: config.app, channel: config.server.channel });
             }
             user.isVerified = true;
-            User.findByIdAndUpdate(user._id, user, function (err, user) {
+            user.save(function (err, user) {
                 if (err) {
-                    message = "Đã xảy ra lỗi. Hãy thử lại sau";
-                    return res.render(process.env.NODE_ENV + '/index', { user: null, message: message, app: app, channel: config.server.channel });
+                    message = "Error Occur. Please try again";
+                    return res.render('index', { message: message, app: config.app, channel: config.server.channel });
                 } else {
-                    message = "Chúc mừng, tài khoản đã được xác thực!";
-                    return res.render(process.env.NODE_ENV + '/index', { user: null, message: message, app: app, channel: config.server.channel });
+                    message = "Congragulation! Account has verified";
+                    return res.render('index', { message: message, app: config.app, channel: config.server.channel });
                 }
             })
         })
@@ -116,10 +121,27 @@ exports.resetPage = function (req, res) {
                 url: config.app.url,
                 image: config.app.image
             };
-            message = "Token để reset password không tồn tại, hoặc đã hết hạn.";
-            return res.render(process.env.NODE_ENV + '/index', { message: message, user: null, app: app, channel: config.server.channel });
+            message = "Token has expired :(";
+            return res.render('index', { message: message, user: null, app: config.app, channel: config.server.channel });
         }
-        return res.redirect('/action/' + req.params.token);
+        return res.redirect('/action/password/' + req.params.token);
+    });
+}
+exports.renderPassword = function (req, res) {
+    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
+        if (!user) {
+            var app = {
+                id: config.app.id,
+                name: config.app.name,
+                description: config.app.description,
+                url: config.app.url,
+                image: config.app.image
+            };
+            message = "Token has expired :(";
+            return res.render('index', { message: message, user: null, app: config.app, channel: config.server.channel });
+        }
+        message = 'Enter new password';
+        return res.render('index', { message: message, user: null, app: config.app, channel: config.server.channel });
     });
 }
 exports.resetDone = function (req, res) {
@@ -127,7 +149,7 @@ exports.resetDone = function (req, res) {
         if (!user) {
             //req.flash('error', 'Token để reset password không tồn tại, hoặc đã hết hạn.');
             //return res.redirect('back');
-            message = "Token để reset password không tồn tại, hoặc đã hết hạn.";
+            message = "Token has expired :(";
             return res.status(400).send({
                 message: message
             });
@@ -138,13 +160,13 @@ exports.resetDone = function (req, res) {
             user.resetPasswordExpires = undefined;
             user.save(function (err) {
                 if (err) {
-                    message = "Đã xảy ra lỗi. Hãy thử lại sau";
+                    message = "Error occur. Please try again";
                     return res.status(400).send({
                         message: message
                     });
                 } else {
                     Mail.sendMailDoneResetPassword(user);
-                    message = "Thay đổi mật khẩu thành công";
+                    message = "Change password success!";
                     return res.status(200).send({
                         data: user,
                         message: message
@@ -154,6 +176,38 @@ exports.resetDone = function (req, res) {
         }
     });
 };
+exports.resendVerificationEmail = function(req, res) {
+    User.findUserByEmail(req.body.email, function(err, user){
+        if (!err) {
+            if (user === null) {
+                message = "Account doesn't exist";
+                return res.status(400).send({
+                    message: message
+                });
+            }
+            if (user.isVerified === true) {
+                message = "Account has verified";
+                return res.status(400).send({
+                    message: message
+                });
+            }
+            var tokenData = {
+                email: user.email
+            };
+            Mail.sentMailVerificationLink(user,Jwt.sign(tokenData, privateKey));
+            message = 'Resend confirmation email success. Check your email to verify!';
+            return res.status(200).send({
+                message: message
+            });
+
+        } else {
+            message = "Error occur. Please try again.";
+            return res.status(400).send({
+                message: message
+            });
+        }
+    });
+}
 exports.resetPassword = function (req, res) {
     User.findOne({ email: req.body.email }, function (err, user) {
         if (!err) {
@@ -165,7 +219,7 @@ exports.resetPassword = function (req, res) {
             }
             crypto.randomBytes(20, function (err, buf) {
                 if (err) {
-                    message = "Đã xảy ra lỗi. Hãy thử lại sau";
+                    message = "Error occur. Please try again";
                     return res.status(400).send({
                         message: message
                     });
@@ -175,13 +229,13 @@ exports.resetPassword = function (req, res) {
                     user.resetPasswordExpires = Date.now() + 3600000;
                     user.save(function (err) {
                         if (err) {
-                            message = "Đã xảy ra lỗi. Hãy thử lại sau";
+                            message = "Error occur. Please try again";
                             return res.status(400).send({
                                 message: message
                             });
                         } else {
                             Mail.sendMailResetPassword(user, token);
-                            message = 'Thành công. Yêu cầu thay đổi mật khẩu đã được gửi tới email của bạn';
+                            message = 'Success. Password change request has been sent to your email';
                             return res.status(200).send({
                                 message: message
                             });
@@ -191,7 +245,7 @@ exports.resetPassword = function (req, res) {
                 }
             });
         } else {
-            message = "Đã xảy ra lỗi. Hãy thử lại sau";
+            message = "Error occur. Please try again";
             return res.status(400).send({
                 message: message
             });
@@ -454,7 +508,7 @@ exports.renderAction = function (req, res) {
         url: 'https://www.funstart.net',
         image: 'https://www.funstart.net/sources/ads.jpg'
     };
-    res.render(process.env.NODE_ENV + '/index', { app: app });
+    res.render('index', { app: config.app });
 };
 exports.requiresLogin = function (req, res, next) {
     if (req.user === 'guest' || !req.isAuthenticated()) {
@@ -464,14 +518,6 @@ exports.requiresLogin = function (req, res, next) {
     } else if (req.user === 'ban') {
         return res.status(401).send({
             message: 'Tài khoản đã bị khóa do nghi ngờ vi phạm'
-        });
-    }
-    next();
-};
-exports.isDeveloper = function (req, res, next) {
-    if (req.user.role !== 1) {
-        return res.status(401).send({
-            message: 'Phải có quyền mới xem được nội dung trang'
         });
     }
     next();

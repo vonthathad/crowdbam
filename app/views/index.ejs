@@ -15,7 +15,10 @@
   <meta name="viewport" content="device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
-abc
+<script>
+  window.message = "<%- message || 'null' %>";
+  alert(window.message);
+</script>
 <!--MODULE COMPONENTS-->
 </body>
 </html>

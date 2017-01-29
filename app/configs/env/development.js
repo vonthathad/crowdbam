@@ -14,8 +14,8 @@ module.exports = {
         profileFields: ['id', 'displayName','email','gender']
     },
     email: {
-        username: "crowdbam.com",
-        password: "crowdbam123",
+        username: "crowdbam.system",
+        password: "crowdbam@sgp",
         accountName: "Crowd Bam",
         verifyEmailUrl: "action/verify",
         resetPasswordUrl: "action/reset"
