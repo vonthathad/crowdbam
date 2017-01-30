@@ -11,6 +11,10 @@ var comments = require('../controllers/comment.server.controller');
 var types = require('../controllers/type.server.controller');
 module.exports = function (router) {
     router.use(passport.authenticate('bearer', {session: false}));
+    
+    /* TOKEN */
+    router.get('/token', users.authToken);
+    
     /* CHALLENGE */
     router.route('/challenges')
         .get(challenges.list)

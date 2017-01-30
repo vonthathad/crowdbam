@@ -7,8 +7,7 @@ var User = require('mongoose').model('User'),
     config = require('../configs/config'),
     privateKey = config.key.privateKey,
     https = require('https'),
-    crypto = require('crypto'),
-    paging = 7;
+    crypto = require('crypto');
 var getErrorMessage = function (err) {
     console.log(err);
     var messages = [];
@@ -253,165 +252,7 @@ exports.resetPassword = function (req, res) {
     });
 
 };
-exports.loadUsers = function (req, res) {
-    var page = parseInt(req.query.page),
-        skip = page > 0 ? ((page - 1) * paging) : 0;
-    if (req.query.suggest) {
-        if (req.query.suggest == 'mutual') {
-            User.aggregate([
-                { "$match": { "_id": { $in: req.user.friends } } },
-                { "$unwind": "$friends" },
-                {
-                    "$group": {
-                        "_id": "$friends",
-                        "count": { $sum: 1 }
-                    }
-                },
-                { "$match": { $and: [{ "_id": { $nin: req.user.friends } }, { _id: { $ne: req.user._id } }] } },
-                { "$sort": { "count": -1 } },
-                { "$skip": skip },
-                { "$limit": (paging + 1) }
-            ], function (err, results) {
-                if (err) {
-                    // console.log(err);
-                    res.json(err);
-                } else {
-                    // console.log(results);
-                    results = results.map(function (doc) {
-                        return new User(doc)
-                    });
-                    //res.json(results);
-                    User.populate(results, { "path": "_id", "select": "displayName username avatar provider" }, function (err, dt) {
-                        if (err) throw err;
-                        data = [];
-                        for (var i = 0; i < dt.length; i++) {
-                            data.push(dt[i]._id);
-                        }
-                        var isNext = false;
-                        if (data.length == (paging + 1)) {
-                            isNext = true;
-                            data.pop();
-                        }
-                        resdata = {
-                            data: data,
-                            isNext: isNext
-                        };
-                        res.json(resdata);
-                    });
-                }
 
-            })
-        } else if (req.query.suggest = 'facebook') {
-            console.log('here');
-            console.log(req.user.providerData);
-            if (req.user.providerData && req.user.providerData.accessToken) {
-                console.log('token', req.user.providerData.accessToken)
-                var options = {
-                    host: 'graph.facebook.com',
-                    path: '/me/friends?limit=100&access_token=' + req.user.providerData.accessToken
-                };
-                https.get(options, function (resp) {
-                    var data = '';
-                    resp.on('data', function (chunk) {
-                        data += chunk;
-
-                    });
-
-                    resp.on('end', function () {
-                        var idArr = [];
-                        results = JSON.parse(data);
-                        if (results.data) {
-                            // console.log(results);
-                            for (var i = 0; i < results.data.length; i++) {
-                                idArr.push(results.data[i].id);
-                            }
-                            // console.log(idArr);
-                            User.find({ $and: [{ providerId: { $in: idArr } }, { _id: { $nin: req.user.friends } }] }, 'username displayName avatar exp level friends', {
-                                skip: skip,
-                                limit: (paging + 1),
-                                sort: getSortType(req.query.order)
-                            }, function (err, users) {
-                                if (err) {
-                                    res.json(err);
-                                } else {
-
-                                    var isNext = false;
-                                    if (users.length == (paging + 1)) {
-                                        isNext = true;
-                                        users.pop();
-                                    }
-                                    resdata = {
-                                        data: users,
-                                        isNext: isNext
-                                    }
-                                    res.json(resdata);
-                                }
-                            });
-                        }
-
-                    });
-                });
-            } else {
-                res.json({});
-            }
-        } else {
-            res.json({});
-        }
-    } else {
-        var conds = [];
-        var match = {};
-        if (req.query.friend) {
-            User.findById(req.query.friend, function (err, user) {
-                if (user) {
-                    conds.push({ _id: { $in: user.friends } });
-                    if (req.query.online) {
-                        conds.push({ status: 1 });
-                    }
-                };
-                if (req.query.text) conds.push({
-                    $or: [
-                        { email: { $regex: req.query.text, $options: 'i' } },
-                        { username: { $regex: req.query.text, $options: 'i' } },
-                        { displayName: { $regex: req.query.text, $options: 'i' } }
-                    ]
-                });
-                if (!conds.length) {
-                    match = {};
-                } else if (conds.length == 1) {
-                    match = conds.pop();
-                } else {
-                    match = { $and: conds };
-                }
-                // console.log(match);
-                var sortType = getSortType(req.query.order);
-                User.find(match, 'username displayName avatar exp level friends class')
-                    .skip(skip)
-                    .limit(paging + 1)
-                    .sort(sortType)
-                    .exec(function (err, data) {
-                        if (err) {
-                            res.status(400).send();
-                        } else {
-                            var isNext = false;
-                            if (data.length == (paging + 1)) {
-                                isNext = true;
-                                data.pop();
-                            }
-                            resdata = {
-                                data: data,
-                                isNext: isNext
-                            }
-                            res.json(resdata);
-                        }
-
-                    })
-            })
-
-        }
-
-    }
-
-};
 var getSortType = function (sortType) {
     if (sortType === "username") {
         return { username: -1 };
@@ -428,40 +269,15 @@ var getSortType = function (sortType) {
 exports.authToken = function (req, res) {
     if (req.user) {
         return res.json({ user: req.user });
-        req.user.active = Date.now();
         req.user.save();
     } else {
         res.status(400).send();
     }
 };
 exports.loadUser = function (req, res, next) {
-    User.find({ exp: { $gt: req.selectedUser.exp } }).count(function (err, count) {
-        // console.log(req.selectedUser);
-        var rank = 0;
-        if (!err) rank = count + 1;
-        req.selectedUser.rank = rank;
-        res.json({ data: req.selectedUser });
-    });
+    res.json({ data: req.selectedUser });
 };
-exports.followUser = function (req, res) {
-    if (req.query.action == 'follow') {
-        User.findByIdAndUpdate(req.user._id, { $addToSet: { "friends": req.selectedUser._id } }, function () {
-            User.findByIdAndUpdate(req.selectedUser._id, { $addToSet: { "friends": req.user._id } }, function () {
-                console.log('them xong');
-                res.status(200).send();
-            });
-        });
 
-    } else if (req.query.action == 'unfollow') {
-        User.findByIdAndUpdate(req.user._id, { $pull: { "friends": req.selectedUser._id } }, function () {
-            User.findByIdAndUpdate(req.selectedUser._id, { $pull: { "friends": req.user._id } }, function () {
-                console.log('bo them xong');
-                res.status(200).send();
-            });
-        });
-
-    }
-}
 exports.updateUser = function (req, res, next) {
     var dataChange = {};
     if (req.body.avatar) dataChange.avatar = req.body.avatar;
@@ -473,50 +289,26 @@ exports.updateUser = function (req, res, next) {
     })
 };
 exports.userByUsername = function (req, res, next, id) {
-    if (req.query.short) {
-        User.findOne({ username: id }, 'username displayName avatar class exp win lose games active friends')
-            .exec(function (err, user) {
-                if (err) {
-                    return next(err);
-                }
-                if (!user) {
-                    return next(new Error('Failed to load user ' + id));
-                }
-                req.selectedUser = user;
-                next();
-            });
-    } else {
-        User.findOne({ username: id }, '-password -salt -token -isVerified -providerData')
-            .exec(function (err, user) {
-                if (err) {
-                    return next(err);
-                }
-                if (!user) {
-                    return next(new Error('Failed to load user ' + id));
-                }
-                req.selectedUser = user;
-                next();
-            });
-    }
+    User.findOne({ username: id }, '-password -salt -token -isVerified -providerData')
+        .exec(function (err, user) {
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                return next(new Error('Failed to load user ' + id));
+            }
+            req.selectedUser = user;
+            next();
+        });
+};
 
-};
-exports.renderAction = function (req, res) {
-    var app = {
-        id: '244448985929177',
-        name: 'Fun Start',
-        description: 'Game hay thử tài!',
-        url: 'https://www.funstart.net',
-        image: 'https://www.funstart.net/sources/ads.jpg'
-    };
-    res.render('index', { app: config.app });
-};
 exports.requiresLogin = function (req, res, next) {
     if (req.user === 'guest' || !req.isAuthenticated()) {
         return res.status(401).send({
             message: "User doesn't login"
         });
     } else if (req.user === 'ban') {
-        return res.status(401).send({
+        return res.status(403).send({
             message: "Your account is banned"
         });
     }
@@ -526,7 +318,7 @@ exports.requiresManager = function(req,res,next){
     if (req.user.role == 'manager' || req.user.role == 'admin'){
         next();
     } else {
-        return res.status(401).send({
+        return res.status(403).send({
             message: "You doesn't have a permission"
         });
     }
