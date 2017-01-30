@@ -47,7 +47,7 @@ var ChallengeSchema = new Schema({
         type: Number,
         ref: 'User',
         default: []
-    }],
+    }], 
     top: Number,
     hot: Number,
     created: {
