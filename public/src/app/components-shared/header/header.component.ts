@@ -16,9 +16,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-  openLoginForm(){
+  onLoginClick(){
     this.modal
     .open(FormLoginWrapperComponent, overlayConfigFactory({num1: 2, num2: 3, isBlocking: false}, BSModalContext))
          .then(dialog => this.userService.setLoginDialog(dialog));
   }
+  // onCreateChallengeClick(){
+
+  // }
 }

@@ -17,9 +17,10 @@ const routes: Routes = [
     { path: 'challenges/:id/:title', component: ChallengesComponent },
 
     { path: 'c/:url', component: ChallengeComponent },
-    { path: 'challeges/:id/', component: ChallengeComponent },
-    { path: 'challeges?sort=:type', component: ChallengeComponent },
-    { path: 'challeges/:id/edit', component: ChallengeComponent },
+    { path: 'challenges/:id/', component: ChallengeComponent },
+    { path: 'challenges?sort=:type', component: ChallengeComponent },
+    { path: 'challenges/:id/edit', component: ChallengeComponent },
+    { path: 'challenges/create', component: ChallengeComponent },
 
     { path: 'profiles/:id', component: ProfilesComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
