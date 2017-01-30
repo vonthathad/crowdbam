@@ -10,7 +10,8 @@ autoIncrement.initialize(connection);
 var SolutionSchema = new Schema({
     challenge: {
         type: Number,
-        ref: 'Challenge'
+        ref: 'Challenge',
+        required: 'Challenge cannot be blank'
     },
     created: {
         type: Date,

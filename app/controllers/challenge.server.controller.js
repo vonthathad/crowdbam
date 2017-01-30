@@ -103,7 +103,7 @@ exports.list = function(req,res){
                 });
                 //res.json(results);
                 Challenge.populate(results,{"path": "creator", "select": "displayName username avatar"}, function(err,data) {
-                    if (err) throw err;
+                    if (err) return res.status(400).send();
                     var isNext = false;
                     if(data.length==(paging+1)){
                         isNext = true;
@@ -181,7 +181,7 @@ exports.challengeByID = function(req, res, next, id){
         .populate('types','title')
         .exec(function (err, challenge) {
             if (err) {
-                return res.status(400).send({messages: getErrorMessage(err)});
+                return res.status(400).send();
             }
             if (!challenge) {
                 return res.status(400).send({messages: ['Failed to load challenge ' + id]});
