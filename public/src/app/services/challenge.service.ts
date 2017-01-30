@@ -19,7 +19,7 @@ export class ChallengeService {
         // this.loggedUser$.subscribe(user => {this.user = user;});
     }
     // GET CHELLENGE LIST
-    getChallenges(){
+    getChallenges(queryArgs?:Object):Observable<any[]>{
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer ${token}`,
@@ -27,6 +27,7 @@ export class ChallengeService {
         });
         return this.rest.get({
             url: `api/challenges`,
+            queryArgs: queryArgs,
             headers: headers
         });
     }
