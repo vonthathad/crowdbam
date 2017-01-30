@@ -19,7 +19,10 @@ module.exports = function (router) {
         .get(challenges.get)
         .put(users.requiresLogin,challenges.hasAuthorization,challenges.update)
         .delete(users.requiresLogin,challenges.hasAuthorization,challenges.remove);
+    router.route('/challenges/:challengeID/follow')
+        .put(users.requiresLogin,challenges.follow);
     router.param('challengeID', challenges.challengeByID);
+    
     /* CATEGORY */
     router.route('/categories')
         .get(categories.list)
@@ -56,6 +59,7 @@ module.exports = function (router) {
         .put(users.requiresLogin,solutions.hasAuthorization,solutions.update)
         .delete(users.requiresLogin,solutions.hasAuthorization,solutions.remove);
     router.param('solutionID', solutions.solutionByID);
+    
     /* COMMENT */
     router.route('/comments')
         .get(comments.list)

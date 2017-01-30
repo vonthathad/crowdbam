@@ -33,11 +33,7 @@ var CommentSchema = new Schema({
         type: Number,
         ref: 'User'
     },
-    thumbUp: [{
-        type: Number,
-        ref: 'User'
-    }],
-    thumbDown: [{
+    votes: [{
         type: Number,
         ref: 'User'
     }]
