@@ -1,17 +1,17 @@
 <form [formGroup]="challengeForm" (ngSubmit)="loginLocal(challengeForm)">
   <div class="content">
     <div class="input-group">
-      <span class="input-group-addon">
-                <i class="ion-at"></i>
-            </span>
+        <span class="input-group-addon">
+            <i class="ion-at"></i>
+        </span>
       <div class="form-group label-floating is-empty">
         <input required type="text" class="form-control" formControlName="title"><span class="material-input"></span>
         <label class="control-label" for="title">Title</label>
       </div>
     </div>
-    <div [hidden]="challengeForm.get('title').valid || challengeForm.get('title').untouched">
+    <div [hidden]="challengeForm.get('title').valid || challengeForm.get('title').untouched" class="alert alert-danger">
       <div *ngIf="challengeForm.get('title').hasError('required')">
-        * Title is required!
+        Title is required!
       </div>
     </div>
 
@@ -25,13 +25,20 @@
         <label class="control-label" for="description">Description</label>
       </div>
     </div>
-    <div [hidden]="challengeForm.get('description').valid || challengeForm.get('description').untouched">
+    <div [hidden]="challengeForm.get('description').valid || challengeForm.get('description').untouched" class="alert alert-danger">
       <div *ngIf="challengeForm.get('description').hasError('required')">
-        * Description is required!
+        Description is required!
       </div>
       <div *ngIf="challengeForm.get('description').hasError('maxlength')">
-        * Description must be no more than 140 character!
+        Description must be no more than 140 character!
       </div>
+    </div>
+
+
+    <div class="input-group">
+      <label for="categories">Categories</label>
+      <validator-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">
+      </validator-multicheckbox>
     </div>
   </div>
   <div class="footer text-center">

@@ -14,7 +14,6 @@ const routes: Routes = [
     { path: 'categories', component: ChallengesComponent },
     { path: 'categories/:name?sort=:type', component: ChallengesComponent },
     { path: 'recommendations?sort=:type', component: ChallengesComponent },
-    { path: 'challenges/:id/:title', component: ChallengesComponent },
 
     { path: 'c/:url', component: ChallengeComponent },
     { path: 'challenges/:id/', component: ChallengeComponent },

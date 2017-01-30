@@ -1,21 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 
+import { CustomValidatorService } from '../../services/custom-validator.service';
 @Component({
   selector: 'app-challenge',
   templateUrl: './challenge.component.html',
   styleUrls: ['./challenge.component.css']
 })
 export class ChallengeComponent implements OnInit {
-   private loginForm: FormGroup;
-  private errorEmail: string;  
-  constructor() { }
+  private challengeForm: FormGroup;
+  private errorEmail: string;
+  private categoryOptions: string[];
+  constructor(private cvs: CustomValidatorService, private fb: FormBuilder) {
+    this.categoryOptions = [
+      'Animal Welfare',
+      'Arts & Culture',
+      'Education',
+      'Energy',
+      'Environment',
+      'Finances'
+    ]
+   }
 
   ngOnInit() {
-     this.loginForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required, Validators.maxLength(140)])
+    this.challengeForm = this.fb.group({
+      title: ['', [Validators.required]],
+      description: ['', Validators.compose([Validators.required, Validators.maxLength(140)])],
+      categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))
     });
   }
 

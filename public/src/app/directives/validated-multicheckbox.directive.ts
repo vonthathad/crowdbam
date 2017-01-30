@@ -4,7 +4,7 @@ import { CustomValidatorService } from '../services/custom-validator.service';
 
 @Component({
     selector: 'validator-multicheckbox',
-    templateUrl: './validated-multicheckbox.html'
+    templateUrl: './validated-multicheckbox.directive.html'
 })
 export class ValidatedMulticheckboxDirective implements DoCheck {
     @Input() control: FormControl = new FormControl();

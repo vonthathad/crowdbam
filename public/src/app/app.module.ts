@@ -8,9 +8,11 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
 import { routing } from './app.routes';
 
-import {USER_PROVIDER} from './services/user.service';
-import {CHALLENGE_PROVIDER} from './services/challenge.service';
-import {CUSTOM_VALIDATOR_PROVIDER} from './services/custom-validator.service';
+import { USER_PROVIDER } from './services/user.service';
+import { CHALLENGE_PROVIDER } from './services/challenge.service';
+import { CUSTOM_VALIDATOR_PROVIDER } from './services/custom-validator.service';
+
+import { ValidatedMulticheckboxDirective } from './directives/validated-multicheckbox.directive';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -28,6 +30,7 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
 
 @NgModule({
   declarations: [
+    ValidatedMulticheckboxDirective,
     AppComponent,
     HomeComponent,
     ChallengesComponent,
