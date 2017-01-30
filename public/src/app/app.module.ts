@@ -10,6 +10,7 @@ import { routing } from './app.routes';
 
 import {USER_PROVIDER} from './services/user.service';
 import {CHALLENGE_PROVIDER} from './services/challenge.service';
+import {CUSTOM_VALIDATOR_PROVIDER} from './services/custom-validator.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -54,6 +55,7 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
   providers: [
     USER_PROVIDER,
     CHALLENGE_PROVIDER,
+    CUSTOM_VALIDATOR_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }
   ],
