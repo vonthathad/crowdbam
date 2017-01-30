@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { LocationStrategy, PathLocationStrategy, APP_BASE_HREF } from '@angular/common';
-
+import { ModalModule } from 'angular2-modal';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
 import { routing } from './app.routes';
+
+import {USER_PROVIDER} from './services/user.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,6 +20,9 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { HeaderComponent } from './components-shared/header/header.component';
 import { FooterComponent } from './components-shared/footer/footer.component';
+import { FormLoginComponent } from './components-child/form-login/form-login.component';
+import { FormRegisterComponent } from './components-child/form-register/form-register.component';
+import { FormLoginWrapperComponent } from './components-child/form-login-wrapper/form-login-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -29,15 +35,23 @@ import { FooterComponent } from './components-shared/footer/footer.component';
     ProfilesComponent,
     CategoriesComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    FormLoginComponent,
+    FormRegisterComponent,
+    FormLoginWrapperComponent
   ],
+  entryComponents: [FormLoginWrapperComponent],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
-    routing
+    routing,
+    ModalModule.forRoot(),
+    BootstrapModalModule
   ],
   providers: [
+    USER_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }
   ],

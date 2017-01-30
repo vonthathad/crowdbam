@@ -11,11 +11,13 @@ import { CategoriesComponent } from './components/categories/categories.componen
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
+    { path: 'categories', component: SearchComponent },
     { path: 'categories/:name?sort=:type', component: SearchComponent },
     { path: 'recommendations?sort=:type', component: RecommendationsComponent },
     { path: 'challenges/:id/:title', component: ChallengesComponent },
     { path: 'c/:id/:title', component: ChallengesComponent },
     { path: 'challeges?sort=:type', component: ChallengesComponent },
+    { path: 'challeges', component: ChallengesComponent },
     { path: 'profiles/:id', component: ProfilesComponent }
 ];
 
