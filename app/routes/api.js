@@ -11,6 +11,10 @@ var comments = require('../controllers/comment.server.controller');
 var types = require('../controllers/type.server.controller');
 module.exports = function (router) {
     router.use(passport.authenticate('bearer', {session: false}));
+    
+    /* TOKEN */
+    router.get('/token', users.authToken);
+    
     /* CHALLENGE */
     router.route('/challenges')
         .get(challenges.list)
@@ -19,7 +23,12 @@ module.exports = function (router) {
         .get(challenges.get)
         .put(users.requiresLogin,challenges.hasAuthorization,challenges.update)
         .delete(users.requiresLogin,challenges.hasAuthorization,challenges.remove);
+    router.route('/challenges/:challengeID/follow')
+        .put(users.requiresLogin,challenges.follow);
+    router.route('/challenges/:challengeID/share')
+        .put(users.requiresLogin,challenges.share);
     router.param('challengeID', challenges.challengeByID);
+    
     /* CATEGORY */
     router.route('/categories')
         .get(categories.list)
@@ -56,6 +65,7 @@ module.exports = function (router) {
         .put(users.requiresLogin,solutions.hasAuthorization,solutions.update)
         .delete(users.requiresLogin,solutions.hasAuthorization,solutions.remove);
     router.param('solutionID', solutions.solutionByID);
+    
     /* COMMENT */
     router.route('/comments')
         .get(comments.list)
@@ -63,5 +73,7 @@ module.exports = function (router) {
     router.route('/comments/:commentID')
         .put(users.requiresLogin,comments.hasAuthorization,comments.update)
         .delete(users.requiresLogin,comments.hasAuthorization,comments.remove);
+    router.route('/comments/:commentID/vote')
+        .put(users.requiresLogin,comments.vote);
     router.param('commentID', comments.commentByID);
 };

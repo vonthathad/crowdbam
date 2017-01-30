@@ -5,14 +5,19 @@ var pa
 /* GET home page. */
 module.exports = function (app) {
   app.post('/auth/signup', users.authSignup);
+  //tao route tuong tu tai angular2
   app.route('/action/verify/:token')
       .get(users.verifyEmail);
+  //yeu cau gui lai verify view message
   app.route('/action/verify')
       .post(users.resendVerificationEmail);
+  //tao route tuong tu tai angular2 view message
   app.route('/action/reset/:token')
       .get(users.resetPage);
+  //yeu cau reset password
   app.route('/action/reset')
       .post(users.resetPassword);
+  //tao route tuong tu tai angular2 view nhap password
   app.route('/action/password/:token')
       //.get(users.renderReset)
       .get(users.renderPassword)

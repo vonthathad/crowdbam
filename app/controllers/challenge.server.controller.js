@@ -190,3 +190,27 @@ exports.challengeByID = function(req, res, next, id){
             next();
         });
 }
+exports.follow = function(req,res){
+    var isFollowed = false;
+    req.challenge.follows.forEach(function(follow){
+        if(follow == req.user._id) isFollowed = true;
+        return;
+    });
+    if(!isFollowed){
+        Challenge.findByIdAndUpdate(req.challenge._id, { $addToSet: {"follows": req.user._id}}).exec(function(err,success){
+            if(err) return res.status(400).send();
+            return res.status(200).send({data: {follow: true}});
+        });
+    } else {
+        Challenge.findByIdAndUpdate(req.challenge._id, { $pull: {"follows": req.user._id}}).exec(function(err,success){
+            if(err) return res.status(400).send();
+            return res.status(200).send({data: {follow: false}});
+        });
+    }
+};
+exports.share = function(req,res){
+    Challenge.findByIdAndUpdate(req.challenge._id, { $addToSet: {"shares": req.user._id}}).exec(function(err,success){
+        if(err) return res.status(400).send();
+        return res.status(200).send();
+    });
+};

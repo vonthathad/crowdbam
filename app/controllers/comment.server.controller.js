@@ -93,7 +93,24 @@ exports.remove = function(req,res){
         return res.json({data: comment});
     });
 };
-
+exports.vote = function(req,res){
+    var isVoted = false;
+    req.comment.votes.forEach(function(vote){
+        if(vote == req.user._id) isVoted = true;
+        return;
+    });
+    if(!isVoted){
+        Comment.findByIdAndUpdate(req.comment._id, { $addToSet: {"votes": req.user._id}}).exec(function(err,success){
+            if(err) return res.status(400).send();
+            return res.status(200).send({data: {vote: true}});
+        });
+    } else {
+        Comment.findByIdAndUpdate(req.comment._id, { $pull: {"votes": req.user._id}}).exec(function(err,success){
+            if(err) return res.status(400).send();
+            return res.status(200).send({data: {vote: false}});
+        });
+    }
+};
 exports.commentByID = function(req, res, next, id){
     Comment.findById(id)
         .exec(function (err, comment) {
