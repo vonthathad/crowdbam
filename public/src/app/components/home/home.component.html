@@ -1,3 +1,18 @@
-<p>
-  home works!
-</p>
+<video width="400" controls>
+  <source src="mov_bbb.mp4" type="video/mp4">
+  <source src="mov_bbb.ogg" type="video/ogg">
+  Your browser does not support HTML5 video.
+</video>
+
+<div>
+  <p>Recommended for you</p>
+  <div *ngFor"let challenge of recommendedChallenges">
+      <app-card-challenge [challenge]='challenge'></app-card-challenge>
+  </div>
+</div>
+<div>
+  <p>What is popular</p>
+   <div *ngFor"let challenge of popularChallenges">
+      <app-card-challenge [challenge]='challenge'></app-card-challenge>
+  </div>
+</div>
