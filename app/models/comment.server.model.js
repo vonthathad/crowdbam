@@ -13,7 +13,7 @@ var CommentSchema = new Schema({
         required: 'Challenge cannot be blank',
     },
     comment: {
-        type: ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Comment'
     },
     created: {
