@@ -21,6 +21,8 @@ module.exports = function (router) {
         .delete(users.requiresLogin,challenges.hasAuthorization,challenges.remove);
     router.route('/challenges/:challengeID/follow')
         .put(users.requiresLogin,challenges.follow);
+    router.route('/challenges/:challengeID/share')
+        .put(users.requiresLogin,challenges.share);
     router.param('challengeID', challenges.challengeByID);
     
     /* CATEGORY */
@@ -67,5 +69,7 @@ module.exports = function (router) {
     router.route('/comments/:commentID')
         .put(users.requiresLogin,comments.hasAuthorization,comments.update)
         .delete(users.requiresLogin,comments.hasAuthorization,comments.remove);
+    router.route('/comments/:commentID/vote')
+        .put(users.requiresLogin,comments.vote);
     router.param('commentID', comments.commentByID);
 };

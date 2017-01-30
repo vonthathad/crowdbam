@@ -207,5 +207,10 @@ exports.follow = function(req,res){
             return res.status(200).send({data: {follow: false}});
         });
     }
-
+};
+exports.share = function(req,res){
+    Challenge.findByIdAndUpdate(req.challenge._id, { $addToSet: {"shares": req.user._id}}).exec(function(err,success){
+        if(err) return res.status(400).send();
+        return res.status(200).send();
+    });
 };
