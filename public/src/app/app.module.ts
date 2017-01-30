@@ -24,6 +24,7 @@ import { FormLoginComponent } from './components-child/form-login/form-login.com
 import { FormRegisterComponent } from './components-child/form-register/form-register.component';
 import { FormLoginWrapperComponent } from './components-child/form-login-wrapper/form-login-wrapper.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { CardChallengeComponent } from './components-child/card-challenge/card-challenge.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     FormLoginComponent,
     FormRegisterComponent,
     FormLoginWrapperComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    CardChallengeComponent
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [
