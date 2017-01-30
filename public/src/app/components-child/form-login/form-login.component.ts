@@ -46,11 +46,14 @@ export class FormLoginComponent implements OnInit {
     localStorage.setItem("token", user.token);
     // console.log("Login successful " + JSON.stringify(user));
     this.userService.loggedUserSource.next(user);
-    this.userService.closeUserDialog();
+    this.userService.closeLoginDialog();
     // location.reload();
   }
   fail(e) {
     // this.error.email = (JSON.parse(e._body)).message;
     console.error("Error " + e);
+  }
+  onForgotPasswordClick(){
+    this.userService.closeLoginDialog();
   }
 }

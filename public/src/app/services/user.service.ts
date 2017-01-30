@@ -11,7 +11,7 @@ import { User } from '../classes/user';
 export class UserService {
     private rest: Rest;
     public user: User;
-    private userDialog: any;
+    private loginDialog: any;
     public loggedUserSource = new Subject<User>();
     public loggedUser$ = this.loggedUserSource.asObservable();
 
@@ -62,12 +62,12 @@ export class UserService {
         return false;
     }
     
-    setUserDialog(dialog) {
-        this.userDialog = dialog;
+    setLoginDialog(dialog) {
+        this.loginDialog = dialog;
     }
-    closeUserDialog() {
-        this.userDialog.close(true);
-        delete this.userDialog;
+    closeLoginDialog() {
+        this.loginDialog.close(true);
+        delete this.loginDialog;
     }
 }
 

@@ -23,6 +23,7 @@ import { FooterComponent } from './components-shared/footer/footer.component';
 import { FormLoginComponent } from './components-child/form-login/form-login.component';
 import { FormRegisterComponent } from './components-child/form-register/form-register.component';
 import { FormLoginWrapperComponent } from './components-child/form-login-wrapper/form-login-wrapper.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FormLoginWrapperComponent } from './components-child/form-login-wrapper
     FooterComponent,
     FormLoginComponent,
     FormRegisterComponent,
-    FormLoginWrapperComponent
+    FormLoginWrapperComponent,
+    ForgotPasswordComponent
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

@@ -2,7 +2,7 @@
   <button class="btn btn-primary btn-social btn-facebook" (click)="loginFacebook()">LOGIN BY FACEBOOK</button>
   <button class="btn btn-primary btn-social btn-twitter" (click)="loginTwitter()">LOGIN BY TWITTER</button>
 </div>
-<app-form-register *ngIf="action=='login'"></app-form-register>
-<app-form-login *ngIf="action=='register'"></app-form-login>
+<app-form-register *ngIf="action=='register'"></app-form-register>
+<app-form-login *ngIf="action=='login'"></app-form-login>
 
 <button (click)="changeAction()">{{actionLabel}}<button>

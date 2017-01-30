@@ -8,6 +8,7 @@ import { ChallengesComponent } from './components/challenges/challenges.componen
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -18,7 +19,8 @@ const routes: Routes = [
     { path: 'c/:id/:title', component: ChallengesComponent },
     { path: 'challeges?sort=:type', component: ChallengesComponent },
     { path: 'challeges', component: ChallengesComponent },
-    { path: 'profiles/:id', component: ProfilesComponent }
+    { path: 'profiles/:id', component: ProfilesComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
 ];
 
 export const routing = RouterModule.forRoot(routes);

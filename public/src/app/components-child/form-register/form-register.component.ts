@@ -35,7 +35,7 @@ export class FormRegisterComponent implements OnInit {
     alert("Register successful");
     // update user
     this.userService.loggedUserSource.next(user);
-    this.userService.closeUserDialog();
+    this.userService.closeLoginDialog();
   }
   fail(e) {
     this.errorEmail = (JSON.parse(e)).message;
