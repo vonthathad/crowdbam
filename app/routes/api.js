@@ -6,6 +6,8 @@ var users = require('../controllers/user.server.controller');
 var categories = require('../controllers/category.server.controller');
 var contents = require('../controllers/content.server.controller');
 var challenges = require('../controllers/challenge.server.controller');
+var solutions = require('../controllers/solution.server.controller');
+var comments = require('../controllers/comment.server.controller');
 var types = require('../controllers/type.server.controller');
 module.exports = function (router) {
     router.use(passport.authenticate('bearer', {session: false}));
@@ -44,4 +46,22 @@ module.exports = function (router) {
         .get(contents.get)
         .put(users.requiresLogin,contents.hasAuthorization,contents.update)
         .delete(users.requiresLogin,contents.hasAuthorization,contents.remove);
+    
+    /* SOLUTION */
+    router.route('/solutions')
+        .get(solutions.list)
+        .post(users.requiresLogin,solutions.create);
+    router.route('/solutions/:solutionID')
+        .get(solutions.get)
+        .put(users.requiresLogin,solutions.hasAuthorization,solutions.update)
+        .delete(users.requiresLogin,solutions.hasAuthorization,solutions.remove);
+    router.param('solutionID', solutions.solutionByID);
+    /* COMMENT */
+    router.route('/comments')
+        .get(comments.list)
+        .post(users.requiresLogin,comments.create);
+    router.route('/comments/:commentID')
+        .put(users.requiresLogin,comments.hasAuthorization,comments.update)
+        .delete(users.requiresLogin,comments.hasAuthorization,comments.remove);
+    router.param('commentID', comments.commentByID);
 };

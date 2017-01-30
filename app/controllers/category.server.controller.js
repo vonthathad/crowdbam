@@ -55,7 +55,7 @@ exports.categoryByURL = function(req, res, next, id){
     Category.findById(id)
         .exec(function (err, category) {
             if (err) {
-                return res.status(400).send({messages: getErrorMessage(err)});
+                return res.status(400).send();
             }
             if (!category) {
                 return res.status(400).send({messages: ['Failed to load category ' + id]});

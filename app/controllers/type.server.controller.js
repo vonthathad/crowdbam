@@ -62,7 +62,7 @@ exports.typeByURL = function(req, res, next, id){
     Type.findById(id)
         .exec(function (err, type) {
             if (err) {
-                return res.status(400).send({messages: getErrorMessage(err)});
+                return res.status(400).send();
             }
             if (!type) {
                 return res.status(400).send({messages: ['Failed to load type ' + id]});

@@ -27,7 +27,10 @@ exports.hasAuthorization = function(req, res, next) {
         });
     } else {
         Content.findOne({challenge: req.challenge._id, type: req.type._id},function(err,content){
-            if(err) return res.status(400).send({messages: getErrorMessage(err)});
+            if(err) return res.status(400).send();
+            if(!content) return res.status(400).send({
+                messages : ["This content isn't exist"]
+            });
             req.content = content;
             next();
         });

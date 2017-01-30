@@ -20,7 +20,7 @@ var ContentSchema = new Schema({
         type: String,
         ref: 'Type',
         required: 'Type cannot be blank'
-    },
+    }, 
     html: {
         type: String,
         required: 'Html cannot be blank'

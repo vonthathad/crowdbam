@@ -78,10 +78,13 @@ ChallengeSchema.plugin(autoIncrement.plugin, {
     model: 'Challenge',
     startAt: 1
 });
-ChallengeSchema.statics.findChallengeByURL = function(email, callback) {
+ChallengeSchema.statics.findChallengeByURL = function(url, callback) {
     this.findOne({
-        email: email
-    },'-password -salt', callback);
+        url: url
+    }).populate('creator', 'displayName username avatar')
+    .populate('categories', 'title')
+    .populate('types','title')
+    .exec(callback);
 };
 // GameSchema.plugin(random);
 ChallengeSchema.index({ title: 'text',description: 'text'});

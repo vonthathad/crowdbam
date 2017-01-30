@@ -9,11 +9,19 @@ var mongoose = require('mongoose'),
 var CommentSchema = new Schema({
     challenge: {
         type: Number,
-        ref: 'Challenge'
+        ref: 'Challenge',
+        required: 'Challenge cannot be blank',
+    },
+    comment: {
+        type: ObjectId,
+        ref: 'Comment'
     },
     created: {
         type: Date,
         default: Date.now
+    },
+    modified: {
+        type: Date
     },
     content: {
         type: String,
