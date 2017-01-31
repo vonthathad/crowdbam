@@ -13,23 +13,7 @@ export class ValidatedMulticheckboxDirective implements DoCheck {
     private errorMessages: Array<string> = [];
     private isValid: boolean;
     private numberOfClicks: number = 0;
-    constructor(private cvs: CustomValidatorService) {
-        console.log(this.options);
-        // this.options = [
-        //     {
-        //         value: "category._id",
-        //         label: "category.title"
-        //     },
-        //     {
-        //         value: "category._id",
-        //         label: "category.title"
-        //     },
-        //     {
-        //         value: "category._id",
-        //         label: "category.title"
-        //     }
-        // ];
-    }
+    constructor(private cvs: CustomValidatorService) { }
     ngDoCheck() {
         this.errorMessages = this.cvs.buildErrorMessage(this.control);
         this.isValid = this.errorMessages.length === 0;
