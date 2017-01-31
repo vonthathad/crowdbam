@@ -1,4 +1,4 @@
-<form [formGroup]="challengeForm" (ngSubmit)="loginLocal(challengeForm)">
+<form [formGroup]="challengeForm" (ngSubmit)="createChallenge(challengeForm)">
     <div class="content">
         <div class="input-group">
             <span class="input-group-addon">
@@ -6,7 +6,7 @@
         </span>
             <div class="form-group label-floating is-empty">
                 <input required type="text" class="form-control" formControlName="title"><span class="material-input"></span>
-                <label class="control-label" for="title">Title</label>
+                <label class="control-label" for="title">Title*</label>
             </div>
         </div>
         <div [hidden]="challengeForm.get('title').valid || challengeForm.get('title').untouched" class="alert alert-danger">
@@ -22,7 +22,7 @@
             <div class="form-group label-floating is-empty">
                 <input required type="description" class="form-control" formControlName="description">
                 <span class="material-input"></span>
-                <label class="control-label" for="description">Description</label>
+                <label class="control-label" for="description">Description*</label>
             </div>
         </div>
         <div [hidden]="challengeForm.get('description').valid || challengeForm.get('description').untouched" class="alert alert-danger">
@@ -36,7 +36,30 @@
 
 
         <div class="input-group">
-            <label for="categories">Categories</label>
+            <span class="input-group-addon">
+                <i class="ion-locked"></i>
+            </span>
+            <div class="form-group label-floating is-empty">
+                <input required type="price" class="form-control" formControlName="price">
+                <span class="material-input"></span>
+                <label class="control-label" for="price">Price*</label>
+            </div>
+        </div>
+        <div [hidden]="challengeForm.get('price').valid || challengeForm.get('price').untouched" class="alert alert-danger">
+            <div *ngIf="challengeForm.get('price').hasError('required')">
+                Price is required!
+            </div>
+            <div *ngIf="challengeForm.get('price').hasError('pattern')">
+                Price must be a number!
+            </div>
+        </div>
+
+        <!--File upload and preview-->
+        <input #fileInput type="file" (change)="fileChange(input" ) #input/>
+        <img [attr.src]='file_src' alt="">
+
+        <div class="input-group">
+            <label for="categories">Categories*</label>
             <validator-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">
             </validator-multicheckbox>
         </div>

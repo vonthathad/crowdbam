@@ -59,6 +59,15 @@ export class Rest {
         options.method = RequestMethod.Get;
         return this.request(options);
     }
+
+    //////////////////////////////////////////////////
+    ////TO PUT
+    //////////////////////////////////////////////////
+    put(options: QueryOptions): Observable<any[]> {
+        options.method = RequestMethod.Put;
+        return this.request(options);
+    }
+    
     //////////////////////////////////////////////////
     ////GET TOKEN
     //////////////////////////////////////////////////
