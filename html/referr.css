@@ -52832,12 +52832,12 @@ textarea.resources-submission__textarea {
 }
 
 .tabbed-nav__link {
-    color: #3D3D66;
+    color: #353535;
     font-size: 1.2rem;
     font-weight: 500;
     border-bottom: 3px solid transparent;
     display: inline-block;
-    padding: 20px 5px 17px;
+    padding: 20px 5px 15px;
     margin: 0 15px
 }
 
@@ -52848,7 +52848,7 @@ textarea.resources-submission__textarea {
 }
 
 .tabbed-nav__link.is-active {
-    color: #020621;
+    color: #000;
     border-color: #2BDE73
 }
 
