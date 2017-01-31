@@ -4,6 +4,10 @@
 var Challenge = require('mongoose').model('Challenge');
 var Type = require('mongoose').model('Type');
 var npp = 6;
+var formidable = require('formidable');
+var dir = 'sources/img';
+var fs = require('fs');
+var config = require('../configs/config');
 var getErrorMessage = function (err) {
     console.log(err);
     var messages = [];
@@ -123,13 +127,51 @@ exports.list = function(req,res){
     );
 };
 exports.create = function(req,res){
-    req.body.creator = req.user._id;
-    var challenge = new Challenge(req.body);
-    console.log(challenge);
-    challenge.save(function(err,challenge){
-        if(err) return res.status(400).send({messages: getErrorMessage(err)});
-        return res.json({data: challenge});
-    })
+    var form = new formidable.IncomingForm();
+    form.uploadDir = __dirname + '/../../public/uploaded/' + dir;
+    console.log(form.uploadDir);
+    form.keepExtensions = true;
+    form.maxFields = 1;
+    form.maxFieldsSize = 4096;
+    var count = 0;
+    var content;
+    form.on('progress', function(bytesReceived) {
+       
+        if (bytesReceived > 300000) {
+            form._error();
+            console.log('Loi nhan');
+            return res.status(400).send();
+        }
+    });
+    form.on('field', function(name, field) {
+        if(name == 'content'){
+            content = field;
+        }
+    });
+    form.on('file', function(name, file) {
+        console.log(file);
+        count++;
+        if(file.type=='image/jpeg'&&file.size<300000&&count==1){
+            res.json();
+            file.name;
+            var data = JSON.parse(content);
+            data.thumb = config.server.host + '/' + dir + '/' + file.name;
+            data.creator = req.user._id;
+            var challenge = new Challenge(data);
+            console.log(challenge);
+            challenge.save(function(err,challenge){
+                if(err) return res.status(400).send({messages: getErrorMessage(err)});
+                return res.json({data: challenge});
+            })
+        } else {
+
+            console.log('loi dinh dang');
+            return res.status(400).send();
+        }
+    });
+    form.parse(req, function(err, fields, files) {
+    });
+
 };
 exports.get = function(req,res){
     return res.json({data: req.challenge});
