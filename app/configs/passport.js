@@ -14,5 +14,6 @@ module.exports = function() {
     });
     require('./strategies/bearer')();
     require('./strategies/facebook')();
+    require('./strategies/google')();
     require('./strategies/local')();
 };

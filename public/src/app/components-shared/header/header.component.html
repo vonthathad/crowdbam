@@ -1,8 +1,40 @@
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <a routerLink=''>Home</a>
-    <a (click)='onLoginClick()'>Login</a>
-    <a routerLink='/challenges/create'>Create challenge</a>
-  </div><!-- /.container-fluid -->
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <a routerLink=''>Home</a>
+        <a routerLink='/challenges/create'>Create challenge</a>
+
+        <ul class="nav navbar-nav navbar-right">
+            <!-- USER CHƯA ĐĂNG NHẬP -->
+            <li *ngIf="!user">
+                <a (click)="onLoginClick()">Login</a>
+            </li>
+            <!--USER ĐÃ ĐĂNG NHẬP-->
+            <li *ngIf="user">
+                <a href="#" class="dropdown-toggle dropdown-user" data-toggle="dropdown" aria-expanded="false">
+                    <img class="avatar" src="{{user.avatar}}">{{user.displayName}}
+                    <b class="caret"></b>
+                    <div class="ripple-container"></div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a (click)="onLogoutClick()">Logout</a>
+                    </li>
+                </ul>
+
+
+            </li>
+            <!--<li>-->
+            <!--<button [disabled]="!amount"  [routerLink]="['/Home','Order',orderService.orderID]" class="btn btn-primary btn-md btn-shopping"><i class="material-icons">shopping_basket</i> Thanh toán {{amount}}</button>-->
+            <!--</li>-->
+            <!--<li *ngIf="!user"><a class="btn btn-login" href="http://localhost:18179/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=self&redirect_uri=http://localhost:18179/">Đăng nhập</a></li>-->
+            <!--<li *ngIf="user" class="dropdown">-->
+            <!--<a class="dropdown-toggle" data-toggle="dropdown"><img [src]="user.Avatar" class="img img-responsive img-circle" style="width: 34px; display: inline-block"> <b>{{user.DisplayName}}</b> <b class="caret"></b></a>-->
+            <!--<ul class="dropdown-menu">-->
+            <!--<li><a (click)="onSignOut()">Đăng xuất</a></li>-->
+            <!--</ul>-->
+            <!--</li>-->
+        </ul>
+    </div>
+    <!-- /.container-fluid -->
 </nav>

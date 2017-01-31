@@ -10,26 +10,19 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
   styleUrls: ['./form-login.component.css']
 })
 export class FormLoginComponent implements OnInit {
-  private location: string;
+
   private loginForm: FormGroup;
   private errorEmail: string;  
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.location = window.location.href;
-    console.log("Location: " + this.location);
+  
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
-      password: new FormControl('', [Validators.required, Validators.minLength(5)])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
-  loginFacebook() {
-    // window.location.href = `/oauth/facebook?redirect=${this.location}`;
-    window.location.href = `http://localhost:8235/oauth/facebook?redirect=${this.location}`;
-  }
-  loginTwitter() {
-    window.location.href = `/oauth/twitter?redirect=${this.location}`;
-  }
+ 
   loginLocal({ value, valid }: { value: User, valid: boolean }) {
     console.log("VELI " + JSON.stringify(value) + valid);
     if (valid) {
