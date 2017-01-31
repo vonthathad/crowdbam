@@ -2,13 +2,12 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <a routerLink=''>Home</a>
-        <a (click)='onLoginClick()'>Login</a>
         <a routerLink='/challenges/create'>Create challenge</a>
 
         <ul class="nav navbar-nav navbar-right">
             <!-- USER CHƯA ĐĂNG NHẬP -->
             <li *ngIf="!user">
-                <a (click)="openDialog()">Login</a>
+                <a (click)="onLoginClick()">Login</a>
             </li>
             <!--USER ĐÃ ĐĂNG NHẬP-->
             <li *ngIf="user">

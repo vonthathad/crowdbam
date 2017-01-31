@@ -16,7 +16,9 @@ import { FormLoginWrapperComponent } from '../../components-child/form-login-wra
 })
 export class HeaderComponent implements OnInit {
   private user: User;
-  constructor(private modal: Modal, private userService: UserService, private route: ActivatedRoute) { }
+  constructor(private modal: Modal, private userService: UserService, private route: ActivatedRoute) { 
+     userService.loggedUser$.subscribe(user => {this.renderUser(user, { from: "change" })});
+  }
 
   ngOnInit() {
 
@@ -63,13 +65,9 @@ export class HeaderComponent implements OnInit {
       .open(FormLoginWrapperComponent, overlayConfigFactory({ num1: 2, num2: 3, isBlocking: false }, BSModalContext))
       .then(dialog => this.userService.setLoginDialog(dialog));
   }
-    onLogoutClick() {
-    // this.userService.logout(this.user.token).subscribe(() => {
+  onLogoutClick() {
     localStorage.removeItem("token");
     this.userService.loggedUserSource.next(null);
     this.user = null;
-    // delete this.user;
-    // location.reload();
-    // });
   }
 }
