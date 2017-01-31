@@ -29,4 +29,13 @@ export class FormLoginWrapperComponent implements OnInit {
     this.action = 'register';
     this.actionLabel = 'ALREADY HAVE AN ACCOUNT!';
   }
+  loginFacebook() {
+    let location = window.location.href;
+    // window.location.href = `/oauth/facebook?redirect=${this.location}`;
+    window.location.href = `http://localhost:8235/oauth/facebook?redirect=${location}`;
+  }
+  loginTwitter() {
+    let location = window.location.href;
+    window.location.href = `/oauth/twitter?redirect=${location}`;
+  }
 }
