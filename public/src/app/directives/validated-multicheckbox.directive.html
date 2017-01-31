@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-6 checkbox" *ngFor="let option of options">
             <label>
-                <input type="checkbox" (change)="changeCheckbox(option)" [checked]="hasOption(option)" [value]="option">{{option}}
+                <input type="checkbox" (change)="changeCheckbox(option)" [checked]="hasOption(option)" [value]="option.value">{{option.label}}
 	         </label>
         </div>
     </div>

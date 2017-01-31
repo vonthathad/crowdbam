@@ -10,6 +10,7 @@ import { routing } from './app.routes';
 
 import { USER_PROVIDER } from './services/user.service';
 import { CHALLENGE_PROVIDER } from './services/challenge.service';
+import { CATEGORY_PROVIDER } from './services/category.service';
 import { CUSTOM_VALIDATOR_PROVIDER } from './services/custom-validator.service';
 
 import { ValidatedMulticheckboxDirective } from './directives/validated-multicheckbox.directive';
@@ -58,6 +59,7 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
   providers: [
     USER_PROVIDER,
     CHALLENGE_PROVIDER,
+    CATEGORY_PROVIDER,
     CUSTOM_VALIDATOR_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }

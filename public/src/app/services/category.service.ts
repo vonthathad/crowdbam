@@ -6,9 +6,9 @@ import { Subject } from 'rxjs/Subject';
 
 import { Rest } from './rest';
 
-import { Challenge } from '../classes/challenge';
+import { Category } from '../classes/category';
 @Injectable()
-export class ChallengeService {
+export class CategoryService {
     private rest: Rest;
     // private loginDialog: any;
     // public loggedUserSource = new Subject<User>();
@@ -19,54 +19,54 @@ export class ChallengeService {
         // this.loggedUser$.subscribe(user => {this.user = user;});
     }
     // GET CHELLENGE LIST
-    getChallenges(queryArgs?: Object): Observable<any[]> {
+    getCategories(queryArgs?: Object): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         });
         return this.rest.get({
-            url: `api/challenges`,
+            url: `api/categories`,
             queryArgs: queryArgs,
             headers: headers
         });
     }
     // CREATE CHALLENGE
-    createChallenge(input: any): Observable<any[]> {
+    createCategory(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
             'Content-Type': null
         });
-        // console.log("Challenge " + JSON.stringify(input));
+        // console.log("Category " + JSON.stringify(input));
         // return this.rest.post({
-        //     url: `api/challenges`,
-        //     body: challenge,
+        //     url: `api/categories`,
+        //     body: category,
         //     headers: headers
         // });
 
         let options = new RequestOptions({ headers: headers });
         return this.http
-            .post("http://localhost:8235/api/challenges", input, options)
+            .post("http://localhost:8235/api/categories", input, options)
             .map((res: any) => res.json())
             .catch((error: any) => Observable.throw(error || 'Server error'));;
     }
 
     // UPDATE CHALLENGE
-    updateChallenge(challenge: Challenge): Observable<any[]> {
+    updateCategory(category: Category): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         });
         return this.rest.put({
-            url: `api/challenges`,
-            body: challenge,
+            url: `api/categories`,
+            body: category,
             headers: headers
         });
     }
 }
 
-export var CHALLENGE_PROVIDER: Array<any> = [
-    { provide: ChallengeService, useClass: ChallengeService }
+export var CATEGORY_PROVIDER: Array<any> = [
+    { provide: CategoryService, useClass: CategoryService }
 ]
