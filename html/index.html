@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <link rel="stylesheet" href="main.css">
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/gsdk.css">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
 </head>
 <body>
 <div class="site-nav-frame js-site-nav-container" role="navigation">
@@ -18,7 +18,7 @@
                 <div class="site-nav__left">
                     <div class="site-nav__item site-nav__item--searchbar js-searchbar js-header-livesearch">
                         <form class="site-nav__search-form" role="search" action="/projects/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
-                            <div class="icon__search"><i class="ion-ios-search-strong"></i></div>
+                            <div class="icon__search"><i class="ion-ios-search-strong" id="ion-ios-search-strong"></i></div>
                             <input type="text" name="term" id="term" aria-label="Search projects" data-tracker-name="Header Live Search" placeholder="Search" class="site-nav__search-input js-search-term text" tabindex="-1" autocomplete="off">
                         </form>
 
@@ -73,8 +73,8 @@
     <div class="livesearch-container js-livesearch-container">
         <h3 class="livesearch-header"></h3>
         <div class="livesearch-no-results js-livesearch-no-results hide" data-filler-projects-url="/discover/popular" data-filler-type="popular"></div>
-        <div class="livesearch-results js-livesearch-results"><ul class="livesearch-list row">
-            <li class="livesearch-result js-livesearch-result col-md-3"><div class="project-card project-card-tall project-card--spotlight ratio-16-9" style="" data-pid="1888130994">
+        <div class="livesearch-results js-livesearch-results"><ul class="livesearch-list">
+            <li class="livesearch-result js-livesearch-result"><div class="project-card project-card-tall project-card--spotlight ratio-16-9" style="" data-pid="1888130994">
 
             <div class="project-profile-feature-image">
                 <a href="https://www.kickstarter.com/projects/boa-x/boa-2012-the-bay-one-acts-festival?ref=nav_search" class="project-thumbnail-wrap">
@@ -119,7 +119,7 @@
             </div>
         </div>
         </li>
-        <li class="livesearch-result js-livesearch-result col-md-3"><div class="project-card project-card-tall project-card--spotlight ratio-16-9" style="" data-pid="240507825">
+        <li class="livesearch-result js-livesearch-result"><div class="project-card project-card-tall project-card--spotlight ratio-16-9" style="" data-pid="240507825">
 
             <div class="project-profile-feature-image">
                 <a href="https://www.kickstarter.com/projects/boa-x/2013-bay-one-acts-festival-boa?ref=nav_search" class="project-thumbnail-wrap">
@@ -164,7 +164,7 @@
             </div>
         </div>
         </li>
-        <li class="livesearch-result js-livesearch-result col-md-3"><div class="project-card project-card-tall project-card--spotlight ratio-16-9" style="" data-pid="807059513">
+        <li class="livesearch-result js-livesearch-result"><div class="project-card project-card-tall project-card--spotlight ratio-16-9" style="" data-pid="807059513">
 
             <div class="project-profile-feature-image">
                 <a href="https://www.kickstarter.com/projects/boa-x/boa-x-the-bay-one-acts-festival-2011?ref=nav_search" class="project-thumbnail-wrap">
@@ -209,7 +209,7 @@
             </div>
         </div>
         </li>
-        <li class="livesearch-result js-livesearch-result col-md-4"><div class="project-card project-card-tall project-card--spotlight ratio-16-9" style="" data-pid="38395608">
+        <li class="livesearch-result js-livesearch-result"><div class="project-card project-card-tall project-card--spotlight ratio-16-9" style="" data-pid="38395608">
 
             <div class="project-profile-feature-image">
                 <a href="https://www.kickstarter.com/projects/1197467279/the-sneaky-boa-brothers?ref=nav_search" class="project-thumbnail-wrap">
@@ -254,17 +254,137 @@
             </div>
         </div>
         </li>
-        </ul></div>
-        <div class="mr3 mt2">
-            <a class="livesearch-see-all-results js-livesearch-see-all-results btn btn--border-gray-thin btn--block" href="/discover/advanced?ref=nav_search&amp;term=boa">See all results for <span class="bold">boa</span></a>
+            <li class="livesearch-result js-livesearch-result"><div class="project-card project-card-tall project-card--spotlight ratio-16-9" style="" data-pid="38395608">
+
+                <div class="project-profile-feature-image">
+                    <a href="https://www.kickstarter.com/projects/1197467279/the-sneaky-boa-brothers?ref=nav_search" class="project-thumbnail-wrap">
+                        <div class="project-profile-card__background" style="">
+                            <div class="project-profile-card__background bg-black "></div>
+                            <div class="project-profile-card__background" style=""></div>
+                        </div>
+                        <img alt="Project image" src="https://ksr-ugc.imgix.net/assets/011/341/531/af69e2ef08ee546c2b70c0a50e74b21a_original.jpg?w=1536&amp;h=864&amp;fit=fill&amp;bg=000000&amp;v=1463681264&amp;auto=format&amp;q=92&amp;s=289269d1563b95f48e316b7c52ca6e11" class="">
+                    </a>
+                </div>
+
+                <div class="project-card-content">
+
+                    <div class="project-profile-title text-truncate-xs">
+                        <a href="https://www.kickstarter.com/projects/1197467279/the-sneaky-boa-brothers?ref=nav_search" target="">
+                            The Sneaky Boa Brothers
+                        </a>
+                    </div>
+
+                    <p class="project-profile-blurb type-12">
+                        Bandits. Pirates. Super Heros. Painterly Mustaches. Sounds like a typical short film? No, not really... so let's get it made!
+                    </p>
+
+                </div>
+
+                <div class="project-profile-footer">
+                    <div class="one-pixel-divider bg-green-dark" style=""></div>
+
+                    <div class="project-profile-footer__content">
+                        <div class="flag">
+                            <div class="flag-img">
+                                <img src="https://ksr-ugc.imgix.net/assets/006/306/306/01c9982e158e3e39fe76bb905bc2d03f_original.jpg?w=40&amp;h=40&amp;fit=crop&amp;v=1461379828&amp;auto=format&amp;q=92&amp;s=36149a6071bda7f98e326f49000ff6d4" class="block circle avatar-small" alt="">
+                            </div>
+                            <div class="flag-body">
+                                <p class="project-profile-byline type-12">
+                                    by Tighe Boudreaux Kellner and 152 backers
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            </li>
+        </ul>
+        </div>
+        <div>
+            <a class="livesearch-see-all-results js-livesearch-see-all-results btn" href="/discover/advanced?ref=nav_search&amp;term=boa">See all results for <span class="bold">boa</span></a>
             <div class="grey-dark small_type js-livesearch-displaying-results mt3 mt5-sm hidden"></div>
         </div>
-        <a class="js-prev prev arrow hide">
-            <svg aria-label="Previous results" class="svg-icon__arrow-left"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left"></use></svg>
+        <a class="js-prev prev arrow">
+            <div aria-label="Previous results" class="icon__arrow-left"><i class="ion-ios-arrow-back"></i></div>
         </a>
         <a class="js-next next arrow">
-            <svg aria-label="Next results" class="svg-icon__arrow-right"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use></svg>
+            <div aria-label="Next results" class="icon__arrow-right"><i class="ion-ios-arrow-forward"></i></div>
         </a>
+    </div>
+</div>
+<div class="container">
+    <div class="title-card">
+        <div class="row">
+            <div class="col-sm-9">
+                <h2 class="f3 mb0 normal">
+                    <a class="green-dark" href="https://www.kickstarter.com/recommendations?ref=home_recs">Recommended for you</a>
+                </h2>
+            </div>
+            <div class="col-sm-3">
+                <a class="btn btn--border-gray btn--small" href="https://www.kickstarter.com/recommendations?ref=home_recs">
+                    See all
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="js-score-tracking project-card project-card-tall-big project-card-wrap ratio-16-9" data-pid="1428846717">
+                <div class="project-thumbnail">
+                    <!--<div class="projects-we-love-badge projects-we-love-badge&#45;&#45;overlay">-->
+                        <!--<div class="icon"><span class="ksr-icon__heart" aria-hidden="true"></span></div><div class="label">Project We Love</div>-->
+                    <!--</div>-->
+
+                    <a class="project-thumbnail-wrap" data-pid="1428846717" href="/projects/stoic/banner-saga-3?ref=home_popular" target="">
+                        <img class="project-thumbnail-img" width="100%" alt="Project image" src="https://ksr-ugc.imgix.net/assets/014/363/262/1a05fa65563ea1564330522ca42ff32f_original.png?w=338&amp;h=190&amp;fit=fill&amp;bg=000000&amp;v=1478110198&amp;auto=format&amp;q=92&amp;s=0a927b676593cb685f0f332143112899">
+                    </a>
+                </div>
+                <div class="project-card-content">
+                    <h6 class="project-title"><a target="" data-score="null" data-version="null" data-pid="1428846717" href="/projects/stoic/banner-saga-3?ref=home_popular">Banner Saga 3</a></h6> <p class="project-byline">Stoic</p>
+                    <p class="project-blurb">
+                        The conclusion to the award-winning series of mature, story-driven, turn-based strategy games steeped in Viking culture.
+                    </p>
+                </div>
+                <div class="project-card-footer">
+                    <div class="project-location">
+                        <a data-location="{&quot;id&quot;:2357536,&quot;name&quot;:&quot;Austin&quot;,&quot;slug&quot;:&quot;austin-tx&quot;,&quot;short_name&quot;:&quot;Austin, TX&quot;,&quot;displayable_name&quot;:&quot;Austin, TX&quot;,&quot;country&quot;:&quot;US&quot;,&quot;state&quot;:&quot;TX&quot;,&quot;type&quot;:&quot;Town&quot;,&quot;is_root&quot;:false,&quot;urls&quot;:{&quot;web&quot;:{&quot;discover&quot;:&quot;https://www.kickstarter.com/discover/places/austin-tx&quot;,&quot;location&quot;:&quot;https://www.kickstarter.com/locations/austin-tx&quot;},&quot;api&quot;:{&quot;nearby_projects&quot;:&quot;https://api.kickstarter.com/v1/discover?signature=1485842270.eb76db64345ce525e9ad45b6cad4c310988686f6&amp;woe_id=2357536&quot;}}}" href="/discover/places/austin-tx?ref=city" target="">
+                            <span aria-hidden="true" class="ksr-icon__location"></span>
+                            <span class="location-name">Austin, TX</span>
+                        </a>
+                    </div>
+                    <div class="project-stats-container">
+                        <div class="project-pledged-successful">
+                            <strong>Successfully funded!</strong>
+                        </div>
+                        <div class="project-progress-bar">
+                            <div class="project-percent-pledged" style="width: 95.84%"></div>
+                        </div>
+                        <ul class="project-stats">
+                            <li>
+                                <div class="project-stats-value">95%</div> <span class="project-stats-label">funded</span>
+                            </li>
+                            <li class="js-amount-pledged">
+                                <div class="project-stats-value"><span class="money">$191,671</span></div> <span class="project-stats-label">pledged</span>
+                            </li>
+                            <li style="display: none;">
+                                <div class="project-stats-value">Funded</div>
+<span class="project-stats-label">
+</span>
+                            </li>
+                            <li class="ksr_page_timer" data-end_time="2017-03-07T23:00:00-05:00">
+                                <div class="project-stats-value">
+                                    <div class="js-num">36</div>
+                                </div>
+                                <div class="project-stats-label js-text" data-word="left">days to go</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -277,6 +397,12 @@
         $('.site-nav-frame').removeClass('site-nav--search-is-visible');
         $('.js-searchbar').removeClass('site-nav__item--searchbar--visible');
     })
+    $('.js-next').click(function(){
+        $('.livesearch-list').offset({top: $('.livesearch-list').offset().top, left: $('.livesearch-list').offset().left - $('.livesearch-results').width()});
+    });
+    $('.js-prev').click(function(){
+        $('.livesearch-list').offset({top: $('.livesearch-list').offset().top, left: $('.livesearch-list').offset().left + $('.livesearch-results').width()});
+    });
 </script>
 </body>
 </html>
