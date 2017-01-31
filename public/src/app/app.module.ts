@@ -8,12 +8,13 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
 import { routing } from './app.routes';
 
+import { FroalaEditorDirective, FroalaViewDirective } from './directives/froala/froala.directive';
+
 import { USER_PROVIDER } from './services/user.service';
 import { CHALLENGE_PROVIDER } from './services/challenge.service';
 import { CATEGORY_PROVIDER } from './services/category.service';
 import { CUSTOM_VALIDATOR_PROVIDER } from './services/custom-validator.service';
 
-import { ValidatedMulticheckboxDirective } from './directives/validated-multicheckbox.directive';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -28,11 +29,14 @@ import { FormLoginWrapperComponent } from './components-child/form-login-wrapper
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { CardChallengeComponent } from './components-child/card-challenge/card-challenge.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
+import { ValidatedMulticheckboxComponent } from './components-child/validated-multicheckbox/validated-multicheckbox.component';
+import { ChallengeOverviewComponent } from './components/challenge-overview/challenge-overview.component';
 
 @NgModule({
   declarations: [
-    ValidatedMulticheckboxDirective,
     AppComponent,
+    FroalaEditorDirective, 
+    FroalaViewDirective,
     HomeComponent,
     ChallengesComponent,
     NotificationsComponent,
@@ -44,7 +48,9 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
     FormLoginWrapperComponent,
     ForgotPasswordComponent,
     CardChallengeComponent,
-    ChallengeComponent
+    ChallengeComponent,
+    ValidatedMulticheckboxComponent,
+    ChallengeOverviewComponent
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

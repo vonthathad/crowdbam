@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ChallengesComponent } from './components/challenges/challenges.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
+import { ChallengeOverviewComponent } from './components/challenge-overview/challenge-overview.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
     { path: 'challenges?sort=:type', component: ChallengeComponent },
     { path: 'challenges/:id/edit', component: ChallengeComponent },
     { path: 'challenges/create', component: ChallengeComponent },
+    { path: 'challenges/:id/overview', component: ChallengeOverviewComponent },
 
     { path: 'profiles/:id', component: ProfilesComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
