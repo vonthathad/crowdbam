@@ -8,8 +8,12 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 
 import { routing } from './app.routes';
 
-import {USER_PROVIDER} from './services/user.service';
-import {CHALLENGE_PROVIDER} from './services/challenge.service';
+import { USER_PROVIDER } from './services/user.service';
+import { CHALLENGE_PROVIDER } from './services/challenge.service';
+import { CATEGORY_PROVIDER } from './services/category.service';
+import { CUSTOM_VALIDATOR_PROVIDER } from './services/custom-validator.service';
+
+import { ValidatedMulticheckboxDirective } from './directives/validated-multicheckbox.directive';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -27,6 +31,7 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
 
 @NgModule({
   declarations: [
+    ValidatedMulticheckboxDirective,
     AppComponent,
     HomeComponent,
     ChallengesComponent,
@@ -54,6 +59,8 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
   providers: [
     USER_PROVIDER,
     CHALLENGE_PROVIDER,
+    CATEGORY_PROVIDER,
+    CUSTOM_VALIDATOR_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }
   ],
