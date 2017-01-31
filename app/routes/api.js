@@ -50,7 +50,7 @@ module.exports = function (router) {
     router.param('typeURL', types.typeByURL);
 
     /* CONTENT */
-    router.route('/contents/:typeURL/:challengeID')
+    router.route('/contents/:challengeID/:typeURL')
         .post(users.requiresLogin,contents.hasAuthorization,contents.create)
         .get(contents.get)
         .put(users.requiresLogin,contents.hasAuthorization,contents.update)
