@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Challenge} from '../../classes/challenge';
+
+import { ChallengeService } from '../../services/challenge.service';
+
+import { Challenge } from '../../classes/challenge';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,9 +12,21 @@ import {Challenge} from '../../classes/challenge';
 export class HomeComponent implements OnInit {
   private recommendedChallenges: Challenge[];
   private popularChallenges: Challenge[];
-  constructor() { }
+  constructor(private challengeService: ChallengeService) { }
 
   ngOnInit() {
-  }
+    this.challengeService
+      .getChallenges({ paging: 3 })
+      .subscribe((res: any) => this.renderRecommendedChallenges(res['data']));
 
+    this.challengeService
+      .getChallenges({ paging: 3 })
+      .subscribe((res: any) => this.renderPopularChallenges(res['data']));
+  }
+  renderRecommendedChallenges(challenges: Challenge[]) {
+    this.recommendedChallenges = challenges;
+  }
+  renderPopularChallenges(challenges: Challenge[]) {
+    this.popularChallenges = challenges;
+  }
 }

@@ -43,7 +43,7 @@ exports.hasAuthorization = function(req, res, next) {
     next();
 };
 exports.list = function(req,res){
-    var paging = parseInt(req.query.paging) || npp;
+    var paging = parseInt(req.query.paging) || npp; 
     console.log('paging',paging);
     var page = parseInt(req.query.page) || 1,
         skip = page > 0 ? ((page - 1) * paging) : 0;
@@ -108,6 +108,7 @@ exports.list = function(req,res){
                 //res.json(results);
                 Challenge.populate(results,{"path": "creator", "select": "displayName username avatar"}, function(err,data) {
                     if (err) return res.status(400).send();
+                    console.log(JSON.stringify(data));
                     var isNext = false;
                     if(data.length==(paging+1)){
                         isNext = true;

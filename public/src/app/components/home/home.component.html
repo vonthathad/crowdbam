@@ -6,13 +6,13 @@
 
 <div>
   <p>Recommended for you</p>
-  <div *ngFor"let challenge of recommendedChallenges">
+  <div *ngFor="let challenge of recommendedChallenges">
       <app-card-challenge [challenge]='challenge'></app-card-challenge>
   </div>
 </div>
 <div>
   <p>What is popular</p>
-   <div *ngFor"let challenge of popularChallenges">
+   <div *ngFor="let challenge of popularChallenges">
       <app-card-challenge [challenge]='challenge'></app-card-challenge>
   </div>
 </div>
