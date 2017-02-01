@@ -27,7 +27,16 @@
 .display-inline {
     display: inline
 }
-
+.btn-white{
+     border-color: #fff;
+     color: #fff;
+}
+.btn-white:hover{
+    background: #fff;
+    color: #3472F7;
+    border-color: #fff;
+    /*font-weight: bold;*/
+}
 .display-none {
     display: none
 }
@@ -1806,48 +1815,53 @@ body#backings_index .project_thumb.ratio-16-9 {
     margin-right: 6px;
     margin-left: 6px;
 }
-.timline-time{
+.timeline-time{
     line-height: 24px;
 }
-.timeline-panel:nth-child(odd) .timline-time>div{
+.timeline-panel:nth-child(odd) .timeline-time>div{
     float: left;
 }
-.timeline-panel:nth-child(even) .timline-time>div{
+.timeline-panel:nth-child(even) .timeline-time>div{
     float: right;
 }
 .timeline-panel:nth-child(even)>.timeline-point{
     right: -12px;
 }
 .timeline-info{
-    color: #8f8d8d;
+    color: #353535;
     font-size: 0.9em;
     max-width: 100%;
     padding: 0 30px;
 }
-.timeline-info a{
-    color: #f1702f;
-    text-decoration: none;
+.timeline-panel.pass>.timeline-point{
+    background: #aaa;
 }
-.timeline-info a:hover{
-    text-decoration: underline;
+.timeline-panel.pass>.timeline-time,.timeline-panel.next>.timeline-time{
+    color: #aaa;
 }
-.timeline-info>img{
-    width: 24px;
-    border-radius: 5px;
-    vertical-align: middle;
-    margin: 3px;
-    box-shadow: 0 1px 6px rgba(0,0,0,.3);
+.timeline-panel.pass>.timeline-info{
+    color: #aaa;
 }
-.timeline-info .title{
-    text-transform: uppercase;
+.timeline-panel.pass>.timeline-info>.text-primary{
+    color: #aaa!important;
 }
-
-
+.timeline-panel.next>.timeline-info>.description{
+    color: #888;
+}
+.timeline-panel.next>.timeline-point{
+    background: #353535;
+}
+.timeline-panel.next>.timeline-info>.text-primary{
+    color: #353535!important;
+}
+.alert-edit{
+    margin: 10px 0;
+}
 @media screen and (max-width: 600px){
     .timeline-panel:nth-child(odd){
         margin-left: 0px;
     }
-    .timeline-panel:nth-child(even) .timline-time>div{
+    .timeline-panel:nth-child(even) .timeline-time>div{
         float: left;
     }
     .timeline-panel:nth-child(even){
