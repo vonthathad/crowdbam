@@ -1704,3 +1704,39 @@ body#backings_index .project_thumb.ratio-16-9 {
 .project-nav__buttons{
     margin-top: 10px;
 }
+
+/*DETAILS COMMENT*/
+.project-details-comments{
+    padding: 1.8rem;
+}
+.project-details-comment{
+    list-style: none;
+    margin-bottom: 0.5rem;
+}
+.project-details-comment .avatar{
+    width: 30px;
+    height: 30px;
+}
+.project-details-comment .btn{
+    padding: 0;
+}
+.comment-thumb-count{
+    padding: 10px 4px 4px;
+}
+.project-details-comment .content {
+    margin-left: 1.8rem;
+    padding-left: 1.8rem;
+
+
+
+}
+.project-details-comment .content h3{
+    margin: 0;
+    font-size: 14px;
+    margin-bottom: 5px;
+    line-height: 30px;
+}
+.project-details-comment .content p{
+    font-size: 14px;
+    margin-bottom: 0;
+}

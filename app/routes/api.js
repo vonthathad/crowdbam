@@ -27,6 +27,8 @@ module.exports = function (router) {
         .put(users.requiresLogin,challenges.follow);
     router.route('/challenges/:challengeID/share')
         .put(users.requiresLogin,challenges.share);
+    router.route('/challenges/:challengeID/image')
+        .post(users.requiresLogin,challenges.hasAuthorization,challenges.uploadImage);
     router.param('challengeID', challenges.challengeByID);
     
     /* CATEGORY */
@@ -76,4 +78,7 @@ module.exports = function (router) {
     router.route('/comments/:commentID/vote')
         .put(users.requiresLogin,comments.vote);
     router.param('commentID', comments.commentByID);
+    
+    /* USER */
+    
 };

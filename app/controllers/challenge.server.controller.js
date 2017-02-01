@@ -8,6 +8,7 @@ var formidable = require('formidable');
 var dir = 'sources/img';
 var fs = require('fs');
 var config = require('../configs/config');
+var mkdirp = require('mkdirp');
 var getErrorMessage = function(err) {
     console.log(err);
     var messages = [];
@@ -129,7 +130,7 @@ exports.list = function(req, res) {
 };
 exports.create = function(req, res) {
     var form = new formidable.IncomingForm();
-    form.uploadDir = __dirname + '/../../public/uploaded/' + dir;
+    form.uploadDir = __dirname + '/../../public/uploaded/' + dir + '/';
     console.log(form.uploadDir);
     form.keepExtensions = true;
     form.maxFields = 1;
@@ -153,7 +154,7 @@ exports.create = function(req, res) {
     form.on('file', function(name, file) {
         console.log(file);
         count++;
-        if (file.type == 'image/jpeg' && file.size < 300000 && count == 1) {
+        if ((file.type == 'image/jpeg' || file.type == 'image/png') && file.size < 300000 && count == 1) {
             var data = JSON.parse(content);
             data.thumb = config.server.host + '/' + dir + '/' + file.name;
             data.creator = req.user._id;
@@ -164,7 +165,53 @@ exports.create = function(req, res) {
                 return res.json({ data: challenge });
             })
         } else {
+            fs.unlink(file.path);
+            console.log('loi dinh dang');
+            return res.status(400).send();
+        }
+    });
+    form.parse(req, function(err, fields, files) {});
 
+};
+function checkExists(dir) {
+    fs.exists(dir, function(exists) {
+        if (!exists) {
+            mkdirp(dir, function(err) {
+                if (err) console.error(err)
+                else console.log("The uploads folder was not present, we have created it for you [" + dir + "]");
+            });
+            //throw new Error(dir + ' does not exists. Please create the folder');
+        }
+    });
+}
+exports.uploadImage = function(req, res) {
+    var form = new formidable.IncomingForm();
+    var cDir = 'challenge/' + req.challenge._id;
+    var uploadDir = __dirname + '/../../public/uploaded/' + dir + '/' + cDir;
+    checkExists(uploadDir);
+
+    form.uploadDir = uploadDir;
+    console.log(form.uploadDir);
+    form.keepExtensions = true;
+    form.maxFields = 1;
+    form.maxFieldsSize = 4096;
+    var count = 0;
+    var content;
+    form.on('progress', function(bytesReceived) {
+
+        if (bytesReceived > 300000) {
+            form._error();
+            console.log('Loi nhan');
+            return res.status(400).send();
+        }
+    });
+    form.on('file', function(name, file) {
+        console.log(file);
+        count++;
+        if ((file.type == 'image/jpeg' || file.type == 'image/png') && file.size < 300000 && count == 1) {
+            return res.json({ data: config.server.host + '/' + dir + '/' + cDir + '/' + file.name});
+        } else {
+            fs.unlink(file.path);
             console.log('loi dinh dang');
             return res.status(400).send();
         }
