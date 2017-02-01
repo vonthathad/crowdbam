@@ -60,15 +60,15 @@ NOTE: This section is only visible to challenge administrators.
             <div class="form-group label-floating is-empty">
                 <input required type="prize" class="form-control" formControlName="prize">
                 <span class="material-input"></span>
-                <label class="control-label" for="prize">Price*</label>
+                <label class="control-label" for="prize">Prize*</label>
             </div>
         </div>
         <div [hidden]="challengeForm.get('prize').valid || challengeForm.get('prize').untouched" class="alert alert-danger">
             <div *ngIf="challengeForm.get('prize').hasError('required')">
-                Price is required!
+                Prize is required!
             </div>
             <div *ngIf="challengeForm.get('prize').hasError('pattern')">
-                Price must be a number!
+                Prize must be a number!
             </div>
         </div>
 

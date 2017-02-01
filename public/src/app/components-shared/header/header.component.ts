@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService } from '../../services/user.service'
 
@@ -13,12 +13,11 @@ import { User } from '../../classes/user';
 })
 export class HeaderComponent implements OnInit {
   private user: User;
-  constructor( private us: UserService, private route: ActivatedRoute) { 
-     us.loggedUser$.subscribe(user => {this.renderUser(user, { from: "change" })});
+  constructor(private us: UserService, private route: ActivatedRoute, private router: Router) {
+    us.loggedUser$.subscribe(user => { this.renderUser(user, { from: "change" }) });
   }
 
   ngOnInit() {
-
     let token;
     this.route.queryParams.subscribe(queryParam => {
       token = queryParam['token'];
@@ -64,5 +63,13 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem("token");
     this.us.loggedUserSource.next(null);
     this.user = null;
+    this.router.navigate(['']);
+  }
+  onCreateChallenge() {
+    if (this.us.isLoggedIn()) {
+      this.router.navigate(['/challenge-create']);
+    } else {
+      this.us.openLoginDialog();
+    }
   }
 }

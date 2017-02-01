@@ -14,6 +14,8 @@ import { USER_PROVIDER } from './services/user.service';
 import { CHALLENGE_PROVIDER } from './services/challenge.service';
 import { CATEGORY_PROVIDER } from './services/category.service';
 import { CUSTOM_VALIDATOR_PROVIDER } from './services/custom-validator.service';
+import { FILE_VALIDATOR_PROVIDER } from './services/file-validator.service';
+import { AUTH_GUARD_PROVIDER } from './services/auth-guard.service';
 
 
 import { AppComponent } from './app.component';
@@ -31,6 +33,9 @@ import { CardChallengeComponent } from './components-child/card-challenge/card-c
 import { ChallengeComponent } from './components/challenge/challenge.component';
 import { ValidatedMulticheckboxComponent } from './components-child/validated-multicheckbox/validated-multicheckbox.component';
 import { ChallengeOverviewComponent } from './components/challenge-overview/challenge-overview.component';
+import { ChallengeCreateComponent } from './components/challenge-create/challenge-create.component';
+import { ChallengeEditComponent } from './components/challenge-edit/challenge-edit.component';
+import { ValidatedUploadComponent } from './components-child/validated-upload/validated-upload.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +55,10 @@ import { ChallengeOverviewComponent } from './components/challenge-overview/chal
     CardChallengeComponent,
     ChallengeComponent,
     ValidatedMulticheckboxComponent,
-    ChallengeOverviewComponent
+    ChallengeOverviewComponent,
+    ChallengeCreateComponent,
+    ChallengeEditComponent,
+    ValidatedUploadComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [
@@ -67,6 +75,8 @@ import { ChallengeOverviewComponent } from './components/challenge-overview/chal
     CHALLENGE_PROVIDER,
     CATEGORY_PROVIDER,
     CUSTOM_VALIDATOR_PROVIDER,
+    AUTH_GUARD_PROVIDER,
+    FILE_VALIDATOR_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }
   ],
