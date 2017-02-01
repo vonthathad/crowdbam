@@ -1740,3 +1740,125 @@ body#backings_index .project_thumb.ratio-16-9 {
     font-size: 14px;
     margin-bottom: 0;
 }
+
+/* TIMELINE */
+
+.timeline-frame{
+    padding: 20px;
+    /*background: #FAFBFB;*/
+    position: relative;
+    margin: auto;
+    border-radius: 6px;
+    /*box-shadow: 0 2px 20px rgba(0,0,0,.3);*/
+}
+
+.timeline-panel:nth-child(odd){
+    position: relative;
+    text-align: left;
+    margin-left: 50%;
+    padding: 20px 0 20px 5px;
+}
+.timeline-panel:nth-child(even){
+    position: relative;
+    text-align: right;
+    margin-right: 50%;
+    padding: 20px 5px 20px 0;
+}
+.timeline-panel>h4{
+    margin: 0;
+    margin-bottom: 6px;
+}
+
+.timeline-panel>.timeline-line{
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: #ddd;
+    top: 0;
+    z-index: 1;
+}
+.timeline-panel:nth-child(odd)>.timeline-line{
+    left: -1px;
+}
+.timeline-panel:nth-child(even)>.timeline-line{
+    right: 0px;
+}
+.timeline-panel>.timeline-point{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px #FAFBFB solid;
+    background: #3472F7;
+    top: 21px;
+    z-index: 2;
+}
+.timeline-panel:nth-child(odd)>.timeline-point{
+    left: -12px;
+}
+.timeline-panel .timeline-vertical-line{
+    height: 1px;
+    width: 25px;
+    margin-top: 12px;
+    background-color: #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+    margin-left: 6px;
+}
+.timline-time{
+    line-height: 24px;
+}
+.timeline-panel:nth-child(odd) .timline-time>div{
+    float: left;
+}
+.timeline-panel:nth-child(even) .timline-time>div{
+    float: right;
+}
+.timeline-panel:nth-child(even)>.timeline-point{
+    right: -12px;
+}
+.timeline-info{
+    color: #8f8d8d;
+    font-size: 0.9em;
+    max-width: 100%;
+    padding: 0 30px;
+}
+.timeline-info a{
+    color: #f1702f;
+    text-decoration: none;
+}
+.timeline-info a:hover{
+    text-decoration: underline;
+}
+.timeline-info>img{
+    width: 24px;
+    border-radius: 5px;
+    vertical-align: middle;
+    margin: 3px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.3);
+}
+.timeline-info .title{
+    text-transform: uppercase;
+}
+
+
+@media screen and (max-width: 600px){
+    .timeline-panel:nth-child(odd){
+        margin-left: 0px;
+    }
+    .timeline-panel:nth-child(even) .timline-time>div{
+        float: left;
+    }
+    .timeline-panel:nth-child(even){
+        text-align: left;
+        margin-right: 0px;
+        padding: 20px 0 20px 5px;
+    }
+    .timeline-panel:nth-child(even)>.timeline-line{
+        left: -1px;
+    }
+    .timeline-panel:nth-child(even)>.timeline-point{
+        left: -12px;
+    }
+}
