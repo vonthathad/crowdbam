@@ -1855,8 +1855,15 @@ body#backings_index .project_thumb.ratio-16-9 {
     color: #353535!important;
 }
 .alert-edit{
-    margin: 10px 0;
+    background-color: #3472F7!important;
+    margin: 0;
 }
+@media screen and (min-width: 993px) {
+    .alert-edit p{
+        margin: 8px 0 0 0;
+    }
+}
+
 @media screen and (max-width: 600px){
     .timeline-panel:nth-child(odd){
         margin-left: 0px;

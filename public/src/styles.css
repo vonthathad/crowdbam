@@ -1,1 +1,244 @@
 /* You can add global styles to this file, and also import other style files */
+.btn i.large{
+  font-size: 1.5em;
+}
+.circle{
+  border-radius: 50%;
+}
+.bold{
+  font-weight: bold;
+}
+.normal{
+  font-weight: normal;
+}
+.light{
+  font-weight: lighter;
+}
+.fixed{
+  position: fixed;
+}
+.absolute{
+  position: absolute;
+}
+.relative{
+  position: relative;
+}
+.block {
+  display: block
+}
+
+.inline-block {
+  display: inline-block
+}
+
+.display-inline {
+  display: inline
+}
+.btn-white{
+  border-color: #fff;
+  color: #fff;
+}
+.btn-white:hover{
+  background: #fff;
+  color: #3472F7;
+  border-color: #fff;
+  /*font-weight: bold;*/
+}
+.display-none {
+  display: none
+}
+.text-blue{
+  color: #0B055E!important;
+}
+.bg-blue{
+  background: #0B055E!important;
+}
+a{
+  color: #3472F7;
+}
+.bttn {
+  display: inline-block;
+  border-radius: 2px;
+  font-weight: 500;
+  transition: all 300ms cubic-bezier(0.175, 0.885, 0.335, 1);
+  text-align: center;
+  line-height: 1;
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+}
+.bttn-medium {
+  padding: 1.8rem 3rem;
+  font-size: 1.4rem;
+}
+.bttn-shadow-light {
+  color: #626369 !important;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px 0 #DCDEDD
+}
+
+.bttn-shadow-light:hover {
+  background-color: #F7F7F9
+}
+
+.webkit-scrolling {
+  -webkit-overflow-scrolling: touch
+}
+
+.transition-all {
+  -webkit-transition: all 360ms cubic-bezier(0.175, 0.885, 0.335, 1);
+  -moz-transition: all 360ms cubic-bezier(0.175, 0.885, 0.335, 1);
+  -ms-transition: all 360ms cubic-bezier(0.175, 0.885, 0.335, 1);
+  -o-transition: all 360ms cubic-bezier(0.175, 0.885, 0.335, 1);
+  transition: all 360ms cubic-bezier(0.175, 0.885, 0.335, 1);
+}
+.transition-delay-200 {
+  -webkit-transition-delay: 200ms;
+  -moz-transition-delay: 200ms;
+  -ms-transition-delay: 200ms;
+  -o-transition-delay: 200ms;
+  transition-delay: 200ms
+}
+.transition-delay-300 {
+  -webkit-transition-delay: 300ms;
+  -moz-transition-delay: 300ms;
+  -ms-transition-delay: 300ms;
+  -o-transition-delay: 300ms;
+  transition-delay: 300ms
+}
+.transition-delay-400 {
+  -webkit-transition-delay: 400ms;
+  -moz-transition-delay: 400ms;
+  -ms-transition-delay: 400ms;
+  -o-transition-delay: 400ms;
+  transition-delay: 400ms
+}
+.z9000 {
+  z-index: 9000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.scroll {
+  overflow: scroll
+}
+
+.scroll-x {
+  overflow-x: scroll
+}
+
+.scroll-y {
+  overflow-y: scroll
+}
+
+.bg-grey-500 {
+  background-color: #DCDEDD
+}
+
+.bg-grey-400 {
+  background-color: #EDEDED
+}
+
+.bg-grey-300 {
+  background-color: #F2F2F2
+}
+
+.bg-grey-200 {
+  background-color: #F7F7F6
+}
+
+.bg-grey-100 {
+  background-color: #FBFBFA
+}
+a{
+  cursor: pointer;
+}
+a:hover{
+  color: #0B055E;
+
+}
+.w100{
+  width: 100%;
+}
+.border-bottom {
+  border-bottom: 0.1rem solid #0B055E;
+}
+
+/* TYPE TEXT */
+
+.type-132 {
+  font-size: 13rem;
+  line-height: 13.2rem
+}
+
+.type-100 {
+  font-size: 10rem;
+  line-height: 10.2rem
+}
+
+.type-66 {
+  font-size: 6.6rem;
+  line-height: 7.2rem
+}
+
+.type-60 {
+  font-size: 6rem;
+  line-height: 6.6rem
+}
+
+.type-48 {
+  font-size: 4.8rem;
+  line-height: 5.4rem
+}
+
+.type-38 {
+  font-size: 3.8rem;
+  line-height: 4.2rem
+}
+
+.type-34 {
+  font-size: 3.4rem;
+  line-height: 4.2rem
+}
+
+.type-28 {
+  font-size: 2.8rem;
+  line-height: 3.6rem
+}
+
+.type-24 {
+  font-size: 2.4rem;
+  line-height: 3rem
+}
+
+.type-21 {
+  font-size: 2.1rem;
+  line-height: 3rem
+}
+
+.type-18 {
+  font-size: 1.8rem;
+  line-height: 2.4rem
+}
+
+.type-16,
+.job-listing ul li {
+  font-size: 1.6rem;
+  line-height: 2.4rem
+}
+
+.type-14 {
+  font-size: 1.4rem;
+  line-height: 2.4rem
+}
+
+.type-12 {
+  font-size: 1.2rem;
+  line-height: 1.8rem
+}
+
+.type-10 {
+  font-size: 1rem;
+  line-height: 1.2rem
+}

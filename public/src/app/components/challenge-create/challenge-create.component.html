@@ -1,69 +1,67 @@
-<form [formGroup]="challengeForm" (ngSubmit)="createChallenge(challengeForm)">
-    <div class="content">
-        <div class="input-group">
-            <span class="input-group-addon">
-            <i class="ion-at"></i>
-        </span>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <h1 class="text-primary">Get started</h1>
+    <form [formGroup]="challengeForm" (ngSubmit)="createChallenge(challengeForm)">
+      <div class="content text-left">
+        <div class="row">
+          <div class="col-md-1">1.</div>
+          <div class="col-md-11">
             <div class="form-group label-floating is-empty">
-                <input required type="text" class="form-control" formControlName="title"><span class="material-input"></span>
-                <label class="control-label" for="title">Title*</label>
+              <label class="control-label normal type-18" for="title">Give your project a title<sup>*</sup>: </label>
+              <input required type="text" class="form-control" formControlName="title"><span class="material-input"></span>
+
             </div>
-        </div>
-        <div [hidden]="challengeForm.get('title').valid || challengeForm.get('title').untouched" class="alert alert-danger">
-            <div *ngIf="challengeForm.get('title').hasError('required')">
+            <div [hidden]="challengeForm.get('title').valid || challengeForm.get('title').untouched" class="alert alert-danger">
+              <div *ngIf="challengeForm.get('title').hasError('required')">
                 Title is required!
+              </div>
             </div>
+          </div>
         </div>
 
-        <div class="input-group">
-            <span class="input-group-addon">
-            <i class="ion-locked"></i>
-        </span>
-            <div class="form-group label-floating is-empty">
-                <input required type="description" class="form-control" formControlName="description">
-                <span class="material-input"></span>
-                <label class="control-label" for="description">Description*</label>
-            </div>
+
+        <div class="form-group label-floating is-empty">
+          <label class="control-label" for="description">Description*</label>
+          <input required type="description" class="form-control" formControlName="description">
+
         </div>
         <div [hidden]="challengeForm.get('description').valid || challengeForm.get('description').untouched" class="alert alert-danger">
-            <div *ngIf="challengeForm.get('description').hasError('required')">
-                Description is required!
-            </div>
-            <div *ngIf="challengeForm.get('description').hasError('maxlength')">
-                Description must be no more than 140 character!
-            </div>
+          <div *ngIf="challengeForm.get('description').hasError('required')">
+            Description is required!
+          </div>
+          <div *ngIf="challengeForm.get('description').hasError('maxlength')">
+            Description must be no more than 140 character!
+          </div>
         </div>
 
 
-        <div class="input-group">
-            <span class="input-group-addon">
-                <i class="ion-locked"></i>
-            </span>
-            <div class="form-group label-floating is-empty">
-                <input required type="prize" class="form-control" formControlName="prize">
-                <span class="material-input"></span>
-                <label class="control-label" for="prize">Prize*</label>
-            </div>
+        <div class="form-group label-floating is-empty">
+          <label class="control-label" for="prize">Prize*</label>
+          <input required type="prize" class="form-control" formControlName="prize">
+
         </div>
         <div [hidden]="challengeForm.get('prize').valid || challengeForm.get('prize').untouched" class="alert alert-danger">
-            <div *ngIf="challengeForm.get('prize').hasError('required')">
-                Prize is required!
-            </div>
-            <div *ngIf="challengeForm.get('prize').hasError('pattern')">
-                Prize must be a number!
-            </div>
+          <div *ngIf="challengeForm.get('prize').hasError('required')">
+            Prize is required!
+          </div>
+          <div *ngIf="challengeForm.get('prize').hasError('pattern')">
+            Prize must be a number!
+          </div>
         </div>
 
         <app-validated-upload [control]="challengeForm.controls['img']"></app-validated-upload>
 
 
         <div class="input-group" *ngIf="categoryOptions && categoryOptions.length > 0">
-            <label for="categories">Categories*</label>
-            <app-validated-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">
-            </app-validated-multicheckbox>
+          <label for="categories">Categories*</label>
+          <app-validated-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">
+          </app-validated-multicheckbox>
         </div>
-    </div>
-    <div class="footer text-center">
+      </div>
+      <div class="footer text-center">
         <button type="submit" [disabled]="!challengeForm.valid" class="btn btn-primary">Create Challenge</button>
-    </div>
-</form>
+      </div>
+    </form>
+
+  </div>
+</div>
