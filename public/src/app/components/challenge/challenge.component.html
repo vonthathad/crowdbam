@@ -61,8 +61,8 @@
 
         <div class="input-group" *ngIf="categoryOptions && categoryOptions.length > 0">
             <label for="categories">Categories*</label>
-            <validator-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">
-            </validator-multicheckbox>
+            <app-validated-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">
+            </app-validated-multicheckbox>
         </div>
     </div>
     <div class="footer text-center">
