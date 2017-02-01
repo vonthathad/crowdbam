@@ -173,14 +173,19 @@ exports.create = function(req, res) {
     form.parse(req, function(err, fields, files) {});
 
 };
-function checkExists(dir) {
+function checkExists(dir,callback) {
     fs.exists(dir, function(exists) {
         if (!exists) {
             mkdirp(dir, function(err) {
-                if (err) console.error(err)
-                else console.log("The uploads folder was not present, we have created it for you [" + dir + "]");
+                if (err) console.error(err);
+                else {
+                    console.log("The uploads folder was not present, we have created it for you [" + dir + "]");
+                    callback();
+                }
             });
             //throw new Error(dir + ' does not exists. Please create the folder');
+        } else {
+            callback();
         }
     });
 }
@@ -188,15 +193,18 @@ exports.uploadImage = function(req, res) {
     var form = new formidable.IncomingForm();
     var cDir = 'challenge/' + req.challenge._id;
     var uploadDir = __dirname + '/../../public/uploaded/' + dir + '/' + cDir;
-    checkExists(uploadDir);
+
 
     form.uploadDir = uploadDir;
     console.log(form.uploadDir);
     form.keepExtensions = true;
     form.maxFields = 1;
     form.maxFieldsSize = 4096;
+
     var count = 0;
-    var content;
+    checkExists(uploadDir,function(){
+        form.parse(req, function(err, fields, files) {});
+    });
     form.on('progress', function(bytesReceived) {
 
         if (bytesReceived > 300000) {
@@ -216,7 +224,7 @@ exports.uploadImage = function(req, res) {
             return res.status(400).send();
         }
     });
-    form.parse(req, function(err, fields, files) {});
+
 
 };
 exports.get = function(req, res) {
