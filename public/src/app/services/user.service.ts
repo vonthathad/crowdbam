@@ -4,9 +4,15 @@ import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
+import { overlayConfigFactory } from 'angular2-modal';
+import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+
 import { Rest } from './rest';
 
 import { User } from '../classes/user';
+
+import { FormLoginWrapperComponent } from '../components-child/form-login-wrapper/form-login-wrapper.component';
+
 @Injectable()
 export class UserService {
     private rest: Rest;
@@ -15,7 +21,7 @@ export class UserService {
     public loggedUserSource = new Subject<User>();
     public loggedUser$ = this.loggedUserSource.asObservable();
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private modal: Modal) {
         this.rest = new Rest(http);
         this.loggedUser$.subscribe(user => {this.user = user;});
     }
@@ -57,7 +63,7 @@ export class UserService {
             headers: headers
         });
     }
-    checkUser(): boolean {
+    checkLoggedInStatus(): boolean {
         if (this.user) return true;
         return false;
     }
@@ -68,6 +74,11 @@ export class UserService {
     closeLoginDialog() {
         this.loginDialog.close(true);
         delete this.loginDialog;
+    }
+    openLoginDialog(){
+    this.modal
+      .open(FormLoginWrapperComponent, overlayConfigFactory({ num1: 2, num2: 3, isBlocking: false }, BSModalContext))
+      .then(dialog => this.setLoginDialog(dialog));
     }
 }
 

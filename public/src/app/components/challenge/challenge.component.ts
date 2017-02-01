@@ -5,6 +5,7 @@ import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { CustomValidatorService } from '../../services/custom-validator.service';
 import { ChallengeService } from '../../services/challenge.service';
 import { CategoryService } from '../../services/category.service';
+import { UserService } from '../../services/user.service';
 
 import { Challenge } from '../../classes/challenge';
 
@@ -20,7 +21,7 @@ export class ChallengeComponent implements OnInit {
   private categoryOptions: { value: string, label: string }[];
   // @ViewChild("fileInput") private fileInput;
   private fileInput: any;
-  constructor(private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fb: FormBuilder, private challengeService: ChallengeService, private categoryService: CategoryService) { }
+  constructor(private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fb: FormBuilder, private challengeService: ChallengeService, private categoryService: CategoryService, private us: UserService) { }
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe(res => this.renderCategoryOptions(res['data']));
@@ -44,24 +45,27 @@ export class ChallengeComponent implements OnInit {
   }
   createChallenge({value, valid}: { value: Challenge, valid: boolean }) {
     // console.log( this.fileInput.nativeElement.files[0]);
-    alert(1234);
-    console.log(JSON.stringify(value));
-    if (this.fileInput && this.fileInput.target && this.fileInput.target.files && this.fileInput.target.files[0]) {
-      let input = new FormData();
-      let fi = this.fileInput.target.files[0];
-      // let fi = this.fileInput.nativeElement.files[0];
+    if (this.us.checkLoggedInStatus()) {
+      alert(1234);
+      console.log(JSON.stringify(value));
+      if (this.fileInput && this.fileInput.target && this.fileInput.target.files && this.fileInput.target.files[0]) {
+        let input = new FormData();
+        let fi = this.fileInput.target.files[0];
+        // let fi = this.fileInput.nativeElement.files[0];
 
-      var tempCategories: any = value.categories;
-      value.categories = [];
-      tempCategories.forEach((category) => value.categories.push(category.value));
-      
-      
-      input.append("file", fi);
-      input.append("content", JSON.stringify(value));
-      this.challengeService
-        .createChallenge(input)
-        .subscribe(data => console.log(JSON.stringify(data)), error => console.error(JSON.stringify(error)));
-    } 
+        var tempCategories: any = value.categories;
+        value.categories = [];
+        tempCategories.forEach((category) => value.categories.push(category.value));
+
+        input.append("file", fi);
+        input.append("content", JSON.stringify(value));
+        this.challengeService
+          .createChallenge(input)
+          .subscribe(data => console.log(JSON.stringify(data)), error => console.error(JSON.stringify(error)));
+      }
+    } else {
+      this.us.openLoginDialog();
+    }
   }
 
   // fileChange() {
