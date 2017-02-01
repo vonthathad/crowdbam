@@ -156,7 +156,9 @@ exports.create = function(req, res) {
         count++;
         if ((file.type == 'image/jpeg' || file.type == 'image/png') && file.size < 300000 && count == 1) {
             var data = JSON.parse(content);
-            data.thumb = config.server.host + '/' + dir + '/' + file.name;
+            var arrSplit = file.path.split('/');
+            var name = arrSplit[arrSplit.length - 1];
+            data.thumb = config.server.host + '/' + dir + '/' + name;
             data.creator = req.user._id;
             var challenge = new Challenge(data);
             console.log(challenge);
@@ -173,7 +175,8 @@ exports.create = function(req, res) {
     form.parse(req, function(err, fields, files) {});
 
 };
-function checkExists(dir,callback) {
+
+function checkExists(dir, callback) {
     fs.exists(dir, function(exists) {
         if (!exists) {
             mkdirp(dir, function(err) {
@@ -202,7 +205,7 @@ exports.uploadImage = function(req, res) {
     form.maxFieldsSize = 4096;
 
     var count = 0;
-    checkExists(uploadDir,function(){
+    checkExists(uploadDir, function() {
         form.parse(req, function(err, fields, files) {});
     });
     form.on('progress', function(bytesReceived) {
@@ -217,7 +220,9 @@ exports.uploadImage = function(req, res) {
         console.log(file);
         count++;
         if ((file.type == 'image/jpeg' || file.type == 'image/png') && file.size < 300000 && count == 1) {
-            return res.json({ data: config.server.host + '/' + dir + '/' + cDir + '/' + file.name});
+            var arrSplit = file.path.split('/');
+            var name = arrSplit[arrSplit.length - 1];
+            return res.json({ link: config.server.host + '/' + dir + '/' + cDir + '/' + name });
         } else {
             fs.unlink(file.path);
             console.log('loi dinh dang');

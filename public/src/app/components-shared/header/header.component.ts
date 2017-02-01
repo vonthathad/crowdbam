@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { overlayConfigFactory } from 'angular2-modal';
-import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
-
 import { UserService } from '../../services/user.service'
 
 import { User } from '../../classes/user';
 
-import { FormLoginWrapperComponent } from '../../components-child/form-login-wrapper/form-login-wrapper.component';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -16,8 +13,8 @@ import { FormLoginWrapperComponent } from '../../components-child/form-login-wra
 })
 export class HeaderComponent implements OnInit {
   private user: User;
-  constructor(private modal: Modal, private userService: UserService, private route: ActivatedRoute) { 
-     userService.loggedUser$.subscribe(user => {this.renderUser(user, { from: "change" })});
+  constructor( private us: UserService, private route: ActivatedRoute) { 
+     us.loggedUser$.subscribe(user => {this.renderUser(user, { from: "change" })});
   }
 
   ngOnInit() {
@@ -30,7 +27,7 @@ export class HeaderComponent implements OnInit {
       if (token) {
         console.log("1234");
         localStorage.setItem("token", token);
-        this.userService.getUser(token).subscribe((res: any) => this.renderUser(res.user, { from: "queryParam" }));
+        this.us.getUser(token).subscribe((res: any) => this.renderUser(res.user, { from: "queryParam" }));
       }
     });
 
@@ -38,7 +35,7 @@ export class HeaderComponent implements OnInit {
     token = localStorage.getItem("token");
     console.log("TOKEN HERE" + token);
     if (token && token != "undefined") {
-      this.userService.getUser(token).subscribe((res: any) => this.renderUser(res.user, { from: "localStorage" }));
+      this.us.getUser(token).subscribe((res: any) => this.renderUser(res.user, { from: "localStorage" }));
     }
 
   }
@@ -52,22 +49,20 @@ export class HeaderComponent implements OnInit {
       this.user.displayName = user.displayName;
       this.user.avatar = user.avatar;
       // if (obj.from == "queryParam" || obj.from == "localStorage") {
-      // this.userService.loggedUserSource.next(this.user);
+      // this.us.loggedUserSource.next(this.user);
       // }
-      this.userService.loggedUserSource.next(this.user);
+      this.us.loggedUserSource.next(this.user);
     } else {
       this.user = user;
     }
   }
 
   onLoginClick() {
-    this.modal
-      .open(FormLoginWrapperComponent, overlayConfigFactory({ num1: 2, num2: 3, isBlocking: false }, BSModalContext))
-      .then(dialog => this.userService.setLoginDialog(dialog));
+    this.us.openLoginDialog();
   }
   onLogoutClick() {
     localStorage.removeItem("token");
-    this.userService.loggedUserSource.next(null);
+    this.us.loggedUserSource.next(null);
     this.user = null;
   }
 }
