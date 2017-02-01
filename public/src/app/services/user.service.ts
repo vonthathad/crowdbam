@@ -57,7 +57,7 @@ export class UserService {
             headers: headers
         });
     }
-    checkUser(): boolean {
+    checkLoggedInStatus(): boolean {
         if (this.user) return true;
         return false;
     }
