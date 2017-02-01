@@ -10,6 +10,7 @@ import { Challenge } from '../classes/challenge';
 @Injectable()
 export class ChallengeService {
     private rest: Rest;
+    private challenge: Challenge;
     // private loginDialog: any;
     // public loggedUserSource = new Subject<User>();
     // public loggedUser$ = this.loggedUserSource.asObservable();

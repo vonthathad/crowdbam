@@ -1,27 +1,30 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 import { CustomValidatorService } from '../../services/custom-validator.service';
+import { FileValidatorService } from '../../services/file-validator.service';
 import { ChallengeService } from '../../services/challenge.service';
 import { CategoryService } from '../../services/category.service';
 import { UserService } from '../../services/user.service';
 
 import { Challenge } from '../../classes/challenge';
 
+import {ValidatedUploadComponent} from '../../components-child/validated-upload/validated-upload.component';
+
 @Component({
-  selector: 'app-challenge',
-  templateUrl: './challenge.component.html',
-  styleUrls: ['./challenge.component.css']
+  selector: 'app-challenge-create',
+  templateUrl: './challenge-create.component.html',
+  styleUrls: ['./challenge-create.component.css']
 })
-export class ChallengeComponent implements OnInit {
-  private challengeForm: FormGroup;
+export class ChallengeCreateComponent implements OnInit {
+
+ private challengeForm: FormGroup;
   private errorEmail: string;
-  private imgSrc: string;
   private categoryOptions: { value: string, label: string }[];
   // @ViewChild("fileInput") private fileInput;
-  private fileInput: any;
-  constructor(private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fb: FormBuilder, private challengeService: ChallengeService, private categoryService: CategoryService, private us: UserService) { }
+  @ViewChild(ValidatedUploadComponent) vuc: ValidatedUploadComponent;
+  constructor(private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fvs: FileValidatorService, private fb: FormBuilder, private challengeService: ChallengeService, private categoryService: CategoryService, private us: UserService, private router: Router) { }
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe(res => this.renderCategoryOptions(res['data']));
@@ -29,6 +32,7 @@ export class ChallengeComponent implements OnInit {
       title: ['', [Validators.required]],
       description: ['', Validators.compose([Validators.required, Validators.maxLength(140)])],
       prize: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]+")])],
+      img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall])],
       categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))
     });
   }
@@ -45,12 +49,14 @@ export class ChallengeComponent implements OnInit {
   }
   createChallenge({value, valid}: { value: Challenge, valid: boolean }) {
     // console.log( this.fileInput.nativeElement.files[0]);
+    let fileInput = this.vuc.fileInput;
+    // console.log(this.fileInput.target.files[0]);
     if (this.us.isLoggedIn()) {
-      alert(1234);
-      console.log(JSON.stringify(value));
-      if (this.fileInput && this.fileInput.target && this.fileInput.target.files && this.fileInput.target.files[0]) {
+      // alert(1234);
+      // console.log(JSON.stringify(value));
+      if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
         let input = new FormData();
-        let fi = this.fileInput.target.files[0];
+        let fi = fileInput.target.files[0];
         // let fi = this.fileInput.nativeElement.files[0];
 
         var tempCategories: any = value.categories;
@@ -61,13 +67,15 @@ export class ChallengeComponent implements OnInit {
         input.append("content", JSON.stringify(value));
         this.challengeService
           .createChallenge(input)
-          .subscribe(challenge => console.log(JSON.stringify(challenge['data'])), error => console.error(JSON.stringify(error)));
+          .subscribe(challenge => this.suceed(challenge['data']), error => console.error(JSON.stringify(error)));
       }
     } else {
       this.us.openLoginDialog();
     }
   }
-
+  suceed(challenge){
+    this.router.navigate(['/challenges/'+ challenge._id]);
+  }
   // fileChange() {
   // let fi = this.fileInput.nativeElement.files[0];
   // console.log(fi);
@@ -77,34 +85,4 @@ export class ChallengeComponent implements OnInit {
   // }
   // }
 
-  fileChangeEvent(fileInput: any) {
-    if (fileInput.target.files && fileInput.target.files[0]) {
-      this.fileInput = fileInput;
-      let file = fileInput.target.files[0];
-      if (file.type.indexOf("image") == -1) {
-        alert("Img required");
-        this.resetImgUpload();
-      } else {
-        this.renderImg(file);
-      }
-    }
-  }
-  renderImg(file) {
-    var reader = new FileReader();
-    reader.onload = (e: any) => {
-      let img = new Image();
-      img.src = e.target.result;
-      if (img.width < 1280 || img.height < 720) {
-        alert("Image width must be larger than 1280");
-        this.resetImgUpload();
-      } else {
-        this.imgSrc = e.target.result;
-      }
-    }
-    reader.readAsDataURL(file);
-  }
-  resetImgUpload() {
-    this.fileInput.target.value = null;
-    this.imgSrc = '';
-  }
 }

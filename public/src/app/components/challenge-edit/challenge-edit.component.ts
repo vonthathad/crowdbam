@@ -10,12 +10,13 @@ import { UserService } from '../../services/user.service';
 import { Challenge } from '../../classes/challenge';
 
 @Component({
-  selector: 'app-challenge',
-  templateUrl: './challenge.component.html',
-  styleUrls: ['./challenge.component.css']
+  selector: 'app-challenge-edit',
+  templateUrl: './challenge-edit.component.html',
+  styleUrls: ['./challenge-edit.component.css']
 })
-export class ChallengeComponent implements OnInit {
-  private challengeForm: FormGroup;
+export class ChallengeEditComponent implements OnInit {
+
+ private challengeForm: FormGroup;
   private errorEmail: string;
   private imgSrc: string;
   private categoryOptions: { value: string, label: string }[];

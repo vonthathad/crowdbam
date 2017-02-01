@@ -11,6 +11,7 @@ export class CustomValidatorService {
     maxLengthArray(control: FormControl) {
         return (control.value.length < 5) ? null : { 'maxLength': true };
     }
+    
     buildErrorMessage(control: FormControl) {
         this.errorMessage = [];
         this.buildControlErrorMessages(control);
