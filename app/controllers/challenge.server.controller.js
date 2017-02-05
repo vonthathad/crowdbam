@@ -235,6 +235,7 @@ exports.uploadImage = function(req, res) {
 exports.get = function(req, res) {
     return res.json({ data: req.challenge });
 };
+
 exports.update = function(req, res) {
 
     // if(req.body.url){
