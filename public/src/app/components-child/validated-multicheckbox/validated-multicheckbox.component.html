@@ -3,8 +3,10 @@
     <div class="row">
         <div class="col-xs-12 col-sm-6" *ngFor="let option of options">
             <label>
-                <input type="checkbox" (change)="changeCheckbox(option)" [checked]="hasOption(option)" [value]="option.value">{{option.label}}
-	         </label>
+                <!--<input type="checkbox" (change)="changeCheckbox(option)" [checked]="hasOption(option)" [value]="option.value">{{option.label}}-->
+                <input type="checkbox" [checked]="option.isChoosen" (change)="changeCheckbox(option, $event)"  [value]="option.value">{{option.label}}
+                <!--<input type="checkbox" [checked]="isChoosen" (change)="isChoosen = $event.target.checked" [value]="option.value">{{option.label}}-->
+	         </label> {{option.isChoosen | json}}
         </div>
     </div>
     <div [hidden]="isValid || numberOfClicks === 0" class="alert alert-danger">

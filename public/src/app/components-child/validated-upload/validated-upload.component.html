@@ -1,6 +1,6 @@
 <!--File upload and preview-->
 <!--<input #fileInput type="file" (change)="fileChangeEvent($event)" accept="image/*" />-->
-<input type="file" required (change)="fileChangeEvent($event)" accept="image/*" />
+<input type="file" (change)="fileChangeEvent($event)" accept="image/*" />
 <img [attr.src]='imgSrc' alt="" width=300>
 <!--<div [hidden]="challengeForm.get('img').valid || challengeForm.get('img').untouched" class="alert alert-danger">
             <div *ngIf="challengeForm.get('img').hasError('required')">

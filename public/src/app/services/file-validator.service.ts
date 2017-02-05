@@ -7,7 +7,7 @@ export class FileValidatorService {
     private fileInput: any = '4';
     constructor() { }
     hasFile(control: any) {
-        console.log("this.fileInput " + control.value);
+        // console.log("this.fileInput " + control.value);
         return (control.value) ? null : { 'hasFile': true };
     }
     isFile(control: any) {
@@ -20,7 +20,7 @@ export class FileValidatorService {
     isTooSmall(control: any) {
         let img = control.value;
         if(img && typeof img == 'Image') return null;
-        return (img.width >= 1280 && img.height >= 720) ? null : { 'isTooSmall': true }
+        return (img.width >= 800 && img.height >= 500) ? null : { 'isTooSmall': true }
     }
     buildErrorMessage(control: any) {
         this.errorMessage = [];

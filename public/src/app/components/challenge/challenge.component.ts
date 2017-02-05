@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { ChallengeService } from '../../services/challenge.service';
 
 import { Challenge } from '../../classes/challenge';
@@ -11,7 +11,7 @@ import { Challenge } from '../../classes/challenge';
 })
 export class ChallengeComponent implements OnInit {
   private challenge: Challenge;
-  constructor(private cv: ChallengeService, private route: ActivatedRoute) {
+  constructor(private cv: ChallengeService, private route: ActivatedRoute, private router: Router) {
     route.params.subscribe(params=>{
         cv.getChallenge(params['id']).subscribe((res: any)=>{
           this.challenge = res.data;
@@ -22,5 +22,8 @@ export class ChallengeComponent implements OnInit {
 
   ngOnInit() {
   
+  }
+  onEditChallengeClick(){
+    this.router.navigate(['challenges/' + this.challenge.id + '/edit']);
   }
 }

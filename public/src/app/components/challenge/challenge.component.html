@@ -1,0 +1,9 @@
+<div *ngIf="challenge">
+    {{challenge.title}}
+    <img [src]="challenge.thumb" width=100 alt="{challenge.title}}">
+    <button>Pre-register</button>
+    <div>
+        State ?? total prize amount <strong>${{challenge.prize}}</strong>
+    </div>
+    <button (click)="onEditChallengeClick()">Edit challenge</button>
+</div>
