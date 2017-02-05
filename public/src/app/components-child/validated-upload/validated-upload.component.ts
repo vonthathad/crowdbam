@@ -1,4 +1,4 @@
-import { Component, Input, DoCheck } from '@angular/core';
+import { Component, Input, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
 import { FileValidatorService } from '../../services/file-validator.service'
 
@@ -7,16 +7,17 @@ import { FileValidatorService } from '../../services/file-validator.service'
   templateUrl: './validated-upload.component.html',
   styleUrls: ['./validated-upload.component.css']
 })
-export class ValidatedUploadComponent implements DoCheck {
+export class ValidatedUploadComponent implements DoCheck, OnChanges {
   @Input() control: FormControl = new FormControl();
+  @Input() private imgSrc: string;
   private errorMessages: Array<string> = [];
   private isValid: boolean;
   public fileInput: any;
-  private imgSrc: string;
   private numberOfClicks: number = 0;
   constructor(private fvs: FileValidatorService) { }
 
   ngOnInit() {
+
   }
   ngDoCheck() {
     this.errorMessages = this.fvs.buildErrorMessage(this.control);
@@ -37,13 +38,18 @@ export class ValidatedUploadComponent implements DoCheck {
       }
     }
   }
+  ngOnChanges(changes: SimpleChanges) {
+    let img = new Image();
+    img.src = this.imgSrc;
+    this.control.setValue(img);
+  }
   renderImg(file) {
     var reader = new FileReader();
     reader.onload = (e: any) => {
       let img = new Image();
       img.src = e.target.result;
       this.control.setValue(img);
-      if (img.width < 1280 || img.height < 720) {
+      if (img.width < 800 || img.height < 500) {
         this.resetImgUpload();
       } else {
         this.imgSrc = e.target.result;

@@ -33,7 +33,7 @@ export class ChallengeService {
         });
     }
     // GET CHALLENGE 
-    getChallenge(id: number):Observable<any[]>{
+    getChallenge(id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer ${token}`,
@@ -66,17 +66,38 @@ export class ChallengeService {
     }
 
     // UPDATE CHALLENGE
-    updateChallenge(challenge: Challenge): Observable<any[]> {
+    updateChallenge(challenge: Challenge, id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+             'Content-Type': 'application/json'
         });
+        console.log(challenge);
         return this.rest.put({
-            url: `api/challenges`,
+            url: `api/challenges/${id}`,
             body: challenge,
             headers: headers
         });
+    }
+    // UPDATE CHALLENGE IMAGE
+    updateChallengeImg(input: any, id: number): Observable<any[]> {
+        var token = this.rest.getToken();
+        let headers = new Headers({
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+            'Content-Type': null
+        });
+        // console.log("Challenge " + JSON.stringify(input));
+        // return this.rest.post({
+        //     url: `api/challenges`,
+        //     body: challenge,
+        //     headers: headers
+        // });
+
+        let options = new RequestOptions({ headers: headers });
+        return this.http
+            .post(`http://localhost:8235/api/challenges/${id}/image`, input, options)
+            .map((res: any) => res.json())
+            .catch((error: any) => Observable.throw(error || 'Server error'));;
     }
 }
 
