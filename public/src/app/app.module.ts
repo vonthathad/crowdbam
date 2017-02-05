@@ -37,6 +37,7 @@ import { ChallengeCreateComponent } from './components/challenge-create/challeng
 import { ChallengeEditComponent } from './components/challenge-edit/challenge-edit.component';
 import { ValidatedUploadComponent } from './components-child/validated-upload/validated-upload.component';
 import { AutocompleteComponent } from './components-child/autocomplete/autocomplete.component';
+import { ChallengesNavigatorComponent } from './components-child/challenges-navigator/challenges-navigator.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,8 @@ import { AutocompleteComponent } from './components-child/autocomplete/autocompl
     ChallengeEditComponent,
     ValidatedUploadComponent,
     AutocompleteComponent,
+    ChallengesNavigatorComponent,
+    ChallengesNavigatorComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

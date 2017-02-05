@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -70,7 +70,7 @@ export class ChallengeService {
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
-             'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
         });
         console.log(challenge);
         return this.rest.put({
@@ -98,6 +98,10 @@ export class ChallengeService {
             .post(`http://localhost:8235/api/challenges/${id}/image`, input, options)
             .map((res: any) => res.json())
             .catch((error: any) => Observable.throw(error || 'Server error'));;
+    }
+    getIdFromActivatedRoute(callback){
+        let route = new ActivatedRoute();
+        route.params.subscribe(params => callback(params['id']));
     }
 }
 

@@ -11,6 +11,8 @@ import { Challenge } from '../../classes/challenge';
 })
 export class ChallengeComponent implements OnInit {
   private challenge: Challenge;
+   name: string = "Ringo";
+  names: string[] = ["John", "Paul", "George", "Ringo"]
   constructor(private cv: ChallengeService, private route: ActivatedRoute, private router: Router) {
     route.params.subscribe(params=>{
         cv.getChallenge(params['id']).subscribe((res: any)=>{

@@ -27,7 +27,7 @@ export class ChallengeEditComponent implements OnInit {
   private id: number;
   @ViewChild(ValidatedUploadComponent) vuc: ValidatedUploadComponent;
   // @ViewChild("fileInput") private fileInput;
-  constructor(private router: Router, private fvs: FileValidatorService, private route: ActivatedRoute, private cv: ChallengeService, private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fb: FormBuilder,  private categoryService: CategoryService, private us: UserService) {
+  constructor(private router: Router, private fvs: FileValidatorService, private route: ActivatedRoute, private cv: ChallengeService, private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fb: FormBuilder, private categoryService: CategoryService, private us: UserService) {
   }
 
   ngOnInit() {
@@ -38,6 +38,9 @@ export class ChallengeEditComponent implements OnInit {
       prize: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]+")])],
       img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall])],
       categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))
+    });
+    this.cv.getIdFromActivatedRoute(id=>{
+      alert(id);
     });
     this.route.params.subscribe(params => {
       this.id = params['id'];
@@ -75,15 +78,15 @@ export class ChallengeEditComponent implements OnInit {
     // console.log( this.fileInput.nativeElement.files[0]);
     if (this.us.isLoggedIn()) {
       let fileInput = this.vuc.fileInput;
+      var tempCategories: any = value.categories;
+      value.categories = [];
+      tempCategories.forEach((category) => value.categories.push(category.value));
+
       // console.log(JSON.stringify(value));
       console.log(fileInput);
       if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
         let input = new FormData();
         let fi = fileInput.target.files[0];
-
-        var tempCategories: any = value.categories;
-        value.categories = [];
-        tempCategories.forEach((category) => value.categories.push(category.value));
         input.append("file", fi);
         alert(1234);
         // input.append("content", JSON.stringify(value));
@@ -91,6 +94,8 @@ export class ChallengeEditComponent implements OnInit {
         this.cv
           .updateChallengeImg(input, this.id)
           .subscribe(image => this._updateChallenger(image['link'], value), error => console.error(JSON.stringify(error)));
+      } else {
+        this._updateChallenger(this.imgSrc, value);
       }
     } else {
       this.us.openLoginDialog();
@@ -106,9 +111,9 @@ export class ChallengeEditComponent implements OnInit {
   }
   updateSucceeded(challenge, id) {
     console.log(challenge)
-     this.router.navigate(['/challenges/'+ id]);
+    alert('update successfull');
   }
   updateFailed() {
-
+    alert('update failed');
   }
 }

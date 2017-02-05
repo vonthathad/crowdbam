@@ -47,7 +47,7 @@ var ChallengeSchema = new Schema({
         type: Number,
         ref: 'User',
         default: []
-    }], 
+    }],
     top: Number,
     hot: Number,
     created: {
@@ -80,13 +80,13 @@ ChallengeSchema.plugin(autoIncrement.plugin, {
 });
 ChallengeSchema.statics.findChallengeByURL = function(url, callback) {
     this.findOne({
-        url: url
-    }).populate('creator', 'displayName username avatar')
-    .populate('categories', 'title')
-    .populate('types','title')
-    .exec(callback);
+            url: url
+        }).populate('creator', 'displayName username avatar')
+        .populate('categories', 'title')
+        .populate('types', 'title')
+        .exec(callback);
 };
 // GameSchema.plugin(random);
-ChallengeSchema.index({ title: 'text',description: 'text'});
-ChallengeSchema.set('toJSON',{getters: true,virtuals: true});
-mongoose.model('Challenge',ChallengeSchema);
+ChallengeSchema.index({ title: 'text', description: 'text' });
+ChallengeSchema.set('toJSON', { getters: true, virtuals: true });
+mongoose.model('Challenge', ChallengeSchema);

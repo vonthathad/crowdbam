@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService } from '../../services/user.service'
@@ -7,6 +7,9 @@ import { User } from '../../classes/user';
 
 
 @Component({
+  host: {
+    '(document:click)':'onClick($event)'
+  },
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
@@ -17,7 +20,7 @@ export class HeaderComponent implements OnInit {
   private isExploringHide: boolean = false;
   private isExploringTrans: boolean = false;
   private isOpeningMenu: boolean = false;
-  constructor(private us: UserService, private route: ActivatedRoute, private router: Router) {
+  constructor(private us: UserService, private route: ActivatedRoute, private router: Router, private eref: ElementRef) {
     us.loggedUser$.subscribe(user => { this.renderUser(user, { from: "change" }) });
   }
 
@@ -40,6 +43,10 @@ export class HeaderComponent implements OnInit {
       this.us.getUser(token).subscribe((res: any) => this.renderUser(res.user, { from: "localStorage" }));
     }
 
+  }
+  onClick(event) {
+   if (!this.eref.nativeElement.contains(event.target)) // or some similar check
+     this.isOpeningMenu = false;
   }
   onClickExplore(){
     this.isExploringHide = true;
