@@ -1,4 +1,56 @@
-{{challenge.title}}
-{{challenge.description}}
-{{challenge.thumb}}
-{{challenge.url}}
+<!--{{challenge.title}}-->
+<!--{{challenge.description}}-->
+<!--{{challenge.thumb}}-->
+<!--{{challenge.url}}-->
+<div class="js-score-tracking project-card project-card-tall-big project-card--spotlight ratio-16-9">
+  <div class="project-thumbnail">
+    <!--<div class="projects-we-love-badge projects-we-love-badge&#45;&#45;overlay">-->
+    <!--<div class="icon"><span class="ksr-icon__heart" aria-hidden="true"></span></div><div class="label">Project We Love</div>-->
+    <!--</div>-->
+
+    <a class="project-thumbnail-wrap" href="">
+      <img class="project-thumbnail-img" width="100%" alt="Project image" [src]="challenge.thumb">
+    </a>
+  </div>
+  <div class="project-card-content">
+    <h6 class="project-title">
+      <a href="">{{challenge.title}}</a>
+    </h6>
+    <p class="project-blurb">
+      {{challenge.description}}
+    </p>
+  </div>
+  <div class="project-profile-prize">
+    <div class="flag">
+      <div class="flag-img">
+        <i class="ion-trophy"></i>
+      </div>
+      <div class="flag-body">
+        <p class="project-profile-byline type-12">
+          ${{challenge.prize}}
+        </p>
+        <p class="project-profile-byline type-12 bold">
+          Total Prizes
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="project-profile-footer">
+    <div class="one-pixel-divider bg-green-dark" style=""></div>
+    <div class="project-profile-footer__content">
+      <div class="flag">
+        <div class="flag-img">
+          <img [src]="challenge.creator.avatar" class="block circle avatar-small" alt="">
+        </div>
+        <div class="flag-body">
+          <p class="project-profile-byline type-12">
+            By
+          </p>
+          <p class="project-profile-byline type-12 bold">
+            {{challenge.creator.displayName}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

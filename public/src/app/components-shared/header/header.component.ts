@@ -13,6 +13,9 @@ import { User } from '../../classes/user';
 })
 export class HeaderComponent implements OnInit {
   private user: User;
+  private isSearching: boolean = false;
+  private isExploringHide: boolean = false;
+  private isExploringTrans: boolean = false;
   constructor(private us: UserService, private route: ActivatedRoute, private router: Router) {
     us.loggedUser$.subscribe(user => { this.renderUser(user, { from: "change" }) });
   }
@@ -37,7 +40,23 @@ export class HeaderComponent implements OnInit {
     }
 
   }
-
+  onClickExplore(){
+    this.isExploringHide = true;
+    setTimeout(()=>{
+      this.isExploringTrans = true;
+    });
+  }
+  onCloseExplore(){
+    this.isExploringTrans = false;
+    this.isExploringHide = false;
+  }
+  onClickSearch(){
+    this.isSearching = true;
+    $('.js-search-term').focus();
+  }
+  onCloseSearch(){
+    this.isSearching = false;
+  }
   renderUser(user, obj) {
     if (obj.from == "queryParam" || obj.from == "localStorage") {
       this.user = new User();
@@ -46,6 +65,7 @@ export class HeaderComponent implements OnInit {
       this.user.token = user.accessToken;
       this.user.displayName = user.displayName;
       this.user.avatar = user.avatar;
+      console.log(this.user);
       // if (obj.from == "queryParam" || obj.from == "localStorage") {
       // this.us.loggedUserSource.next(this.user);
       // }

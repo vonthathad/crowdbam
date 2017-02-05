@@ -1,3 +1,16 @@
-.avatar {
-    width: 50px;
+
+.btn-login{
+  margin: 10px auto;
+}
+
+@media screen and (max-width: 768px) {
+  .site-nav__right .site-nav__item{
+    margin-right: 0;
+  }
+  .filter-heading{
+    margin-top: 0!important;
+  }
+  .filter-close {
+    top: 10px;
+  }
 }

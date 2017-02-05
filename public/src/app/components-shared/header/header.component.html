@@ -1,40 +1,223 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <a routerLink=''>Home</a>
-        <a (click)="onCreateChallenge()">Create a Challenge</a>
+<!--<nav class="navbar navbar-default">-->
+    <!--<div class="container-fluid">-->
+        <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+        <!--<a routerLink=''>Home</a>-->
+        <!--<a (click)="onCreateChallenge()">Create a Challenge</a>-->
 
-        <ul class="nav navbar-nav navbar-right">
-            <!-- USER CHƯA ĐĂNG NHẬP -->
-            <li *ngIf="!user">
-                <a (click)="onLoginClick()">Login</a>
-            </li>
-            <!--USER ĐÃ ĐĂNG NHẬP-->
-            <li *ngIf="user">
-                <a href="#" class="dropdown-toggle dropdown-user" data-toggle="dropdown" aria-expanded="false">
-                    <img class="avatar" src="{{user.avatar}}">{{user.displayName}}
-                    <b class="caret"></b>
-                    <div class="ripple-container"></div>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a (click)="onLogoutClick()">Logout</a>
-                    </li>
-                </ul>
-
-
-            </li>
-            <!--<li>-->
-            <!--<button [disabled]="!amount"  [routerLink]="['/Home','Order',orderService.orderID]" class="btn btn-primary btn-md btn-shopping"><i class="material-icons">shopping_basket</i> Thanh toán {{amount}}</button>-->
+        <!--<ul class="nav navbar-nav navbar-right">-->
+            <!--&lt;!&ndash; USER CHƯA ĐĂNG NHẬP &ndash;&gt;-->
+            <!--<li *ngIf="!user">-->
+                <!--<a (click)="onLoginClick()">Login</a>-->
             <!--</li>-->
-            <!--<li *ngIf="!user"><a class="btn btn-login" href="http://localhost:18179/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=self&redirect_uri=http://localhost:18179/">Đăng nhập</a></li>-->
-            <!--<li *ngIf="user" class="dropdown">-->
-            <!--<a class="dropdown-toggle" data-toggle="dropdown"><img [src]="user.Avatar" class="img img-responsive img-circle" style="width: 34px; display: inline-block"> <b>{{user.DisplayName}}</b> <b class="caret"></b></a>-->
-            <!--<ul class="dropdown-menu">-->
-            <!--<li><a (click)="onSignOut()">Đăng xuất</a></li>-->
-            <!--</ul>-->
+            <!--&lt;!&ndash;USER ĐÃ ĐĂNG NHẬP&ndash;&gt;-->
+            <!--<li *ngIf="user">-->
+                <!--<a href="#" class="dropdown-toggle dropdown-user" data-toggle="dropdown" aria-expanded="false">-->
+                    <!--<img class="avatar" src="{{user.avatar}}">{{user.displayName}}-->
+                    <!--<b class="caret"></b>-->
+                    <!--<div class="ripple-container"></div>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                    <!--<li>-->
+                        <!--<a (click)="onLogoutClick()">Logout</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+
+
             <!--</li>-->
-        </ul>
+            <!--&lt;!&ndash;<li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<button [disabled]="!amount"  [routerLink]="['/Home','Order',orderService.orderID]" class="btn btn-primary btn-md btn-shopping"><i class="material-icons">shopping_basket</i> Thanh toán {{amount}}</button>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<li *ngIf="!user"><a class="btn btn-login" href="http://localhost:18179/api/Account/ExternalLogin?provider=Facebook&response_type=token&client_id=self&redirect_uri=http://localhost:18179/">Đăng nhập</a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;<li *ngIf="user" class="dropdown">&ndash;&gt;-->
+            <!--&lt;!&ndash;<a class="dropdown-toggle" data-toggle="dropdown"><img [src]="user.Avatar" class="img img-responsive img-circle" style="width: 34px; display: inline-block"> <b>{{user.DisplayName}}</b> <b class="caret"></b></a>&ndash;&gt;-->
+            <!--&lt;!&ndash;<ul class="dropdown-menu">&ndash;&gt;-->
+            <!--&lt;!&ndash;<li><a (click)="onSignOut()">Đăng xuất</a></li>&ndash;&gt;-->
+            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+        <!--</ul>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+<!--</nav>-->
+<div class="site-nav-frame" [ngClass]="{'site-nav--search-is-visible': isSearching}" role="navigation">
+  <div class="site-nav-container site-nav-container--search" id="js-nav-search" aria-hidden="true">
+    <div class="site-nav-unit site-nav-unit--search">
+      <nav class="site-nav-base site-nav--search">
+        <div class="site-nav__left">
+          <div class="site-nav__item site-nav__item--searchbar js-searchbar js-header-livesearch" [ngClass]="{'site-nav__item--searchbar--visible': isSearching}">
+            <form class="site-nav__search-form" role="search" action="/projects/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+              <div class="icon__search"><i class="ion-ios-search-strong" id="ion-ios-search-strong"></i></div>
+              <input type="text" name="term" id="term" aria-label="Search projects" placeholder="Search" class="site-nav__search-input js-search-term text" tabindex="-1" autocomplete="off">
+            </form>
+
+          </div>
+        </div>
+        <div class="site-nav__right">
+          <button (click)="onCloseSearch()" class="btn btn-primary btn-simple site-nav__item--close" id="btn-search-close"><i class="ion-ios-close large"></i></button>
+        </div>
+      </nav>
     </div>
-    <!-- /.container-fluid -->
-</nav>
+  </div>
+  <div class="site-nav-container site-nav-container--main active-nav--primary">
+    <div class="site-nav-unit site-nav-unit--primary" id="js-nav-primary">
+      <nav class="site-nav-base site-nav--primary">
+        <div class="site-nav__left">
+          <a aria-controls="NS_discovery_overlay" aria-expanded="false" aria-haspopup="true" class="site-nav__item site-nav__item--text" (click)="onClickExplore()">
+            <span class="site-nav__item-label">Explore</span>
+          </a>
+          <a class="site-nav__item site-nav__item--text" (click)="onCreateChallenge()">
+            <span class="site-nav__item-label">Create <span class="hidden-xs">a challenge</span></span>
+          </a>
+          <a class="site-nav__item site-nav__item--text site-nav__item--about" href="/recommendations?ref=nav">
+            <span class="site-nav__item-label">For you</span>
+          </a>
+        </div>
+        <div class="site-nav__middle">
+          <a class="site-nav__item site-nav__item--logo" href="/?ref=nav">
+            <div class="svg--ksr-logo">
+              Crowdbam
+            </div>
+          </a>
+
+        </div>
+        <div class="site-nav__right">
+
+          <a aria-label="Enter Search" class="site-nav__item site-nav__item--search js-toggle-search" data-nav="search" (click)="onClickSearch()">
+            <button class="btn btn-primary btn-simple" id="btn-search-open"><i class="ion-ios-search-strong  large"></i></button>
+            <span class="site-nav__item-label">Enter Search</span>
+          </a>
+
+          <a *ngIf="user" class="site-nav__item site-nav__item--user bg-navy-200" aria-label="User dropdown menu" data-toggle="dropdown" aria-expanded="false">
+            <div class="notification-indicator-and-avatar">
+              <img class="site-nav__user-avatar" [src]="user.avatar">
+            </div>
+          </a>
+
+
+          <div *ngIf="!user" class="site-nav__item site-nav__item--user bg-navy-200">
+            <a (click)="onLoginClick()" class="btn btn-primary btn-login">Login <span class="hidden-xs">/ Sign up</span></a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+  </div>
+</div>
+<div>
+  <div id="filter-frame" class="block fixed scroll-y webkit-scrolling transition-all z9000 bg-grey-100" [ngClass]="{'hide': !isExploringHide}">
+    <div id="filter-content" class="filter" [ngClass]="{'translate': !isExploringTrans}">
+      <div class="container relative item-translate transition-all transition-delay-400">
+        <div class="absolute filter-close">
+          <a (click)="onCloseExplore()" aria-label="Close">
+            <i class="ion-ios-close large"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="container item-translate transition-all transition-delay-200">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="border-bottom type-16 filter-heading">
+              Collections
+            </h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="filter-title type-34"><a>Recommended</a></h2>
+            <h2 class="filter-title type-34"><a>Most popular</a></h2>
+            <h2 class="filter-title type-34"><a>Most newest</a></h2>
+          </div>
+        </div>
+      </div>
+      <div class="container item-translate transition-all transition-delay-300">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="border-bottom type-16 filter-heading">
+              Categories
+            </h1>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="filter-title type-34"><a>Categories #1</a></h2>
+            <h2 class="filter-title type-34"><a>Categories #2</a></h2>
+            <h2 class="filter-title type-34"><a>Categories #3</a></h2>
+            <h2 class="filter-title type-34"><a>Categories #4</a></h2>
+            <h2 class="filter-title type-34"><a>Categories #5</a></h2>
+            <h2 class="filter-title type-34"><a>Categories #6</a></h2>
+            <h2 class="filter-title type-34"><a>Categories #7</a></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="user-menu">
+  <div class="NS_layouts__user_dropdown column-span-2" data-user_dropdown_backer_creator_columns_path="/users/dropdown_backer_creator_columns" id="js-user_menu_dropdown" aria-expanded="true" aria-hidden="false">
+    <div class="user-dropdown js-user-dropdown creator selected">
+      <div class="user-options" id="menu-me-children">
+        <div class="menu-me-account dropdown-column" id="menu-me-account">
+          <h3 class="dropdown-menu-header">
+            My stuff
+          </h3>
+          <ul class="js-dropdown_group dd-menu">
+            <li>
+              <a href="/profile/following/find_creators?ref=user_menu">Follow creators</a>
+              <span class="flag-callout">New</span>
+            </li>
+            <li>
+              <a href="/profile/following/find?ref=user_menu">Follow Facebook friends</a>
+            </li>
+            <li><a href="/recommendations?ref=user_menu">Recommended for you</a></li>
+            <li>
+              <a title="Inbox" href="/messages?mailbox=inbox&amp;ref=user_menu">Messages
+              </a></li>
+            <li>
+              <a title="Activity" href="/activity?ref=user_menu">Activity
+              </a></li>
+            <li><a href="/profile/665783157?ref=user_menu">Profile</a></li>
+            <li><a href="/profile/backings?ref=user_menu">Backed projects</a></li>
+            <li><a href="/profile/projects?ref=user_menu">My projects</a></li>
+            <li>
+              <a href="/profile/starred?ref=user_menu">Saved projects
+              </a></li>
+          </ul>
+          <h3 class="dropdown-menu-header">
+            Settings
+          </h3>
+          <ul class="js-dropdown_group dd-menu">
+            <li><a href="/settings/account?ref=user_menu">Account</a></li>
+            <li><a href="/settings/profile?ref=user_menu">Edit profile</a></li>
+            <li><a href="/settings/notifications?ref=user_menu">Notifications</a></li>
+          </ul>
+        </div>
+
+        <div class="NS_layouts__user_dropdown_backer_creator_columns">
+          <div class="menu-me-created dropdown-column" id="menu-me-created">
+            <h3 class="dropdown-menu-header">
+              My projects
+            </h3>
+            <ul class="js-dropdown_group dd-menu">
+              <li class="project-title">
+                <a href="/projects/665783157/1180949172?ref=user_menu"><img alt="" style="height: auto;" class="project-thumb" src="https://ksr-ugc.imgix.net/assets/015/239/818/1c71a71cfb5e55c27f7ad35bdf251c55_original.jpg?w=48&amp;h=27&amp;fit=fill&amp;bg=000000&amp;v=1484985798&amp;auto=format&amp;q=92&amp;s=c28e66559415cf801b86aee419252302" width="48" height="27">
+                  New boardgame
+                </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="user-menu-footer">
+        <div class="row">
+          <div class="col">
+            You're logged in as <b>Đoàn Hữu An</b>
+            &nbsp;
+            <span class="mobile-show"></span>
+            <a href="/logout?ref=user_menu">Log out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
