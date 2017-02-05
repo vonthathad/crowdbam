@@ -73,7 +73,7 @@
   }
   
   $.fn.checkbox.defaults = {
-    template: '<span class="icons"><span class="first-icon fa fa-square-o"></span><span class="second-icon fa fa-check-square-o"></span></span>'
+    template: '<span class="icons"><span class="first-icon ion-ios-circle-outline"></span><span class="second-icon ion-ios-checkmark-outline"></span></span>'
   }
 
 
