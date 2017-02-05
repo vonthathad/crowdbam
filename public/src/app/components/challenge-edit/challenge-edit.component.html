@@ -200,17 +200,17 @@
         <div class="col-md-9" style="padding: 15px">
           <app-validated-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">
           </app-validated-multicheckbox>
-        <div class="alert alert-danger mt10">
-        <div>
-        Category is required!
-        </div>
-
-        </div>
         </div>
         </div>
 
         </div>
         </div>
+        </div>
+        <div class="alert alert-info alert-edit navbar-fixed-bottom">
+          <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4 text-right"><button type="submit" [disabled]="!challengeForm.valid" class="btn btn-white">Save changes</button></div>
+          </div>
         </div>
         </form>
         <!--<div class="content">-->

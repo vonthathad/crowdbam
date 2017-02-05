@@ -121,7 +121,7 @@ a{
   -o-transition-delay: 400ms;
   transition-delay: 400ms
 }
-.alert{
+.alert.alert-danger{
   border-radius: 4px;
 }
 .z9000 {
