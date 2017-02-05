@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/gsdk.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body>
+<section class="project-edit bg-grey-100 ">
+    <div class="row">
+        <div class="project-details-content">
+            <div class="project-details-nav">
+                <div class="container js-project-nav-scroll">
+                    <div class="row">
+                        <div class="project-nav__links col-md-9">
+                            <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/rewards">
+                                <i class="ion-ios-checkmark text-green"></i> Basics
+                            </a>
+                            <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/rewards">
+                                <i class="ion-ios-circle-outline"></i> Overview
+                            </a>
+                            <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/description">
+                                <i class="ion-ios-circle-outline"></i> Timeline
+                            </a>
+                            <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/comments">
+                                <i class="ion-ios-circle-outline"></i> Guidelines
+                            </a>
+                            <a class="tabbed-nav__link" data-content="community" href="/projects/stoic/banner-saga-3/community">
+                                <i class="ion-ios-circle-outline"></i> About Us
+                            </a>
+                        </div>
+                        <div class="project-nav__buttons col-md-3 hidden-xs hidden-md text-right">
+                            <a class="btn btn-md btn-primary btn-fill">Submit to Review</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-8 col-md-offset-2 text-center">
+            <!--<form [formGroup]="challengeForm" (ngSubmit)="createChallenge(challengeForm)">-->
+                <!--<div class="content text-left">-->
+                    <!--<div class="form-input-group">-->
+                        <!--<div class="form-input clearfix">-->
+                            <!--<div class="form-group label-floating is-empty row card">-->
+                                    <!--<div class="col-md-3"><label class="control-label light type-18"><sup class="text-gray">*</sup> Project image:</label></div>-->
+                                    <!--<div class="col-md-9">-->
+                                        <!--<div><img class="img-responsive" src="https://ksr-ugc.imgix.net/assets/015/239/818/1c71a71cfb5e55c27f7ad35bdf251c55_original.jpg?w=1024&h=576&fit=fill&bg=000000&v=1484985798&auto=format&q=92&s=5c9dbdd19322d12e67fd73dadf2371bf"></div>-->
+                                        <!--<input required type="file" class="form-control  mt10">-->
+                                        <!--<div class="alert alert-danger mt10">-->
+                                            <!--<div>-->
+                                                <!--Image is required!-->
+                                            <!--</div>-->
+
+                                        <!--</div>-->
+                                    <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-input-group">-->
+                        <!--<div class="form-input clearfix">-->
+                            <!--<div class="form-group label-floating is-empty row card">-->
+                                <!--<div class="col-md-3">-->
+                                    <!--<label class="control-label light type-18" for="title"><sup class="text-gray">*</sup> Project title: </label>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<input required type="text" class="form-control" formControlName="title"><span class="material-input"></span>-->
+                                    <!--<div [hidden]="challengeForm.get('title').valid || challengeForm.get('title').untouched" class="alert alert-danger mt10">-->
+                                        <!--<div *ngIf="challengeForm.get('title').hasError('required')">-->
+                                            <!--Title is required!-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-input-group">-->
+                        <!--<div class="form-input clearfix">-->
+                            <!--<div class="form-group label-floating is-empty row card">-->
+                                <!--<div class="col-md-3"><label class="control-label light type-18" for="description"><sup class="text-gray">*</sup> Description:</label></div>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<textarea required type="description" class="form-control" formControlName="description"></textarea>-->
+                                    <!--<div [hidden]="challengeForm.get('description').valid || challengeForm.get('description').untouched" class="alert alert-danger mt10">-->
+                                        <!--<div *ngIf="challengeForm.get('description').hasError('required')">-->
+                                            <!--Description is required!-->
+                                        <!--</div>-->
+                                        <!--<div *ngIf="challengeForm.get('description').hasError('maxlength')">-->
+                                            <!--Description must be no more than 140 character!-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-input-group">-->
+                        <!--<div class="form-input clearfix">-->
+                            <!--<div class="form-group label-floating is-empty row card">-->
+                                <!--<div class="col-md-3"><label class="control-label light type-18" for="prize"><sup class="text-gray">*</sup> Prize:</label></div>-->
+                                <!--<div class="col-md-9">-->
+                                    <!--<input required type="prize" class="form-control" formControlName="prize">-->
+                                    <!--<div [hidden]="challengeForm.get('prize').valid || challengeForm.get('prize').untouched" class="alert alert-danger mt10">-->
+                                        <!--<div *ngIf="challengeForm.get('prize').hasError('required')">-->
+                                            <!--Prize is required!-->
+                                        <!--</div>-->
+                                        <!--<div *ngIf="challengeForm.get('prize').hasError('pattern')">-->
+                                            <!--Prize must be a number!-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="form-input-group">-->
+                        <!--<div class="form-input clearfix">-->
+                            <!--<div class="form-group label-floating is-empty row card">-->
+                                <!--<div class="col-md-3"><label class="control-label light type-18"><sup class="text-gray">*</sup> Categories:</label></div>-->
+                                <!--<div class="col-md-9" style="padding: 15px">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-sm-6"><input type="checkbox" value="" data-toggle="checkbox" checked> <span class="type-14 light">Check</span></div>-->
+                                        <!--<div class="col-sm-6"><input type="checkbox" value="" data-toggle="checkbox" checked> <span class="type-14 light">Check</span></div>-->
+                                    <!--</div>-->
+                                    <!--<div class="alert alert-danger mt10">-->
+                                        <!--<div>-->
+                                            <!--Category is required!-->
+                                        <!--</div>-->
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+            <div class="content">
+                <div class="row card text-left">
+                    <div class="clearfix">
+                        <div class="pull-left"><a class="btn btn-primary"><i class="ion-ios-plus-outline"></i> Create event</a></div>
+                        <div class="pull-right"><a class="btn btn-primary btn-fill"><i class="ion-ios-checkmark-outline"></i> Update timeline</a></div>
+                    </div>
+                    <div class="timeline-preview mt10">
+                        <div class="item pass">
+                            <div>abc</div>
+                            <div>xyz</div>
+                        </div>
+                        <div class="item">
+                            <div>abc</div>
+                            <div>xyz</div>
+                        </div>
+                        <div class="item next">
+                            <div>abc</div>
+                            <div>xyz</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row card text-left event">
+                    <div class="delete-btn">
+                        <a class="btn btn-simple btn-primary"><i class="ion-ios-close large"></i></a>
+                    </div>
+                   <div class="col-md-5 event-title">
+                       <div class="form-input clearfix">
+                           <input type="text" class="form-control" >
+                       </div>
+                       <div class="form-input clearfix mt10">
+                           <select class="form-control">
+                               <option value="pre-registration">Pre-registration</option>
+                               <option value="enter">Enter</option>
+                               <option value="registration-closed">Registration Closed</option>
+                               <option value="submission-deadline">Submission Deadline</option>
+                               <option value="judging">Judging</option>
+                               <option value="winners-announced">Winners Announced</option>
+                               <option value="closed">Closed</option>
+                               <option value="">Other</option>
+                           </select>
+                       </div>
+                       <div class="form-input clearfix mt10">
+                           <input placeholder="Custom title*" type="text" class="form-control" >
+                       </div>
+                   </div>
+                   <div class="col-md-7">
+                       <div class="form-input clearfix">
+                           <textarea class="form-control" rows="4"></textarea>
+                       </div>
+                   </div>
+                </div>
+            </div>
+            <div class="row pull-right">
+                <a class="btn btn-primary btn-simple"><i class="ion-ios-close"></i> Delete project</a>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!--<script src="assets/js/gsdk-checkbox.js"></script>-->
+<!--<script>-->
+    <!--$('.checkbox').checkbox();-->
+<!--</script>-->
+</body>
+</html>
