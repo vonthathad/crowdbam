@@ -1,92 +1,275 @@
-<pre>
-    Publish Tasks
-Before we can publish your challenge live, you need to complete the following tasks. Click here to edit your challenge.
- Prize
-Set the total prize amount.
- Categories
-Choose appropriate categories for your challenge.
- Short Description
-Describe the challenge in 140 characters or less.
- Overview
-Write a compelling and inspiring challenge overview.
- Image
-Upload an image that illustrates your challenge.
-NOTE: This section is only visible to challenge administrators.
-</pre>
+<!--<pre>-->
+    <!--Publish Tasks-->
+<!--Before we can publish your challenge live, you need to complete the following tasks. Click here to edit your challenge.-->
+ <!--Prize-->
+<!--Set the total prize amount.-->
+ <!--Categories-->
+<!--Choose appropriate categories for your challenge.-->
+ <!--Short Description-->
+<!--Describe the challenge in 140 characters or less.-->
+ <!--Overview-->
+<!--Write a compelling and inspiring challenge overview.-->
+ <!--Image-->
+<!--Upload an image that illustrates your challenge.-->
+<!--NOTE: This section is only visible to challenge administrators.-->
+<!--</pre>-->
 
-<div *ngIf="challenge">
+<!--<div *ngIf="challenge">-->
 
-    <form [formGroup]="challengeForm" (ngSubmit)="updateChallenge(challengeForm)">
-        <div class="content">
-            <div class="input-group">
-                <span class="input-group-addon">
-            <i class="ion-at"></i>
-        </span>
-                <div class="form-group label-floating is-empty">
-                    <input required type="text" class="form-control" formControlName="title"><span class="material-input"></span>
-                    <label class="control-label" for="title">Title*</label>
-                </div>
+    <!--<form [formGroup]="challengeForm" (ngSubmit)="updateChallenge(challengeForm)">-->
+        <!--<div class="content">-->
+            <!--<div class="input-group">-->
+                <!--<span class="input-group-addon">-->
+            <!--<i class="ion-at"></i>-->
+        <!--</span>-->
+                <!--<div class="form-group label-floating is-empty">-->
+                    <!--<input required type="text" class="form-control" formControlName="title"><span class="material-input"></span>-->
+                    <!--<label class="control-label" for="title">Title*</label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div [hidden]="challengeForm.get('title').valid || challengeForm.get('title').untouched" class="alert alert-danger">-->
+                <!--<div *ngIf="challengeForm.get('title').hasError('required')">-->
+                    <!--Title is required!-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="input-group">-->
+                <!--<span class="input-group-addon">-->
+            <!--<i class="ion-locked"></i>-->
+        <!--</span>-->
+                <!--<div class="form-group label-floating is-empty">-->
+                    <!--<input required type="description" class="form-control" formControlName="description">-->
+                    <!--<span class="material-input"></span>-->
+                    <!--<label class="control-label" for="description">Description*</label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div [hidden]="challengeForm.get('description').valid || challengeForm.get('description').untouched" class="alert alert-danger">-->
+                <!--<div *ngIf="challengeForm.get('description').hasError('required')">-->
+                    <!--Description is required!-->
+                <!--</div>-->
+                <!--<div *ngIf="challengeForm.get('description').hasError('maxlength')">-->
+                    <!--Description must be no more than 140 character!-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div class="input-group">-->
+                <!--<span class="input-group-addon">-->
+                <!--<i class="ion-locked"></i>-->
+            <!--</span>-->
+                <!--<div class="form-group label-floating is-empty">-->
+                    <!--<input required type="prize" class="form-control" formControlName="prize">-->
+                    <!--<span class="material-input"></span>-->
+                    <!--<label class="control-label" for="prize">Prize*</label>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div [hidden]="challengeForm.get('prize').valid || challengeForm.get('prize').untouched" class="alert alert-danger">-->
+                <!--<div *ngIf="challengeForm.get('prize').hasError('required')">-->
+                    <!--Prize is required!-->
+                <!--</div>-->
+                <!--<div *ngIf="challengeForm.get('prize').hasError('pattern')">-->
+                    <!--Prize must be a number!-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;File upload and preview&ndash;&gt;-->
+            <!--&lt;!&ndash;<input #fileInput type="file" (change)="fileChangeEvent($event)" accept="image/*" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<input type="file" (change)="fileChangeEvent($event)" accept="image/*" />-->
+            <!--<img id="imgPreview" [attr.src]='imgSrc' alt="" width=300>&ndash;&gt;-->
+            <!--<app-validated-upload [imgSrc]="challenge.thumb" [control]="challengeForm.controls['img']"></app-validated-upload>-->
+
+
+            <!--<div class="input-group" *ngIf="categoryOptions && categoryOptions.length > 0">-->
+                <!--<label for="categories">Categories*</label>-->
+                <!--<app-validated-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">-->
+                <!--</app-validated-multicheckbox>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="footer text-center">-->
+            <!--<button type="submit" [disabled]="!challengeForm.valid" class="btn btn-primary">Edit Challenge</button>-->
+        <!--</div>-->
+    <!--</form>-->
+<!--</div>-->
+
+<section *ngIf="challenge" class="project-edit bg-grey-100 ">
+  <div class="row">
+    <div class="project-details-content">
+      <div class="project-details-nav">
+        <div class="container js-project-nav-scroll">
+          <div class="row">
+            <div class="project-nav__links col-md-9">
+              <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/rewards">
+                <i class="ion-ios-checkmark text-green"></i> Basics
+              </a>
+              <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/rewards">
+                <i class="ion-ios-circle-outline"></i> Overview
+              </a>
+              <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/description">
+                <i class="ion-ios-circle-outline"></i> Timeline
+              </a>
+              <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/comments">
+                <i class="ion-ios-circle-outline"></i> Guidelines
+              </a>
+              <a class="tabbed-nav__link" data-content="community" href="/projects/stoic/banner-saga-3/community">
+                <i class="ion-ios-circle-outline"></i> About Us
+              </a>
             </div>
-            <div [hidden]="challengeForm.get('title').valid || challengeForm.get('title').untouched" class="alert alert-danger">
-                <div *ngIf="challengeForm.get('title').hasError('required')">
-                    Title is required!
-                </div>
+            <div class="project-nav__buttons col-md-3 hidden-xs hidden-md text-right">
+              <a class="btn btn-md btn-primary btn-fill">Submit to Review</a>
             </div>
-
-            <div class="input-group">
-                <span class="input-group-addon">
-            <i class="ion-locked"></i>
-        </span>
-                <div class="form-group label-floating is-empty">
-                    <input required type="description" class="form-control" formControlName="description">
-                    <span class="material-input"></span>
-                    <label class="control-label" for="description">Description*</label>
-                </div>
-            </div>
-            <div [hidden]="challengeForm.get('description').valid || challengeForm.get('description').untouched" class="alert alert-danger">
-                <div *ngIf="challengeForm.get('description').hasError('required')">
-                    Description is required!
-                </div>
-                <div *ngIf="challengeForm.get('description').hasError('maxlength')">
-                    Description must be no more than 140 character!
-                </div>
-            </div>
-
-
-            <div class="input-group">
-                <span class="input-group-addon">
-                <i class="ion-locked"></i>
-            </span>
-                <div class="form-group label-floating is-empty">
-                    <input required type="prize" class="form-control" formControlName="prize">
-                    <span class="material-input"></span>
-                    <label class="control-label" for="prize">Prize*</label>
-                </div>
-            </div>
-            <div [hidden]="challengeForm.get('prize').valid || challengeForm.get('prize').untouched" class="alert alert-danger">
-                <div *ngIf="challengeForm.get('prize').hasError('required')">
-                    Prize is required!
-                </div>
-                <div *ngIf="challengeForm.get('prize').hasError('pattern')">
-                    Prize must be a number!
-                </div>
-            </div>
-
-            <!--File upload and preview-->
-            <!--<input #fileInput type="file" (change)="fileChangeEvent($event)" accept="image/*" />-->
-            <!--<input type="file" (change)="fileChangeEvent($event)" accept="image/*" />
-            <img id="imgPreview" [attr.src]='imgSrc' alt="" width=300>-->
-            <app-validated-upload [imgSrc]="challenge.thumb" [control]="challengeForm.controls['img']"></app-validated-upload>
-
-
-            <div class="input-group" *ngIf="categoryOptions && categoryOptions.length > 0">
-                <label for="categories">Categories*</label>
-                <app-validated-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">
-                </app-validated-multicheckbox>
-            </div>
+          </div>
         </div>
-        <div class="footer text-center">
-            <button type="submit" [disabled]="!challengeForm.valid" class="btn btn-primary">Edit Challenge</button>
+      </div>
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <form [formGroup]="challengeForm" (ngSubmit)="updateChallenge(challengeForm)">
+        <div class="content text-left">
+        <div class="form-input-group">
+        <div class="form-input clearfix">
+        <div class="form-group label-floating is-empty row card">
+        <div class="col-md-3"><label class="control-label light type-18"><sup class="text-gray">*</sup> Project image:</label></div>
+        <div class="col-md-9">
+        <app-validated-upload [imgSrc]="challenge.thumb" [control]="challengeForm.controls['img']"></app-validated-upload>
         </div>
-    </form>
-</div>
+        </div>
+
+        </div>
+        </div>
+        <div class="form-input-group">
+        <div class="form-input clearfix">
+        <div class="form-group label-floating is-empty row card">
+        <div class="col-md-3">
+        <label class="control-label light type-18" for="title"><sup class="text-gray">*</sup> Project title: </label>
+        </div>
+        <div class="col-md-9">
+        <input required type="text" class="form-control" formControlName="title"><span class="material-input"></span>
+        <div [hidden]="challengeForm.get('title').valid || challengeForm.get('title').untouched" class="alert alert-danger mt10">
+        <div *ngIf="challengeForm.get('title').hasError('required')">
+        Title is required!
+        </div>
+        </div>
+        </div>
+        </div>
+
+        </div>
+        </div>
+        <div class="form-input-group">
+        <div class="form-input clearfix">
+        <div class="form-group label-floating is-empty row card">
+        <div class="col-md-3"><label class="control-label light type-18" for="description"><sup class="text-gray">*</sup> Description:</label></div>
+        <div class="col-md-9">
+        <textarea required type="description" class="form-control" formControlName="description"></textarea>
+        <div [hidden]="challengeForm.get('description').valid || challengeForm.get('description').untouched" class="alert alert-danger mt10">
+        <div *ngIf="challengeForm.get('description').hasError('required')">
+        Description is required!
+        </div>
+        <div *ngIf="challengeForm.get('description').hasError('maxlength')">
+        Description must be no more than 140 character!
+        </div>
+        </div>
+        </div>
+
+        </div>
+
+        </div>
+        </div>
+        <div class="form-input-group">
+        <div class="form-input clearfix">
+        <div class="form-group label-floating is-empty row card">
+        <div class="col-md-3"><label class="control-label light type-18" for="prize"><sup class="text-gray">*</sup> Prize:</label></div>
+        <div class="col-md-9">
+        <input required type="prize" class="form-control" formControlName="prize">
+        <div [hidden]="challengeForm.get('prize').valid || challengeForm.get('prize').untouched" class="alert alert-danger mt10">
+        <div *ngIf="challengeForm.get('prize').hasError('required')">
+        Prize is required!
+        </div>
+        <div *ngIf="challengeForm.get('prize').hasError('pattern')">
+        Prize must be a number!
+        </div>
+        </div>
+        </div>
+
+        </div>
+
+        </div>
+        </div>
+
+        <div class="form-input-group">
+        <div class="form-input clearfix">
+        <div class="form-group label-floating is-empty row card">
+        <div class="col-md-3"><label class="control-label light type-18"><sup class="text-gray">*</sup> Categories:</label></div>
+        <div class="col-md-9" style="padding: 15px">
+          <app-validated-multicheckbox [control]="challengeForm.controls['categories']" [options]="categoryOptions" [model]="challengeForm.controls['categories']">
+          </app-validated-multicheckbox>
+        <div class="alert alert-danger mt10">
+        <div>
+        Category is required!
+        </div>
+
+        </div>
+        </div>
+        </div>
+
+        </div>
+        </div>
+        </div>
+        </form>
+        <!--<div class="content">-->
+          <!--<div class="row card text-left">-->
+            <!--<div class="clearfix">-->
+              <!--<div class="pull-left"><a class="btn btn-primary"><i class="ion-ios-plus-outline"></i> Create event</a></div>-->
+              <!--<div class="pull-right"><a class="btn btn-primary btn-fill"><i class="ion-ios-checkmark-outline"></i> Update timeline</a></div>-->
+            <!--</div>-->
+            <!--<div class="timeline-preview mt10">-->
+              <!--<div class="item pass">-->
+                <!--<div>abc</div>-->
+                <!--<div>xyz</div>-->
+              <!--</div>-->
+              <!--<div class="item">-->
+                <!--<div>abc</div>-->
+                <!--<div>xyz</div>-->
+              <!--</div>-->
+              <!--<div class="item next">-->
+                <!--<div>abc</div>-->
+                <!--<div>xyz</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="row card text-left event">-->
+            <!--<div class="delete-btn">-->
+              <!--<a class="btn btn-simple btn-primary"><i class="ion-ios-close large"></i></a>-->
+            <!--</div>-->
+            <!--<div class="col-md-5 event-title">-->
+              <!--<div class="form-input clearfix">-->
+                <!--<input type="text" class="form-control" >-->
+              <!--</div>-->
+              <!--<div class="form-input clearfix mt10">-->
+                <!--<select class="form-control">-->
+                  <!--<option value="pre-registration">Pre-registration</option>-->
+                  <!--<option value="enter">Enter</option>-->
+                  <!--<option value="registration-closed">Registration Closed</option>-->
+                  <!--<option value="submission-deadline">Submission Deadline</option>-->
+                  <!--<option value="judging">Judging</option>-->
+                  <!--<option value="winners-announced">Winners Announced</option>-->
+                  <!--<option value="closed">Closed</option>-->
+                  <!--<option value="">Other</option>-->
+                <!--</select>-->
+              <!--</div>-->
+              <!--<div class="form-input clearfix mt10">-->
+                <!--<input placeholder="Custom title*" type="text" class="form-control" >-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-7">-->
+              <!--<div class="form-input clearfix">-->
+                <!--<textarea class="form-control" rows="4"></textarea>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <div class="row pull-right">
+          <a class="btn btn-primary btn-simple"><i class="ion-ios-close"></i> Delete project</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

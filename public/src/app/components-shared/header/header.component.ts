@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   private isSearching: boolean = false;
   private isExploringHide: boolean = false;
   private isExploringTrans: boolean = false;
+  private isOpeningMenu: boolean = false;
   constructor(private us: UserService, private route: ActivatedRoute, private router: Router) {
     us.loggedUser$.subscribe(user => { this.renderUser(user, { from: "change" }) });
   }
@@ -56,6 +57,9 @@ export class HeaderComponent implements OnInit {
   }
   onCloseSearch(){
     this.isSearching = false;
+  }
+  onToggleMenu(){
+    this.isOpeningMenu = !this.isOpeningMenu;
   }
   renderUser(user, obj) {
     if (obj.from == "queryParam" || obj.from == "localStorage") {

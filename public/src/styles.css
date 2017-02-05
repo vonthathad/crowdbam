@@ -194,14 +194,8 @@ a:hover{
 }
 
 @media (min-width: 641px) {
-  .column-span-2 .user-dropdown {
+  .user-dropdown {
     width: 520px
-  }
-  .column-span-3 .user-dropdown {
-    width: 820px
-  }
-  .column-span-3 .user-dropdown .menu-me-backed {
-    margin-right: 60px
   }
 }
 
@@ -209,23 +203,17 @@ a:hover{
   width: 210px
 }
 
-.user-menu .menu-me-backed,
-.user-menu .menu-me-account {
-  margin-right: 10px
-}
-
-@media (max-width: 640px) {
-  .user-menu .menu-me-backed,
-  .user-menu .menu-me-created {
-    display: none
-  }
+.user-menu .dd-menu {
+  padding-left: 0;
 }
 
 .user-menu .dd-menu,
 .user-menu .dropdown-menu-header {
   line-height: 2.2
 }
-
+.user-menu .dd-menu li{
+  list-style: none;
+}
 .user-menu .dropdown-menu-header {
   font-size: 14px;
   margin: 0 0 10px 0;
@@ -234,7 +222,6 @@ a:hover{
 
 .user-menu .dd-menu {
   font-size: 14px;
-  margin-bottom: 20px
 }
 
 .user-menu .dd-menu .project-title {
