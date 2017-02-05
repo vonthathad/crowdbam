@@ -32,6 +32,18 @@ export class ChallengeService {
             headers: headers
         });
     }
+    // GET CHALLENGE 
+    getChallenge(id: number):Observable<any[]>{
+        var token = this.rest.getToken();
+        let headers = new Headers({
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        });
+        return this.rest.get({
+            url: `api/challenges/${id}`,
+            headers: headers
+        });
+    }
     // CREATE CHALLENGE
     createChallenge(input: any): Observable<any[]> {
         var token = this.rest.getToken();

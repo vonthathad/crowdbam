@@ -21,10 +21,9 @@ export class HeaderComponent implements OnInit {
     let token;
     this.route.queryParams.subscribe(queryParam => {
       token = queryParam['token'];
-      console.log("TOKEN " + token);
+      // console.log("TOKEN " + token);
       // if there is one, take user in db and render to user
       if (token) {
-        console.log("1234");
         localStorage.setItem("token", token);
         this.us.getUser(token).subscribe((res: any) => this.renderUser(res.user, { from: "queryParam" }));
       }
@@ -32,7 +31,7 @@ export class HeaderComponent implements OnInit {
 
     // get token from localstorage if there is one
     token = localStorage.getItem("token");
-    console.log("TOKEN HERE" + token);
+    // console.log("TOKEN HERE" + token);
     if (token && token != "undefined") {
       this.us.getUser(token).subscribe((res: any) => this.renderUser(res.user, { from: "localStorage" }));
     }
@@ -42,7 +41,7 @@ export class HeaderComponent implements OnInit {
   renderUser(user, obj) {
     if (obj.from == "queryParam" || obj.from == "localStorage") {
       this.user = new User();
-      console.log("USER" + JSON.stringify(user));
+      // console.log("USER" + JSON.stringify(user));
       this.user._id = user._id;
       this.user.token = user.accessToken;
       this.user.displayName = user.displayName;
