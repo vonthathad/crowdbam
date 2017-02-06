@@ -23,7 +23,6 @@ export class ChallengeComponent implements OnInit {
    }
 
   ngOnInit() {
-  
   }
   onEditChallengeClick(){
     this.router.navigate(['challenges/' + this.challenge.id + '/edit']);

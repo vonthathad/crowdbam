@@ -2,21 +2,24 @@
     <div class="container js-project-nav-scroll">
         <div class="row">
             <div class="project-nav__links col-md-9">
-                <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/rewards">
+                <a class="tabbed-nav__link" (click)="onBasicClick()">
                     <i class="ion-ios-checkmark text-green"></i> Basics
                 </a>
-                <a class="tabbed-nav__link" (click)="onOverviewClick()">
-                    <i class="ion-ios-circle-outline"></i> Overview
-                </a>
-                <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/description">
+                <a class="tabbed-nav__link" (click)="onTimeClick()">
                     <i class="ion-ios-circle-outline"></i> Timeline
                 </a>
-                <a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/comments">
+                <!--<a class="tabbed-nav__link" (click)="onOverviewClick()">
+                    <i class="ion-ios-circle-outline"></i> Overview
+                </a>-->
+                <a *ngFor="let type of types" (click)="onTypeClick(type)" class="tabbed-nav__link">
+                    <i class="ion-ios-circle-outline"></i> {{type.title}}
+                </a>
+                <!--<a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/comments">
                     <i class="ion-ios-circle-outline"></i> Guidelines
                 </a>
                 <a class="tabbed-nav__link" data-content="community" href="/projects/stoic/banner-saga-3/community">
                     <i class="ion-ios-circle-outline"></i> About Us
-                </a>
+                </a>-->
             </div>
             <div class="project-nav__buttons col-md-3 hidden-xs hidden-md text-right">
                 <a class="btn btn-md btn-primary btn-fill">Submit to Review</a>

@@ -16,6 +16,8 @@ import { CATEGORY_PROVIDER } from './services/category.service';
 import { CUSTOM_VALIDATOR_PROVIDER } from './services/custom-validator.service';
 import { FILE_VALIDATOR_PROVIDER } from './services/file-validator.service';
 import { AUTH_GUARD_PROVIDER } from './services/auth-guard.service';
+import { CONTENT_PROVIDER } from './services/content.service';
+import { TYPE_PROVIDER } from './services/type.service';
 
 
 import { AppComponent } from './app.component';
@@ -32,12 +34,14 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { CardChallengeComponent } from './components-child/card-challenge/card-challenge.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
 import { ValidatedMulticheckboxComponent } from './components-child/validated-multicheckbox/validated-multicheckbox.component';
-import { ChallengeOverviewComponent } from './components/challenge-overview/challenge-overview.component';
 import { ChallengeCreateComponent } from './components/challenge-create/challenge-create.component';
-import { ChallengeEditComponent } from './components/challenge-edit/challenge-edit.component';
 import { ValidatedUploadComponent } from './components-child/validated-upload/validated-upload.component';
 import { AutocompleteComponent } from './components-child/autocomplete/autocomplete.component';
-import { ChallengesNavigatorComponent } from './components-child/challenges-navigator/challenges-navigator.component';
+import { ChallengeEditWrapperComponent } from './components/challenge-edit-wrapper/challenge-edit-wrapper.component';
+import { ChallengeEditBasicComponent } from './components/challenge-edit-basic/challenge-edit-basic.component';
+import { ChallengeEditHtmlComponent } from './components/challenge-edit-html/challenge-edit-html.component';
+import { ChallengeEditTimelineComponent } from './components/challenge-edit-timeline/challenge-edit-timeline.component';
+import { ChallengeNavigatorComponent } from './components-shared/challenge-navigator/challenge-navigator.component';
 
 @NgModule({
   declarations: [
@@ -57,13 +61,15 @@ import { ChallengesNavigatorComponent } from './components-child/challenges-navi
     CardChallengeComponent,
     ChallengeComponent,
     ValidatedMulticheckboxComponent,
-    ChallengeOverviewComponent,
     ChallengeCreateComponent,
-    ChallengeEditComponent,
     ValidatedUploadComponent,
     AutocompleteComponent,
-    ChallengesNavigatorComponent,
-    ChallengesNavigatorComponent,
+    ChallengeEditWrapperComponent,
+    ChallengeEditBasicComponent,
+    ChallengeEditBasicComponent,
+    ChallengeEditHtmlComponent,
+    ChallengeEditTimelineComponent,
+    ChallengeNavigatorComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [
@@ -82,6 +88,8 @@ import { ChallengesNavigatorComponent } from './components-child/challenges-navi
     CUSTOM_VALIDATOR_PROVIDER,
     AUTH_GUARD_PROVIDER,
     FILE_VALIDATOR_PROVIDER,
+    CONTENT_PROVIDER,
+    TYPE_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }
   ],

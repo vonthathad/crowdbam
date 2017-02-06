@@ -94,7 +94,7 @@
 <section *ngIf="challenge" class="project-edit bg-grey-100 ">
     <div class="row">
         <div class="project-details-content">
-            <app-challenges-navigator></app-challenges-navigator>
+            <!--<app-challenges-navigator [id]="id"></app-challenges-navigator>-->
             <div class="col-md-8 col-md-offset-2 text-center">
                 <form [formGroup]="challengeForm" (ngSubmit)="updateChallenge(challengeForm)">
                     <div class="content text-left">

@@ -7,11 +7,14 @@ import { HomeComponent } from './components/home/home.component';
 import { ChallengesComponent } from './components/challenges/challenges.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
 import { ChallengeCreateComponent } from './components/challenge-create/challenge-create.component';
-import { ChallengeEditComponent } from './components/challenge-edit/challenge-edit.component';
-import { ChallengeOverviewComponent } from './components/challenge-overview/challenge-overview.component';
+import { ChallengeEditWrapperComponent } from './components/challenge-edit-wrapper/challenge-edit-wrapper.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+
+import { ChallengeEditBasicComponent } from './components/challenge-edit-basic/challenge-edit-basic.component';
+import { ChallengeEditTimelineComponent } from './components/challenge-edit-timeline/challenge-edit-timeline.component';
+import { ChallengeEditHtmlComponent } from './components/challenge-edit-html/challenge-edit-html.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -22,10 +25,22 @@ const routes: Routes = [
 
     { path: 'c/:url', component: ChallengeComponent },
     { path: 'challenges/:id', component: ChallengeComponent },
-    { path: 'challenges?sort=:type', component: ChallengeComponent},
-    { path: 'challenges/:id/edit', component: ChallengeEditComponent, canActivate: [AuthGuardService] },
-    { path: 'challenge-create', component: ChallengeCreateComponent, canActivate: [AuthGuardService] },
-    { path: 'challenges/:id/overview', component: ChallengeOverviewComponent},
+    { path: 'challenges?sort=:type', component: ChallengeComponent },
+    // { path: 'challenges/:id/edit', component: ChallengeEditWrapperComponent, canActivate: [AuthGuardService] },
+    // { path: 'challenge-create', component: ChallengeCreateComponent, canActivate: [AuthGuardService] },
+    {
+        path: 'challenges/:id/edit', component: ChallengeEditWrapperComponent,
+        children: [
+            { path: 'basic', redirectTo: '', pathMatch: 'full' },
+            { path: '', component: ChallengeEditBasicComponent },
+            { path: 'timeline', component: ChallengeEditTimelineComponent },
+            { path: 'others/:type', component: ChallengeEditHtmlComponent },
+        ]
+    },
+    // { path: 'challenges/:id/edit-timeline', component: ChallengeEditWrapperComponent },
+    // { path: 'challenges/:id/edit/:type', component: ChallengeEditWrapperComponent },
+    { path: 'challenge-create', component: ChallengeCreateComponent },
+
 
     { path: 'profiles/:id', component: ProfilesComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },

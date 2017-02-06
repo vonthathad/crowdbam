@@ -39,9 +39,7 @@ export class ChallengeEditComponent implements OnInit {
       img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall])],
       categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))
     });
-    this.cv.getIdFromActivatedRoute(id=>{
-      alert(id);
-    });
+   
     this.route.params.subscribe(params => {
       this.id = params['id'];
       this.cv.getChallenge(this.id).subscribe((res: any) => this.renderChallenge(res.data));
