@@ -35,10 +35,10 @@ export class FormLoginWrapperComponent implements OnInit {
   loginFacebook() {
     let location = window.location.href;
     // window.location.href = `/oauth/facebook?redirect=${this.location}`;
-    window.location.href = `http://localhost:8235/oauth/facebook?redirect=${location}`;
+    window.location.href = `/oauth/facebook?redirect=${location}`;
   }
   loginGoogle() {
     let location = window.location.href;
-    window.location.href = `http://localhost:8235/oauth/google?redirect=${location}`;
+    window.location.href = `/oauth/google?redirect=${location}`;
   }
 }
