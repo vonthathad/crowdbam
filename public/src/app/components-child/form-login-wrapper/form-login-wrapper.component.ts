@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormLoginWrapperComponent implements OnInit {
   private actionLabel: string;
+  private actionTitle: string;
   private action: string;
   constructor() {
   }
@@ -15,19 +16,21 @@ export class FormLoginWrapperComponent implements OnInit {
     this.initLogin();
   }
   changeAction() {
-    if (this.action == 'login') {
+    if (this.action == 'Login') {
       this.initRegister();
     } else {
       this.initLogin();
     }
   }
   initLogin() {
-    this.action = 'login';
-    this.actionLabel = 'NEW USER?';
+    this.action = 'Login';
+    this.actionTitle = 'New member?';
+    this.actionLabel = 'Signup!';
   }
   initRegister() {
-    this.action = 'register';
-    this.actionLabel = 'ALREADY HAVE AN ACCOUNT!';
+    this.action = 'Sign up';
+    this.actionTitle = 'Already have an account?';
+    this.actionLabel = 'Login';
   }
   loginFacebook() {
     let location = window.location.href;

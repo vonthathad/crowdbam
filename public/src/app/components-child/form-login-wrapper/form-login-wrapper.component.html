@@ -1,8 +1,16 @@
-<div>
-    <button class="btn btn-primary btn-social btn-facebook" (click)="loginFacebook()">LOGIN BY FACEBOOK</button>
-    <button class="btn btn-primary btn-social btn-google" (click)="loginGoogle()">LOGIN BY GOOGLE</button>
-</div>
-<app-form-register *ngIf="action=='register'"></app-form-register>
-<app-form-login *ngIf="action=='login'"></app-form-login>
+<div class="p20 pb0"><h3>{{action}}</h3></div>
+<app-form-register *ngIf="action=='Sign up'"></app-form-register>
+<app-form-login *ngIf="action=='Login'"></app-form-login>
+<div *ngIf="action=='Login'" class="text-center">
+  <div class="social-btn">
+    <button class="btn btn-primary w100 btn-fill btn-facebook" (click)="loginFacebook()">LOGIN BY FACEBOOK</button>
+  </div>
+  <div class="social-btn">
+    <button class="btn btn-primary w100 btn-fill btn-google" (click)="loginGoogle()">LOGIN BY GOOGLE</button>
+  </div>
 
-<button (click)="changeAction()">{{actionLabel}}<button>
+</div>
+<div class="w100 bg-grey-400 p20 text-center">
+  {{actionTitle}} <a (click)="changeAction()" class="bold">{{actionLabel}}</a>
+</div>
+

@@ -12,6 +12,7 @@ var debug = require('debug')('docs:server');
 var http = require('http');
 var mongoose = require('../app/configs/mongoose');
 var server;
+var port
 /**
  * Get port from environment and store in Express.
  */
@@ -23,7 +24,7 @@ var server;
  */
 mongoose(function(){
   var app = require('../app');
-  var port = process.env.PORT || '3000';
+  port = process.env.PORT || '3000';
   app.set('port', port);
   server = http.createServer(app);
   /**
