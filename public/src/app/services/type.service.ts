@@ -79,6 +79,21 @@ export class TypeService {
             headers: headers
         });
     }
+
+      // UPDATE TYPE
+    deleteType(type: Type, id: number): Observable<any[]> {
+        var token = this.rest.getToken();
+        let headers = new Headers({
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+            'Type-Type': 'application/json'
+        });
+        console.log(type);
+        return this.rest.delete({
+            url: `api/types/${id}`,
+            body: type,
+            headers: headers
+        });
+    }
 }
 
 export var TYPE_PROVIDER: Array<any> = [

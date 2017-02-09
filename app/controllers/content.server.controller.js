@@ -28,9 +28,9 @@ exports.hasAuthorization = function(req, res, next) {
     } else {
         Content.findOne({challenge: req.challenge._id, type: req.type._id},function(err,content){
             if(err) return res.status(400).send();
-            if(!content) return res.status(400).send({
-                messages : ["This content isn't exist"]
-            });
+            // if(!content) return res.status(400).send({
+            //     messages : ["This content isn't exist"]
+            // });
             req.content = content;
             next();
         });
@@ -55,7 +55,12 @@ exports.create = function(req,res){
 
 };
 exports.get = function(req,res){
-    return res.json({data: req.content});
+
+    Content.findOne({challenge: req.challenge._id, type: req.type._id},function(err,content){
+        if(err) return res.status(400).send();
+        return res.json({data: content});
+    });
+    // return res.json({data: req.content});
 };
 exports.update = function(req,res){
     if(req.content){

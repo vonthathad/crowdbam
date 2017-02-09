@@ -42,6 +42,7 @@ import { ChallengeEditBasicComponent } from './components/challenge-edit-basic/c
 import { ChallengeEditHtmlComponent } from './components/challenge-edit-html/challenge-edit-html.component';
 import { ChallengeEditTimelineComponent } from './components/challenge-edit-timeline/challenge-edit-timeline.component';
 import { ChallengeNavigatorComponent } from './components-shared/challenge-navigator/challenge-navigator.component';
+import { TimelineCardComponent } from './components-child/timeline-card/timeline-card.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ChallengeNavigatorComponent } from './components-shared/challenge-navig
     ChallengeEditHtmlComponent,
     ChallengeEditTimelineComponent,
     ChallengeNavigatorComponent,
+    TimelineCardComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

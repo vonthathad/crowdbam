@@ -67,14 +67,21 @@ export class Rest {
         options.method = RequestMethod.Put;
         return this.request(options);
     }
-    
+
+    //////////////////////////////////////////////////
+    ////TO DELETE
+    //////////////////////////////////////////////////
+    delete(options: QueryOptions): Observable<any[]> {
+        options.method = RequestMethod.Delete;
+        return this.request(options);
+    }
     //////////////////////////////////////////////////
     ////GET TOKEN
     //////////////////////////////////////////////////
     getToken(): string {
         var token = localStorage.getItem("token");
         if (token != "undefined" && token != null) {
-           return token;
+            return token;
         } else {
             return Rest.DEFAULT_TOKEN;
         }

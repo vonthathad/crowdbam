@@ -1,7 +1,12 @@
-<div class="sample">
-    <h2>Sample 2: Full Editor</h2>
-    <div [froalaEditor] [(froalaModel)]="content"></div>
-    <!--<h4>Rendered Content:</h4>
-    <div [froalaView]="content"></div>
-    <div>{{content}}</div>-->
+<div *ngIf="type">
+  <div class="sample">
+    <div class="sample">
+      <div [froalaEditor] [(froalaModel)]="html"></div>
+    </div>
+  </div>
+  <div *ngIf="showButton">
+    <button [hidden]="isCreated" (click)="createContent()">Create</button>
+    <button [hidden]="!isCreated" (click)="updateContent()">Edit</button>
+    <button [hidden]="!isCreated" (click)="deleteContent()">Delete</button>
+  </div>
 </div>

@@ -32,7 +32,7 @@ export class ChallengeCreateComponent implements OnInit {
       title: ['', [Validators.required]],
       description: ['', Validators.compose([Validators.required, Validators.maxLength(140)])],
       prize: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]+")])],
-      img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall])],
+      img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall, this.fvs.isTooBig])],
       categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))
     });
   }

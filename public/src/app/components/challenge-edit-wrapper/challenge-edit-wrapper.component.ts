@@ -36,13 +36,10 @@ export class ChallengeEditWrapperComponent implements OnInit {
     let location = window.location.href;
     if (location.indexOf('/edit/') > -1) {
       this.isHtml = true;
-      console.log(3);
     } else if (location.indexOf('/edit-timeline') > -1) {
       this.isTimeline = true;
-      console.log(2);
     } else {
       this.isBasic = true;
-      console.log(1);
     }
   }
 

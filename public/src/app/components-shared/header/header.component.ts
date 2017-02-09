@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
     if (token && token != "undefined") {
       this.us.getUser(token).subscribe((res: any) => this.renderUser(res.user, { from: "localStorage" }));
     }
-
+  
   }
   onClick(event) {
    if (!this.eref.nativeElement.contains(event.target)) // or some similar check

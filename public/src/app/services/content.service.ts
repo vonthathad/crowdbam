@@ -33,14 +33,14 @@ export class ContentService {
         });
     }
     // GET CONTENT 
-    getContent(id: number): Observable<any[]> {
+    getContent(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         });
         return this.rest.get({
-            url: `api/contents/${id}`,
+            url: `api/contents/${input.id}/${input.type}`,
             headers: headers
         });
     }
@@ -49,33 +49,39 @@ export class ContentService {
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
-            'Content-Type': null
+            'Content-Type': 'application/json'
         });
-        // console.log("Content " + JSON.stringify(input));
-        // return this.rest.post({
-        //     url: `api/contents`,
-        //     body: content,
-        //     headers: headers
-        // });
+        return this.rest.post({
+            url: `api/contents/${input.id}/${input.type}`,
+            body: input.data,
+            headers: headers
+        });
 
-        let options = new RequestOptions({ headers: headers });
-        return this.http
-            .post("http://localhost:8235/api/contents", input, options)
-            .map((res: any) => res.json())
-            .catch((error: any) => Observable.throw(error || 'Server error'));;
     }
 
     // UPDATE CONTENT
-    updateContent(content: Content, id: number): Observable<any[]> {
+    updateContent(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
             'Content-Type': 'application/json'
         });
-        console.log(content);
         return this.rest.put({
-            url: `api/contents/${id}`,
-            body: content,
+            url: `api/contents/${input.id}/${input.type}`,
+            body: input.data,
+            headers: headers
+        });
+    }
+
+    // DELETE CONTENT
+    deleteContent(input: any): Observable<any[]> {
+        var token = this.rest.getToken();
+        let headers = new Headers({
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+            'Content-Type': 'application/json'
+        });
+        return this.rest.delete({
+            url: `api/contents/${input.id}/${input.type}`,
             headers: headers
         });
     }

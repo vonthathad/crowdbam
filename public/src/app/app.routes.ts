@@ -26,8 +26,6 @@ const routes: Routes = [
     { path: 'c/:url', component: ChallengeComponent },
     { path: 'challenges/:id', component: ChallengeComponent },
     { path: 'challenges?sort=:type', component: ChallengeComponent },
-    // { path: 'challenges/:id/edit', component: ChallengeEditWrapperComponent, canActivate: [AuthGuardService] },
-    // { path: 'challenge-create', component: ChallengeCreateComponent, canActivate: [AuthGuardService] },
     {
         path: 'challenges/:id/edit', component: ChallengeEditWrapperComponent,
         children: [
@@ -37,8 +35,6 @@ const routes: Routes = [
             { path: 'others/:type', component: ChallengeEditHtmlComponent },
         ]
     },
-    // { path: 'challenges/:id/edit-timeline', component: ChallengeEditWrapperComponent },
-    // { path: 'challenges/:id/edit/:type', component: ChallengeEditWrapperComponent },
     { path: 'challenge-create', component: ChallengeCreateComponent },
 
 
