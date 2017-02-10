@@ -14,6 +14,7 @@ export class TimelineCardComponent implements OnInit {
   private inputHidden: boolean;
   private deadline: string;
   private description: string;
+  private hiddenOption :boolean;
   @Input() timeline: Timeline;
   @Input() orderNum: number;
   @Output() updateValue = new EventEmitter();
@@ -36,21 +37,29 @@ export class TimelineCardComponent implements OnInit {
     this.dropdownValues.push(new DropdownValue('Closed', 'Closed'));
     this.dropdownValues.push(new DropdownValue('Other', 'Other'));
     this.otherValue = '';
-    this.title = {value:'Funding', label:'Funding'};
+    // setTimeout(() => {
+      // this.title = { value: this.timeline.title, label: this.timeline.title };
+      this.dropdownValues.forEach(dropdownValue=>{
+        if(dropdownValue.value == this.timeline.title) this.title = dropdownValue;
+      })
+    
+    // }, 100)
+    this.hiddenOption = false;
+  }
+  removeOption(){
+    this.hiddenOption = true;
   }
   _updateValue() {
     this.timeline.title = this.title.value;
     if (this.title.value == "Other") {
-      console.log(false);
       this.inputHidden = false;
       this.timeline.title += `: ${this.otherValue}`;
     } else {
-      console.log(true);
       this.inputHidden = true;
     }
     this.updateValue.emit({ orderNum: this.orderNum, timeline: this.timeline });
   }
-  _deleteTimeline(){
+  _deleteTimeline() {
     this.deleteTimeline.emit(this.orderNum);
   }
 }

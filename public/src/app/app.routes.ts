@@ -17,14 +17,25 @@ import { ChallengeEditBasicComponent } from './components/challenge-edit-basic/c
 import { ChallengeEditTimelineComponent } from './components/challenge-edit-timeline/challenge-edit-timeline.component';
 import { ChallengeEditHtmlComponent } from './components/challenge-edit-html/challenge-edit-html.component';
 
+import { ChallengeTimelineComponent } from './components/challenge-timeline/challenge-timeline.component';
+import { ChallengeHtmlComponent } from './components/challenge-html/challenge-html.component';
+import { ChallengeCommentsComponent } from './components/challenge-comments/challenge-comments.component';
+
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
     { path: 'categories/:name?sort=:type', component: FilterChallengesComponent },
-    { path: 'recommendations?sort=:type', component: ChallengesComponent },
+    { path: 'recommendations?sort=:type', component: FilterChallengesComponent },
+    { path: 'challenges?sort=:type', component: FilterChallengesComponent },
 
     { path: 'c/:url', component: ChallengeComponent },
-    { path: 'challenges/:id', component: ChallengeComponent },
-    { path: 'challenges?sort=:type', component: ChallengeComponent },
+    {
+        path: 'challenges/:id', component: ChallengeComponent,
+        children: [
+            { path: 'others/:type', component: ChallengeHtmlComponent },
+            { path: 'timeline', component: ChallengeTimelineComponent },
+            { path: 'comments', component: ChallengeCommentsComponent }
+        ]
+    },
     {
         path: 'challenges/:id/edit', component: ChallengeEditWrapperComponent,
         children: [

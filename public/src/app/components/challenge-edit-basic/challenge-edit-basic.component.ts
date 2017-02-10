@@ -27,11 +27,13 @@ export class ChallengeEditBasicComponent implements OnInit {
   private id: number;
   @ViewChild(ValidatedUploadComponent) vuc: ValidatedUploadComponent;
   // @ViewChild("fileInput") private fileInput;
-  constructor(private router: Router, private fvs: FileValidatorService, private route: ActivatedRoute, private cv: ChallengeService, private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fb: FormBuilder, private categoryService: CategoryService, private us: UserService) {
+  constructor(private router: Router, private fvs: FileValidatorService, private route: ActivatedRoute, private cv: ChallengeService, private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fb: FormBuilder, private cas: CategoryService, private us: UserService) {
+    cv.challange$.subscribe(challenge=> this.renderChallenge(challenge));
+    cas.categories$.subscribe(categories=> this.renderCategoryOptions(categories))
   }
 
   ngOnInit() {
-    this.categoryService.getCategories().subscribe(res => this.renderCategoryOptions(res['data']));
+    if(this.cas.categories)this.renderCategoryOptions(this.cas.categories);
     this.challengeForm = this.fb.group({
       title: ['', [Validators.required]],
       description: ['', Validators.compose([Validators.required, Validators.maxLength(140)])],
@@ -39,11 +41,8 @@ export class ChallengeEditBasicComponent implements OnInit {
       img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall])],
       categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))
     });
-   
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-      this.cv.getChallenge(this.id).subscribe((res: any) => this.renderChallenge(res.data));
-    });
+       console.log(JSON.stringify(this.cv.challenge));
+    if(this.cv.challenge) this.renderChallenge(this.cv.challenge);
   }
   renderChallenge(challenge) {
     this.challenge = challenge;

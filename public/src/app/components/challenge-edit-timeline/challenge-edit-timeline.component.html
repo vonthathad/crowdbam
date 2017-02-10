@@ -1,9 +1,13 @@
-<h1>Timeline</h1>
-<button (click)="saveTimelines()">Save</button>
-<div *ngFor="let timeline of _timelines">
-    {{timeline.title}} {{timeline.description}} {{timeline.deadline}}
+<div *ngIf="challenge">
+    <h1>Timeline</h1>
+    <button (click)="updateChallenge()">Save</button>
+    <div *ngFor="let timeline of timelines">
+        {{timeline.title}} {{timeline.description}} {{timeline.deadline}}
+    </div>
+    <button (click)="addTimelineCard()">Add event</button>
+    <!--{{timelines}}-->
+    <h1>Timeline detail</h1>
+
+    <app-timeline-card *ngFor="let timeline of challenge.timelines; let i = index" [orderNum]="i" [timeline]="timeline" (updateValue)="handleUpdateValue($event)"
+        (deleteTimeline)="handleDeleteTimeline($event)"></app-timeline-card>
 </div>
-<button (click)="addTimelineCard()">Add event</button>
-<!--{{timelines}}-->
-<h1>Timeline detail</h1>
-<app-timeline-card *ngFor="let timeline of timelines; let i = index" [orderNum]="i" [timeline]="timeline" (updateValue)="handleUpdateValue($event)" (deleteTimeline)="handleDeleteTimeline($event)"></app-timeline-card>

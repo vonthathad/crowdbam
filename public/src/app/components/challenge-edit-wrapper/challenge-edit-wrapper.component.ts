@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { TypeService } from '../../services/type.service'
+import { ChallengeService } from '../../services/challenge.service';
+import { CategoryService } from '../../services/category.service';
 
 import { Type } from '../../classes/type';
 
@@ -17,7 +19,7 @@ export class ChallengeEditWrapperComponent implements OnInit {
   private isBasic: boolean;
   private isTimeline: boolean;
   private isHtml: boolean;
-  constructor(private ts: TypeService, private route: ActivatedRoute) {
+  constructor(private cv: ChallengeService,private ts: TypeService, private route: ActivatedRoute, private cas: CategoryService) {
     ts.getTypes()
       .subscribe(res => this.types = res['data']);
     // ts.currentTopic$.subscribe(type=>{
@@ -27,6 +29,7 @@ export class ChallengeEditWrapperComponent implements OnInit {
       this.id = params['id']
       this.type = params['type']
     });
+    this.cas.getCategories().subscribe(res => this.cas.categoriesSource.next(res['data']));
   }
 
   ngOnInit() {
@@ -41,6 +44,11 @@ export class ChallengeEditWrapperComponent implements OnInit {
     } else {
       this.isBasic = true;
     }
+
+     this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.cv.getChallenge(this.id).subscribe((res: any) => this.cv.challengeSource.next(res['data']));
+    });
   }
 
 }

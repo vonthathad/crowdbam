@@ -1,29 +1,28 @@
-<div class="project-details-nav">
+<div class="project-details-content">
+  <div class="project-details-nav">
     <div class="container js-project-nav-scroll">
-        <div class="row">
-            <div class="project-nav__links col-md-9">
-                <a class="tabbed-nav__link" (click)="onBasicClick()">
-                    <i class="ion-ios-checkmark text-green"></i> Basics
-                </a>
-                <a class="tabbed-nav__link" (click)="onTimeClick()">
-                    <i class="ion-ios-circle-outline"></i> Timeline
-                </a>
-                <!--<a class="tabbed-nav__link" (click)="onOverviewClick()">
-                    <i class="ion-ios-circle-outline"></i> Overview
-                </a>-->
-                <a *ngFor="let type of types" (click)="onTypeClick(type)" class="tabbed-nav__link">
-                    <i class="ion-ios-circle-outline"></i> {{type.title}}
-                </a>
-                <!--<a class="tabbed-nav__link" href="/projects/stoic/banner-saga-3/comments">
-                    <i class="ion-ios-circle-outline"></i> Guidelines
-                </a>
-                <a class="tabbed-nav__link" data-content="community" href="/projects/stoic/banner-saga-3/community">
-                    <i class="ion-ios-circle-outline"></i> About Us
-                </a>-->
-            </div>
-            <div class="project-nav__buttons col-md-3 hidden-xs hidden-md text-right">
-                <a class="btn btn-md btn-primary btn-fill">Submit to Review</a>
-            </div>
+      <div class="row">
+        <div class="project-nav__links col-md-8">
+
+          <a class="tabbed-nav__link" [ngClass]="{'is-active': current == 'overview'}" (click)="onTypeClick('overview');changeClass('overview')">
+              Overview
+            </a>
+          <a class="tabbed-nav__link" [ngClass]="{'is-active': current == 'timeline'}" (click)="onTimeClick();changeClass('timeline')">
+              Timeline
+            </a>
+          <a class="tabbed-nav__link" [ngClass]="{'is-active': current == 'comments'}" (click)="onCommentsClick();changeClass('comments')">
+              Comments
+              <span class="count">326</span>
+            </a>
+            <a *ngFor="let type of types" [ngClass]="{'is-active': current == type.id}" [hidden]="type.id=='overview'" (click)="onTypeClick(type);changeClass(type.id)" class="tabbed-nav__link">
+                  {{type.title}}
+            </a>
         </div>
+        <div class="project-nav__buttons col-md-4 hidden-xs hidden-md">
+          <a class="btn btn-md btn-primary btn-fill">Give solution</a>
+          <a class="btn btn-md btn-simple text-primary"><i class="ion-ios-star"></i> Follow</a>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

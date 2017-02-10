@@ -1,0 +1,146 @@
+<!--{{challenge | json}}-->
+<div *ngIf="challenge">
+  <h1>Timeline</h1>
+  <!--<div *ngFor="let timeline of challenge.timelines">
+    {{timeline.title}} {{timeline.description}} {{timeline.deadline}}
+  </div>-->
+  <div class="timeline-frame container">
+   
+
+    <div *ngFor="let timeline of timelines" class="timeline-panel" [ngClass]="{'pass': timeline.status == 'passed', 'next': timeline.status == 'notYet'}">
+       <!--{{timeline.title}} {{timeline.description}} {{timeline.deadline}} {{timeline.status}}-->
+      <div class="timeline-line"></div>
+      <div class="timeline-point"></div>
+      <div class="timeline-time clearfix">
+        <div class="timeline-vertical-line"></div>
+        <div>{{timeline.deadline}}</div>
+      </div>
+      <div class="timeline-info">
+        <div class="type-24 text-primary bold"> {{timeline.title}}</div>
+        <div class="type-14 description">{{timeline.description}}</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!--
+<div class="timeline-frame container">
+
+  <div class="timeline-panel pass">
+    <div class="timeline-line"></div>
+    <div class="timeline-point"></div>
+    <div class="timeline-time clearfix">
+      <div class="timeline-vertical-line"></div>
+      <div>June 2, 2016, midnight PDT</div>
+    </div>
+    <div class="timeline-info">
+      <div class="type-24 text-primary bold">Pre registration</div>
+      <div class="type-14 description">Concept Phase submissions must be received by 11:59 PM EDT on October 18, 2016.</div>
+    </div>
+  </div>
+
+  <div class="timeline-panel">
+    <div class="timeline-line"></div>
+    <div class="timeline-point"></div>
+    <div class="timeline-time clearfix">
+      <div class="timeline-vertical-line"></div>
+      <div>June 2, 2016, midnight PDT</div>
+    </div>
+    <div class="timeline-info">
+      <div class="type-24 text-primary bold">Pre registration</div>
+      <div class="type-14 description">Concept Phase submissions must be received by 11:59 PM EDT on October 18, 2016.</div>
+    </div>
+  </div>
+  <div class="timeline-panel next">
+    <div class="timeline-line"></div>
+    <div class="timeline-point"></div>
+    <div class="timeline-time clearfix">
+      <div class="timeline-vertical-line"></div>
+      <div>June 2, 2016, midnight PDT</div>
+    </div>
+    <div class="timeline-info">
+      <div class="type-24 text-primary bold">Pre registration</div>
+      <div class="type-14 description">Concept Phase submissions must be received by 11:59 PM EDT on October 18, 2016.</div>
+    </div>
+  </div>
+  <div class="timeline-panel next">
+    <div class="timeline-line"></div>
+    <div class="timeline-point"></div>
+    <div class="timeline-time clearfix">
+      <div class="timeline-vertical-line"></div>
+      <div>June 2, 2016, midnight PDT</div>
+    </div>
+    <div class="timeline-info">
+      <div class="type-24 text-primary bold">Pre registration</div>
+      <div class="type-14 description">Concept Phase submissions must be received by 11:59 PM EDT on October 18, 2016.</div>
+    </div>
+  </div>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--TIMELINE-->
+<!--<div class="timeline-frame container">
+  <div class="timeline-panel pass">
+    <div class="timeline-line"></div>
+    <div class="timeline-point"></div>
+    <div class="timeline-time clearfix">
+      <div class="timeline-vertical-line"></div>
+      <div>June 2, 2016, midnight PDT</div>
+    </div>
+    <div class="timeline-info">
+      <div class="type-24 text-primary bold">Pre registration</div>
+      <div class="type-14 description">Concept Phase submissions must be received by 11:59 PM EDT on October 18, 2016.</div>
+    </div>
+  </div>
+  <div class="timeline-panel">
+    <div class="timeline-line"></div>
+    <div class="timeline-point"></div>
+    <div class="timeline-time clearfix">
+      <div class="timeline-vertical-line"></div>
+      <div>June 2, 2016, midnight PDT</div>
+    </div>
+    <div class="timeline-info">
+      <div class="type-24 text-primary bold">Pre registration</div>
+      <div class="type-14 description">Concept Phase submissions must be received by 11:59 PM EDT on October 18, 2016.</div>
+    </div>
+  </div>
+  <div class="timeline-panel next">
+    <div class="timeline-line"></div>
+    <div class="timeline-point"></div>
+    <div class="timeline-time clearfix">
+      <div class="timeline-vertical-line"></div>
+      <div>June 2, 2016, midnight PDT</div>
+    </div>
+    <div class="timeline-info">
+      <div class="type-24 text-primary bold">Pre registration</div>
+      <div class="type-14 description">Concept Phase submissions must be received by 11:59 PM EDT on October 18, 2016.</div>
+    </div>
+  </div>
+  <div class="timeline-panel next">
+    <div class="timeline-line"></div>
+    <div class="timeline-point"></div>
+    <div class="timeline-time clearfix">
+      <div class="timeline-vertical-line"></div>
+      <div>June 2, 2016, midnight PDT</div>
+    </div>
+    <div class="timeline-info">
+      <div class="type-24 text-primary bold">Pre registration</div>
+      <div class="type-14 description">Concept Phase submissions must be received by 11:59 PM EDT on October 18, 2016.</div>
+    </div>
+  </div>-->

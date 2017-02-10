@@ -10,14 +10,18 @@ import { Challenge } from '../classes/challenge';
 @Injectable()
 export class ChallengeService {
     private rest: Rest;
-    private challenge: Challenge;
+    public challenge: Challenge;
     // private loginDialog: any;
-    // public loggedUserSource = new Subject<User>();
-    // public loggedUser$ = this.loggedUserSource.asObservable();
+    public challengeSource = new Subject<Challenge>();
+    public challange$ = this.challengeSource.asObservable();
 
     constructor(private http: Http) {
         this.rest = new Rest(http);
         // this.loggedUser$.subscribe(user => {this.user = user;});
+        this.challange$.subscribe(challenge => {
+            this.challenge = challenge;
+            console.log(JSON.stringify(this.challenge));
+        });
     }
     // GET CHELLENGE LIST
     getChallenges(queryArgs?: Object): Observable<any[]> {

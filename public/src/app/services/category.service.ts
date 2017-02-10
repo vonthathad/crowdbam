@@ -10,13 +10,14 @@ import { Category } from '../classes/category';
 @Injectable()
 export class CategoryService {
     private rest: Rest;
+    public categories: Category[];
     // private loginDialog: any;
-    // public loggedUserSource = new Subject<User>();
-    // public loggedUser$ = this.loggedUserSource.asObservable();
+    public categoriesSource = new Subject<Category[]>();
+    public categories$ = this.categoriesSource.asObservable();
 
     constructor(private http: Http) {
         this.rest = new Rest(http);
-        // this.loggedUser$.subscribe(user => {this.user = user;});
+        this.categories$.subscribe(categories => {this.categories = categories;});
     }
     // GET CHELLENGE LIST
     getCategories(queryArgs?: Object): Observable<any[]> {

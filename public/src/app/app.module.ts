@@ -21,6 +21,7 @@ import { CONTENT_PROVIDER } from './services/content.service';
 import { TYPE_PROVIDER } from './services/type.service';
 
 import {OrderByPipe} from './pipes/orderBy.pipe';
+import {NotContainPipe} from './pipes/notContain.pipe';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -43,13 +44,18 @@ import { ChallengeEditWrapperComponent } from './components/challenge-edit-wrapp
 import { ChallengeEditBasicComponent } from './components/challenge-edit-basic/challenge-edit-basic.component';
 import { ChallengeEditHtmlComponent } from './components/challenge-edit-html/challenge-edit-html.component';
 import { ChallengeEditTimelineComponent } from './components/challenge-edit-timeline/challenge-edit-timeline.component';
-import { ChallengeNavigatorComponent } from './components-shared/challenge-navigator/challenge-navigator.component';
+import { ChallengeEditNavigatorComponent } from './components-shared/challenge-edit-navigator/challenge-edit-navigator.component';
 import { TimelineCardComponent } from './components-child/timeline-card/timeline-card.component';
 import { FilterChallengesComponent } from './components/filter-challenges/filter-challenges.component';
+import { ChallengeHtmlComponent } from './components/challenge-html/challenge-html.component';
+import { ChallengeTimelineComponent } from './components/challenge-timeline/challenge-timeline.component';
+import { ChallengeNavigatorComponent } from './components-shared/challenge-navigator/challenge-navigator.component';
+import { ChallengeCommentsComponent } from './components/challenge-comments/challenge-comments.component';
 
 @NgModule({
   declarations: [
     OrderByPipe,
+    NotContainPipe,
     AppComponent,
     FroalaEditorDirective,
     FroalaViewDirective,
@@ -74,9 +80,13 @@ import { FilterChallengesComponent } from './components/filter-challenges/filter
     ChallengeEditBasicComponent,
     ChallengeEditHtmlComponent,
     ChallengeEditTimelineComponent,
-    ChallengeNavigatorComponent,
+    ChallengeEditNavigatorComponent,
     TimelineCardComponent,
     FilterChallengesComponent,
+    ChallengeHtmlComponent,
+    ChallengeTimelineComponent,
+    ChallengeNavigatorComponent,
+    ChallengeCommentsComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [
