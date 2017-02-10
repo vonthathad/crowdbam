@@ -1,12 +1,10 @@
 <div *ngIf="type">
-  <div class="sample">
-    <div class="sample">
-      <div [froalaEditor] [(froalaModel)]="html"></div>
-    </div>
+  <div class="content">
+    <div [froalaEditor] [(froalaModel)]="html"></div>
   </div>
   <div *ngIf="showButton">
-    <button [hidden]="isCreated" (click)="createContent()">Create</button>
-    <button [hidden]="!isCreated" (click)="updateContent()">Edit</button>
-    <button [hidden]="!isCreated" (click)="deleteContent()">Delete</button>
+    <button class="btn btn-fill btn-primary" *ngIf="!isCreated" (click)="createContent()"><i class="ion-checkmark-circled"></i> Create</button>
+    <button class="btn btn-fill btn-primary" *ngIf="isCreated" (click)="updateContent()"><i class="ion-edit"></i> Edit</button>
+    <button class="btn btn-simple btn-primary" *ngIf="isCreated" (click)="deleteContent()"><i class="ion-ios-close"></i> Delete</button>
   </div>
 </div>

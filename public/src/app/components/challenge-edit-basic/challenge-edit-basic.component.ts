@@ -89,11 +89,10 @@ export class ChallengeEditBasicComponent implements OnInit {
         let input = new FormData();
         let fi = fileInput.target.files[0];
         input.append("file", fi);
-        alert(1234);
         // input.append("content", JSON.stringify(value));
 
         this.cv
-          .updateChallengeImg(input, this.id)
+          .updateChallengeImg(input, parseInt(this.challenge.id))
           .subscribe(image => this._updateChallenger(image['link'], value), error => console.error(JSON.stringify(error)));
       } else {
         this._updateChallenger(this.imgSrc, value);
@@ -107,10 +106,10 @@ export class ChallengeEditBasicComponent implements OnInit {
     challenger.img = null;
     console.log(challenger);
     this.cv
-      .updateChallenge(challenger, this.id)
-      .subscribe(challenge => this.updateSucceeded(challenge, this.id), error => console.error(JSON.stringify(error)));
+      .updateChallenge(challenger, parseInt(this.challenge.id))
+      .subscribe(challenge => this.updateSucceeded(challenge), error => console.error(JSON.stringify(error)));
   }
-  updateSucceeded(challenge, id) {
+  updateSucceeded(challenge) {
     console.log(challenge)
     alert('update successfull');
   }

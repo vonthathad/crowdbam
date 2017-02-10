@@ -1732,6 +1732,9 @@ body#backings_index .project_thumb.ratio-16-9 {
 }
 
 /* PROJECT DETAILS */
+.project-details{
+  padding-bottom: 40px;
+}
 .project-details-header{
   padding: 30px 0;
 }
@@ -1800,7 +1803,6 @@ body#backings_index .project_thumb.ratio-16-9 {
   border-bottom: 3px solid #3472F7
 }
 .project-details-content{
-  overflow: hidden;
   position: relative;
   padding-top: 65px;
 }

@@ -1,25 +1,50 @@
-<br/>
-<div>
-    <!--<div *ngIf="title">
-        {{orderNum}} {{title.value}}<span *ngIf="chosenValue=='Other'">:{{otherValue}}</span> {{deadline}}
-    </div>-->
-    <label for="title">Title</label>
-    <select name="title" [(ngModel)]="title" (change)="_updateValue()">
-            <option *ngFor="let dropdownValue of dropdownValues"  [attr.disable]="dropdownValue.value === 'Funding'" [ngValue]="dropdownValue">{{dropdownValue.label}}</option>
-    </select>
-    <div [hidden]="inputHidden">
-        <label for="other">Other value</label>
-        <input type="text" name="other" [(ngModel)]="otherValue" (change)="_updateValue()">
+<!--<br/>-->
+<!--<div>-->
+    <!--&lt;!&ndash;<div *ngIf="title">-->
+        <!--{{orderNum}} {{title.value}}<span *ngIf="chosenValue=='Other'">:{{otherValue}}</span> {{deadline}}-->
+    <!--</div>&ndash;&gt;-->
+    <!--<label for="title">Title</label>-->
+    <!--<select name="title" [(ngModel)]="title" (change)="_updateValue()">-->
+            <!--<option *ngFor="let dropdownValue of dropdownValues"  [attr.disable]="dropdownValue.value === 'Funding'" [ngValue]="dropdownValue">{{dropdownValue.label}}</option>-->
+    <!--</select>-->
+    <!--<div [hidden]="inputHidden">-->
+        <!--<label for="other">Other value</label>-->
+        <!--<input type="text" name="other" [(ngModel)]="otherValue" (change)="_updateValue()">-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<label for="deadline">Deadline</label>-->
+        <!--<input [(ngModel)]="timeline.deadline" name="deadline" ng2-datetime-picker close-on-select="false" (ngModelChange)="_updateValue()"/>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<label for="description">Description</label>-->
+        <!--<input type="textarea" [(ngModel)]="timeline.description" name="description" (change)="_updateValue()">-->
+    <!--</div>-->
+    <!--<button (click)="_deleteTimeline()">Delete</button>-->
+<!--</div>-->
+
+<div class="row card text-left event">
+  <div class="delete-btn">
+    <a  (click)="_deleteTimeline()" class="btn btn-simple btn-primary"><i class="ion-ios-close large"></i></a>
+  </div>
+  <div class="col-md-5 event-title">
+    <div class="form-input mt10">
+      <input [(ngModel)]="timeline.deadlineDate" name="deadlineDate" placeholder="Deadline..." class="form-control" ng2-datetime-picker close-on-select="true" (ngModelChange)="_updateValue()"/>
+    </div>
+    <div class="form-input mt10">
+      <select name="title" [(ngModel)]="title" (change)="_updateValue()" placeholder="Title..." class="form-control">
+        <option *ngFor="let dropdownValue of dropdownValues"  [attr.disable]="dropdownValue.value === 'Funding'" [ngValue]="dropdownValue">{{dropdownValue.label}}</option>
+      </select>
+    </div>
+    <div [hidden]="inputHidden" class="form-input mt10">
+      <input type="text" name="other" placeholder="Custom title..." [(ngModel)]="otherValue" (change)="_updateValue()"  class="form-control">
     </div>
 
-    <div>
-        <label for="deadline">Deadline</label>
-        <input [(ngModel)]="timeline.deadline" name="deadline" ng2-datetime-picker close-on-select="false" (ngModelChange)="_updateValue()"/>
+  </div>
+  <div class="col-md-7">
+    <div class="form-input ">
+      <textarea row="4" [(ngModel)]="timeline.description" class="form-control" placeholder="Description..." name="description" (change)="_updateValue()"></textarea>
     </div>
-
-    <div>
-        <label for="description">Description</label>
-        <input type="textarea" [(ngModel)]="timeline.description" name="description" (change)="_updateValue()">
-    </div>
-    <button (click)="_deleteTimeline()">Delete</button>
+  </div>
 </div>

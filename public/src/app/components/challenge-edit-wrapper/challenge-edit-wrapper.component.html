@@ -1,5 +1,14 @@
-<app-challenge-edit-navigator [id]="id" [types]="types"></app-challenge-edit-navigator>
-<router-outlet></router-outlet>
+<section class="project-edit bg-grey-100 ">
+  <div class="row">
+    <div class="project-details-content">
+    <app-challenge-edit-navigator [id]="id" [types]="types"></app-challenge-edit-navigator>
+
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>
 <!--<app-challenge-edit-basic ></app-challenge-edit-basic>
 <app-challenge-edit-timeline ></app-challenge-edit-timeline>
 <app-challenge-edit-html [type]="type"></app-challenge-edit-html>-->

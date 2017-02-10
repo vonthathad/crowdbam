@@ -36,7 +36,7 @@ export class ChallengeService {
             headers: headers
         });
     }
-    // GET CHALLENGE 
+    // GET CHALLENGE
     getChallenge(id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
@@ -70,7 +70,7 @@ export class ChallengeService {
     }
 
     // UPDATE CHALLENGE
-    updateChallenge(challenge: Challenge, id: number): Observable<any[]> {
+    updateChallenge(challenge: any, id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
             'Authorization': `Bearer ${token}`,
