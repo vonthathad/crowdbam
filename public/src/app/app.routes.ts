@@ -42,7 +42,7 @@ const routes: Routes = [
     {
         path: 'challenges/:id/edit', component: ChallengeEditWrapperComponent,
         children: [
-            { path: 'basic', redirectTo: '', pathMatch: 'full' },
+            // { path: 'basic', redirectTo: '', pathMatch: 'full' },
             { path: '', component: ChallengeEditBasicComponent },
             { path: 'timeline', component: ChallengeEditTimelineComponent },
             { path: 'others/:type', component: ChallengeEditHtmlComponent },

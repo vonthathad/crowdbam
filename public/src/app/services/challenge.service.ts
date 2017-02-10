@@ -52,7 +52,7 @@ export class ChallengeService {
     createChallenge(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': null
         });
         // console.log("Challenge " + JSON.stringify(input));
@@ -73,7 +73,7 @@ export class ChallengeService {
     updateChallenge(challenge: Challenge, id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         });
         console.log(challenge);
@@ -87,7 +87,7 @@ export class ChallengeService {
     updateChallengeImg(input: any, id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': null
         });
         // console.log("Challenge " + JSON.stringify(input));
