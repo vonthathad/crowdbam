@@ -14,10 +14,9 @@ import { Challenge } from '../../classes/challenge';
 export class AutocompleteComponent implements OnInit {
   @ViewChild("input") private input;
   private query = '';
-  private challenges: Challenge[];
+  // private challenges: Challenge[];
   private filteredList = [];
   private searchFinished: boolean;
-
   constructor(private elementRef: ElementRef, private challengeService: ChallengeService) { }
 
   ngOnInit() {
@@ -25,8 +24,9 @@ export class AutocompleteComponent implements OnInit {
   }
   renderChallenges(challenges) {
     this.searchFinished = true;
-    this.challenges = challenges;
+    // this.challenges = challenges;
      this.filteredList = challenges;
+    console.log(this.filteredList );
   }
   handleClick(event) {
     var clickedComponent = event.target;

@@ -1,17 +1,35 @@
-<div class="search-panel">
-    <div class="form-group">
-        <input type="text" class="form-control" #input (click)="onInputClick()" [(ngModel)]=query (keyup)=filter() placeholder="Search">
-        <div class="search-btn-group">
-            <button type="button" class="btn btn-fab btn-fab-mini btn-round btn-danger search-btn">
-                <i class="ion-android-search"></i>
-            </button>
+<!--<div class="search-panel">-->
+    <!--<div class="form-group">-->
+        <!--<input type="text" class="form-control" #input (click)="onInputClick()" [(ngModel)]=query (keyup)=filter() placeholder="Search">-->
+        <!--<div class="search-btn-group">-->
+            <!--<button type="button" class="btn btn-fab btn-fab-mini btn-round btn-danger search-btn">-->
+                <!--<i class="ion-android-search"></i>-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dropdown-search" *ngIf="filteredList.length > 0">-->
+        <!--<li *ngFor="let challenge of filteredList">-->
+            <!--<a (click)="select(challenge.title)" [routerLink]="['/challenge', challenge._id]">-->
+                <!--<img src="{{challenge.thumb}}" alt="{{challenge.title}}" width="30" height="30"> {{challenge.title}}-->
+            <!--</a>-->
+        <!--</li>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="site-nav-container site-nav-container--search" id="js-nav-search" aria-hidden="true">
+  <div class="site-nav-unit site-nav-unit--search">
+    <nav class="site-nav-base site-nav--search">
+      <div class="site-nav__left">
+        <div class="site-nav__item site-nav__item--searchbar js-searchbar js-header-livesearch" [ngClass]="{'site-nav__item--searchbar--visible': isSearching}">
+          <form class="site-nav__search-form" role="search">
+            <div class="icon__search"><i class="ion-ios-search-strong" id="ion-ios-search-strong"></i></div>
+            <input type="text" #input (click)="onInputClick()" [(ngModel)]=query [ngModelOptions]="{standalone: true}"  (keyup)=filter() aria-label="Search projects" placeholder="Search" class="site-nav__search-input js-search-term text" tabindex="-1" autocomplete="off">
+          </form>
+
         </div>
-    </div>
-    <div class="dropdown-search" *ngIf="filteredList.length > 0">
-        <li *ngFor="let challenge of filteredList">
-            <a (click)="select(challenge.title)" [routerLink]="['/challenge', challenge._id]">
-                <img src="{{challenge.thumb}}" alt="{{challenge.title}}" width="30" height="30"> {{challenge.title}}
-            </a>
-        </li>
-    </div>
+      </div>
+      <div class="site-nav__right">
+        <a (click)="onCloseSearch()" class="btn btn-primary btn-simple site-nav__item--close" id="btn-search-close"><i class="ion-ios-close large"></i></a>
+      </div>
+    </nav>
+  </div>
 </div>

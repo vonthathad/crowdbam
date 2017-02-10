@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service'
 
 import { User } from '../../classes/user';
+import {Challenge} from "../../classes/challenge";
+import {ChallengeService} from "../../services/challenge.service";
 
 
 @Component({
@@ -16,11 +18,19 @@ import { User } from '../../classes/user';
 })
 export class HeaderComponent implements OnInit {
   private user: User;
+  // private isExploringHide: boolean = false;
+  // private isExploringTrans: boolean = false;
+  private query = '';
+  private maxPage: number = 1;
+  private currentPage: number = 1;
+  private page: number = 1;
+  // private challenges: Challenge[];
+  private filteredList = [];
+  private searchBegin: boolean = false;
+  private searchFinished: boolean = true;
   private isSearching: boolean = false;
-  private isExploringHide: boolean = false;
-  private isExploringTrans: boolean = false;
   private isOpeningMenu: boolean = false;
-  constructor(private us: UserService, private route: ActivatedRoute, private router: Router, private eref: ElementRef) {
+  constructor(private us: UserService, private route: ActivatedRoute, private router: Router, private eref: ElementRef, private challengeService: ChallengeService) {
     us.loggedUser$.subscribe(user => { this.renderUser(user, { from: "change" }) });
   }
 
@@ -42,21 +52,88 @@ export class HeaderComponent implements OnInit {
     if (token && token != "undefined") {
       this.us.getUser(token).subscribe((res: any) => this.renderUser(res.user, { from: "localStorage" }));
     }
-  
+
+  }
+  renderChallenges(challenges) {
+    this.searchFinished = true;
+    // this.challenges = challenges;
+    if(this.filteredList && this.filteredList.length){
+      this.filteredList = this.filteredList.concat(challenges);
+    } else {
+      this.filteredList = challenges;
+    }
+    console.log(this.filteredList);
   }
   onClick(event) {
-   if (!this.eref.nativeElement.contains(event.target)) // or some similar check
+   if (!this.eref.nativeElement.contains(event.target)){
      this.isOpeningMenu = false;
+   }  // or some similar check
+    var clickedComponent = event.target;
+    var inside = false;
+    do {
+      if (clickedComponent === this.eref.nativeElement) {
+        inside = true;
+      }
+      clickedComponent = clickedComponent.parentNode;
+    } while (clickedComponent);
+    if (!inside) {
+      this.filteredList = [];
+    }
   }
   onClickExplore(){
-    this.isExploringHide = true;
-    setTimeout(()=>{
-      this.isExploringTrans = true;
+    $('#filter-frame').removeClass('hide');
+    setTimeout(function(){
+      $('#filter-content').removeClass('translate');
     });
   }
-  onCloseExplore(){
-    this.isExploringTrans = false;
-    this.isExploringHide = false;
+  nextSearchPage(){
+    this.page ++;
+    this.currentPage++;
+    this.loadSearchQuery(this.query,this.page);
+    $('#livesearch-list').offset({top: $('#livesearch-list').offset().top,left: $('#livesearch-list').offset().left - $('#livesearch-results').width()});
+  }
+  preSearchPage(){
+    this.currentPage--;
+    $('#livesearch-list').offset({top: $('#livesearch-list').offset().top,left: $('#livesearch-list').offset().left + $('#livesearch-results').width()});
+  }
+  filter() {
+    // if (this.query !== "") {
+    //   this.filteredList = this.challenges.filter(function (el) {
+    //     return el.title.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
+    //   }.bind(this));
+    //   this.filteredList = this.filteredList.slice(0,4);
+    // } else {
+    //   this.filteredList = [];
+    // }
+    if (this.query.length > 0) {
+      this.searchBegin = false;
+      if(this.searchFinished){
+        this.page = 1;
+        this.searchBegin = true;
+        this.searchFinished = false;
+        this.loadSearchQuery(this.query,this.page);
+      }
+    } else {
+      if (this.query.length == 0) {
+        this.filteredList = [];
+        this.searchBegin = false;
+      }
+    }
+  }
+  loadSearchQuery(text,page){
+    this.challengeService
+      .getChallenges({ paging: 4, text: text,page: page})
+      .subscribe((res: any) => {
+        this.renderChallenges(res.data);
+        if(res.isNext) {
+          this.maxPage = this.page + 1;
+          console.log(this.maxPage);
+        }
+      });
+  };
+  select(title) {
+    this.query = title;
+    this.filteredList = [];
   }
   onClickSearch(){
     this.isSearching = true;

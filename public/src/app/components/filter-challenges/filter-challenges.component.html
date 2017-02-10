@@ -2,21 +2,32 @@
   <div class="container">
     <div class="pull-left">
       <span class="type-24 text-white filter-title light">Filter by:</span>
-      <button class="btn btn-white"><span *ngIf="filters && filters['mode']" class="text-capitalize">{{filters['mode']}}</span> <i class="ion-chevron-down"></i></button>
+      <button (click)="openExplore()" class="btn btn-white"><span *ngIf="filters && filters['mode']" class="text-capitalize">{{filters['mode']}}</span> <i class="ion-chevron-down"></i></button>
     </div>
     <div class="pull-left">
       <span class="type-24 text-white filter-title light">Sorted by:</span>
-      <button class="btn btn-white"><span *ngIf="filters && filters['mode']" class="text-capitalize">{{filters['sort']}}</span> <i class="ion-chevron-down"></i></button>
+      <button id="open-sort-btn" (click)="toggleSort(true)" class="btn btn-white"><span *ngIf="filters && filters['mode']" class="text-capitalize">{{filters['sort']}}</span> <i class="ion-chevron-down"></i></button>
     </div>
-
+  </div>
+  <div [hidden]="!isOpenSort" class="fixed">
+    <div (click)="toggleSort(false)" class="shadow">
+    </div>
+    <div class="sort-types transition-all" id="sort-types" [ngClass]="{'translate':isOpenSort}">
+      <div class="sort-type"><a [routerLink]="[url]" [queryParams]="{'sort':'created'}" class="text-white type-34 light">Created</a></div>
+      <div class="sort-type"><a [routerLink]="[url]" [queryParams]="{'sort':'popular'}"  class="text-white type-34 light">Popular</a></div>
+      <div class="sort-type"><a [routerLink]="[url]" [queryParams]="{'sort':'trending'}"  class="text-white type-34 light">Trending</a></div>
+    </div>
   </div>
 </div>
-<div class="container">
+<div class="container main-list">
   <div class="row">
     <div class="col-sm-3" *ngFor="let challenge of challenges">
       <app-card-challenge [challenge]='challenge'></app-card-challenge>
     </div>
   </div>
-  <button *ngIf="hasMore" (click)="loadMore()">More</button>
+  <div class="text-center p20">
+    <button class="btn btn-primary" *ngIf="hasMore && !isLoading" (click)="loadMore()">View more</button>
+  </div>
+
 </div>
 
