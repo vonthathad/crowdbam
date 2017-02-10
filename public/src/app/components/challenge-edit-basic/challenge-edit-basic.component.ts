@@ -19,7 +19,7 @@ import { ValidatedUploadComponent } from '../../components-child/validated-uploa
 })
 export class ChallengeEditBasicComponent implements OnInit {
 
- private challengeForm: FormGroup;
+  private challengeForm: FormGroup;
   private errorEmail: string;
   private imgSrc: string;
   private categoryOptions: { value: string, label: string, isChoosen: boolean }[];
@@ -28,12 +28,12 @@ export class ChallengeEditBasicComponent implements OnInit {
   @ViewChild(ValidatedUploadComponent) vuc: ValidatedUploadComponent;
   // @ViewChild("fileInput") private fileInput;
   constructor(private router: Router, private fvs: FileValidatorService, private route: ActivatedRoute, private cv: ChallengeService, private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fb: FormBuilder, private cas: CategoryService, private us: UserService) {
-    cv.challange$.subscribe(challenge=> this.renderChallenge(challenge));
-    cas.categories$.subscribe(categories=> this.renderCategoryOptions(categories))
+    cv.challange$.subscribe(challenge => this.renderChallenge(challenge));
+    cas.categories$.subscribe(categories => this.renderCategoryOptions(categories))
   }
 
   ngOnInit() {
-    if(this.cas.categories)this.renderCategoryOptions(this.cas.categories);
+    if (this.cas.categories) this.renderCategoryOptions(this.cas.categories);
     this.challengeForm = this.fb.group({
       title: ['', [Validators.required]],
       description: ['', Validators.compose([Validators.required, Validators.maxLength(140)])],
@@ -41,22 +41,26 @@ export class ChallengeEditBasicComponent implements OnInit {
       img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall])],
       categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))
     });
-       console.log(JSON.stringify(this.cv.challenge));
-    if(this.cv.challenge) this.renderChallenge(this.cv.challenge);
+    console.log(JSON.stringify(this.cv.challenge));
+    if (this.cv.challenge) this.renderChallenge(this.cv.challenge);
   }
   renderChallenge(challenge) {
-    this.challenge = challenge;
-    console.log(this.challenge);
-    this.challengeForm.patchValue({
-      title: this.challenge.title,
-      description: this.challenge.description,
-      prize: this.challenge.prize,
-    });
-    this.categoryOptions.forEach((_category) => {
-      if (this.challenge.categories.find(category => { return category.id === _category.value })) {
-        _category.isChoosen = true;
-      };
-    });
+    if (challenge) {
+      this.challenge = challenge;
+      console.log(this.challenge);
+      this.challengeForm.patchValue({
+        title: this.challenge.title,
+        description: this.challenge.description,
+        prize: this.challenge.prize,
+      });
+    }
+    if (this.categoryOptions) {
+      this.categoryOptions.forEach((_category) => {
+        if (this.challenge.categories.find(category => { return category.id === _category.value })) {
+          _category.isChoosen = true;
+        };
+      });
+    }
     console.log(this.categoryOptions);
   }
   renderCategoryOptions(categoryData) {

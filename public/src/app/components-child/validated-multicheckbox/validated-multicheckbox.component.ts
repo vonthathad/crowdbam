@@ -27,12 +27,15 @@ export class ValidatedMulticheckboxComponent implements DoCheck, OnChanges {
     // this.options = null;
     // this.options
     console.log(this.options);
+
     var currentScheduleControls: FormArray = this.model as FormArray;
-    this.options.forEach(option => {
-      if (option.isChoosen) {
-        currentScheduleControls.push(new FormControl(option))
-      }
-    });
+    if (this.options) {
+      this.options.forEach(option => {
+        if (option.isChoosen) {
+          currentScheduleControls.push(new FormControl(option))
+        }
+      });
+    }
     console.log(currentScheduleControls.value);
   }
   // public hasOption(option): boolean {
