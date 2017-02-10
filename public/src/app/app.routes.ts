@@ -23,11 +23,13 @@ import { ChallengeCommentsComponent } from './components/challenge-comments/chal
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
-    { path: 'categories/:name?sort=:type', component: FilterChallengesComponent },
-    { path: 'recommendations?sort=:type', component: FilterChallengesComponent },
-    { path: 'challenges?sort=:type', component: FilterChallengesComponent },
 
+    { path: 'categories/:name', component: FilterChallengesComponent },
+    { path: 'recommendations', component: FilterChallengesComponent },
+    { path: 'challenges', component: FilterChallengesComponent },
+    { path: 'search', component: FilterChallengesComponent },
     { path: 'c/:url', component: ChallengeComponent },
+
     {
         path: 'challenges/:id', component: ChallengeComponent,
         children: [
@@ -36,6 +38,7 @@ const routes: Routes = [
             { path: 'comments', component: ChallengeCommentsComponent }
         ]
     },
+
     {
         path: 'challenges/:id/edit', component: ChallengeEditWrapperComponent,
         children: [
@@ -46,8 +49,6 @@ const routes: Routes = [
         ]
     },
     { path: 'challenge-create', component: ChallengeCreateComponent },
-
-
     { path: 'profiles/:id', component: ProfilesComponent },
     { path: 'forgot-password', component: ForgotPasswordComponent },
 ];

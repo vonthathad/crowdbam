@@ -9,10 +9,12 @@ export class FormLoginWrapperComponent implements OnInit {
   private actionLabel: string;
   private actionTitle: string;
   private action: string;
+  private location: string;
   constructor() {
   }
 
   ngOnInit() {
+    this.location = window.location.href;
     this.initLogin();
   }
   changeAction() {
@@ -33,12 +35,22 @@ export class FormLoginWrapperComponent implements OnInit {
     this.actionLabel = 'Login';
   }
   loginFacebook() {
-    let location = window.location.href;
+    console.log('login facebook');
     // window.location.href = `/oauth/facebook?redirect=${this.location}`;
-    window.location.href = `/oauth/facebook?redirect=${location}`;
+    if (this.location.indexOf('localhost') > -1) {
+      console.log('local');
+      window.location.href = 'http://localhost:8456/oauth/facebook?redirect=' + this.location;
+    } else {
+      window.location.href = '/oauth/facebook?redirect=' + this.location;
+    }
+
   }
   loginGoogle() {
     let location = window.location.href;
-    window.location.href = `/oauth/google?redirect=${location}`;
+    if (location.indexOf('localhost') > -1) {
+      location = `localhost:8456/oauth/google?redirect=${location}`;
+    } else {
+      location = `/oauth/google?redirect=${location}`;
+    }
   }
 }

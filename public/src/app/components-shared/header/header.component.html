@@ -4,15 +4,15 @@
       <nav class="site-nav-base site-nav--search">
         <div class="site-nav__left">
           <div class="site-nav__item site-nav__item--searchbar js-searchbar js-header-livesearch" [ngClass]="{'site-nav__item--searchbar--visible': isSearching}">
-            <form class="site-nav__search-form" role="search" action="/projects/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓">
+            <form class="site-nav__search-form" role="search">
               <div class="icon__search"><i class="ion-ios-search-strong" id="ion-ios-search-strong"></i></div>
-              <input type="text" name="term" id="term" aria-label="Search projects" placeholder="Search" class="site-nav__search-input js-search-term text" tabindex="-1" autocomplete="off">
+              <input type="text" #input [(ngModel)]=query [ngModelOptions]="{standalone: true}"  (keyup)=filter() aria-label="Search projects" placeholder="Search" class="site-nav__search-input js-search-term text" tabindex="-1" autocomplete="off">
             </form>
 
           </div>
         </div>
         <div class="site-nav__right">
-          <button (click)="onCloseSearch()" class="btn btn-primary btn-simple site-nav__item--close" id="btn-search-close"><i class="ion-ios-close large"></i></button>
+          <a (click)="onCloseSearch()" class="btn btn-primary btn-simple site-nav__item--close" id="btn-search-close"><i class="ion-ios-close large"></i></a>
         </div>
       </nav>
     </div>
@@ -27,12 +27,12 @@
           <a class="site-nav__item site-nav__item--text" (click)="onCreateChallenge()">
             <span class="site-nav__item-label">Create <span class="hidden-xs">a challenge</span></span>
           </a>
-          <a class="site-nav__item site-nav__item--text site-nav__item--about" href="/recommendations?ref=nav">
+          <a class="site-nav__item site-nav__item--text site-nav__item--about" [routerLink]="['recommendations']" [queryParams]="{'sort':'created'}">
             <span class="site-nav__item-label">For you</span>
           </a>
         </div>
         <div class="site-nav__middle">
-          <a class="site-nav__item site-nav__item--logo" href="/?ref=nav">
+          <a class="site-nav__item site-nav__item--logo" [routerLink]="['/']">
             <div class="svg--ksr-logo">
               Crowdbam
             </div>
@@ -48,7 +48,7 @@
 
           <a *ngIf="user" (click)="onToggleMenu()" class="site-nav__item site-nav__item--user bg-grey-200" aria-label="User dropdown menu" data-toggle="dropdown" aria-expanded="false">
             <div class="notification-indicator-and-avatar">
-              <img class="site-nav__user-avatar" [src]="user.avatar">
+              <img class="site-nav__user-avatar" [src]="user.avatar"><span class="hidden-xs"> {{user.displayName.split(' ')[0]}} <i class="ion-arrow-down-b"></i></span>
             </div>
           </a>
 
@@ -60,57 +60,6 @@
       </nav>
     </div>
 
-  </div>
-</div>
-<div>
-  <div id="filter-frame" class="block fixed scroll-y webkit-scrolling transition-all z9000 bg-grey-100" [ngClass]="{'hide': !isExploringHide}">
-    <div id="filter-content" class="filter" [ngClass]="{'translate': !isExploringTrans}">
-      <div class="container relative item-translate transition-all transition-delay-400">
-        <div class="absolute filter-close">
-          <a (click)="onCloseExplore()" aria-label="Close">
-            <i class="ion-ios-close large"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="container item-translate transition-all transition-delay-200">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="border-bottom type-16 filter-heading">
-              Collections
-            </h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h2 class="filter-title type-34"><a>Recommended</a></h2>
-            <h2 class="filter-title type-34"><a>Most popular</a></h2>
-            <h2 class="filter-title type-34"><a>Most newest</a></h2>
-          </div>
-        </div>
-      </div>
-      <div class="container item-translate transition-all transition-delay-300">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="border-bottom type-16 filter-heading">
-              Categories
-            </h1>
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h2 class="filter-title type-34"><a [routerLink]="['categories/','art']" [queryParams]="{'sort':'newest'}">Categories #1</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #2</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #3</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #4</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #5</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #6</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #7</a></h2>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 <div *ngIf="user" [hidden]="!isOpeningMenu" class="user-menu">
@@ -148,4 +97,27 @@
       </div>
     </div>
 
+</div>
+<div [hidden]="!searchBegin" class="livesearch-wrap js-livesearch-wrap">
+  <div class="livesearch-container js-livesearch-container">
+    <h3 class="livesearch-header"></h3>
+    <div class="livesearch-results js-livesearch-results" id="livesearch-results">
+      <ul class="livesearch-list" id="livesearch-list">
+        <li *ngFor="let challenge of filteredList" class="livesearch-result js-livesearch-result">
+          <app-card-challenge [challenge]="challenge"></app-card-challenge>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <a *ngIf="searchFinished && filteredList.length" (click)="onCloseSearch()" [routerLink]="['search']" [queryParams]="{'text':query,'sort':'popular'}" class="livesearch-see-all-results btn">See all results for <span class="bold">{{query}}</span></a>
+      <a *ngIf="searchFinished && !filteredList.length" class="livesearch-see-all-results btn">No result for <span class="bold">{{query}}</span></a>
+      <div class="grey-dark small_type js-livesearch-displaying-results mt3 mt5-sm hidden"></div>
+    </div>
+    <button [disabled]="currentPage==1" (click)="preSearchPage()" class="js-prev prev arrow">
+      <div aria-label="Previous results" class="icon__arrow-left"><i class="ion-ios-arrow-back"></i></div>
+    </button>
+    <button [disabled]="currentPage >= maxPage" (click)="nextSearchPage()" class="js-next next arrow">
+      <div aria-label="Next results" class="icon__arrow-right"><i class="ion-ios-arrow-forward"></i></div>
+    </button>
+  </div>
 </div>

@@ -39,7 +39,7 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
 import { ValidatedMulticheckboxComponent } from './components-child/validated-multicheckbox/validated-multicheckbox.component';
 import { ChallengeCreateComponent } from './components/challenge-create/challenge-create.component';
 import { ValidatedUploadComponent } from './components-child/validated-upload/validated-upload.component';
-import { AutocompleteComponent } from './components-child/autocomplete/autocomplete.component';
+// import { AutocompleteComponent } from './components-child/autocomplete/autocomplete.component';
 import { ChallengeEditWrapperComponent } from './components/challenge-edit-wrapper/challenge-edit-wrapper.component';
 import { ChallengeEditBasicComponent } from './components/challenge-edit-basic/challenge-edit-basic.component';
 import { ChallengeEditHtmlComponent } from './components/challenge-edit-html/challenge-edit-html.component';
@@ -51,6 +51,7 @@ import { ChallengeHtmlComponent } from './components/challenge-html/challenge-ht
 import { ChallengeTimelineComponent } from './components/challenge-timeline/challenge-timeline.component';
 import { ChallengeNavigatorComponent } from './components-shared/challenge-navigator/challenge-navigator.component';
 import { ChallengeCommentsComponent } from './components/challenge-comments/challenge-comments.component';
+import { ExploreModalComponent } from './components-child/explore-modal/explore-modal.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,7 @@ import { ChallengeCommentsComponent } from './components/challenge-comments/chal
     ValidatedMulticheckboxComponent,
     ChallengeCreateComponent,
     ValidatedUploadComponent,
-    AutocompleteComponent,
+    // AutocompleteComponent,
     ChallengeEditWrapperComponent,
     ChallengeEditBasicComponent,
     ChallengeEditBasicComponent,
@@ -87,6 +88,7 @@ import { ChallengeCommentsComponent } from './components/challenge-comments/chal
     ChallengeTimelineComponent,
     ChallengeNavigatorComponent,
     ChallengeCommentsComponent,
+    ExploreModalComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

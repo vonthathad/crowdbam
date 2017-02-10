@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import {ChallengeService} from "../../services/challenge.service";
 import {Challenge} from "../../classes/challenge";
@@ -12,20 +12,40 @@ export class FilterChallengesComponent implements OnInit {
   private filters: Object;
   private params: Object;
   private hasMore: boolean;
+  private url: string;
   private isLoading: boolean;
-  constructor(private route: Router,private challengeService: ChallengeService) { }
+  private isOpenSort: boolean = false;
+  constructor(private route: Router,private challengeService: ChallengeService,private el: ElementRef) { }
 
   ngOnInit() {
-
+    this.setPositionSortTypes(false);
     this.route.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
         this.params = {};
         this.params["paging"] = 4;
         this.params["page"] = 1;
+        this.isOpenSort = false;
         this.filters = this.getRouteParams(event.url);
         this.filterChallenges();
       }
     })
+  }
+  openExplore(){
+    $('#filter-frame').removeClass('hide');
+    setTimeout(function(){
+      $('#filter-content').removeClass('translate');
+    });
+  }
+  setPositionSortTypes(open:boolean){
+    let openSortBtn = (<HTMLElement>this.el.nativeElement).querySelector('#open-sort-btn') as HTMLElement;
+    let sortTypes = (<HTMLElement>this.el.nativeElement).querySelector('#sort-types') as HTMLElement;
+    sortTypes.style.left = (openSortBtn.getBoundingClientRect().left ) + 'px';
+    if(open){
+      sortTypes.style.top = (openSortBtn.getBoundingClientRect().top - sortTypes.clientHeight/2 + 20) + 'px';
+    } else {
+      sortTypes.style.top = (openSortBtn.getBoundingClientRect().top - sortTypes.clientHeight/2  + 150) + 'px';
+    }
+
   }
   filterChallenges(){
     if(this.filters["sort"]) this.params["order"] = this.filters["sort"];
@@ -35,6 +55,14 @@ export class FilterChallengesComponent implements OnInit {
               this.params["category"] = this.filters["name"];
             }
             break;
+      case "recommendations":
+        this.params["recommendations"] = true;
+        break;
+      case "search":
+        if(this.filters["text"]){
+          this.params["text"] = this.filters["text"];
+        }
+        break;
     }
     this.challengeService
       .getChallenges(this.params)
@@ -63,8 +91,15 @@ export class FilterChallengesComponent implements OnInit {
     this.hasMore = isNext;
     this.isLoading = false;
   }
+  toggleSort(open:boolean){
+    this.isOpenSort = open;
+    setTimeout(()=>{
+      this.setPositionSortTypes(open);
+    })
+  };
   getRouteParams(url:string){
     let urlArray =  url.split('?');
+    this.url = urlArray[0];
     let obj = {
       "mode": urlArray[0].split('/')[1]
     };
@@ -77,6 +112,8 @@ export class FilterChallengesComponent implements OnInit {
         if(e.split('=')[0] == 'sort'){
           obj["sort"] = e.split('=')[1];
           return;
+        } else if(e.split('=')[0] == 'text'){
+          obj["text"] = e.split('=')[1];
         }
       });
 

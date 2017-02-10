@@ -1,0 +1,47 @@
+<div>
+  <div id="filter-frame" class="block fixed scroll-y webkit-scrolling transition-all z9000 bg-grey-100 hide">
+    <div id="filter-content" class="filter translate">
+      <div class="container relative item-translate transition-all transition-delay-400">
+        <div class="absolute filter-close">
+          <a (click)="onCloseExplore()" aria-label="Close">
+            <i class="ion-ios-close large"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="container item-translate transition-all transition-delay-200">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="border-bottom type-16 filter-heading">
+              Collections
+            </h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="filter-title type-34"><a [routerLink]="['recommendations']" [queryParams]="{'sort':'created'}" (click)="onCloseExplore()">Recommended</a></h2>
+            <h2 class="filter-title type-34"><a [routerLink]="['challenges']" [queryParams]="{'sort':'popular'}" (click)="onCloseExplore()">Most popular</a></h2>
+            <h2 class="filter-title type-34"><a [routerLink]="['challenges']" [queryParams]="{'sort':'trending'}" (click)="onCloseExplore()">Trending</a></h2>
+            <h2 class="filter-title type-34"><a [routerLink]="['challenges']" [queryParams]="{'sort':'created'}" (click)="onCloseExplore()">Most newest</a></h2>
+          </div>
+        </div>
+      </div>
+      <div class="container item-translate transition-all transition-delay-300">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="border-bottom type-16 filter-heading">
+              Categories
+            </h1>
+
+          </div>
+        </div>
+        <div class="row">
+          <div *ngIf="categories" class="col-md-12">
+            <h2 *ngFor="let category of categories" class="filter-title type-34"><a [routerLink]="['categories/',category._id]" [queryParams]="{'sort':'created'}" (click)="onCloseExplore()">{{category.title}}</a></h2>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

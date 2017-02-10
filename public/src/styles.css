@@ -92,6 +92,9 @@
 .text-white{
   color: #fff!important;
 }
+.text-white:hover,.text-white:active,.text-white:focus{
+  opacity: 0.7;
+}
 .bg-blue{
   background: #0B055E!important;
 }
@@ -429,12 +432,14 @@ a:hover{
 }
 
 .site-nav--search .site-nav__item--close {
+  line-height: 45px;
   margin-right: 24px
 }
 
 @media (min-width: 640px) {
   .site-nav--search .site-nav__item--close {
-    margin-right: 108px
+    line-height: 45px;
+    margin-right: 170px;
   }
 }
 
@@ -669,22 +674,40 @@ input.site-nav__search-input:focus {
 }
 
 .site-nav__item--user {
-  padding-left: 24px;
-  padding-right: 24px
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 150px;
 }
-
+@media screen and (max-width: 768px){
+  .site-nav__item--user{
+    width: auto;
+    min-width: 60px;
+  }
+  .notification-indicator-and-avatar{
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
 .site-nav__item--user:focus {
   background-color: rgba(6, 15, 70, 0.2)
 }
 
 .site-nav__item--user .notification-indicator-and-avatar {
   position: relative;
-  display: flex
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin: auto;
 }
-
+.
 .site-nav__item--user .notification-indicator-and-avatar .notification-indicator--active {
   position: absolute;
   top: 4px
+}
+.site-nav__item--user .notification-indicator-and-avatar>span {
+  margin-left: 5px;
 }
 
 .site-nav__user-avatar {
@@ -715,7 +738,8 @@ input.site-nav__search-input:focus {
 .livesearch-container {
   margin: 0 auto;
   position: relative;
-  width: 960px
+  width: calc(100% - 80px);
+  max-width: 960px
 }
 
 .livesearch-container .svg-icon__close {
@@ -734,30 +758,33 @@ input.site-nav__search-input:focus {
 
 .livesearch-container .arrow {
   position: absolute;
-  top: 240px;
+  top: 200px;
   cursor: pointer;
-  fill: #3D3D66
+  color: #3472F7;
+  background: transparent;
+  border: none;
 }
-
+.livesearch-container .arrow:disabled{
+  color: #999;
+}
 .livesearch-container .no-result-header {
   text-align: center
 }
 
 .livesearch-container .prev {
-  left: -40px
+  left: -40px;
 }
 
 .livesearch-container .next {
-  right: -40px
+  right: -40px;
 }
 
 .livesearch-container .icon__arrow-left,
 .livesearch-container .icon__arrow-right {
   fill: #3D3D66;
-  height: 15px;
+  height: 40px;
   width: 15px;
   font-size: 2em;
-  margin-top: -8px;
 }
 
 .livesearch-container .icon__arrow-left.disabled,
@@ -887,7 +914,7 @@ input.site-nav__search-input:focus {
   bottom: 0
 }
 .ratio-16-9.project-card-tall-big {
-  height: 420px
+  height: 380px
 }
 @media (min-width: 640px) {
   /*.ratio-16-9.project-card-tall-big {*/
