@@ -1,6 +1,6 @@
 <br>/
 <div>
-    {{}}  {{title}}<span *ngIf="chosenValue=='Other'">:{{otherValue}}</span> {{deadline}}
+     {{title}}<span *ngIf="chosenValue=='Other'">:{{otherValue}}</span> {{deadline}}
 
     <label for="title">Title</label>
     <select name="title" [(ngModel)]="title" (change)="_updateValue()">
