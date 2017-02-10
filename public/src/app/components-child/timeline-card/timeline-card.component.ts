@@ -1,23 +1,26 @@
-import {Input, Output, Component, OnInit, EventEmitter } from '@angular/core';
+import { Input, Output, Component, OnInit, EventEmitter } from '@angular/core';
 
-import {Timeline} from '../../classes/timeline';
-import {DropdownValue} from '../../classes/dropdown-value';
+import { Timeline } from '../../classes/timeline';
+import { DropdownValue } from '../../classes/dropdown-value';
 @Component({
   selector: 'app-timeline-card',
   templateUrl: './timeline-card.component.html',
   styleUrls: ['./timeline-card.component.css']
 })
 export class TimelineCardComponent implements OnInit {
-  private title: string;
+  private title: any;
   private otherValue: string;
   private dropdownValues: DropdownValue[];
   private inputHidden: boolean;
-  private deadline: string  ;
+  private deadline: string;
   private description: string;
+  @Input() timeline: Timeline;
   @Input() orderNum: number;
   @Output() updateValue = new EventEmitter();
-  constructor() { }
-  
+  @Output() deleteTimeline = new EventEmitter();
+  constructor() {
+  }
+
   ngOnInit() {
     this.dropdownValues = new Array<DropdownValue>();
     this.dropdownValues.push(new DropdownValue('Funding', 'Funding'));
@@ -32,15 +35,22 @@ export class TimelineCardComponent implements OnInit {
     this.dropdownValues.push(new DropdownValue('Winner Announced', 'Winner Announced'));
     this.dropdownValues.push(new DropdownValue('Closed', 'Closed'));
     this.dropdownValues.push(new DropdownValue('Other', 'Other'));
-    this.inputHidden = true;
     this.otherValue = '';
+    this.title = {value:'Funding', label:'Funding'};
   }
-  _updateValue(){
-    this.updateValue.emit({orderNum: 1,timeline:new Timeline(this.title, this.description, this.deadline)});
-    if(this.title == "Other"){
+  _updateValue() {
+    this.timeline.title = this.title.value;
+    if (this.title.value == "Other") {
+      console.log(false);
       this.inputHidden = false;
+      this.timeline.title += `: ${this.otherValue}`;
     } else {
+      console.log(true);
       this.inputHidden = true;
     }
+    this.updateValue.emit({ orderNum: this.orderNum, timeline: this.timeline });
+  }
+  _deleteTimeline(){
+    this.deleteTimeline.emit(this.orderNum);
   }
 }
