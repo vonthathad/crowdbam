@@ -33,6 +33,7 @@ var ChallengeSchema = new Schema({
         sparse: true,
         match: [/^[A-Za-z_.-]{3,20}$/, "Please fill a valid challenge's url"]
     },
+    timelines: [],
     categories: [{
         type: String,
         required: 'Category of challenge is required',
@@ -72,7 +73,12 @@ var ChallengeSchema = new Schema({
     public: {
         type: Boolean,
         default: false
-    }
+    },
+    review: {
+        type: Boolean,
+        default: false
+    },
+    reviewMessage: String
 });
 ChallengeSchema.plugin(autoIncrement.plugin, {
     model: 'Challenge',

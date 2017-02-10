@@ -15,7 +15,7 @@ module.exports = function(callback) {
     require('../models/comment.server.model');
     require('../models/content.server.model');
     require('../models/solution.server.model');
-    require('../models/timeline.server.model');
+    // require('../models/timeline.server.model');
     require('../models/type.server.model');
     return db;
 };

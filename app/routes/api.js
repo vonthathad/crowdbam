@@ -9,7 +9,7 @@ var challenges = require('../controllers/challenge.server.controller');
 var solutions = require('../controllers/solution.server.controller');
 var comments = require('../controllers/comment.server.controller');
 var types = require('../controllers/type.server.controller');
-var timelines = require('../controllers/timeline.server.controller');
+// var timelines = require('../controllers/timeline.server.controller');
 module.exports = function (router) {
     router.use(passport.authenticate('bearer', {session: false}));
     
@@ -26,6 +26,8 @@ module.exports = function (router) {
         .delete(users.requiresLogin,challenges.hasAuthorization,challenges.remove);
     router.route('/challenges/:challengeID/follow')
         .put(users.requiresLogin,challenges.follow);
+    router.route('/challenges/:challengeID/review')
+        .put(users.requiresLogin,challenges.hasAuthorization,challenges.review);
     router.route('/challenges/:challengeID/share')
         .put(users.requiresLogin,challenges.share);
     router.route('/challenges/:challengeID/image')
@@ -81,11 +83,11 @@ module.exports = function (router) {
     router.param('commentID', comments.commentByID);
     
     /* TIMELINE */
-    router.route('/timelines')
-        .get(timelines.checkChallengeExist,timelines.list)
-        .post(users.requiresLogin,solutions.create);
-    router.route('/solutions/:timelineID')
-        .put(users.requiresLogin,timelines.checkChallengeExist,timelines.hasAuthorization,timelines.update)
-        .delete(users.requiresLogin,timelines.checkChallengeExist,timelines.hasAuthorization,timelines.remove);
-    router.param('timelineID', timelines.timelineByID);
+    // router.route('/timelines')
+    //     .get(timelines.checkChallengeExist,timelines.list)
+    //     .post(users.requiresLogin,solutions.create);
+    // router.route('/solutions/:timelineID')
+    //     .put(users.requiresLogin,timelines.checkChallengeExist,timelines.hasAuthorization,timelines.update)
+    //     .delete(users.requiresLogin,timelines.checkChallengeExist,timelines.hasAuthorization,timelines.remove);
+    // router.param('timelineID', timelines.timelineByID);
 };

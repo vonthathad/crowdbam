@@ -260,13 +260,17 @@ exports.update = function(req, res) {
     //     });
     // }
 
-    req.body.public = req.challenge.public;
+    req.body.public = false;
     req.body._id = req.challenge._id;
     req.body.creator = req.user._id;
     Challenge.findByIdAndUpdate(req.challenge._id, req.body).exec(function(err, challenge) {
         if (err) return res.status(400).send({ messages: getErrorMessage(err) });
         return res.json({ message: "Challenge's information has changed" });
     });
+};
+exports.review = function(req, res){
+    req.challenge.review = true;
+    req.challenge.save();
 };
 exports.remove = function(req, res) {
     req.challenge.types.forEach(function(e) {

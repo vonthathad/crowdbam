@@ -59,7 +59,7 @@
   border-color: #fff;
   color: #fff;
 }
-.btn-white:hover{
+.btn-white:hover,.btn-white:active,.btn-white:focus,.btn:active:focus, .btn:active:hover, .btn.active:focus, .btn.active:hover{
   background: #fff;
   color: #3472F7;
   border-color: #fff;
@@ -88,6 +88,9 @@
 }
 .text-blue{
   color: #0B055E!important;
+}
+.text-white{
+  color: #fff!important;
 }
 .bg-blue{
   background: #0B055E!important;
@@ -2119,4 +2122,17 @@ body#backings_index .project_thumb.ratio-16-9 {
   .project-edit .event>.delete-btn{
     right: 5px;
   }
+}
+
+
+/* LIST CHALLENGES */
+.filter-header{
+  background: #3472F7;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.filter-header .filter-title{
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-left: 10px;
 }
