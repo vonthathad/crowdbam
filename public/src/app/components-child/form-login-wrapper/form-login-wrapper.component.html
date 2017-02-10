@@ -2,11 +2,15 @@
 <app-form-register *ngIf="action=='Sign up'"></app-form-register>
 <app-form-login *ngIf="action=='Login'"></app-form-login>
 <div *ngIf="action=='Login'" class="text-center">
+  <div class="split">
+    <div class="text-center w100 line-choose"><span>or</span></div>
+  </div>
+
   <div class="social-btn">
-    <button class="btn btn-primary w100 btn-fill btn-facebook" (click)="loginFacebook()">LOGIN BY FACEBOOK</button>
+    <button class="btn w100 btn-fill btn-facebook" (click)="loginFacebook()">Login by Facebook</button>
   </div>
   <div class="social-btn">
-    <button class="btn btn-primary w100 btn-fill btn-google" (click)="loginGoogle()">LOGIN BY GOOGLE</button>
+    <button class="btn w100 btn-fill btn-google" (click)="loginGoogle()">Login by Google</button>
   </div>
 
 </div>

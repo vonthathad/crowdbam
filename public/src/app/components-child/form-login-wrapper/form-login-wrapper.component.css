@@ -1,0 +1,26 @@
+.line-choose{
+  height: 20px;
+  position: relative;
+  vertical-align: middle;
+}
+.line-choose>span{
+  position: absolute;
+  top: 0;
+  left: calc(50% - 10px);
+  width: 20px;
+  height: 20px;
+  background: #fff;
+}
+.line-choose:before{
+  position: absolute;
+  content: "";
+  top: 50%;
+  height: 1px;
+  left: 0;
+  width: 100%;
+  background: #ddd;
+}
+
+.split{
+  padding: 0 10px 10px;
+}

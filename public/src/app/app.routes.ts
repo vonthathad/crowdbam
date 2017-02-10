@@ -5,6 +5,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ChallengesComponent } from './components/challenges/challenges.component';
+import { FilterChallengesComponent } from './components/filter-challenges/filter-challenges.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
 import { ChallengeCreateComponent } from './components/challenge-create/challenge-create.component';
 import { ChallengeEditWrapperComponent } from './components/challenge-edit-wrapper/challenge-edit-wrapper.component';
@@ -18,9 +19,7 @@ import { ChallengeEditHtmlComponent } from './components/challenge-edit-html/cha
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
-
-    { path: 'categories', component: ChallengesComponent },
-    { path: 'categories/:name?sort=:type', component: ChallengesComponent },
+    { path: 'categories/:name?sort=:type', component: FilterChallengesComponent },
     { path: 'recommendations?sort=:type', component: ChallengesComponent },
 
     { path: 'c/:url', component: ChallengeComponent },
