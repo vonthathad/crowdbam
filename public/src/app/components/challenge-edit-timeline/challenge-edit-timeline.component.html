@@ -1,7 +1,8 @@
 <h1>Timeline</h1>
 
-<button>+ Add event</button>
-
+<button (click)="addTimelineCard()">+ Add event</button>
+<!--<div *ngIf="let timeline of timelines | orderBy: 'deadline'" ></div>-->
+{{timelines}}
 Timeline preview
 
-<app-timeline-card></app-timeline-card>
+<app-timeline-card *ngFor="let timeline of timelines; let i = index" [orderNum]="i" (updateValue)="handleUpdateValue($event)"></app-timeline-card>

@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { LocationStrategy, PathLocationStrategy, APP_BASE_HREF } from '@angular/common';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
 
 import { routing } from './app.routes';
 
@@ -81,7 +82,8 @@ import { TimelineCardComponent } from './components-child/timeline-card/timeline
     HttpModule,
     routing,
     ModalModule.forRoot(),
-    BootstrapModalModule
+    BootstrapModalModule,
+    Ng2DatetimePickerModule
   ],
   providers: [
     USER_PROVIDER,
