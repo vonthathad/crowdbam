@@ -49,8 +49,8 @@ var ChallengeSchema = new Schema({
         ref: 'User',
         default: []
     }],
-    top: Number,
-    hot: Number,
+    popular: Number,
+    trending: Number,
     created: {
         type: Date,
         default: Date.now

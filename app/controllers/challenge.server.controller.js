@@ -27,11 +27,11 @@ var getErrorMessage = function(err) {
     return messages;
 };
 var getSortType = function(sortType) {
-    if (sortType === "top") {
-        return { top: -1 };
+    if (sortType === "trending") {
+        return { trending: -1 };
     }
-    if (sortType === "hot") {
-        return { hot: -1 };
+    if (sortType === "popular") {
+        return { popular: -1 };
     }
     return { created: -1 };
 };
@@ -53,6 +53,15 @@ exports.list = function(req, res) {
     conds.push({ public: true });
     if (req.query.category) conds.push({ categories: req.query.category });
     if (req.query.follow) conds.push({ follows: parseInt(req.query.follow) });
+    if (req.query.recommendations && req.user._id){
+        var cateList = [];
+        req.user.recommendations.forEach(function (recommendation) {
+            cateList.push({categories: recommendation});
+        })
+        if(cateList.length){
+            conds.push({$or: cateList});
+        }
+    };
     if (req.query.user) conds.push({ creator: parseInt(req.query.user) });
     if (req.query.text) {
         conds.push({
@@ -78,8 +87,8 @@ exports.list = function(req, res) {
             },
             {
                 $project: {
-                    top: { $add: [{ $multiply: [{ $size: "$shares" }, 2] }, { $size: "$follows" }] },
-                    hot: { $divide: [{ $add: [{ $multiply: [{ $size: "$shares" }, 2] }, { $size: "$follows" }] }, { $divide: [{ $subtract: [new Date(), "$created"] }, 3600000] }] },
+                    popular: { $add: [{ $multiply: [{ $size: "$shares" }, 2] }, { $size: "$follows" }] },
+                    trending: { $divide: [{ $add: [{ $multiply: [{ $size: "$shares" }, 2] }, { $size: "$follows" }] }, { $divide: [{ $subtract: [new Date(), "$created"] }, 3600000] }] },
                     created: 1,
                     title: 1,
                     description: 1,
