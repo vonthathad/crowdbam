@@ -19,6 +19,7 @@ import { FILE_VALIDATOR_PROVIDER } from './services/file-validator.service';
 import { AUTH_GUARD_PROVIDER } from './services/auth-guard.service';
 import { CONTENT_PROVIDER } from './services/content.service';
 import { TYPE_PROVIDER } from './services/type.service';
+import { HTML_PROVIDER } from './services/html.service';
 
 import {OrderByPipe} from './pipes/orderBy.pipe';
 import {NotContainPipe} from './pipes/notContain.pipe';
@@ -110,6 +111,7 @@ import { ExploreModalComponent } from './components-child/explore-modal/explore-
     FILE_VALIDATOR_PROVIDER,
     CONTENT_PROVIDER,
     TYPE_PROVIDER,
+    HTML_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }
   ],

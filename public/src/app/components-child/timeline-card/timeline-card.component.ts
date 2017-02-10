@@ -39,9 +39,16 @@ export class TimelineCardComponent implements OnInit {
     this.otherValue = '';
     // setTimeout(() => {
       // this.title = { value: this.timeline.title, label: this.timeline.title };
+      let foundTitle = true;
       this.dropdownValues.forEach(dropdownValue=>{
-        if(dropdownValue.value == this.timeline.title) this.title = dropdownValue;
+        if(dropdownValue.value == this.timeline.title){
+          this.title = dropdownValue;
+          foundTitle = false;
+        }
       })
+      if(foundTitle){
+        this.title = this.dropdownValues[0];
+      }
     
     // }, 100)
     this.hiddenOption = false;
