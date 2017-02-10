@@ -55,6 +55,14 @@ export class FilterChallengesComponent implements OnInit {
               this.params["category"] = this.filters["name"];
             }
             break;
+      case "recommendations":
+        this.params["recommendations"] = true;
+        break;
+      case "search":
+        if(this.filters["text"]){
+          this.params["text"] = this.filters["text"];
+        }
+        break;
     }
     this.challengeService
       .getChallenges(this.params)
@@ -104,6 +112,8 @@ export class FilterChallengesComponent implements OnInit {
         if(e.split('=')[0] == 'sort'){
           obj["sort"] = e.split('=')[1];
           return;
+        } else if(e.split('=')[0] == 'text'){
+          obj["text"] = e.split('=')[1];
         }
       });
 

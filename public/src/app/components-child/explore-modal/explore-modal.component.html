@@ -19,9 +19,10 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <h2 class="filter-title type-34"><a>Recommended</a></h2>
-            <h2 class="filter-title type-34"><a>Most popular</a></h2>
-            <h2 class="filter-title type-34"><a>Most newest</a></h2>
+            <h2 class="filter-title type-34"><a [routerLink]="['recommendations']" [queryParams]="{'sort':'created'}" (click)="onCloseExplore()">Recommended</a></h2>
+            <h2 class="filter-title type-34"><a [routerLink]="['challenges']" [queryParams]="{'sort':'popular'}" (click)="onCloseExplore()">Most popular</a></h2>
+            <h2 class="filter-title type-34"><a [routerLink]="['challenges']" [queryParams]="{'sort':'trending'}" (click)="onCloseExplore()">Trending</a></h2>
+            <h2 class="filter-title type-34"><a [routerLink]="['challenges']" [queryParams]="{'sort':'created'}" (click)="onCloseExplore()">Most newest</a></h2>
           </div>
         </div>
       </div>
@@ -35,14 +36,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
-            <h2 class="filter-title type-34"><a [routerLink]="['categories/','art']" [queryParams]="{'sort':'newest'}">Categories #1</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #2</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #3</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #4</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #5</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #6</a></h2>
-            <h2 class="filter-title type-34"><a>Categories #7</a></h2>
+          <div *ngIf="categories" class="col-md-12">
+            <h2 *ngFor="let category of categories" class="filter-title type-34"><a [routerLink]="['categories/',category._id]" [queryParams]="{'sort':'created'}" (click)="onCloseExplore()">{{category.title}}</a></h2>
+
           </div>
         </div>
       </div>

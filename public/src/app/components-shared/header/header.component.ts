@@ -141,6 +141,9 @@ export class HeaderComponent implements OnInit {
   }
   onCloseSearch(){
     this.isSearching = false;
+    this.filteredList = [];
+    this.searchBegin = false;
+    this.searchFinished = false;
   }
   onToggleMenu(){
     this.isOpeningMenu = !this.isOpeningMenu;

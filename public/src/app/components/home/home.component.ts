@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.challengeService
-      .getChallenges({ paging: 3 })
+      .getChallenges({ paging: 3, recommendations: true })
       .subscribe((res: any) => this.renderRecommendedChallenges(res['data']));
 
     this.challengeService

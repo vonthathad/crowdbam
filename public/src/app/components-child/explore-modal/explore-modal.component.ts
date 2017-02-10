@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CategoryService} from "../../services/category.service";
+import {Category} from "../../classes/category";
 
 @Component({
   selector: 'app-explore-modal',
@@ -6,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./explore-modal.component.css']
 })
 export class ExploreModalComponent implements OnInit {
-
-  constructor() { }
+  categories: Category[];
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
-
+    this.categoryService.getCategories().subscribe((res: any)=>{
+      this.categories = res.data;
+    });
   }
   onCloseExplore(){
     $('#filter-content').addClass('translate');

@@ -439,7 +439,7 @@ a:hover{
 @media (min-width: 640px) {
   .site-nav--search .site-nav__item--close {
     line-height: 45px;
-    margin-right: 204px;
+    margin-right: 170px;
   }
 }
 
@@ -674,22 +674,40 @@ input.site-nav__search-input:focus {
 }
 
 .site-nav__item--user {
-  padding-left: 24px;
-  padding-right: 24px
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 150px;
 }
-
+@media screen and (max-width: 768px){
+  .site-nav__item--user{
+    width: auto;
+    min-width: 60px;
+  }
+  .notification-indicator-and-avatar{
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
 .site-nav__item--user:focus {
   background-color: rgba(6, 15, 70, 0.2)
 }
 
 .site-nav__item--user .notification-indicator-and-avatar {
   position: relative;
-  display: flex
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin: auto;
 }
-
+.
 .site-nav__item--user .notification-indicator-and-avatar .notification-indicator--active {
   position: absolute;
   top: 4px
+}
+.site-nav__item--user .notification-indicator-and-avatar>span {
+  margin-left: 5px;
 }
 
 .site-nav__user-avatar {
@@ -746,7 +764,9 @@ input.site-nav__search-input:focus {
   background: transparent;
   border: none;
 }
-
+.livesearch-container .arrow:disabled{
+  color: #999;
+}
 .livesearch-container .no-result-header {
   text-align: center
 }

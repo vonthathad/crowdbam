@@ -27,12 +27,12 @@
           <a class="site-nav__item site-nav__item--text" (click)="onCreateChallenge()">
             <span class="site-nav__item-label">Create <span class="hidden-xs">a challenge</span></span>
           </a>
-          <a class="site-nav__item site-nav__item--text site-nav__item--about" href="/recommendations?ref=nav">
+          <a class="site-nav__item site-nav__item--text site-nav__item--about" [routerLink]="['recommendations']" [queryParams]="{'sort':'created'}">
             <span class="site-nav__item-label">For you</span>
           </a>
         </div>
         <div class="site-nav__middle">
-          <a class="site-nav__item site-nav__item--logo" href="/?ref=nav">
+          <a class="site-nav__item site-nav__item--logo" [routerLink]="['/']">
             <div class="svg--ksr-logo">
               Crowdbam
             </div>
@@ -48,7 +48,7 @@
 
           <a *ngIf="user" (click)="onToggleMenu()" class="site-nav__item site-nav__item--user bg-grey-200" aria-label="User dropdown menu" data-toggle="dropdown" aria-expanded="false">
             <div class="notification-indicator-and-avatar">
-              <img class="site-nav__user-avatar" [src]="user.avatar">
+              <img class="site-nav__user-avatar" [src]="user.avatar"><span class="hidden-xs"> {{user.displayName.split(' ')[0]}} <i class="ion-arrow-down-b"></i></span>
             </div>
           </a>
 
@@ -109,7 +109,7 @@
       </ul>
     </div>
     <div>
-      <a *ngIf="searchFinished && filteredList.length" class="livesearch-see-all-results btn">See all results for <span class="bold">{{query}}</span></a>
+      <a *ngIf="searchFinished && filteredList.length" (click)="onCloseSearch()" [routerLink]="['search']" [queryParams]="{'text':query,'sort':'popular'}" class="livesearch-see-all-results btn">See all results for <span class="bold">{{query}}</span></a>
       <a *ngIf="searchFinished && !filteredList.length" class="livesearch-see-all-results btn">No result for <span class="bold">{{query}}</span></a>
       <div class="grey-dark small_type js-livesearch-displaying-results mt3 mt5-sm hidden"></div>
     </div>

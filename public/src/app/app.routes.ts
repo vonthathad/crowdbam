@@ -19,12 +19,12 @@ import { ChallengeEditHtmlComponent } from './components/challenge-edit-html/cha
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
-    { path: 'categories/:name?sort=:type', component: FilterChallengesComponent },
-    { path: 'recommendations?sort=:type', component: ChallengesComponent },
-
+    { path: 'categories/:name', component: FilterChallengesComponent },
+    { path: 'recommendations', component: FilterChallengesComponent },
+    { path: 'challenges', component: FilterChallengesComponent },
+    { path: 'search', component: FilterChallengesComponent },
     { path: 'c/:url', component: ChallengeComponent },
     { path: 'challenges/:id', component: ChallengeComponent },
-    { path: 'challenges?sort=:type', component: ChallengeComponent },
     {
         path: 'challenges/:id/edit', component: ChallengeEditWrapperComponent,
         children: [
