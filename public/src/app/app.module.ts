@@ -44,11 +44,12 @@ import { ChallengeEditHtmlComponent } from './components/challenge-edit-html/cha
 import { ChallengeEditTimelineComponent } from './components/challenge-edit-timeline/challenge-edit-timeline.component';
 import { ChallengeNavigatorComponent } from './components-shared/challenge-navigator/challenge-navigator.component';
 import { TimelineCardComponent } from './components-child/timeline-card/timeline-card.component';
+import { FilterChallengesComponent } from './components/filter-challenges/filter-challenges.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FroalaEditorDirective, 
+    FroalaEditorDirective,
     FroalaViewDirective,
     HomeComponent,
     ChallengesComponent,
@@ -73,6 +74,7 @@ import { TimelineCardComponent } from './components-child/timeline-card/timeline
     ChallengeEditTimelineComponent,
     ChallengeNavigatorComponent,
     TimelineCardComponent,
+    FilterChallengesComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

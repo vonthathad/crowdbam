@@ -21,8 +21,8 @@
                 </div>
             </div>
         </div>
+      <div *ngIf="errorEmail" class="alert alert-danger">{{errorEmail}}</div>
 
-        <div *ngIf="errorEmail" class="alert alert-error">{{errorEmail}}</div>
       <div class="form-group label-floating is-empty">
         <label class="control-label" for="password">*Password:</label>
         <input required type="password" class="form-control" formControlName="password">

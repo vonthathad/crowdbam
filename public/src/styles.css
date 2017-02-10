@@ -4,9 +4,7 @@
 .btn-w100p{
   width: 100%;
 }
-.pb0{
-  padding-bottom: 0;
-}
+
 .circle{
   border-radius: 50%;
 }
@@ -24,6 +22,9 @@
  }
 .p20{
   padding: 20px;
+}
+.pb0{
+  padding-bottom: 0;
 }
 .social-btn{
   padding: 0 20px 10px;
@@ -63,6 +64,24 @@
   color: #3472F7;
   border-color: #fff;
   /*font-weight: bold;*/
+}
+.btn-fill.btn-facebook{
+  color: #fff;
+  background: #3b5998;
+  border-color: #3b5998;
+}
+.btn-fill.btn-google{
+  color: #fff;
+  background: #C63D2D;
+  border-color: #C63D2D;
+}
+.btn-fill.btn-google:hover,.btn-fill.btn-google:focus,.btn-fill.btn-google:active{
+  background: #b93527;
+  border-color: #b93527;
+}
+.btn-fill.btn-facebook:hover,.btn-fill.btn-facebook:focus,.btn-fill.btn-facebook:active{
+  background: #2f4c8a;
+  border-color: #2f4c8a;
 }
 .display-none {
   display: none

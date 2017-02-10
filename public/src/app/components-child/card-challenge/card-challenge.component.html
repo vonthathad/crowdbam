@@ -8,13 +8,13 @@
     <!--<div class="icon"><span class="ksr-icon__heart" aria-hidden="true"></span></div><div class="label">Project We Love</div>-->
     <!--</div>-->
 
-    <a class="project-thumbnail-wrap" href="">
+    <a class="project-thumbnail-wrap" [routerLink]="['challenges/',challenge.id]">
       <img class="project-thumbnail-img" width="100%" alt="Project image" [src]="challenge.thumb">
     </a>
   </div>
   <div class="project-card-content">
     <h6 class="project-title">
-      <a href="">{{challenge.title}}</a>
+      <a  [routerLink]="['challenges/',challenge.id]">{{challenge.title}}</a>
     </h6>
     <p class="project-blurb">
       {{challenge.description}}
