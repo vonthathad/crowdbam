@@ -10,11 +10,6 @@
 
 <section *ngIf="challenge" class="project-details bg-grey-100">
     <div class="container">
-
-        <select [(ngModel)]="name" name="Select name" class="ui fluid search selection dropdown"> 
-        <option *ngFor="let n of names" [attr.value]="n">{{n}}</option>
-      </select>
-
         <div class="row project-details-header">
             <div class="col-md-2 text-left">
                 <div>
@@ -100,7 +95,7 @@
     </div>
 
     <app-challenge-navigator [id]="id" [types]="types"></app-challenge-navigator>
-     
+
     <div class="project-details-main">
        <div class="container">
            <router-outlet></router-outlet>
@@ -110,7 +105,7 @@
         <div class="col-md-8">
             <p>This challenge cannot be published yet. View your checklist to see what tasks still need to be completed.</p>
         </div>
-        <div class="col-md-4 text-right"><a class="btn btn-white" (click)="onEditChallengeClick()">Edit Challenge</a></div>
+        <div class="col-md-4 text-right"><a class="btn btn-white" [routerLink]="['/challenges/', challenge.id , 'edit']">Edit Challenge</a></div>
 
     </div>
 </section>

@@ -17,8 +17,6 @@ export class ChallengeComponent implements OnInit {
   private type: string;
   private types: Type[];
   private challenge: Challenge;
-  name: string = "Ringo";
-  names: string[] = ["John", "Paul", "George", "Ringo"]
   constructor(private cv: ChallengeService, private route: ActivatedRoute, private router: Router, private ts: TypeService) {
     route.params.subscribe(params => {
       cv.getChallenge(params['id']).subscribe((res: any) => {
@@ -41,8 +39,5 @@ export class ChallengeComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-  onEditChallengeClick() {
-    this.router.navigate(['challenges/' + this.challenge.id + '/edit']);
   }
 }
