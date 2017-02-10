@@ -64,7 +64,7 @@ export class ChallengeService {
 
         let options = new RequestOptions({ headers: headers });
         return this.http
-            .post("http://localhost:8235/api/challenges", input, options)
+            .post("/api/challenges", input, options)
             .map((res: any) => res.json())
             .catch((error: any) => Observable.throw(error || 'Server error'));;
     }
