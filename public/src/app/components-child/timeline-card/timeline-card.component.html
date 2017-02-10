@@ -1,11 +1,12 @@
-<br>/
+<br/>
 <div>
-     {{title}}<span *ngIf="chosenValue=='Other'">:{{otherValue}}</span> {{deadline}}
-
+    <div *ngIf="title">
+        {{orderNum}} {{title.value}}<span *ngIf="chosenValue=='Other'">:{{otherValue}}</span> {{deadline}}
+    </div>
     <label for="title">Title</label>
     <select name="title" [(ngModel)]="title" (change)="_updateValue()">
-    <option *ngFor="let dropdownValue of dropdownValues" [value]="dropdownValue.value">{{dropdownValue.label}}</option>
-</select>
+            <option *ngFor="let dropdownValue of dropdownValues; let i=index"  [selected]="dropdownValue.value == title.value" [ngValue]="dropdownValue">{{dropdownValue.label}}</option>
+    </select>
     <div [hidden]="inputHidden">
         <label for="other">Other value</label>
         <input type="text" name="other" [(ngModel)]="otherValue" (change)="_updateValue()">
@@ -13,11 +14,12 @@
 
     <div>
         <label for="deadline">Deadline</label>
-        <input [(ngModel)]="deadline" name="deadline" ng2-datetime-picker close-on-select="false" (change)="_updateValue()" />
+        <input [(ngModel)]="timeline.deadline" name="deadline" ng2-datetime-picker close-on-select="false" (ngModelChange)="_updateValue()"/>
     </div>
 
     <div>
         <label for="description">Description</label>
-        <input type="textarea" [(ngModel)]="description" name="description" (change)="_updateValue()">
+        <input type="textarea" [(ngModel)]="timeline.description" name="description" (change)="_updateValue()">
     </div>
+    <button (click)="_deleteTimeline()">Delete</button>
 </div>

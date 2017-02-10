@@ -20,6 +20,7 @@ import { AUTH_GUARD_PROVIDER } from './services/auth-guard.service';
 import { CONTENT_PROVIDER } from './services/content.service';
 import { TYPE_PROVIDER } from './services/type.service';
 
+import {OrderByPipe} from './pipes/orderBy.pipe';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -48,6 +49,7 @@ import { FilterChallengesComponent } from './components/filter-challenges/filter
 
 @NgModule({
   declarations: [
+    OrderByPipe,
     AppComponent,
     FroalaEditorDirective,
     FroalaViewDirective,
