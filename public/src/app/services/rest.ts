@@ -8,7 +8,7 @@ import 'rxjs/Rx';
 export class Rest {
     // set base url of api backend
     // static BASE_URL: string = '/';
-    static BASE_URL: string = 'http://localhost:8235/';
+    // static BASE_URL: string = 'http://localhost:8235/';
     static DEFAULT_TOKEN: string = 'CRzytqL1lv1o8FaogFa2S4MyYU4F6Z9D';
     constructor(private http: Http) {
     }
@@ -17,8 +17,15 @@ export class Rest {
     ////TO SEND REQUEST
     //////////////////////////////////////////////////
     request(options: QueryOptions): Observable<any[]> {
+        let base_url = '';
+        let location = window.location.href;
+        if (location.indexOf('localhost') > -1) {
+          base_url = `http://localhost:8456/`;
+        } else {
+          base_url = `/`;
+        }
         // set partial url to full url
-        options.url = `${Rest.BASE_URL}${options.url}`;
+        options.url = `${base_url}${options.url}`;
         // stringify body from json to string
         options.body = JSON.stringify(options.body);
         // add default header if there are no header
@@ -75,6 +82,7 @@ export class Rest {
         options.method = RequestMethod.Delete;
         return this.request(options);
     }
+
     //////////////////////////////////////////////////
     ////GET TOKEN
     //////////////////////////////////////////////////

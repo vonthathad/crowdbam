@@ -5,13 +5,14 @@
  */
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 process.env.DOMAIN = process.env.DOMAIN || 'crowdbam.com';
-process.env.PORT = process.env.PORT || '8235';
+process.env.PORT = process.env.PORT || '8456';
 process.env.PROTOCOL = process.env.PROTOCOL || 'http';
 process.env.CHANNEL = process.env.CHANNEL || 'www';
 var debug = require('debug')('docs:server');
 var http = require('http');
 var mongoose = require('../app/configs/mongoose');
 var server;
+var port
 /**
  * Get port from environment and store in Express.
  */
@@ -23,7 +24,7 @@ var server;
  */
 mongoose(function(){
   var app = require('../app');
-  var port = process.env.PORT || '3000';
+  port = process.env.PORT || '8456';
   app.set('port', port);
   server = http.createServer(app);
   /**

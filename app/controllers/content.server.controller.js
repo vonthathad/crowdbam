@@ -28,9 +28,12 @@ exports.hasAuthorization = function(req, res, next) {
     } else {
         Content.findOne({challenge: req.challenge._id, type: req.type._id},function(err,content){
             if(err) return res.status(400).send();
+<<<<<<< HEAD
             // if(!content) return res.status(400).send({
             //     messages : ["This content isn't exist"]
             // });
+=======
+>>>>>>> 9b2c7709f613e1a18cf72fb1483a782bce230f50
             req.content = content;
             next();
         });
@@ -60,7 +63,7 @@ exports.get = function(req,res){
         if(err) return res.status(400).send();
         return res.json({data: content});
     });
-    // return res.json({data: req.content});
+
 };
 exports.update = function(req,res){
     if(req.content){

@@ -1,6 +1,12 @@
 .btn i.large{
   font-size: 1.5em;
 }
+.btn-w100p{
+  width: 100%;
+}
+.pb0{
+  padding-bottom: 0;
+}
 .circle{
   border-radius: 50%;
 }
@@ -12,6 +18,15 @@
 }
 .light{
   font-weight: 300;
+}
+.p10{
+   padding: 10px;
+ }
+.p20{
+  padding: 20px;
+}
+.social-btn{
+  padding: 0 20px 10px;
 }
 .text-gray{
   color: #666;
