@@ -32,6 +32,7 @@ var UserSchema = new Schema({
     salt: {
         type: String
     },
+    recommendations: [],
     avatar: String,
     isVerified: {
         type: Boolean,
