@@ -49,7 +49,7 @@ export class TimelineCardComponent implements OnInit {
     if(foundTitle){
       this.title = this.dropdownValues[0];
     }
-    console.log(this.title);
+
     // }, 100)
     this.hiddenOption = false;
   }

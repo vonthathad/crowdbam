@@ -33,6 +33,7 @@ const routes: Routes = [
     {
         path: 'challenges/:id', component: ChallengeComponent,
         children: [
+            // { path: '',  component: ChallengeHtmlComponent },
             { path: 'others/:type', component: ChallengeHtmlComponent },
             { path: 'timeline', component: ChallengeTimelineComponent },
             { path: 'comments', component: ChallengeCommentsComponent }

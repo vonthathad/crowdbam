@@ -4,7 +4,7 @@
       <div class="row">
         <div class="project-nav__links col-md-8">
 
-          <a class="tabbed-nav__link" [ngClass]="{'is-active': current == 'overview'}" (click)="onTypeClick('overview');changeClass('overview')">
+          <a #fileInput class="tabbed-nav__link" [ngClass]="{'is-active': current == 'overview'}" (click)="onTypeClick('overview');changeClass('overview')">
               Overview
             </a>
           <a class="tabbed-nav__link" [ngClass]="{'is-active': current == 'timeline'}" (click)="onTimeClick();changeClass('timeline')">
@@ -14,7 +14,7 @@
               Comments
               <span class="count">326</span>
             </a>
-            <a *ngFor="let type of types" [ngClass]="{'is-active': current == type.id}" [hidden]="type.id=='overview'" (click)="onTypeClick(type);changeClass(type.id)" class="tabbed-nav__link">
+            <a *ngFor="let type of types" [ngClass]="{'is-active': current == type.id}"  (click)="onTypeClick(type.id);changeClass(type.id)" class="tabbed-nav__link">
                   {{type.title}}
             </a>
         </div>
