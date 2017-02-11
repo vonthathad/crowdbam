@@ -32,9 +32,9 @@ export class ActionService {
     // });
   };
   followChallenge(id,callback){
-    this.cS.actionChallenge(id,'follow').subscribe(res => {
+    this.cS.actionChallenge(id,'follow').subscribe((res:any) => {
       console.log(res);
-      callback();
+      callback(res.data.follow);
     });
   }
   // get currentUser$() { return this.fc.currentUser$; }

@@ -102,7 +102,7 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-    <div class="alert alert-info alert-edit navbar-fixed-bottom">
+    <div *ngIf="challenge" class="alert alert-info alert-edit navbar-fixed-bottom">
         <div class="col-md-8">
             <p>This challenge cannot be published yet. View your checklist to see what tasks still need to be completed.</p>
         </div>

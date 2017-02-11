@@ -159,7 +159,7 @@ export class HeaderComponent implements OnInit {
       // if (obj.from == "queryParam" || obj.from == "localStorage") {
       // this.us.loggedUserSource.next(this.user);
       // }
-      this.us.loggedUserSource.next(this.user);
+      this.us.passUser(this.user);
     } else {
       this.user = user;
     }
@@ -170,7 +170,7 @@ export class HeaderComponent implements OnInit {
   }
   onLogoutClick() {
     localStorage.removeItem("token");
-    this.us.loggedUserSource.next(null);
+    this.us.passUser(null);
     this.user = null;
     this.router.navigate(['']);
   }

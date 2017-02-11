@@ -88,8 +88,8 @@ export class ChallengeComponent implements OnInit {
   onFollowChallenge(){
     if(this.user){
 
-      this.aS.followChallenge(this.id,function(){
-
+      this.aS.followChallenge(this.id,function(isFollow){
+          this.isFollow = isFollow;
       });
     }
 
