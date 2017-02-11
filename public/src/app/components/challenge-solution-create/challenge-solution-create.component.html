@@ -8,9 +8,9 @@
             <div class="number-circle">1</div>
             <div class="form-input clearfix">
               <div class="form-group label-floating is-empty">
-                <label class="control-label light type-18" for="title"><sup class="text-gray">*</sup> Give your project
+                <label class="control-label light type-18" for="title"><sup class="text-gray">*</sup> Give your solution
                   a title: </label>
-                <input required type="text" class="form-control" formControlName="title"><span
+                <input id="title" required type="text" class="form-control" formControlName="title"><span
                 class="material-input"></span>
 
               </div>
@@ -27,9 +27,9 @@
             <div class="form-input clearfix">
               <div class="form-group label-floating is-empty">
                 <label class="control-label light type-18" for="description"><sup class="text-gray">*</sup> Description
-                  of project:</label>
-                <textarea required type="description" class="form-control" formControlName="description"></textarea>
-
+                  of solution:</label>
+                <textarea required id="description" type="description" class="form-control"
+                          formControlName="description"></textarea>
               </div>
 
               <div [hidden]="solutionForm.get('description').valid || solutionForm.get('description').untouched"
@@ -44,6 +44,26 @@
             </div>
           </div>
         </div>
+
+
+        <div class="form-input-group">
+          <div class="number-circle">2</div>
+          <div class="form-input clearfix">
+            <div class="form-group label-floating is-empty">
+              <label class="control-label light type-18" for="html"><sup class="text-gray">*</sup> Detail
+                of solution:</label>
+              <textarea required id="html" type="description" class="form-control" formControlName="html"></textarea>
+            </div>
+
+            <div [hidden]="solutionForm.get('html').valid || solutionForm.get('html').untouched"
+                 class="alert alert-danger">
+              <div *ngIf="solutionForm.get('html').hasError('required')">
+                Description is required!
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="text-center">
           <button type="submit" [disabled]="!solutionForm.valid" class="btn btn-primary btn-fill btn-lg text-center">
             Create Challenge
