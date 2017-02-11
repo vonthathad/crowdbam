@@ -20,15 +20,15 @@ export class ChallengeEditNavigatorComponent implements OnInit {
     this.current = 'basics';
   }
   onTypeClick(type) {
-    this.ts.currentTopicSource.next(type._id);
+    this.ts.typeSource.next(type._id);
     this.router.navigate([`/challenges/${this.id}/edit/others/${type._id}`]);
   }
   onBasicClick() {
-    this.ts.currentTopicSource.next('basic');
+    this.ts.typeSource.next('basic');
     this.router.navigate([`/challenges/${this.id}/edit`]);
   }
   onTimeClick(){
-    this.ts.currentTopicSource.next('time-line');
+    this.ts.typeSource.next('time-line');
     this.router.navigate([`/challenges/${this.id}/edit/timeline`]);
   }
   changeClass(current) {

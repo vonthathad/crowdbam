@@ -52,7 +52,10 @@ export class ChallengeComponent implements OnInit {
 
 
     ts.getTypes()
-      .subscribe(res => this.types = res['data']);
+      .subscribe(res => {
+        this.types = res['data']
+        ts.typesSource.next(this.types)
+      });
     // ts.currentTopic$.subscribe(type=>{
     //   this.type = type;
     // });

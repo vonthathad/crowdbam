@@ -155,11 +155,13 @@ exports.create = function(req, res) {
         }
     });
     form.on('field', function(name, field) {
-        console.log(field);
+        // console.log("field \n" +field);
         if (name == 'content') {
             content = field;
+            // console.log("content \n" + content);
         }
     });
+    
     form.on('file', function(name, file) {
         console.log(file);
         count++;

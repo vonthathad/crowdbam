@@ -19,9 +19,12 @@ export class ChallengeEditWrapperComponent implements OnInit {
   private isBasic: boolean;
   private isTimeline: boolean;
   private isHtml: boolean;
-  constructor(private cv: ChallengeService,private ts: TypeService, private route: ActivatedRoute, private cas: CategoryService) {
+  constructor(private cv: ChallengeService, private ts: TypeService, private route: ActivatedRoute, private cas: CategoryService) {
     ts.getTypes()
-      .subscribe(res => this.types = res['data']);
+      .subscribe(res => {
+        this.types = res['data']
+        ts.typesSource.next(this.types)
+      });
     // ts.currentTopic$.subscribe(type=>{
     //   this.type = type;
     // });
@@ -45,7 +48,7 @@ export class ChallengeEditWrapperComponent implements OnInit {
       this.isBasic = true;
     }
 
-     this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.id = params['id'];
       this.cv.getChallenge(this.id).subscribe((res: any) => this.cv.challengeSource.next(res['data']));
     });
