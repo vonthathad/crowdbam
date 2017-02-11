@@ -27,7 +27,7 @@ module.exports = {
         resetPasswordUrl: "action/reset"
     },
     server: {
-        host: process.env.PROTOCOL + '://' + process.env.DOMAIN + ':' + process.env.PORT,
+        host: process.env.PROTOCOL + '://' + process.env.CHANNEL + '.' + process.env.DOMAIN,
         port: process.env.PORT,
         channel: process.env.CHANNEL
     },

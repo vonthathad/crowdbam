@@ -25,13 +25,13 @@ export class ChallengeTimelineComponent implements OnInit {
   }
   renderChallenge(challenge: Challenge) {
     if (challenge) {
-      let now = (new Date()).getTime();
+      let now = Date.now();
       let options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
       let currentFilted = false;
       for (let i = 0; i < challenge.timelines.length; i++) {
-        let date = new Date(parseInt(challenge.timelines[i].deadline));
-        console.log(date.getTime() + ' $ ' + now);
-        if (date.getTime() > now) {
+        let date = parseInt(challenge.timelines[i].deadline);
+        console.log(date + ' $ ' + now);
+        if (date > now) {
           if (!currentFilted) {
             challenge.timelines[i].status = 'current';
             currentFilted = true;
@@ -41,10 +41,9 @@ export class ChallengeTimelineComponent implements OnInit {
         } else {
           challenge.timelines[i].status = 'passed';
         }
-        challenge.timelines[i].deadline = date.toLocaleDateString('en-US', options);
+        challenge.timelines[i].titleDate = new Date(date).toLocaleDateString('en-US', options);
       }
       this.challenge = challenge;
-      console.log('timelines' + JSON.stringify(challenge));
       if (!this.challenge.timelines) this.challenge.timelines = new Array<Timeline>();
       // this.timelines = timelines;
       this.setSortTimeline();
@@ -54,8 +53,8 @@ export class ChallengeTimelineComponent implements OnInit {
   setSortTimeline() {
     this.timelines = this.challenge.timelines;
     this.timelines.sort((a, b) => {
-      let timeStampA = new Date(a.deadline).getTime();
-      let timeStampB = new Date(b.deadline).getTime();
+      let timeStampA = parseInt(a.deadline);
+      let timeStampB = parseInt(b.deadline);;
       // console.log(timeStampA + ' / ' + timeStampB);
       if (timeStampA > timeStampB) return 1
       else if (timeStampA < timeStampB) return -1;

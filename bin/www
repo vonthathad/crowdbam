@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-process.env.DOMAIN = process.env.DOMAIN || '188.166.247.131';
+process.env.DOMAIN = process.env.DOMAIN || 'crowdbam.com';
 process.env.PORT = process.env.PORT || '8456';
 process.env.PROTOCOL = process.env.PROTOCOL || 'http';
-process.env.CHANNEL = process.env.CHANNEL || 'www';
+process.env.CHANNEL = process.env.CHANNEL || 'beta';
 var debug = require('debug')('docs:server');
 var http = require('http');
 var mongoose = require('../app/configs/mongoose');

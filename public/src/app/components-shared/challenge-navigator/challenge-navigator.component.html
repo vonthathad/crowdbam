@@ -12,15 +12,15 @@
             </a>
           <a class="tabbed-nav__link" [ngClass]="{'is-active': current == 'comments'}" (click)="onCommentsClick();changeClass('comments')">
               Comments
-              <span class="count">326</span>
+              <!--<span class="count">326</span>-->
             </a>
             <a *ngFor="let type of types" [ngClass]="{'is-active': current == type.id}"  (click)="onTypeClick(type.id);changeClass(type.id)" class="tabbed-nav__link">
                   {{type.title}}
             </a>
         </div>
         <div class="project-nav__buttons col-md-4 hidden-xs hidden-md">
-          <a class="btn btn-md btn-primary btn-fill">Give solution</a>
-          <a class="btn btn-md btn-simple text-primary"><i class="ion-ios-star"></i> Follow</a>
+          <!--<a class="btn btn-md btn-primary btn-fill">Give solution</a>-->
+          <!--<a class="btn btn-md btn-simple text-primary"><i class="ion-ios-star"></i> Follow</a>-->
         </div>
       </div>
     </div>

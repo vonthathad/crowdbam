@@ -85,7 +85,7 @@
                 </div>
                 <div class="row btn-social-group">
                     <div class="col-xs-6">
-                        <a (click)="onFollowChallenge()"  class="bttn bttn-medium bttn-shadow-light w100"><i class="ion-ios-star"></i> Follow</a>
+                        <a (click)="onFollowChallenge()"  class="bttn bttn-medium bttn-shadow-light w100" [ngClass]="{'is-follow': isFollow}"><span *ngIf="isFollow">Following</span><span  *ngIf="!isFollow"><i class="ion-ios-star"></i> Follow</span></a>
                     </div>
                     <div class="col-xs-6">
                         <a (click)="onShareFacebook()" class="bttn bttn-medium bttn-shadow-light w100"><i class="ion-ios-redo"></i> Share</a>
@@ -102,7 +102,7 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-    <div *ngIf="challenge" class="alert alert-info alert-edit navbar-fixed-bottom">
+    <div *ngIf="challenge && user && user._id == challenge.creator._id" class="alert alert-info alert-edit navbar-fixed-bottom">
         <div class="col-md-8">
             <p>This challenge cannot be published yet. View your checklist to see what tasks still need to be completed.</p>
         </div>

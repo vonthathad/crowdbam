@@ -766,6 +766,9 @@ input.site-nav__search-input:focus {
   background: transparent;
   border: none;
 }
+.is-follow{
+  color: #3472F7!important;
+}
 .livesearch-container .arrow:disabled{
   color: #999;
 }
@@ -2078,7 +2081,7 @@ body#backings_index .project_thumb.ratio-16-9 {
   padding-bottom: 60px;
 }
 
-.project-edit .content .card{
+.project-edit .content .card,.project-details-main .content.card {
   margin: 20px 0 0;
   padding: 10px;
   background: white;

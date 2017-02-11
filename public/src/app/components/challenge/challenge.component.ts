@@ -27,7 +27,6 @@ export class ChallengeComponent implements OnInit {
   private userSub: Subscription;
   constructor(private uS: UserService, private cv: ChallengeService, private route: ActivatedRoute, private router: Router, private ts: TypeService,private aS: ActionService) {
     uS.loggedUserSource.subscribe(user => {
-      console.log('usser',user);
       this.user = user
     });
     this.userSub = new Subscription();
@@ -39,6 +38,7 @@ export class ChallengeComponent implements OnInit {
             if(user){
               this.checkFollow(user,res.data);
             }
+            this.userSub.unsubscribe();
           })
         } else {
           this.checkFollow(this.user,res.data);
@@ -67,17 +67,24 @@ export class ChallengeComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  checkTimelines(timelines){
+    timelines.forEach(function(){
+
+    });
+  }
+
   checkFollow(user,challenge){
-    this.userSub.unsubscribe();
-    this.user = user;
+    console.log('check',challenge);
     if(challenge.follows && challenge.follows.length){
-      challenge.follows.forEach(function(follower){
+      challenge.follows.forEach((follower)=>{
         if(follower == user._id){
           this.isFollow = true;
           return;
         };
       })
     }
+    console.log(this.isFollow);
   }
   onShareFacebook(){
     if(this.user){
@@ -88,7 +95,7 @@ export class ChallengeComponent implements OnInit {
   onFollowChallenge(){
     if(this.user){
 
-      this.aS.followChallenge(this.id,function(isFollow){
+      this.aS.followChallenge(this.id,(isFollow)=>{
           this.isFollow = isFollow;
       });
     }

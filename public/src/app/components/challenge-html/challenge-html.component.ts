@@ -39,7 +39,7 @@ export class ChallengeHtmlComponent implements OnInit {
 
     this.subRoute = this.route.params.subscribe(params => {
       this.type = null;
-      this.type = params['type'];
+      this.type = (params['type'])?params['type']:'overview';
       let input = {
         id: this.id,
         type: this.type,
