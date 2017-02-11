@@ -6,6 +6,10 @@ import { ChallengeService } from '../../services/challenge.service';
 
 import { Challenge } from '../../classes/challenge';
 import { Type } from '../../classes/type';
+import {ActionService} from "../../services/action.service";
+import {UserService} from "../../services/user.service";
+import {User} from "../../classes/user";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-challenge',
@@ -16,13 +20,33 @@ export class ChallengeComponent implements OnInit {
   private id: number;
   private type: string;
   private types: Type[];
+  private isFollowing: boolean = false;
+  private isFollow: boolean = false;
   private challenge: Challenge;
-  constructor(private cv: ChallengeService, private route: ActivatedRoute, private router: Router, private ts: TypeService) {
+  private user: User;
+  private userSub: Subscription;
+  constructor(private uS: UserService, private cv: ChallengeService, private route: ActivatedRoute, private router: Router, private ts: TypeService,private aS: ActionService) {
+    uS.loggedUserSource.subscribe(user => {
+      console.log('usser',user);
+      this.user = user
+    });
+    this.userSub = new Subscription();
     route.params.subscribe(params => {
       cv.getChallenge(params['id']).subscribe((res: any) => {
         this.challenge = res.data;
+        if(!this.user){
+          this.userSub = uS.loggedUserSource.subscribe(user => {
+            if(user){
+              this.checkFollow(user,res.data);
+            }
+          })
+        } else {
+          this.checkFollow(this.user,res.data);
+        }
+
+
         this.cv.challengeSource.next(res.data);
-        console.log(this.challenge);
+        // console.log(this.challenge);
       });
     });
 
@@ -39,5 +63,32 @@ export class ChallengeComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  checkFollow(user,challenge){
+    this.userSub.unsubscribe();
+    this.user = user;
+    if(challenge.follows && challenge.follows.length){
+      challenge.follows.forEach(function(follower){
+        if(follower == user._id){
+          this.isFollow = true;
+          return;
+        };
+      })
+    }
+  }
+  onShareFacebook(){
+    if(this.user){
+      this.aS.shareFacebook(window.location.href, this.id);
+    }
+
+  }
+  onFollowChallenge(){
+    if(this.user){
+
+      this.aS.followChallenge(this.id,function(){
+
+      });
+    }
+
   }
 }

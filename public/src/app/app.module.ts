@@ -6,7 +6,7 @@ import { LocationStrategy, PathLocationStrategy, APP_BASE_HREF } from '@angular/
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
 import { Ng2DatetimePickerModule } from 'ng2-datetime-picker';
-
+import { FacebookService } from 'ng2-facebook-sdk';
 import { routing } from './app.routes';
 
 import { FroalaEditorDirective, FroalaViewDirective } from './directives/froala/froala.directive';
@@ -20,7 +20,7 @@ import { AUTH_GUARD_PROVIDER } from './services/auth-guard.service';
 import { CONTENT_PROVIDER } from './services/content.service';
 import { TYPE_PROVIDER } from './services/type.service';
 import { HTML_PROVIDER } from './services/html.service';
-
+import { ACTION_PROVIDER } from './services/action.service';
 import {OrderByPipe} from './pipes/orderBy.pipe';
 import {NotContainPipe} from './pipes/notContain.pipe';
 
@@ -112,6 +112,8 @@ import { ExploreModalComponent } from './components-child/explore-modal/explore-
     CONTENT_PROVIDER,
     TYPE_PROVIDER,
     HTML_PROVIDER,
+    FacebookService,
+    ACTION_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },
     { provide: APP_BASE_HREF, useValue: '/' }
   ],
