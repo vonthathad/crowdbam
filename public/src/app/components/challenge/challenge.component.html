@@ -11,7 +11,6 @@
 <section class="project-details bg-grey-100">
     <div class="container" *ngIf="challenge">
 
-
         <div class="row project-details-header">
             <div class="col-md-2 text-left">
                 <div>
@@ -107,7 +106,7 @@
         <div class="col-md-8">
             <p>This challenge cannot be published yet. View your checklist to see what tasks still need to be completed.</p>
         </div>
-        <div class="col-md-4 text-right"><a class="btn btn-white" (click)="onEditChallengeClick()">Edit Challenge</a></div>
+        <div class="col-md-4 text-right"><a class="btn btn-white" [routerLink]="['/challenges/', challenge.id , 'edit']">Edit Challenge</a></div>
 
     </div>
 </section>

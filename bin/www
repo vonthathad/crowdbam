@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-process.env.DOMAIN = process.env.DOMAIN || 'crowdbam.com';
+process.env.DOMAIN = process.env.DOMAIN || '188.166.247.131';
 process.env.PORT = process.env.PORT || '8456';
 process.env.PROTOCOL = process.env.PROTOCOL || 'http';
 process.env.CHANNEL = process.env.CHANNEL || 'www';

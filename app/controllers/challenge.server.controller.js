@@ -204,6 +204,7 @@ function checkExists(dir, callback) {
     });
 }
 exports.uploadImage = function(req, res) {
+    console.log('vo image');
     var form = new formidable.IncomingForm();
     var cDir = 'challenge/' + req.challenge._id;
     var uploadDir = __dirname + '/../../public/uploaded/' + dir + '/' + cDir;

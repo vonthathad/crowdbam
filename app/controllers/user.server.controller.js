@@ -324,5 +324,10 @@ exports.requiresManager = function(req,res,next){
     }
 }
 exports.renderAngular = function(req, res, next) {
-    res.render('index', { message: null, app: config.app, channel: config.server.channel });
+    if ((req.url.indexOf('sources') < 0 && req.url.indexOf('api') < 0 && req.url.indexOf('assets') < 0)) {
+        res.render('index', { message: null, app: config.app, channel: config.server.channel });
+    } else {
+        next();
+    }
+
 }

@@ -1,13 +1,19 @@
 <div *ngIf="challenge">
-    <h1>Timeline</h1>
-    <button (click)="updateChallenge()">Save</button>
-    <div *ngFor="let timeline of timelines">
-        {{timeline.title}} {{timeline.description}} {{timeline.deadline}}
+  <div class="content">
+    <div class="row card text-left">
+      <div class="clearfix">
+        <div class="pull-left"><a (click)="addTimelineCard()" class="btn btn-primary"><i class="ion-ios-plus-outline"></i> Create event</a></div>
+        <div class="pull-right"><a (click)="updateChallenge()" class="btn btn-primary btn-fill"><i class="ion-ios-checkmark-outline"></i> Update</a></div>
+      </div>
+      <div class="timeline-preview mt10" >
+        <div *ngFor="let timeline of timelines" class="item" [ngClass]="{'pass': timeline.status == 'pass','next': timeline.status == 'next'}">
+          <div>{{timeline.deadlineDate}}</div>
+          <div>{{timeline.title}}</div>
+        </div>
+      </div>
     </div>
-    <button (click)="addTimelineCard()">Add event</button>
-    <!--{{timelines}}-->
-    <h1>Timeline detail</h1>
-
     <app-timeline-card *ngFor="let timeline of challenge.timelines; let i = index" [orderNum]="i" [timeline]="timeline" (updateValue)="handleUpdateValue($event)"
-        (deleteTimeline)="handleDeleteTimeline($event)"></app-timeline-card>
+                       (deleteTimeline)="handleDeleteTimeline($event)"></app-timeline-card>
+  </div>
+
 </div>

@@ -47,18 +47,6 @@ module.exports = function(app) {
         res.redirect(req.session.redirect + "?token=" + req.user.token);
     });
 
-    app.get('/', users.renderAngular);
-    app.get('/categories', users.renderAngular);
-    app.get('/categories/:name', users.renderAngular);
-    app.get('/recommendations', users.renderAngular);
-    app.get('/c/:url', users.renderAngular);
-    app.get('/challenges/:id', users.renderAngular);
-    app.get('/challenges', users.renderAngular);
-    app.get('/challenges/:id/edit', users.renderAngular);
-    app.get('/challenge-create', users.renderAngular);
-    app.get('/challenges/:id/:type', users.renderAngular);
-    app.get('/challenges/:id/:type', users.renderAngular);
-    app.get('/profiles/:id', users.renderAngular);
-    app.get('/forgot-password', users.renderAngular);
+    app.get('*', users.renderAngular);
 
 }

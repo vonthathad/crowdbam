@@ -39,17 +39,17 @@ export class TimelineCardComponent implements OnInit {
     this.otherValue = '';
     // setTimeout(() => {
       // this.title = { value: this.timeline.title, label: this.timeline.title };
-      let foundTitle = true;
-      this.dropdownValues.forEach(dropdownValue=>{
-        if(dropdownValue.value == this.timeline.title){
-          this.title = dropdownValue;
-          foundTitle = false;
-        }
-      })
-      if(foundTitle){
-        this.title = this.dropdownValues[0];
+    let foundTitle = true;
+    this.dropdownValues.forEach(dropdownValue=>{
+      if(dropdownValue.value == this.timeline.title){
+        this.title = dropdownValue;
+        foundTitle = false;
       }
-    
+    })
+    if(foundTitle){
+      this.title = this.dropdownValues[0];
+    }
+
     // }, 100)
     this.hiddenOption = false;
   }
@@ -57,6 +57,7 @@ export class TimelineCardComponent implements OnInit {
     this.hiddenOption = true;
   }
   _updateValue() {
+
     this.timeline.title = this.title.value;
     if (this.title.value == "Other") {
       this.inputHidden = false;

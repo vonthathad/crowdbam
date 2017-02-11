@@ -1597,13 +1597,16 @@ input.ct-red + span + label + span.switch-right {
 
 .modal-content {
   border: 0 none;
-  border-radius: 10px;
+  border-radius: 0px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), 0 0 1px 1px rgba(0, 0, 0, 0.1); }
+@media screen and (min-width: 769px){
+  .modal-dialog {
+    padding-top: 60px; }
+}
 
-.modal-dialog {
-
-  padding-top: 60px; }
-
+.modal-dialog h3{
+  margin-top: 0;
+}
 .modal-footer {
   border-top: 0 none;
   padding: 5px 10px;

@@ -29,7 +29,7 @@ export class ChallengeTimelineComponent implements OnInit {
       let options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
       let currentFilted = false;
       for (let i = 0; i < challenge.timelines.length; i++) {
-        let date = new Date(challenge.timelines[i].deadline);
+        let date = new Date(parseInt(challenge.timelines[i].deadline));
         console.log(date.getTime() + ' $ ' + now);
         if (date.getTime() > now) {
           if (!currentFilted) {
