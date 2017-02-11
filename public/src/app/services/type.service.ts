@@ -11,13 +11,17 @@ import { Type } from '../classes/type';
 export class TypeService {
     private rest: Rest;
     private type: Type;
+    public types: Type[];
     // private loginDialog: any;
-    public currentTopicSource = new Subject<string>();
-    public currentTopic$ = this.currentTopicSource.asObservable();
+    public typeSource = new Subject<string>();
+    public type$ = this.typeSource.asObservable();
+    public typesSource = new Subject<Type[]>();
+    public types$ = this.typesSource.asObservable();
 
     constructor(private http: Http) {
         this.rest = new Rest(http);
-        // this.loggedUser$.subscribe(user => {this.user = user;});
+        this.type$.subscribe(type => {this.type = type;});
+        this.types$.subscribe(types => {this.types = types;});
     }
     // GET CHELLENGE LIST
     getTypes(queryArgs?: Object): Observable<any[]> {

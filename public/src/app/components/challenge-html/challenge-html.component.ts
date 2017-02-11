@@ -18,19 +18,21 @@ export class ChallengeHtmlComponent implements OnInit {
   private subParentRoute: any;
   constructor(private route: ActivatedRoute, private cs: ContentService, private hs: HtmlService) {
     this.hs.htmls$.subscribe(htmls => {
-      this.htmls = htmls;
-      this.htmls.forEach(html => {
-        if (html.type == this.type) {
-          this.html = html.html;
-        }
-      })
-      // console.log(JSON.stringify(this.htmls));
+      if (htmls) {
+        this.htmls = htmls;
+        this.htmls.forEach(html => {
+          if (html.type == this.type) {
+            this.html = html.html;
+          }
+        })
+        console.log(JSON.stringify(htmls));
+      }
     });
   }
 
   ngOnInit() {
 
-  
+
     this.subParentRoute = this.route.parent.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -53,10 +55,10 @@ export class ChallengeHtmlComponent implements OnInit {
           htmlAlready = true;
         }
       }
-      
+
       this.cs.getContent(input).subscribe(res => {
         if (res['data'] && res['data'].html) {
-          if(!htmlAlready){
+          if (!htmlAlready) {
             this.html = res['data'].html;
           }
           console.log("FF " + this.htmls);

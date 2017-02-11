@@ -11,23 +11,17 @@ import { Type } from '../../classes/type';
 })
 export class ChallengeNavigatorComponent implements OnInit {
   private current: string;
-  @Input() private types: Type[];
+  private types: Type[];
   @Input() private id: number;
   @ViewChild('fileInput') fileInput: ElementRef;
   private overview: string = 'overview';
   constructor(private renderer: Renderer, private router: Router, private route: ActivatedRoute, private ts: TypeService) {
+    ts.types$.subscribe(types => this.renderTypes(types));
   }
   ngOnInit() {
-    
-    let overviewIndex;
-    this.types.forEach((type,index)=>{
-      console.log(type.id);
-      if(type.id === 'overview'){
-        overviewIndex = index;
-      }
-    })
-    this.types.splice(overviewIndex, 1);
-    console.log(JSON.stringify(this.types));
+    if(this.ts.types){
+      this.renderTypes(this.ts.types);
+    }
 
 
     let event = new MouseEvent('click', { bubbles: true });
@@ -35,17 +29,29 @@ export class ChallengeNavigatorComponent implements OnInit {
       this.fileInput.nativeElement, 'dispatchEvent', [event]);
     this.fileInput.nativeElement.click()
   }
+  renderTypes(types) {
+    this.types = types;
+    let overviewIndex;
+    this.types.forEach((type, index) => {
+      console.log(type.id);
+      if (type.id === 'overview') {
+        overviewIndex = index;
+      }
+    })
+    this.types.splice(overviewIndex, 1);
+    console.log(JSON.stringify(this.types));
+  }
   onTypeClick(typeId) {
-    this.ts.currentTopicSource.next(typeId);
+    this.ts.typeSource.next(typeId);
     console.log(typeId);
     this.router.navigate([`/challenges/${this.id}/others/${typeId}`]);
   }
   onTimeClick() {
-    this.ts.currentTopicSource.next('time-line');
+    this.ts.typeSource.next('time-line');
     this.router.navigate([`/challenges/${this.id}/timeline`]);
   }
   onCommentsClick() {
-    this.ts.currentTopicSource.next('comments');
+    this.ts.typeSource.next('comments');
     this.router.navigate([`/challenges/${this.id}/comments`]);
   }
   changeClass(current) {

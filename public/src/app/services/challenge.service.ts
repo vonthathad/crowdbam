@@ -52,21 +52,24 @@ export class ChallengeService {
     createChallenge(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
             'Content-Type': null
         });
-        // console.log("Challenge " + JSON.stringify(input));
-        // return this.rest.post({
-        //     url: `api/challenges`,
-        //     body: challenge,
-        //     headers: headers
-        // });
 
-        let options = new RequestOptions({ headers: headers });
-        return this.http
-            .post("http://localhost:8235/api/challenges", input, options)
-            .map((res: any) => res.json())
-            .catch((error: any) => Observable.throw(error || 'Server error'));;
+ let options = new RequestOptions({ headers: headers });
+
+        // console.log("Challenge " + JSON.stringify(input));
+        return this.rest.post({
+            url: `api/challenges`,
+            body: input,
+            headers: headers
+        });
+
+       
+        // return this.http
+        //     .post("http://localhost:8235/api/challenges", input, options)
+        //     .map((res: any) => res.json())
+        //     .catch((error: any) => Observable.throw(error || 'Server error'));;
     }
 
     // UPDATE CHALLENGE

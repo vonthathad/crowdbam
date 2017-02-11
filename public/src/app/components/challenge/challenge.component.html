@@ -8,12 +8,9 @@
 <!--<button (click)="onEditChallengeClick()">Edit challenge</button>-->
 <!--</div>-->
 
-<section *ngIf="challenge" class="project-details bg-grey-100">
-    <div class="container">
+<section class="project-details bg-grey-100">
+    <div class="container" *ngIf="challenge">
 
-        <select [(ngModel)]="name" name="Select name" class="ui fluid search selection dropdown"> 
-        <option *ngFor="let n of names" [attr.value]="n">{{n}}</option>
-      </select>
 
         <div class="row project-details-header">
             <div class="col-md-2 text-left">
@@ -98,12 +95,12 @@
             </div>
         </div>
     </div>
-
-    <app-challenge-navigator [id]="id" [types]="types"></app-challenge-navigator>
-     
+    <div *ngIf="challenge">
+        <app-challenge-navigator [id]="id"></app-challenge-navigator>
+    </div>
     <div class="project-details-main">
-       <div class="container">
-           <router-outlet></router-outlet>
+        <div  class="container">
+            <router-outlet></router-outlet>
         </div>
     </div>
     <div class="alert alert-info alert-edit navbar-fixed-bottom">
