@@ -26,7 +26,6 @@ import {NotContainPipe} from './pipes/notContain.pipe';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { ChallengesComponent } from './components/challenges/challenges.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { HeaderComponent } from './components-shared/header/header.component';
@@ -58,6 +57,7 @@ import { ChallengeSolutionComponent } from './components/challenge-solution/chal
 import { ChallengeSolutionCreateComponent } from './components/challenge-solution-create/challenge-solution-create.component';
 import { ChallengeSolutionEditComponent } from './components/challenge-solution-edit/challenge-solution-edit.component';
 import { ChallengeWrapperComponent } from './components/challenge-wrapper/challenge-wrapper.component';
+import { FollowChallengesComponent } from './components/follow-challenges/follow-challenges.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +67,6 @@ import { ChallengeWrapperComponent } from './components/challenge-wrapper/challe
     FroalaEditorDirective,
     FroalaViewDirective,
     HomeComponent,
-    ChallengesComponent,
     NotificationsComponent,
     ProfilesComponent,
     HeaderComponent,
@@ -101,6 +100,7 @@ import { ChallengeWrapperComponent } from './components/challenge-wrapper/challe
     ChallengeSolutionEditComponent,
     ChallengeSolutionsComponent,
     ChallengeWrapperComponent,
+    FollowChallengesComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

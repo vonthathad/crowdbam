@@ -1,0 +1,12 @@
+<div class="container main-list">
+  <div class="row">
+    <div class="col-sm-3" *ngFor="let challenge of challenges">
+      <app-card-challenge [challenge]='challenge'></app-card-challenge>
+    </div>
+  </div>
+  <div class="text-center p20">
+    <button class="btn btn-primary" *ngIf="hasMore && !isLoading" (click)="loadMore()">View more</button>
+  </div>
+
+</div>
+

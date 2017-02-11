@@ -25,6 +25,10 @@ export class ChallengeComponent implements OnInit {
   private challenge: Challenge;
   private user: User;
   private userSub: Subscription;
+  private countdown: any;
+  private thisStage: string;
+  private nextStage: string;
+  private interval: any;
   constructor(private uS: UserService, private cv: ChallengeService, private route: ActivatedRoute, private router: Router, private ts: TypeService,private aS: ActionService) {
     uS.loggedUserSource.subscribe(user => {
       this.user = user
@@ -33,6 +37,7 @@ export class ChallengeComponent implements OnInit {
     route.params.subscribe(params => {
       cv.getChallenge(params['id']).subscribe((res: any) => {
         this.challenge = res.data;
+        if(this.challenge.timelines) this.checkTimelines(this.challenge.timelines);
         if(!this.user){
           this.userSub = uS.loggedUserSource.subscribe(user => {
             if(user){
@@ -67,10 +72,52 @@ export class ChallengeComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  intervalCountdown(){
+    if(this.countdown){
+      this.interval = setInterval(()=>{
+        if(!this.countdown.seconds){
+          this.countdown.seconds = 59;
+          if(!this.countdown.minutes){
+            this.countdown.minutes = 59;
+            if(!this.countdown.hours){
+              this.countdown.hours = 23;
+              if(!this.countdown.days){
+                clearInterval(this.interval);
+              } else {
+                this.countdown.days--;
+              }
+            } else {
+              this.countdown.hours--;
+            }
+          } else {
+            this.countdown.minutes--;
+          }
+        } else {
+          this.countdown.seconds--;
+        }
+      },1000)
+    }
+  }
   checkTimelines(timelines){
-    timelines.forEach(function(){
-
+    let check = true;
+    timelines.forEach((timeline,index)=>{
+      let date = parseInt(timeline.deadline);
+      if (date > Date.now() && check) {
+        console.log('vo deadline');
+        check = false;
+        if(timeline.title) this.thisStage = timeline.title;
+        if(timelines[index + 1] && timelines[index + 1].title) {
+          this.nextStage = timelines[index + 1].title;
+          this.countdown = {};
+          let datetime = new Date(date)
+          this.countdown.hours = datetime.getHours();
+          this.countdown.minutes = datetime.getMinutes();
+          this.countdown.seconds = datetime.getSeconds();
+          this.countdown.days = datetime.getDay();
+          this.intervalCountdown();
+        }
+        return false;
+      }
     });
   }
 

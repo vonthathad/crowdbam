@@ -36,7 +36,7 @@ export class ChallengeNavigatorComponent implements OnInit {
     // this.fileInput.nativeElement.click()
   }
   renderTypes(types) {
-    this.types = types;
+    this.types = types.slice();
     let overviewIndex;
     this.types.forEach((type, index) => {
       if (type.id === 'overview') {

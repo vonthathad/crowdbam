@@ -11,11 +11,15 @@ import { Type } from '../../classes/type';
 })
 export class ChallengeEditNavigatorComponent implements OnInit {
   private current: string;
-  @Input() private types: Type[];
+  private types: Type[];
   @Input() private id: number;
   constructor(private router: Router, private route: ActivatedRoute, private ts: TypeService) {
+    ts.types$.subscribe(types => this.renderTypes(types));
   }
-
+  renderTypes(types) {
+    console.log(types);
+    this.types = types;
+  }
   ngOnInit() {
     this.current = 'basics';
   }

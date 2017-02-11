@@ -32,51 +32,51 @@
             <div class="col-md-4">
                 <div class="project-details-line-top"></div>
                 <div class="project-details-statics row">
-                    <div class="project-details-static col-md-6 col-xs-6">
+                    <div class="project-details-static col-md-4 col-xs-4">
                         <p class="project-details-static-title text-primary bold">${{challenge.prize}}</p>
                         <p class="project-details-static-des">prizes</p>
                     </div>
-                    <div class="project-details-static col-md-6 col-xs-6">
-                        <p class="project-details-static-title text-primary bold">Enter</p>
+                    <div *ngIf = "thisStage" class="project-details-static col-md-8 col-xs-8">
+                        <p class="project-details-static-title text-primary bold">{{thisStage}}</p>
                         <p class="project-details-static-des">stage</p>
                     </div>
-                    <div class="project-details-static col-md-6 col-xs-6">
+                    <div class="project-details-static col-md-4 col-xs-4">
                         <p class="project-details-static-title bold">{{challenge.follows.length}}</p>
                         <p class="project-details-static-des">follows</p>
                     </div>
-                    <div class="project-details-static col-md-6 col-xs-6">
+                    <div class="project-details-static col-md-8 col-xs-8">
                         <p class="project-details-static-title bold">{{challenge.shares.length}}</p>
                         <p class="project-details-static-des">shares</p>
                     </div>
-                    <div class="project-details-static col-md-12 col-xs-12">
+                    <div *ngIf="nextStage" class="project-details-static col-md-12 col-xs-12">
                         <div class="clearfix">
                             <div class="pull-left time-element">
-                                <p class="project-details-static-title bold">00</p>
+                                <p class="project-details-static-title bold">{{countdown.days}}</p>
                                 <p class="project-details-static-des">days</p>
                             </div>
                             <div class="pull-left time-element">
                                 <p class="project-details-static-title bold">:</p>
                             </div>
                             <div class="pull-left time-element">
-                                <p class="project-details-static-title bold">12</p>
+                                <p class="project-details-static-title bold">{{countdown.hours}}</p>
                                 <p class="project-details-static-des">hrs</p>
                             </div>
                             <div class="pull-left time-element">
                                 <p class="project-details-static-title bold">:</p>
                             </div>
                             <div class="pull-left time-element">
-                                <p class="project-details-static-title bold">24</p>
+                                <p class="project-details-static-title bold">{{countdown.minutes}}</p>
                                 <p class="project-details-static-des">min</p>
                             </div>
                             <div class="pull-left time-element">
                                 <p class="project-details-static-title bold">:</p>
                             </div>
                             <div class="pull-left time-element">
-                                <p class="project-details-static-title bold">50</p>
+                                <p class="project-details-static-title bold">{{countdown.seconds}}</p>
                                 <p class="project-details-static-des">sec</p>
                             </div>
                         </div>
-                        <p class="project-details-static-des">time left to <span class="bold">Enter</span></p>
+                        <p class="project-details-static-des">time left to <span class="bold">{{nextStage}}</span></p>
                     </div>
                 </div>
                 <div>
