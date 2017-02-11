@@ -85,6 +85,17 @@ export class ChallengeService {
             headers: headers
         });
     }
+    actionChallenge(id: number,action:string): Observable<any[]> {
+      var token = this.rest.getToken();
+      let headers = new Headers({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
+      return this.rest.put({
+        url: `api/challenges/${id}/${action}`,
+        headers: headers
+      });
+    };
     // UPDATE CHALLENGE IMAGE
     updateChallengeImg(input: any, id: number): Observable<any[]> {
         var token = this.rest.getToken();
@@ -105,6 +116,7 @@ export class ChallengeService {
             .map((res: any) => res.json())
             .catch((error: any) => Observable.throw(error || 'Server error'));;
     }
+  
 }
 
 export var CHALLENGE_PROVIDER: Array<any> = [

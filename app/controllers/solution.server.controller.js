@@ -76,7 +76,12 @@ exports.get = function(req,res){
     return res.json({data: req.solution});
 };
 exports.update = function(req,res){
-    Solution.findByIdAndUpdate(req.solution._id,{html: req.body.html,modified: Date.now() },function(err,solution){
+    var obj = {};
+    if(req.body.title) obj.title = req.body.title;
+    if(req.body.description) obj.title = req.body.description;
+    if(req.body.html) obj.html = req.body.html;
+    obj.modified =  Date.now();
+    Solution.findByIdAndUpdate(req.solution._id,obj,function(err,solution){
         if(err) return res.status(400).send({messages: getErrorMessage(err)});
         return res.json({message: "Solution's information has changed"});
     });

@@ -19,11 +19,11 @@ export class UserService {
     public user: User;
     private loginDialog: any;
     public loggedUserSource = new Subject<User>();
-    public loggedUser$ = this.loggedUserSource.asObservable();
+    // public loggedUser$ = this.loggedUserSource.asObservable();
 
     constructor(private http: Http, private modal: Modal) {
         this.rest = new Rest(http);
-        this.loggedUser$.subscribe(user => {this.user = user;});
+        this.loggedUserSource.subscribe(user => {this.user = user;});
     }
     // register by email, username and password
     register(user): Observable<any[]> {
@@ -52,6 +52,9 @@ export class UserService {
             url: `logout`,
             headers: headers
         });
+    }
+    passUser(user){
+        this.loggedUserSource.next(user);
     }
     getUser(token): Observable<any[]> {
         let headers = new Headers({

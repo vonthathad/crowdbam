@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   private isSearching: boolean = false;
   private isOpeningMenu: boolean = false;
   constructor(private us: UserService, private route: ActivatedRoute, private router: Router, private eref: ElementRef, private challengeService: ChallengeService) {
-    us.loggedUser$.subscribe(user => { this.renderUser(user, { from: "change" }) });
+    us.loggedUserSource.subscribe(user => { this.renderUser(user, { from: "change" }) });
   }
 
   ngOnInit() {
@@ -156,11 +156,10 @@ export class HeaderComponent implements OnInit {
       this.user.token = user.accessToken;
       this.user.displayName = user.displayName;
       this.user.avatar = user.avatar;
-      console.log(this.user);
       // if (obj.from == "queryParam" || obj.from == "localStorage") {
       // this.us.loggedUserSource.next(this.user);
       // }
-      this.us.loggedUserSource.next(this.user);
+      this.us.passUser(this.user);
     } else {
       this.user = user;
     }
@@ -171,7 +170,7 @@ export class HeaderComponent implements OnInit {
   }
   onLogoutClick() {
     localStorage.removeItem("token");
-    this.us.loggedUserSource.next(null);
+    this.us.passUser(null);
     this.user = null;
     this.router.navigate(['']);
   }

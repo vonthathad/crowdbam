@@ -22,6 +22,14 @@ var SolutionSchema = new Schema({
         ref: 'User',
         required: 'User cannot be blank'
     },
+    title: {
+        type: String,
+        required: 'Title cannot be blank'
+    },
+    description: {
+        type: String,
+        required: 'Description cannot be blank'
+    },
     modified: {
         type: Date
     },
