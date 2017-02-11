@@ -67,6 +67,7 @@ export class ChallengeComponent implements OnInit {
 
   ngOnInit() {
   }
+
   checkFollow(user,challenge){
     this.userSub.unsubscribe();
     this.user = user;

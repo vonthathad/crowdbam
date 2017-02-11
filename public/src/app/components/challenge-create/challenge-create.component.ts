@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
+import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormGroup, FormArray, Validators, FormBuilder} from '@angular/forms';
 
-import { CustomValidatorService } from '../../services/custom-validator.service';
-import { FileValidatorService } from '../../services/file-validator.service';
-import { ChallengeService } from '../../services/challenge.service';
-import { CategoryService } from '../../services/category.service';
-import { UserService } from '../../services/user.service';
+import {CustomValidatorService} from '../../services/custom-validator.service';
+import {FileValidatorService} from '../../services/file-validator.service';
+import {ChallengeService} from '../../services/challenge.service';
+import {CategoryService} from '../../services/category.service';
+import {UserService} from '../../services/user.service';
 
-import { Challenge } from '../../classes/challenge';
+import {Challenge} from '../../classes/challenge';
 
 import {ValidatedUploadComponent} from '../../components-child/validated-upload/validated-upload.component';
 
@@ -19,12 +19,13 @@ import {ValidatedUploadComponent} from '../../components-child/validated-upload/
 })
 export class ChallengeCreateComponent implements OnInit {
 
- private challengeForm: FormGroup;
-  private errorEmail: string;
-  private categoryOptions: { value: string, label: string }[];
+  private challengeForm: FormGroup;
+  private categoryOptions: {value: string, label: string}[];
   // @ViewChild("fileInput") private fileInput;
   @ViewChild(ValidatedUploadComponent) vuc: ValidatedUploadComponent;
-  constructor(private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fvs: FileValidatorService, private fb: FormBuilder, private challengeService: ChallengeService, private categoryService: CategoryService, private us: UserService, private router: Router) { }
+
+  constructor(private cvs: CustomValidatorService, private fvs: FileValidatorService, private fb: FormBuilder, private challengeService: ChallengeService, private categoryService: CategoryService, private us: UserService, private router: Router) {
+  }
 
   ngOnInit() {
     this.categoryService.getCategories().subscribe(res => this.renderCategoryOptions(res['data']));
@@ -36,6 +37,7 @@ export class ChallengeCreateComponent implements OnInit {
       categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))
     });
   }
+
   renderCategoryOptions(categoryData) {
     this.categoryOptions = [];
     categoryData.forEach(category => {
@@ -47,7 +49,8 @@ export class ChallengeCreateComponent implements OnInit {
       )
     });
   }
-  createChallenge({value, valid}: { value: Challenge, valid: boolean }) {
+
+  createChallenge({value, valid}: {value: Challenge, valid: boolean}) {
     // console.log( this.fileInput.nativeElement.files[0]);
     let fileInput = this.vuc.fileInput;
     // console.log(this.fileInput.target.files[0]);
@@ -73,9 +76,11 @@ export class ChallengeCreateComponent implements OnInit {
       this.us.openLoginDialog();
     }
   }
-  suceed(challenge){
-    this.router.navigate(['/challenges/'+ challenge._id]);
+
+  suceed(challenge) {
+    this.router.navigate(['/challenges/' + challenge._id]);
   }
+
   // fileChange() {
   // let fi = this.fileInput.nativeElement.files[0];
   // console.log(fi);

@@ -10,7 +10,6 @@
 
 <section class="project-details bg-grey-100">
     <div class="container" *ngIf="challenge">
-
         <div class="row project-details-header">
             <div class="col-md-2 text-left">
                 <div>
@@ -81,7 +80,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="btn btn-block btn-lg btn-primary btn-fill">Give solution</button>
+                    <a class="btn btn-block btn-lg btn-primary btn-fill" [routerLink]="['/challenges/', challenge.id , 'solution-create']">Give solution</a>
                 </div>
                 <div class="row btn-social-group">
                     <div class="col-xs-6">
