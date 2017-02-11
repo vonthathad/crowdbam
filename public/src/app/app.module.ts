@@ -53,6 +53,11 @@ import { ChallengeTimelineComponent } from './components/challenge-timeline/chal
 import { ChallengeNavigatorComponent } from './components-shared/challenge-navigator/challenge-navigator.component';
 import { ChallengeCommentsComponent } from './components/challenge-comments/challenge-comments.component';
 import { ExploreModalComponent } from './components-child/explore-modal/explore-modal.component';
+import { ChallengeSolutionsComponent } from './components/challenge-solutions/challenge-solutions.component';
+import { ChallengeSolutionComponent } from './components/challenge-solution/challenge-solution.component';
+import { ChallengeSolutionCreateComponent } from './components/challenge-solution-create/challenge-solution-create.component';
+import { ChallengeSolutionEditComponent } from './components/challenge-solution-edit/challenge-solution-edit.component';
+import { ChallengeWrapperComponent } from './components/challenge-wrapper/challenge-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +95,12 @@ import { ExploreModalComponent } from './components-child/explore-modal/explore-
     ChallengeNavigatorComponent,
     ChallengeCommentsComponent,
     ExploreModalComponent,
+    ChallengeSolutionsComponent,
+    ChallengeSolutionComponent,
+    ChallengeSolutionCreateComponent,
+    ChallengeSolutionEditComponent,
+    ChallengeSolutionsComponent,
+    ChallengeWrapperComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

@@ -56,7 +56,7 @@ export class ChallengeService {
             'Content-Type': null
         });
 
- let options = new RequestOptions({ headers: headers });
+        let options = new RequestOptions({ headers: headers });
 
         // console.log("Challenge " + JSON.stringify(input));
         return this.rest.post({
@@ -66,9 +66,9 @@ export class ChallengeService {
         });
 
         // return this.http
-        //     .post("/api/challenges", input, options)
+        //     .post("http://localhost:8456/api/challenges", input, options)
         //     .map((res: any) => res.json())
-        //     .catch((error: any) => Observable.throw(error || 'Server error'));;
+        //     .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
     // UPDATE CHALLENGE
@@ -116,7 +116,7 @@ export class ChallengeService {
             .map((res: any) => res.json())
             .catch((error: any) => Observable.throw(error || 'Server error'));;
     }
-  
+
 }
 
 export var CHALLENGE_PROVIDER: Array<any> = [

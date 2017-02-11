@@ -27,7 +27,7 @@ export class Rest {
         // set partial url to full url
         options.url = `${base_url}${options.url}`;
         // stringify body from json to string
-        options.body = JSON.stringify(options.body);
+        // options.body = JSON.stringify(options.body);
         // add default header if there are no header
         if (!options.headers) options.headers = new Headers({ 'Content-Type': 'application/json' });
         // add params to query params
