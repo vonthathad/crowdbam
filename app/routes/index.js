@@ -1,7 +1,7 @@
 var passport = require('passport');
 var config = require('../configs/config');
 var users = require('../controllers/user.server.controller');
-var pa
+var challenges = require('../controllers/challenge.server.controller');
     /* GET home page. */
 module.exports = function(app) {
     app.post('/auth/signup', users.authSignup);
@@ -36,7 +36,7 @@ module.exports = function(app) {
     app.get('/oauth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
         res.redirect(req.session.redirect + "?token=" + req.user.token);
     });
-
+    app.get('challenges/:id',challenges.renderChallenge);
     /////////// GOOGLE LOGIN
     app.get('/oauth/google', function(req, res, next) {
         req.session.redirect = req.query.redirect || '/';
@@ -47,6 +47,6 @@ module.exports = function(app) {
         res.redirect(req.session.redirect + "?token=" + req.user.token);
     });
 
-    app.get('*', users.renderAngular);
+    app.get('*', challenges.renderAngular);
 
 }
