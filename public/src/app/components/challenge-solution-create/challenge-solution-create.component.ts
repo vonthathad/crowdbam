@@ -67,6 +67,6 @@ export class ChallengeSolutionCreateComponent implements OnInit {
     }
   }
   suceed(solution){
-    this.router.navigate([`/challenges/${this.challengeId}/solutions/${solution._id}/edit`]);
+    this.router.navigate([`/challenges/${this.challengeId}/solutions/${solution._id}`]);
   }
 }

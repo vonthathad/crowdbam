@@ -68,7 +68,7 @@ module.exports = function (router) {
         .get(solutions.list)
         .post(users.requiresLogin,solutions.create);
     router.route('/solutions/:solutionID')
-        .get(solutions.get)
+        .get(solutions.isOwnerOrCreator,solutions.get)
         .put(users.requiresLogin,solutions.hasAuthorization,solutions.update)
         .delete(users.requiresLogin,solutions.hasAuthorization,solutions.remove);
     router.param('solutionID', solutions.solutionByID);

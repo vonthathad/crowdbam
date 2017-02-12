@@ -2,10 +2,14 @@
     <div class="form-group label-floating clearfix">
       <textarea required id="comment" type="text" class="form-control" placeholder="Comment here ..." formControlName="content"
              [ngModel]="content"></textarea>
-      <div class="pull-right mt10">
-        <button type="submit" [disabled]="!commentForm.valid || isSubmitting" class="btn btn-primary btn-fill text-center">
-          Post
-        </button>
+      <div class="clearfix mt10">
+        <div *ngIf="comments && !comments.length" class="pull-left first-comment type-18 light">Be the first person to comment ...</div>
+        <div class="pull-right">
+          <button type="submit" [disabled]="!commentForm.valid || isSubmitting" class="btn btn-primary btn-sm btn-fill text-center">
+            <i class="ion-ios-paperplane"></i> Post
+          </button>
+        </div>
+
       </div>
     </div>
 </form>
