@@ -22,8 +22,12 @@ export class ChallengeEditHtmlComponent implements OnInit {
 
   public titleOptions: Object = {
     placeholderText: 'Edit Your Content Here!',
-    charCounterCount: false,
-    toolbarInline: true,
+    // charCounterCount: false,
+    // toolbarInline: true,
+    fileMaxSize: 1024 * 1024 * 2,
+    heightMin: 300,
+    fileAllowedTypes: ['application/pdf', 'application/msword'],
+    imageAllowedTypes: ['jpeg', 'jpg', 'png'],
     // toolbarVisibleWithoutSelection: true,
     events: {
       'froalaEditor.initialized': function () {
