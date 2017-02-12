@@ -9,7 +9,7 @@ textarea.form-control{
   border-radius: 5px 5px 0 0;
 }
 .content.card{
-  margin: 0;
-  padding: 5px;
-  border-radius: 0 0 5px 5px;
+  margin: 0!important;
+  padding: 5px!important;
+  border-radius: 0 0 5px 5px!important;
 }
