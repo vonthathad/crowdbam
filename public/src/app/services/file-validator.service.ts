@@ -20,7 +20,7 @@ export class FileValidatorService {
     isTooSmall(control: any) {
         let img = control.value;
         if (img && typeof img == 'Image') return null;
-        return (img.width >= 800 && img.height >= 500) ? null : { 'isTooSmall': true }
+        return (img.width >= 700 && img.height >= 450) ? null : { 'isTooSmall': true }
     }
     isTooBig(control: any){
         let fileInput = control.value;
@@ -42,7 +42,7 @@ export class FileValidatorService {
         } else if (control.hasError('isFile')) {
             this.errorMessage.push('File must be an image.')
         } else if (control.hasError('isTooSmall')) {
-            this.errorMessage.push('File must larger than 800x500')
+            this.errorMessage.push('File must larger than 700x450')
         } else if (control.hasError('isTooBig')) {
             this.errorMessage.push('File must not bigger than 300KB')
         }
@@ -51,4 +51,4 @@ export class FileValidatorService {
 
 export var FILE_VALIDATOR_PROVIDER: Array<any> = [
     { provide: FileValidatorService, useClass: FileValidatorService }
-]
+];
