@@ -17,6 +17,7 @@ export class CommentFormComponent implements OnInit {
   @Input() private comment: Comment;
   @Input() private comments: Comment[];
   @Input() id: string;
+  private isSubmitting: boolean = false;
   private commentForm: FormGroup;
   constructor(private us:UserService, private cs: CommentService, private fb: FormBuilder) {
     us.loggedUserSource.subscribe(user=>{
@@ -31,25 +32,33 @@ export class CommentFormComponent implements OnInit {
 
   }
   createComment({value, valid}: {value: any, valid: boolean}){
+    this.isSubmitting = true;
     value.challenge = this.id;
     if(this.comment){
       value.comment = this.comment._id;
     }
 
     console.log(value);
-    this.cs.createComment(value).subscribe(comment=>this.succeed(comment));
+    this.cs.createComment(value).subscribe((res:any)=>this.succeed(res.data));
   }
   succeed(comment){
-    console.log(this.comment);
-    // console.log(this.comment);
-    // console.log(this.comments);
+    this.isSubmitting = false;
+    console.log(this.comments);
     if(this.comment){
-      this.comments.map(e=>e._id).forEach((id,index)=>{
-        this.comments.push(comment);
+      this.comments.forEach((cmt)=>{
+        if(cmt._id == this.comment._id){
+          if(!cmt.comments){
+            cmt["comments"] = [];
+          };
+          cmt.comments.unshift(comment);
+        }
       })
     } else {
-      this.comments.push(comment);
+      this.comments.unshift(comment);
     }
+    // console.log(this.comment);
+    // console.log(this.comments);
+    // this.comments.unshift(this.comment);
     this.cs.passComments(this.comments);
     // this.comments
   }
