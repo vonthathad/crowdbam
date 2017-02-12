@@ -22,10 +22,12 @@ import { TYPE_PROVIDER } from './services/type.service';
 import { HTML_PROVIDER } from './services/html.service';
 import { ACTION_PROVIDER } from './services/action.service';
 import { SOLUTION_PROVIDER } from './services/solution.service';
+import { COMMENT_PROVIDER } from './services/comment.service';
 
 
 import {OrderByPipe} from './pipes/orderBy.pipe';
 import {NotContainPipe} from './pipes/notContain.pipe';
+import {TimesincePipe} from './pipes/timesince.pipe';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -61,13 +63,14 @@ import { ChallengeSolutionCreateComponent } from './components/challenge-solutio
 import { ChallengeSolutionEditComponent } from './components/challenge-solution-edit/challenge-solution-edit.component';
 import { ChallengeWrapperComponent } from './components/challenge-wrapper/challenge-wrapper.component';
 import { CommentComponent } from './components-child/comment/comment.component';
-import { CommentSubComponent } from './components-child/comment-sub/comment-sub.component';
 import { FollowChallengesComponent } from './components/follow-challenges/follow-challenges.component';
+import { CommentFormComponent } from './components-child/comment-form/comment-form.component';
 
 @NgModule({
   declarations: [
     OrderByPipe,
     NotContainPipe,
+    TimesincePipe,
     AppComponent,
     FroalaEditorDirective,
     FroalaViewDirective,
@@ -106,8 +109,8 @@ import { FollowChallengesComponent } from './components/follow-challenges/follow
     ChallengeSolutionsComponent,
     ChallengeWrapperComponent,
     CommentComponent,
-    CommentSubComponent,
-    FollowChallengesComponent
+    FollowChallengesComponent,
+    CommentFormComponent
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [
@@ -131,6 +134,7 @@ import { FollowChallengesComponent } from './components/follow-challenges/follow
     TYPE_PROVIDER,
     HTML_PROVIDER,
     SOLUTION_PROVIDER,
+    COMMENT_PROVIDER,
     FacebookService,
     ACTION_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },

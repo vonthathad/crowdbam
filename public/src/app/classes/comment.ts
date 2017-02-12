@@ -3,13 +3,14 @@
  */
 import {Challenge} from './challenge';
 import {User} from './user';
-export class Comment{
-  constructor(
-  public challenge?: Challenge,
-  public comment?:Comment,
-  public created?:any,
-  public modified?:any,
-  public creator?: User,
-  public votes?: number
-  ){}
+export class Comment {
+  constructor(public _id?: string,
+              public challenge?: Challenge,
+              public comment?: Comment,
+              public created?: any,
+              public modified?: any,
+              public creator?: User,
+              public votes?: number,
+              public comments?: Comment[]) {
+  }
 }

@@ -1,17 +1,18 @@
-<li class="project-details-comment">
+<li *ngIf="comment" class="project-details-comment">
   <div class="comment-inner">
     <div class="avatar pull-left">
       <a href="/profile/1604818639">
-        <img class="circle img-responsive" src="https://ksr-ugc.imgix.net/missing_user_avatar.png?w=80&amp;h=80&amp;fit=crop&amp;v=&amp;auto=format&amp;q=92&amp;s=8f7172b83a603c1a2355dce4a017420b">
+        <!--<img class="circle img-responsive" src="https://ksr-ugc.imgix.net/missing_user_avatar.png?w=80&amp;h=80&amp;fit=crop&amp;v=&amp;auto=format&amp;q=92&amp;s=8f7172b83a603c1a2355dce4a017420b">-->
+        <img class="circle img-responsive" [src]="comment.creator.avatar">
       </a>
     </div>
     <div class="content clearfix">
       <h3>
-        <a class="author green-dark" href="/profile/1604818639">Spencer</a>
-        <span>11 minutes ago</span>
+        <a class="author green-dark" href="/profile/1604818639">{{comment.creator.displayName}}</a>
+        <!--<span>11 minutes ago</span>-->
+        <span>{{time | timesince}} ago</span>
       </h3>
-      <p>@Vincent This campaign is purely digital. The bottom of the kickstarter campaign states this and it is the
-        reason for no shipping amount being charge.</p>
+      <p>{{comment.content}}</p>
       <span class="loading icon-loading-small" style="display:none;"></span>
       <div class="clearfix">
         <div class="pull-left">
@@ -21,7 +22,9 @@
           200
         </div>
       </div>
-      <app-comment-sub></app-comment-sub>
+      <button *ngIf="comment.comments" (click)="onReplyClick()">Reply</button>
+      <app-comment-form></app-comment-form>
+      <app-comment *ngFor="let comment of comment.comments" [comment]="comment"></app-comment>
     </div>
   </div>
 </li>

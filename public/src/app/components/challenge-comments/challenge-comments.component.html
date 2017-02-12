@@ -3,8 +3,8 @@
   <div class="row">
     <div class="col-md-8">
       <ul class="project-details-comments">
-        <app-comment></app-comment>
-        <app-comment></app-comment>
+        <app-comment-form></app-comment-form>
+        <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
         <!--<li class="project-details-comment">-->
           <!--<div class="comment-inner">-->
             <!--<div class="avatar pull-left">-->
