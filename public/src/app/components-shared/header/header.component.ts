@@ -149,6 +149,7 @@ export class HeaderComponent implements OnInit {
     this.isOpeningMenu = !this.isOpeningMenu;
   }
   renderUser(user, obj) {
+    console.log(user);
     if (obj.from == "queryParam" || obj.from == "localStorage") {
       this.user = new User();
       // console.log("USER" + JSON.stringify(user));

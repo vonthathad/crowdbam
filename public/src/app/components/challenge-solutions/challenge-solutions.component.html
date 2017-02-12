@@ -1,3 +1,6 @@
-<p>
-  challenge-solutions works!
-</p>
+<div *ngIf="solutions">
+  <div *ngFor="let solution of solutions">
+    <a (click)="goToSolution(solution)">{{solution.title}}</a>
+    {{solution.description}}
+  </div>
+</div>

@@ -1,3 +1,5 @@
-<p>
-  challenge-solution works!
-</p>
+<div *ngIf="solution">
+  {{solution.title}}
+  {{solution.description}}
+  <div [innerHtml]="solution.html"></div>
+</div>

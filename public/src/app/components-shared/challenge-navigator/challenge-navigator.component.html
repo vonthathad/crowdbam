@@ -1,4 +1,4 @@
-<div class="project-details-content">
+<div *ngIf="challenge" class="project-details-content">
   <div class="project-details-nav">
     <div class="container js-project-nav-scroll">
       <div class="row">
@@ -17,6 +17,9 @@
             <a *ngFor="let type of types" [ngClass]="{'is-active': current == type.id}"  (click)="onTypeClick(type.id);changeClass(type.id)" class="tabbed-nav__link">
                   {{type.title}}
             </a>
+          <a *ngIf="user && user._id == challenge.creator._id" class="tabbed-nav__link" [ngClass]="{'is-active': current == 'solutions'}" (click)="onSolutionClick();changeClass('solutions')">
+            Solutions
+          </a>
         </div>
         <div class="project-nav__buttons col-md-4 hidden-xs hidden-md">
           <!--<a class="btn btn-md btn-primary btn-fill">Give solution</a>-->

@@ -43,10 +43,10 @@ exports.list = function(req,res) {
                 var isNext = false;
                 if(solutions.length==(paging+1)){
                     isNext = true;
-                    data.pop();
+                   solutions.pop();
                 };
                 resdata = {
-                    data: data,
+                    data: solutions,
                     isNext: isNext
                 };
                 return res.json(resdata);

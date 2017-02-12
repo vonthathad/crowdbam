@@ -2,8 +2,13 @@ import { ElementRef, ViewChild, Renderer, Component, OnInit, Input } from '@angu
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { TypeService } from '../../services/type.service';
+import { UserService } from '../../services/user.service';
+import { ChallengeService } from '../../services/challenge.service';
 
 import { Type } from '../../classes/type';
+import { User } from '../../classes/user';
+import { Challenge } from '../../classes/challenge';
+
 @Component({
   selector: 'app-challenge-navigator',
   templateUrl: './challenge-navigator.component.html',
@@ -12,13 +17,20 @@ import { Type } from '../../classes/type';
 export class ChallengeNavigatorComponent implements OnInit {
   private current: string;
   private types: Type[];
+  private user: User;
+  private challenge: Challenge;
   @Input() private id: number;
   @ViewChild('fileInput') fileInput: ElementRef;
   private overview: string = 'overview';
-  constructor(private renderer: Renderer, private router: Router, private route: ActivatedRoute, private ts: TypeService) {
+  constructor(private cs: ChallengeService, private us: UserService, private router: Router, private route: ActivatedRoute, private ts: TypeService) {
     ts.types$.subscribe(types => this.renderTypes(types));
+    us.loggedUserSource.subscribe(user => { this.user = user});
+    cs.challengeSource.subscribe(challenge => { this.challenge = challenge});
   }
   ngOnInit() {
+
+    if(this.us.user) this.user = this.us.user;
+    if(this.cs.challenge) this.challenge = this.cs.challenge;
     if(this.ts.types){
       this.renderTypes(this.ts.types);
     }
@@ -56,6 +68,10 @@ export class ChallengeNavigatorComponent implements OnInit {
   onCommentsClick() {
     this.ts.typeSource.next('comments');
     this.router.navigate([`/challenges/${this.id}/comments`]);
+  }
+  onSolutionClick(){
+    this.ts.typeSource.next('solutions');
+    this.router.navigate([`/challenges/${this.id}/solutions`]);
   }
   changeClass(current) {
     this.current = current;
