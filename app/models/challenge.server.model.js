@@ -13,7 +13,7 @@ var ChallengeSchema = new Schema({
         type: String,
         trim: true,
         required: 'Title of challenge is required',
-        maxlength: 36
+        maxlength: 50
     },
     description: {
         type: String,

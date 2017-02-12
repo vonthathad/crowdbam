@@ -107,7 +107,7 @@ import { FollowChallengesComponent } from './components/follow-challenges/follow
     ChallengeWrapperComponent,
     CommentComponent,
     CommentSubComponent,
-    FollowChallengesComponent,
+    FollowChallengesComponent
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [
