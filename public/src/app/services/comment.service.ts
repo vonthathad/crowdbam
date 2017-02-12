@@ -11,16 +11,20 @@ import { Comment } from '../classes/comment';
 export class CommentService {
   private rest: Rest;
   public comment: Comment;
+  public comments: Comment[];
   // private loginDialog: any;
-  public commentSource = new Subject<Comment>();
-  public challange$ = this.commentSource.asObservable();
+  public commentsSource = new Subject<Comment[]>();
 
   constructor(private http: Http) {
     this.rest = new Rest(http);
     // this.loggedUser$.subscribe(user => {this.user = user;});
-    this.challange$.subscribe(comment => {
-      this.comment = comment;
+    this.commentsSource.subscribe(comments => {
+      this.comments = comments;
     });
+  }
+  passComments(comments){
+    console.log(comments);
+    this.commentsSource.next(comments);
   }
   // GET CHELLENGE LIST
   getComments(queryArgs?: Object): Observable<any[]> {
@@ -52,7 +56,7 @@ export class CommentService {
     var token = this.rest.getToken();
     let headers = new Headers({
       'Authorization': `Bearer ${token}`,
-      'Content-Type': null
+      'Content-Type': 'application/json'
     });
 
     let options = new RequestOptions({ headers: headers });

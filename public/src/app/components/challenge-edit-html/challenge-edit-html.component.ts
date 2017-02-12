@@ -26,7 +26,7 @@ export class ChallengeEditHtmlComponent implements OnInit {
     // toolbarInline: true,
     fileMaxSize: 1024 * 1024 * 2,
     heightMin: 300,
-    fileAllowedTypes: ['application/pdf', 'application/msword'],
+    fileAllowedTypes: ['application/pdf'],
     imageAllowedTypes: ['jpeg', 'jpg', 'png'],
     // toolbarVisibleWithoutSelection: true,
     events: {

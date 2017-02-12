@@ -85,16 +85,14 @@ export class TypeService {
     }
 
       // UPDATE TYPE
-    deleteType(type: Type, id: number): Observable<any[]> {
+    deleteType(id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
           'Authorization': `Bearer ${token}`,
             'Type-Type': 'application/json'
         });
-        console.log(type);
         return this.rest.delete({
             url: `api/types/${id}`,
-            body: type,
             headers: headers
         });
     }

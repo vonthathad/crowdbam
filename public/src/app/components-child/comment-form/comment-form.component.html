@@ -1,22 +1,9 @@
 <form [formGroup]="commentForm" (ngSubmit)="createComment(commentForm)">
   <div class="form-input-group">
-    <div class="number-circle">2</div>
     <div class="form-input clearfix">
       <div class="form-group label-floating is-empty">
-        <label class="control-label light type-18" for="comment"><sup class="text-gray">*</sup> Detail
-          of comment:</label>
-        <textarea required id="comment" type="description" class="form-control" formControlName="comment"
-                  [ngModel]="comment"></textarea>
-      </div>
-
-      <div [hidden]="commentForm.get('comment').valid || commentForm.get('comment').untouched"
-           class="alert alert-danger">
-        <div *ngIf="commentForm.get('comment').hasError('required')">
-          Comment is required!
-        </div>
-        <div *ngIf="commentForm.get('comment').hasError('maxlength')">
-          Comment must be no more than 140 character!
-        </div>
+        <input required id="comment" type="text" class="form-control" placeholder="Comment here .." formControlName="content"
+               [ngModel]="content">
       </div>
     </div>
     <div class="text-center">

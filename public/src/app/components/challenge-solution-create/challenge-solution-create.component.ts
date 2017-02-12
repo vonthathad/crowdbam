@@ -15,7 +15,6 @@ import { Solution } from '../../classes/solution';
 export class ChallengeSolutionCreateComponent implements OnInit {
   private solutionForm: FormGroup;
   private challengeId: number;
-  hiddend: boolean = true;
   constructor(private route: ActivatedRoute,private cs: ChallengeService, private us: UserService, private ss: SolutionService,private fb: FormBuilder) {
   }
 
@@ -25,7 +24,7 @@ export class ChallengeSolutionCreateComponent implements OnInit {
     // toolbarInline: true,
     fileMaxSize: 1024 * 1024 * 2,
     heightMin: 300,
-    fileAllowedTypes: ['application/pdf', 'application/msword'],
+    fileAllowedTypes: ['application/pdf'],
     imageAllowedTypes: ['jpeg', 'jpg', 'png'],
     // toolbarVisibleWithoutSelection: true,
     events: {

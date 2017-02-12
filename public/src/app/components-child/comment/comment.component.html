@@ -1,4 +1,4 @@
-<li *ngIf="comment" class="project-details-comment">
+<li *ngIf="comment && comments" class="project-details-comment">
   <div class="comment-inner">
     <div class="avatar pull-left">
       <a href="/profile/1604818639">
@@ -22,9 +22,9 @@
           200
         </div>
       </div>
-      <button *ngIf="comment.comments" (click)="onReplyClick()">Reply</button>
-      <app-comment-form></app-comment-form>
-      <app-comment *ngFor="let comment of comment.comments" [comment]="comment"></app-comment>
+      <a *ngIf="!comment.comment" (click)="onReplyClick()">Reply</a>
+      <app-comment-form *ngIf="commentFormOpenned" [id]="id" [comment]="comment" [comments]="comments"></app-comment-form>
+      <app-comment *ngFor="let comment of comment.comments" [comment]="comment" [comments]="comments"></app-comment>
     </div>
   </div>
 </li>
