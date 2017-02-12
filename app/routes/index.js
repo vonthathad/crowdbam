@@ -36,7 +36,7 @@ module.exports = function(app) {
     app.get('/oauth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
         res.redirect(req.session.redirect + "?token=" + req.user.token);
     });
-    app.get('challenges/:id',challenges.renderChallenge);
+    app.get('/challenges/:id',challenges.renderChallenge);
     /////////// GOOGLE LOGIN
     app.get('/oauth/google', function(req, res, next) {
         req.session.redirect = req.query.redirect || '/';
