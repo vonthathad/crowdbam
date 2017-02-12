@@ -35,7 +35,7 @@ export class FormLoginWrapperComponent implements OnInit {
     this.actionLabel = 'Login';
   }
   loginFacebook() {
-    console.log('login facebook');
+    // console.log('login facebook');
     // window.location.href = `/oauth/facebook?redirect=${this.location}`;
     if (this.location.indexOf('localhost') > -1) {
       console.log('local');
@@ -46,11 +46,11 @@ export class FormLoginWrapperComponent implements OnInit {
 
   }
   loginGoogle() {
-    let location = window.location.href;
-    if (location.indexOf('localhost') > -1) {
-      location = `localhost:8456/oauth/google?redirect=${location}`;
+    console.log('login google');
+    if (this.location.indexOf('localhost') > -1) {
+      window.location.href = `http://localhost:8456/oauth/google?redirect=${location}`;
     } else {
-      location = `/oauth/google?redirect=${location}`;
+      window.location.href = `/oauth/google?redirect=${location}`;
     }
   }
 }
