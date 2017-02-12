@@ -18,7 +18,7 @@ export class ChallengeSolutionCreateComponent implements OnInit {
   private isSubmitting: boolean = false;
   hiddend: boolean = true;
 
-  constructor(private route: ActivatedRoute,private cs: ChallengeService, private us: UserService, private ss: SolutionService,private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute,private router: Router, cs: ChallengeService, private us: UserService, private ss: SolutionService,private fb: FormBuilder) {
   }
 
   public titleOptions: Object = {
@@ -66,7 +66,7 @@ export class ChallengeSolutionCreateComponent implements OnInit {
       this.us.openLoginDialog();
     }
   }
-  suceed(s){
-    console.log(s);
+  suceed(solution){
+    this.router.navigate([`/challenges/${this.challengeId}/solutions/${solution._id}/edit`]);
   }
 }

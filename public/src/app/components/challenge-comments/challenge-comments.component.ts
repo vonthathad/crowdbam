@@ -28,6 +28,9 @@ export class ChallengeCommentsComponent implements OnInit {
   ngOnInit() {
     this.ro.parent.params.subscribe(params=>{
       this.id = params['id'];
+      if(this.us.user){
+        this.user = this.us.user;
+      }
       this.cs.getComments({challenge: params['id']}).subscribe(res=>{
           this.renderComments(res['data']);
       });

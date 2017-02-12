@@ -37,6 +37,7 @@ exports.list = function(req,res) {
         Solution.find({challenge: req.query.challenge})
             .sort('-created')
             .limit(paging + 1)
+            .populate('creator','avatar username displayName')
             .skip(skip)
             .exec(function (err, solutions) {
                 if (err) return res.status(400).send();
@@ -95,6 +96,7 @@ exports.remove = function(req,res){
 
 exports.solutionByID = function(req, res, next, id){
     Solution.findById(id)
+        .populate('creator','avatar username displayName')
         .exec(function (err, solution) {
             if (err) {
                 return res.status(400).send();
