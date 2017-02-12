@@ -80,7 +80,8 @@
                     </div>
                 </div>
                 <div>
-                    <a class="btn btn-block btn-lg btn-primary btn-fill" [routerLink]="['/challenges/', challenge.id , 'solution-create']">Give solution</a>
+                    <a *ngIf="user" class="btn btn-block btn-lg btn-primary btn-fill" [routerLink]="['/challenges/', challenge.id , 'solution-create']">Give solution</a>
+                    <a *ngIf="!user" class="btn btn-block btn-lg btn-primary btn-fill" (click)="uS.openLoginDialog()">Give solution</a>
                 </div>
                 <div class="row btn-social-group">
                     <div class="col-xs-6">

@@ -21,6 +21,7 @@ export class ChallengeCreateComponent implements OnInit {
 
   private challengeForm: FormGroup;
   private categoryOptions: {value: string, label: string}[];
+  private isSubmitting: boolean = false;
   // @ViewChild("fileInput") private fileInput;
   @ViewChild(ValidatedUploadComponent) vuc: ValidatedUploadComponent;
 
@@ -52,11 +53,13 @@ export class ChallengeCreateComponent implements OnInit {
 
   createChallenge({value, valid}: {value: Challenge, valid: boolean}) {
     // console.log( this.fileInput.nativeElement.files[0]);
+
     let fileInput = this.vuc.fileInput;
     // console.log(this.fileInput.target.files[0]);
     if (this.us.isLoggedIn()) {
       // alert(1234);
       // console.log(JSON.stringify(value));
+      this.isSubmitting = true;
       if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
         let input = new FormData();
         let fi = fileInput.target.files[0];
@@ -70,7 +73,13 @@ export class ChallengeCreateComponent implements OnInit {
         input.append("content", JSON.stringify(value));
         this.challengeService
           .createChallenge(input)
-          .subscribe(challenge => this.suceed(challenge['data']), error => console.error(JSON.stringify(error)));
+          .subscribe(challenge => {
+            this.suceed(challenge['data']);
+            this.isSubmitting = false;
+          }, error => {
+            console.error(JSON.stringify(error));
+            this.isSubmitting = false;
+          });
       }
     } else {
       this.us.openLoginDialog();

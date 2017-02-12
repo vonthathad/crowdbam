@@ -3,8 +3,8 @@
     <div [froalaEditor]="titleOptions" [(froalaModel)]="html"></div>
   </div>
   <div *ngIf="showButton">
-    <button class="btn btn-fill btn-primary" *ngIf="!isCreated" (click)="createContent()"><i class="ion-checkmark-circled"></i> Create</button>
-    <button class="btn btn-fill btn-primary" *ngIf="isCreated" (click)="updateContent()"><i class="ion-edit"></i> Edit</button>
-    <button class="btn btn-simple btn-primary" *ngIf="isCreated" (click)="deleteContent()"><i class="ion-ios-close"></i> Delete</button>
+    <button class="btn btn-fill btn-primary" *ngIf="!isCreated" [disabled]="isSubmitting" (click)="createContent()"><i class="ion-checkmark-circled"></i> Create</button>
+    <button class="btn btn-fill btn-primary" *ngIf="isCreated" [disabled]="isSubmitting" (click)="updateContent()"><i class="ion-edit"></i> Edit</button>
+    <button class="btn btn-simple btn-primary" *ngIf="isCreated" [disabled]="isSubmitting" (click)="deleteContent()"><i class="ion-ios-close"></i> Delete</button>
   </div>
 </div>

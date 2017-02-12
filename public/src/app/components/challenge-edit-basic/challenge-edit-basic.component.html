@@ -93,11 +93,16 @@
                   </div>
                   <div class="alert alert-info alert-edit navbar-fixed-bottom">
                     <div class="col-md-8"></div>
-                    <div class="col-md-4 text-right"><button type="submit" class="btn btn-white">Save changes</button></div>
+                    <div class="col-md-4 text-right"><button [disabled]="isSubmitting" type="submit" class="btn btn-white">
+                      <span *ngIf="!isSubmitting">Save changes</span>
+                      <span *ngIf="isSubmitting">Saving ...</span>
+                    </button></div>
 
                   </div>
                 </form>
                 <div class="row pull-right">
-                  <a class="btn btn-primary btn-simple"><i class="ion-ios-close"></i> Delete project</a>
+                  <button [disabled]="isSubmitting" (click)="deleteChallenge()" class="btn btn-primary btn-simple">
+                    <i class="ion-ios-close"></i> Delete project
+                  </button>
                 </div>
               </div>

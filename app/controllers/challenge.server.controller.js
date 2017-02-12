@@ -53,6 +53,7 @@ exports.list = function(req, res) {
     if(!req.query.user || parseInt(req.query.user) != req.user._id){
         conds.push({ public: true });
     }
+    if (req.query.review) conds.push({ review: true });
     if (req.query.category) conds.push({ categories: req.query.category });
     if (req.query.follow) conds.push({ follows: parseInt(req.query.follow) });
     if (req.query.recommendations && req.user._id){

@@ -3,6 +3,7 @@
     <div class="col-sm-3" *ngFor="let challenge of challenges">
       <app-card-challenge [challenge]='challenge'></app-card-challenge>
     </div>
+    <div *ngIf="challenges && !challenges.length" class="text-center">Don't have challenges</div>
   </div>
   <div class="text-center p20">
     <button class="btn btn-primary" *ngIf="hasMore && !isLoading" (click)="loadMore()">View more</button>

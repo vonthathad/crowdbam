@@ -1,3 +1,13 @@
+<div>
+  <div class="site-nav__middle hidden-lg hidden-md hidden-sm">
+    <a class="site-nav__item site-nav__item--logo w100" [routerLink]="['/']">
+      <div class="crowdbam-logo text-center w100">
+        <img class="img-responsive" src="./assets/img/logo.webp">
+      </div>
+    </a>
+
+  </div>
+</div>
 <div class="site-nav-frame" [ngClass]="{'site-nav--search-is-visible': isSearching}" role="navigation">
   <div class="site-nav-container site-nav-container--search" id="js-nav-search" aria-hidden="true">
     <div class="site-nav-unit site-nav-unit--search">
@@ -17,6 +27,7 @@
       </nav>
     </div>
   </div>
+
   <div class="site-nav-container site-nav-container--main active-nav--primary">
     <div class="site-nav-unit site-nav-unit--primary" id="js-nav-primary">
       <nav class="site-nav-base site-nav--primary">
@@ -34,7 +45,7 @@
         <div class="site-nav__middle">
           <a class="site-nav__item site-nav__item--logo" [routerLink]="['/']">
             <div class="crowdbam-logo text-center">
-              Crowdbam
+              <img class="img-responsive" src="./assets/img/logo.webp">
             </div>
           </a>
 

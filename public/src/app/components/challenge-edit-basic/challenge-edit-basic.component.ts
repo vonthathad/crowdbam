@@ -25,6 +25,7 @@ export class ChallengeEditBasicComponent implements OnInit {
   private categoryOptions: { value: string, label: string, isChoosen: boolean }[];
   private challenge: Challenge;
   private id: number;
+  private isSubmitting: boolean = false;
   @ViewChild(ValidatedUploadComponent) vuc: ValidatedUploadComponent;
   // @ViewChild("fileInput") private fileInput;
   constructor(private router: Router, private fvs: FileValidatorService, private route: ActivatedRoute, private cv: ChallengeService, private cd: ChangeDetectorRef, private cvs: CustomValidatorService, private fb: FormBuilder, private cas: CategoryService, private us: UserService) {
@@ -102,12 +103,31 @@ export class ChallengeEditBasicComponent implements OnInit {
     }
   }
   _updateChallenger(imgUrl, challenger) {
+    this.isSubmitting = true;
     challenger.thumb = imgUrl;
     challenger.img = null;
     console.log(challenger);
     this.cv
       .updateChallenge(challenger, parseInt(this.challenge.id))
-      .subscribe(challenge => this.updateSucceeded(challenge), error => console.error(JSON.stringify(error)));
+      .subscribe(challenge => {
+        this.updateSucceeded(challenge);
+        this.isSubmitting = false;
+      }, error => {
+        console.error(JSON.stringify(error));
+        this.isSubmitting = false;
+      });
+  }
+  deleteChallenge(){
+    this.isSubmitting = true;
+    this.cv
+      .deleteChallenge(parseInt(this.challenge.id))
+      .subscribe(challenge => {
+        this.isSubmitting = false;
+        location.href = '/';
+      }, error => {
+        console.error(JSON.stringify(error));
+        this.isSubmitting = false;
+      });
   }
   updateSucceeded(challenge) {
     console.log(challenge)
