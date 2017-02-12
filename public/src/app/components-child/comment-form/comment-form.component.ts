@@ -1,11 +1,11 @@
-import { Input, Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {Input, Component, OnInit} from '@angular/core';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 
 import {Comment} from '../../classes/comment';
 import {Challenge} from '../../classes/challenge';
 
-import { CommentService } from '../../services/comment.service';
-import { UserService } from '../../services/user.service';
+import {CommentService} from '../../services/comment.service';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-comment-form',
@@ -19,8 +19,9 @@ export class CommentFormComponent implements OnInit {
   @Input() id: string;
   private isSubmitting: boolean = false;
   private commentForm: FormGroup;
-  constructor(private us:UserService, private cs: CommentService, private fb: FormBuilder) {
-    us.loggedUserSource.subscribe(user=>{
+
+  constructor(private us: UserService, private cs: CommentService, private fb: FormBuilder) {
+    us.loggedUserSource.subscribe(user => {
       console.log(user);
     });
   }
@@ -31,25 +32,32 @@ export class CommentFormComponent implements OnInit {
     });
 
   }
-  createComment({value, valid}: {value: any, valid: boolean}){
-    this.isSubmitting = true;
-    value.challenge = this.id;
-    if(this.comment){
-      value.comment = this.comment._id;
-    }
 
-    console.log(value);
-    this.cs.createComment(value).subscribe((res:any)=>this.succeed(res.data));
+  createComment({value, valid}: {value: any, valid: boolean}) {
+    if (this.us.isLoggedIn()) {
+      this.isSubmitting = true;
+      value.challenge = this.id;
+      if (this.comment) {
+        value.comment = this.comment._id;
+      }
+
+      console.log(value);
+      this.cs.createComment(value).subscribe((res: any) => this.succeed(res.data));
+    } else {
+      this.us.openLoginDialog()
+    }
   }
-  succeed(comment){
+
+  succeed(comment) {
     this.isSubmitting = false;
     console.log(this.comments);
-    if(this.comment){
-      this.comments.forEach((cmt)=>{
-        if(cmt._id == this.comment._id){
-          if(!cmt.comments){
+    if (this.comment) {
+      this.comments.forEach((cmt) => {
+        if (cmt._id == this.comment._id) {
+          if (!cmt.comments) {
             cmt["comments"] = [];
-          };
+          }
+          ;
           cmt.comments.unshift(comment);
         }
       })

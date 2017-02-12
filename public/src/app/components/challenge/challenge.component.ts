@@ -35,23 +35,7 @@ export class ChallengeComponent implements OnInit {
       console.log('nhan user');
     });
     this.userSub = new Subscription();
-    route.params.subscribe(params => {
 
-      cv.getChallenge(params['id']).subscribe((res: any) => {
-        this.challenge = res.data;
-        if(this.challenge.timelines) this.checkTimelines(this.challenge.timelines);
-        if(!this.user){
-          this.user = uS.user;
-          this.checkFollow(this.user,res.data);
-        } else {
-          this.checkFollow(this.user,res.data);
-        }
-
-
-        this.cv.challengeSource.next(res.data);
-        // console.log(this.challenge);
-      });
-    });
 
 
     ts.getTypes()
@@ -68,6 +52,27 @@ export class ChallengeComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.route.params.subscribe(params => {
+
+      this.cv.getChallenge(params['id']).subscribe((res: any) => {
+        this.challenge = res.data;
+        if(this.challenge.timelines) this.checkTimelines(this.challenge.timelines);
+        if(!this.user){
+          if(this.uS.user){
+            this.user = this.uS.user;
+            this.checkFollow(this.user,res.data);
+          }
+
+        } else {
+
+          this.checkFollow(this.user,res.data);
+        }
+
+
+        this.cv.challengeSource.next(res.data);
+        // console.log(this.challenge);
+      });
+    });
   }
   intervalCountdown(){
     if(this.countdown){
