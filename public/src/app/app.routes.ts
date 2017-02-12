@@ -4,6 +4,7 @@ import {AuthGuardService} from './services/auth-guard.service';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './components/home/home.component';
+import {AdminComponent} from './components/admin/admin.component';
 import {FilterChallengesComponent} from './components/filter-challenges/filter-challenges.component';
 
 import {ChallengeComponent} from './components/challenge/challenge.component';
@@ -31,6 +32,7 @@ import {ProfileSettingsComponent} from "./components/profile-settings/profile-se
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
+  {path: 'admin', component: AdminComponent, pathMatch: 'full'},
 
   {path: 'categories/:name', component: FilterChallengesComponent},
   {path: 'recommendations', component: FilterChallengesComponent},

@@ -1,0 +1,8 @@
+<div *ngIf="challenges">
+  <div *ngFor="let challenge of challenges">
+    <a [routerLink]="['/challenges/',challenge._id]">{{challenge.title}}</a>
+    {{challenge.description}}
+    <img [src]="challenge.creator.avatar" alt="">
+
+  </div>
+</div>
