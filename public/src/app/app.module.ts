@@ -29,7 +29,6 @@ import {NotContainPipe} from './pipes/notContain.pipe';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { ChallengesComponent } from './components/challenges/challenges.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { HeaderComponent } from './components-shared/header/header.component';
@@ -61,8 +60,12 @@ import { ChallengeSolutionComponent } from './components/challenge-solution/chal
 import { ChallengeSolutionCreateComponent } from './components/challenge-solution-create/challenge-solution-create.component';
 import { ChallengeSolutionEditComponent } from './components/challenge-solution-edit/challenge-solution-edit.component';
 import { ChallengeWrapperComponent } from './components/challenge-wrapper/challenge-wrapper.component';
+<<<<<<< HEAD
 import { CommentComponent } from './components-child/comment/comment.component';
 import { CommentSubComponent } from './components-child/comment-sub/comment-sub.component';
+=======
+import { FollowChallengesComponent } from './components/follow-challenges/follow-challenges.component';
+>>>>>>> 80bfbef2c8dcab8ffec4a7ebd80b8ace17e9b028
 
 @NgModule({
   declarations: [
@@ -72,7 +75,6 @@ import { CommentSubComponent } from './components-child/comment-sub/comment-sub.
     FroalaEditorDirective,
     FroalaViewDirective,
     HomeComponent,
-    ChallengesComponent,
     NotificationsComponent,
     ProfilesComponent,
     HeaderComponent,
@@ -106,8 +108,12 @@ import { CommentSubComponent } from './components-child/comment-sub/comment-sub.
     ChallengeSolutionEditComponent,
     ChallengeSolutionsComponent,
     ChallengeWrapperComponent,
+<<<<<<< HEAD
     CommentComponent,
     CommentSubComponent,
+=======
+    FollowChallengesComponent,
+>>>>>>> 80bfbef2c8dcab8ffec4a7ebd80b8ace17e9b028
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

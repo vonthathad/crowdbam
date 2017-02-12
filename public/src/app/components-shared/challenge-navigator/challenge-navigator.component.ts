@@ -22,28 +22,31 @@ export class ChallengeNavigatorComponent implements OnInit {
     if(this.ts.types){
       this.renderTypes(this.ts.types);
     }
+    let arrUrl = this.router.url.split('?')[0].split('/');
+    if(arrUrl[arrUrl.length - 1] == this.id.toString()){
+      this.current = 'overview';
+    } else {
+      this.current = arrUrl[arrUrl.length - 1];
+    }
 
 
-    let event = new MouseEvent('click', { bubbles: true });
-    this.renderer.invokeElementMethod(
-      this.fileInput.nativeElement, 'dispatchEvent', [event]);
-    this.fileInput.nativeElement.click()
+    // let event = new MouseEvent('click', { bubbles: true });
+    // this.renderer.invokeElementMethod(
+    //   this.fileInput.nativeElement, 'dispatchEvent', [event]);
+    // this.fileInput.nativeElement.click()
   }
   renderTypes(types) {
-    this.types = types;
+    this.types = types.slice();
     let overviewIndex;
     this.types.forEach((type, index) => {
-      console.log(type.id);
       if (type.id === 'overview') {
         overviewIndex = index;
       }
     })
     this.types.splice(overviewIndex, 1);
-    console.log(JSON.stringify(this.types));
   }
   onTypeClick(typeId) {
     this.ts.typeSource.next(typeId);
-    console.log(typeId);
     this.router.navigate([`/challenges/${this.id}/others/${typeId}`]);
   }
   onTimeClick() {

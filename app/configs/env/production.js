@@ -1,5 +1,6 @@
 module.exports = {
     database: 'mongodb://admin:crowdbam123@188.166.247.131:63432/crowdbam',
+    // database: 'mongodb://admin:crowdbam123@23.88.239.10:61511/crowdbam',
     key: {
         privateKey: 'PRIVATEKEYGOESHERE',
         tokenExpiry: 1 * 30 * 1000 * 60 //1 hour

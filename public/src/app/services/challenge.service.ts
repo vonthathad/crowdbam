@@ -20,7 +20,6 @@ export class ChallengeService {
         // this.loggedUser$.subscribe(user => {this.user = user;});
         this.challange$.subscribe(challenge => {
             this.challenge = challenge;
-            console.log(JSON.stringify(this.challenge));
         });
     }
     // GET CHELLENGE LIST
@@ -78,7 +77,6 @@ export class ChallengeService {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         });
-        console.log(challenge);
         return this.rest.put({
             url: `api/challenges/${id}`,
             body: challenge,

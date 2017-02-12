@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import {ChallengeService} from "../../services/challenge.service";
 import {Challenge} from "../../classes/challenge";
+
 @Component({
   selector: 'app-filter-challenges',
   templateUrl: './filter-challenges.component.html',
@@ -51,14 +52,19 @@ export class FilterChallengesComponent implements OnInit {
     if(this.filters["sort"]) this.params["order"] = this.filters["sort"];
     switch (this.filters["mode"]){
       case "categories":
-            if(this.filters["name"]){
-              this.params["category"] = this.filters["name"];
-            }
-            break;
+        if(this.filters["name"]){
+          this.params["category"] = this.filters["name"];
+        }
+        break;
       case "recommendations":
         this.params["recommendations"] = true;
         break;
       case "search":
+        if(this.filters["text"]){
+          this.params["text"] = this.filters["text"];
+        }
+        break;
+      case "follows":
         if(this.filters["text"]){
           this.params["text"] = this.filters["text"];
         }
@@ -120,5 +126,4 @@ export class FilterChallengesComponent implements OnInit {
     };
     return obj;
   }
-
 }

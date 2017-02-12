@@ -4,7 +4,6 @@ import { AuthGuardService } from './services/auth-guard.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { ChallengesComponent } from './components/challenges/challenges.component';
 import { FilterChallengesComponent } from './components/filter-challenges/filter-challenges.component';
 
 import { ChallengeComponent } from './components/challenge/challenge.component';
@@ -27,6 +26,7 @@ import { ChallengeSolutionComponent } from './components/challenge-solution/chal
 import { ChallengeSolutionsComponent } from './components/challenge-solutions/challenge-solutions.component';
 import { ChallengeSolutionEditComponent } from './components/challenge-solution-edit/challenge-solution-edit.component';
 import { ChallengeSolutionCreateComponent } from './components/challenge-solution-create/challenge-solution-create.component';
+import {FollowChallengesComponent} from "./components/follow-challenges/follow-challenges.component";
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -34,11 +34,13 @@ const routes: Routes = [
     { path: 'categories/:name', component: FilterChallengesComponent },
     { path: 'recommendations', component: FilterChallengesComponent },
     { path: 'challenges', component: FilterChallengesComponent },
+    { path: 'profiles/:id/follows', component: FollowChallengesComponent },
     { path: 'search', component: FilterChallengesComponent },
     { path: 'c/:url', component: ChallengeComponent },
 
-    
+
     {
+
         path: 'challenges/:id/solutions', component: ChallengeSolutionsComponent,
     },
     {
@@ -66,7 +68,7 @@ const routes: Routes = [
     {
         path: 'challenges/:id', component: ChallengeComponent,
         children: [
-            // { path: '',  component: ChallengeHtmlComponent },
+            { path: '',  component: ChallengeHtmlComponent },
             { path: 'others/:type', component: ChallengeHtmlComponent },
             { path: 'timeline', component: ChallengeTimelineComponent },
             { path: 'comments', component: ChallengeCommentsComponent }
