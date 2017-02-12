@@ -58,10 +58,11 @@ export class ChallengeEditTimelineComponent implements OnInit {
       if (challenge.timelines[i].deadlineDate) {
         date = new Date(challenge.timelines[i].deadlineDate).getTime();
         challenge.timelines[i].deadline = date.toString();
-      } else {
-        date = parseInt(challenge.timelines[i].deadline);
-        challenge.timelines[i].deadlineDate = new Date(date);
       }
+      // else {
+      //   date = parseInt(challenge.timelines[i].deadline);
+      //   challenge.timelines[i].deadlineDate = new Date(date);
+      // }
     }
   }
   setStatusTimeline(challenge){
