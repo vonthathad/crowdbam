@@ -1,9 +1,19 @@
 {
-  "name": "docs",
+  "name": "crowdbam",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
+  },
+  "main": "./bin/www",
+  "script": "./bin/www",
+  "env": {
+    "NODE_ENV": "production",
+    "CHANNEL": "beta",
+    "DOMAIN": "crowdbam.com",
+    "PORT": "8456",
+    "PROTOCOL": "http",
+    "AWESOME_SERVICE_API_TOKEN": "xxx"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
