@@ -112,18 +112,13 @@ export class ChallengeService {
             'Authorization': `Bearer ${token}`,
             'Content-Type': null
         });
-        // console.log("Challenge " + JSON.stringify(input));
-        // return this.rest.post({
-        //     url: `api/challenges`,
-        //     body: challenge,
-        //     headers: headers
-        // });
+        console.log("Challenge " + JSON.stringify(input));
+        return this.rest.post({
+            url: `api/challenges/${id}/file`,
+            body: input,
+            headers: headers
+        });
 
-        let options = new RequestOptions({ headers: headers });
-        return this.http
-            .post(`/api/challenges/${id}/image`, input, options)
-            .map((res: any) => res.json())
-            .catch((error: any) => Observable.throw(error || 'Server error'));;
     }
 
 }

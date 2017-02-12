@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
+import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormGroup, FormArray, Validators, FormBuilder} from '@angular/forms';
 
-import { CustomValidatorService } from '../../services/custom-validator.service';
-import { ChallengeService } from '../../services/challenge.service';
-import { CategoryService } from '../../services/category.service';
-import { UserService } from '../../services/user.service';
-import { FileValidatorService } from '../../services/file-validator.service';
+import {CustomValidatorService} from '../../services/custom-validator.service';
+import {ChallengeService} from '../../services/challenge.service';
+import {CategoryService} from '../../services/category.service';
+import {UserService} from '../../services/user.service';
+import {FileValidatorService} from '../../services/file-validator.service';
 
-import { Challenge } from '../../classes/challenge';
+import {Challenge} from '../../classes/challenge';
 
-import { ValidatedUploadComponent } from '../../components-child/validated-upload/validated-upload.component';
+import {ValidatedUploadComponent} from '../../components-child/validated-upload/validated-upload.component';
 
 @Component({
   selector: 'app-challenge-edit-basic',
@@ -22,7 +22,7 @@ export class ChallengeEditBasicComponent implements OnInit {
   private challengeForm: FormGroup;
   private errorEmail: string;
   private imgSrc: string;
-  private categoryOptions: { value: string, label: string, isChoosen: boolean }[];
+  private categoryOptions: {value: string, label: string, isChoosen: boolean}[];
   private challenge: Challenge;
   private id: number;
   private isSubmitting: boolean = false;
@@ -39,12 +39,13 @@ export class ChallengeEditBasicComponent implements OnInit {
       title: ['', [Validators.required]],
       description: ['', Validators.compose([Validators.required, Validators.maxLength(140)])],
       prize: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]+")])],
-      img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall])],
+      img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall, this.fvs.isTooBig])],
       categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))
     });
     console.log(JSON.stringify(this.cv.challenge));
     if (this.cv.challenge) this.renderChallenge(this.cv.challenge);
   }
+
   renderChallenge(challenge) {
     if (challenge) {
       this.challenge = challenge;
@@ -57,13 +58,17 @@ export class ChallengeEditBasicComponent implements OnInit {
     }
     if (this.categoryOptions) {
       this.categoryOptions.forEach((_category) => {
-        if (this.challenge.categories.find(category => { return category.id === _category.value })) {
+        if (this.challenge.categories.find(category => {
+            return category.id === _category.value
+          })) {
           _category.isChoosen = true;
-        };
+        }
+        ;
       });
     }
     console.log(this.categoryOptions);
   }
+
   renderCategoryOptions(categoryData) {
     this.categoryOptions = [];
     categoryData.forEach(category => {
@@ -76,7 +81,8 @@ export class ChallengeEditBasicComponent implements OnInit {
       )
     });
   }
-  updateChallenge({value, valid}: { value: Challenge, valid: boolean }) {
+
+  updateChallenge({value, valid}: {value: Challenge, valid: boolean}) {
     // console.log( this.fileInput.nativeElement.files[0]);
     if (this.us.isLoggedIn()) {
       let fileInput = this.vuc.fileInput;
@@ -102,6 +108,7 @@ export class ChallengeEditBasicComponent implements OnInit {
       this.us.openLoginDialog();
     }
   }
+
   _updateChallenger(imgUrl, challenger) {
     this.isSubmitting = true;
     challenger.thumb = imgUrl;
@@ -117,7 +124,8 @@ export class ChallengeEditBasicComponent implements OnInit {
         this.isSubmitting = false;
       });
   }
-  deleteChallenge(){
+
+  deleteChallenge() {
     this.isSubmitting = true;
     this.cv
       .deleteChallenge(parseInt(this.challenge.id))
@@ -129,10 +137,12 @@ export class ChallengeEditBasicComponent implements OnInit {
         this.isSubmitting = false;
       });
   }
+
   updateSucceeded(challenge) {
     console.log(challenge)
     alert('update successfull');
   }
+
   updateFailed() {
     alert('update failed');
   }
