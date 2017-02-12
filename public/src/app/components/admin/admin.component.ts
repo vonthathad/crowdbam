@@ -21,9 +21,14 @@ export class AdminComponent implements OnInit {
     if(this.us.user) this.getChallenges(this.us.user);
   }
   getChallenges(user){
-    this.cs.getChallenges({review:true}).subscribe((res:any)=>{
-      this.renderChallenges(res.data);
-    })
+    if(user.role == 'admin' || user.role == 'manager'){
+      this.cs.getChallenges({review:true}).subscribe((res:any)=>{
+        console.log(res.data);
+        this.renderChallenges(res.data);
+      })
+    } else {
+      location.href = '/';
+    }
   }
   renderChallenges(challenges){
     this.challenges = challenges;
