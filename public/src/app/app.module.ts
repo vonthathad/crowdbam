@@ -60,12 +60,9 @@ import { ChallengeSolutionComponent } from './components/challenge-solution/chal
 import { ChallengeSolutionCreateComponent } from './components/challenge-solution-create/challenge-solution-create.component';
 import { ChallengeSolutionEditComponent } from './components/challenge-solution-edit/challenge-solution-edit.component';
 import { ChallengeWrapperComponent } from './components/challenge-wrapper/challenge-wrapper.component';
-<<<<<<< HEAD
 import { CommentComponent } from './components-child/comment/comment.component';
 import { CommentSubComponent } from './components-child/comment-sub/comment-sub.component';
-=======
 import { FollowChallengesComponent } from './components/follow-challenges/follow-challenges.component';
->>>>>>> 80bfbef2c8dcab8ffec4a7ebd80b8ace17e9b028
 
 @NgModule({
   declarations: [
@@ -108,12 +105,9 @@ import { FollowChallengesComponent } from './components/follow-challenges/follow
     ChallengeSolutionEditComponent,
     ChallengeSolutionsComponent,
     ChallengeWrapperComponent,
-<<<<<<< HEAD
     CommentComponent,
     CommentSubComponent,
-=======
-    FollowChallengesComponent,
->>>>>>> 80bfbef2c8dcab8ffec4a7ebd80b8ace17e9b028
+    FollowChallengesComponent
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [
