@@ -50,7 +50,9 @@ exports.list = function(req, res) {
         skip = page > 0 ? ((page - 1) * paging) : 0;
     var conds = [];
     var match = {};
-    conds.push({ public: true });
+    if(!req.query.user || parseInt(req.query.user) != req.user._id){
+        conds.push({ public: true });
+    }
     if (req.query.category) conds.push({ categories: req.query.category });
     if (req.query.follow) conds.push({ follows: parseInt(req.query.follow) });
     if (req.query.recommendations && req.user._id){
@@ -203,19 +205,15 @@ function checkExists(dir, callback) {
         }
     });
 }
-exports.uploadImage = function(req, res) {
-    console.log('vo image');
+exports.uploadFile = function(req, res) {
     var form = new formidable.IncomingForm();
-    var cDir = 'challenge/' + req.challenge._id;
-    var uploadDir = __dirname + '/../../public/uploaded/' + dir + '/' + cDir;
-
-
+    var cDir = 'challenges/' + req.challenge._id;
+    var uploadDir = __dirname + '/../../public/uploaded/' + cDir;
     form.uploadDir = uploadDir;
     console.log(form.uploadDir);
     form.keepExtensions = true;
     form.maxFields = 1;
     form.maxFieldsSize = 4096;
-
     var count = 0;
     checkExists(uploadDir, function() {
         form.parse(req, function(err, fields, files) {});
@@ -231,18 +229,16 @@ exports.uploadImage = function(req, res) {
     form.on('file', function(name, file) {
         console.log(file);
         count++;
-        if ((file.type == 'image/jpeg' || file.type == 'image/png') && file.size < 300000 && count == 1) {
+        if (file.size < 300000 && count == 1) {
             var arrSplit = file.path.split('/');
             var name = arrSplit[arrSplit.length - 1];
-            return res.json({ link: config.server.host + '/' + dir + '/' + cDir + '/' + name });
+            return res.json({ link: config.server.host + '/' + cDir + '/' + name });
         } else {
             fs.unlink(file.path);
-            console.log('loi dinh dang');
+            console.log('file qua lon');
             return res.status(400).send();
         }
     });
-
-
 };
 exports.get = function(req, res) {
     return res.json({ data: req.challenge });

@@ -63,6 +63,7 @@ import { ChallengeWrapperComponent } from './components/challenge-wrapper/challe
 import { CommentComponent } from './components-child/comment/comment.component';
 import { CommentSubComponent } from './components-child/comment-sub/comment-sub.component';
 import { FollowChallengesComponent } from './components/follow-challenges/follow-challenges.component';
+import { ProfileNavigatorComponent } from './components-shared/profile-navigator/profile-navigator.component';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { FollowChallengesComponent } from './components/follow-challenges/follow
     ChallengeWrapperComponent,
     CommentComponent,
     CommentSubComponent,
-    FollowChallengesComponent
+    FollowChallengesComponent,
+    ProfileNavigatorComponent
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [

@@ -25,7 +25,7 @@ export class ChallengeHtmlComponent implements OnInit {
             this.html = html.html;
           }
         })
-        console.log(JSON.stringify(htmls));
+        // console.log(JSON.stringify(htmls));
       }
     });
   }
@@ -61,7 +61,7 @@ export class ChallengeHtmlComponent implements OnInit {
           if (!htmlAlready) {
             this.html = res['data'].html;
           }
-          console.log("FF " + this.htmls);
+          // console.log("FF " + this.htmls);
           if (this.htmls) {
             let i = this.htmls.map(e => e.type).indexOf(this.type);
             if (i == -1) {

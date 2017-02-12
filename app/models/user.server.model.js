@@ -38,9 +38,15 @@ var UserSchema = new Schema({
         type: Boolean,
         default: false
     },
+    bio: String,
+    website: String,
     role: {
         type: String,
         default: 'user'
+    },
+    created: {
+        type: Date,
+        default: Date.now()
     },
     provider: {
         type: String,

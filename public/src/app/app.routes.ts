@@ -34,7 +34,6 @@ const routes: Routes = [
     { path: 'categories/:name', component: FilterChallengesComponent },
     { path: 'recommendations', component: FilterChallengesComponent },
     { path: 'challenges', component: FilterChallengesComponent },
-    { path: 'profiles/:id/follows', component: FollowChallengesComponent },
     { path: 'search', component: FilterChallengesComponent },
     { path: 'c/:url', component: ChallengeComponent },
 
@@ -74,9 +73,13 @@ const routes: Routes = [
             { path: 'comments', component: ChallengeCommentsComponent }
         ]
     },
-
-
-    { path: 'profiles/:id', component: ProfilesComponent },
+    { path: 'profiles/:id', component: ProfilesComponent,
+      children: [
+        { path: 'follows', component: FollowChallengesComponent },
+        { path: 'challenges', component: FollowChallengesComponent },
+        { path: 'settings', component: FollowChallengesComponent }
+      ]
+    },
     { path: 'forgot-password', component: ForgotPasswordComponent },
 ];
 

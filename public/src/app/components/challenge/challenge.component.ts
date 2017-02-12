@@ -31,20 +31,18 @@ export class ChallengeComponent implements OnInit {
   private interval: any;
   constructor(private uS: UserService, private cv: ChallengeService, private route: ActivatedRoute, private router: Router, private ts: TypeService,private aS: ActionService) {
     uS.loggedUserSource.subscribe(user => {
-      this.user = user
+      this.user = user;
+      console.log('nhan user');
     });
     this.userSub = new Subscription();
     route.params.subscribe(params => {
+
       cv.getChallenge(params['id']).subscribe((res: any) => {
         this.challenge = res.data;
         if(this.challenge.timelines) this.checkTimelines(this.challenge.timelines);
         if(!this.user){
-          this.userSub = uS.loggedUserSource.subscribe(user => {
-            if(user){
-              this.checkFollow(user,res.data);
-            }
-            this.userSub.unsubscribe();
-          })
+          this.user = uS.user;
+          this.checkFollow(this.user,res.data);
         } else {
           this.checkFollow(this.user,res.data);
         }
@@ -69,7 +67,6 @@ export class ChallengeComponent implements OnInit {
       this.type = params['type']
     });
   }
-
   ngOnInit() {
   }
   intervalCountdown(){

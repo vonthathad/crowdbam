@@ -1,3 +1,36 @@
-<p>
-  profiles works!
-</p>
+
+<div *ngIf="selectedUser"  class="bg-grey-400 text-center">
+  <div class="container">
+    <div><img class="avatar" [src]="selectedUser.avatar"></div>
+    <div class="type-28 bold text-primary">{{selectedUser.displayName}}</div>
+    <div class="type-12 text-time">
+      Join: {{selectedUser.created | date:"MM/dd/yyyy"}}
+    </div>
+  </div>
+
+</div>
+<div *ngIf="selectedUser">
+  <app-profile-navigator [selectedUser]="selectedUser" [isMine]="isMine" [current]="current"></app-profile-navigator>
+</div>
+<div class="main-frame bg-grey-200">
+  <router-outlet ></router-outlet>
+</div>
+<div *ngIf="current == ''" class="bg-grey-200 about-frame">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+          <div class="col-md-4 type-16 bold text-gray">Biography:</div>
+          <div class="col-md-8">Not have a biography yet</div>
+        </div>
+        <div class="divider"></div>
+        <div class="row">
+          <div class="col-md-4 type-18 bold text-gray">Website:</div>
+          <div class="col-md-8">Not have a website yet</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,25 @@
+<div class="project-details-content">
+  <div class="project-details-nav">
+    <div class="container js-project-nav-scroll">
+      <div class="row">
+        <div class="project-nav__links col-md-12 text-center">
+          <a class="tabbed-nav__link" [ngClass]="{'is-active': current == ''}" (click)="onTabClick('')">
+            About
+            <!--<span class="count">326</span>-->
+          </a>
+          <a class="tabbed-nav__link" [ngClass]="{'is-active': current == 'challenges'}" (click)="onTabClick('challenges')">
+            Challenges
+          </a>
+          <a class="tabbed-nav__link" [ngClass]="{'is-active': current == 'follows'}" (click)="onTabClick('follows')">
+            Follows
+            <!--<span class="count">326</span>-->
+          </a>
+          <a *ngIf="isMine" class="tabbed-nav__link" [ngClass]="{'is-active': current == 'settings'}" (click)="onTabClick('settings')">
+            Settings
+            <!--<span class="count">326</span>-->
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
