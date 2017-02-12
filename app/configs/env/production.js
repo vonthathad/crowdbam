@@ -14,6 +14,12 @@ module.exports = {
         callbackURL: '/oauth/facebook/callback',
         profileFields: ['id', 'displayName','email','gender']
     },
+   google: {
+      clientID: '844189525883-op8r9biu0u8rotve147erv08dsmv3fr6.apps.googleusercontent.com',
+      clientSecret: 'cNztTZyza-QkaijXejKP2lRj',
+      callbackURL: '/oauth/google/callback',
+      profileFields: ['id', 'displayName', 'email', 'gender']
+   },
     email: {
         username: "crowdbam.com",
         password: "crowdbam123",
