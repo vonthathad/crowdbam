@@ -15,8 +15,8 @@ module.exports = {
         profileFields: ['id', 'displayName','email','gender']
     },
    google: {
-      clientID: '844189525883-op8r9biu0u8rotve147erv08dsmv3fr6.apps.googleusercontent.com',
-      clientSecret: 'cNztTZyza-QkaijXejKP2lRj',
+      clientID: '844189525883-okpr9g9gjb5kempdsg2caj74j98bip5n.apps.googleusercontent.com',
+      clientSecret: 'luoTiezuErz5H9A9CatigGjF',
       callbackURL: '/oauth/google/callback',
       profileFields: ['id', 'displayName', 'email', 'gender']
    },
