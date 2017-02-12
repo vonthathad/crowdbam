@@ -55,7 +55,7 @@
               <textarea required id="html" type="description" class="form-control" formControlName="html" [ngModel]="html"></textarea>
 
               <div class="content">
-                <div [froalaEditor] [(froalaModel)]="html"></div>
+                <div [froalaEditor]="titleOptions" [(froalaModel)]="html"></div>
               </div>
 
             </div>

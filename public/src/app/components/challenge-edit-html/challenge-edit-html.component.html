@@ -1,6 +1,6 @@
 <div *ngIf="type">
   <div class="content">
-    <div [froalaEditor] [(froalaModel)]="html"></div>
+    <div [froalaEditor]="titleOptions" [(froalaModel)]="html"></div>
   </div>
   <div *ngIf="showButton">
     <button class="btn btn-fill btn-primary" *ngIf="!isCreated" (click)="createContent()"><i class="ion-checkmark-circled"></i> Create</button>
