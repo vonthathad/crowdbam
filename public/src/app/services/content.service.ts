@@ -32,7 +32,7 @@ export class ContentService {
             headers: headers
         });
     }
-    // GET CONTENT 
+    // GET CONTENT
     getContent(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
@@ -48,7 +48,7 @@ export class ContentService {
     createContent(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+          'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         });
         return this.rest.post({
@@ -63,7 +63,7 @@ export class ContentService {
     updateContent(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+          'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         });
         return this.rest.put({
@@ -77,7 +77,7 @@ export class ContentService {
     deleteContent(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+          'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         });
         return this.rest.delete({

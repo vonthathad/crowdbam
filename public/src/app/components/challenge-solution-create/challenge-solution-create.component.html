@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 text-center">
       <h1 class="text-primary">Get started</h1>
-      <form [formGroup]="solutionForm" (ngSubmit)="createChallenge(solutionForm)">
+      <form [formGroup]="solutionForm" (ngSubmit)="createSolution(solutionForm)">
         <div class="content text-left">
           <div class="form-input-group">
             <div class="number-circle">1</div>
@@ -52,13 +52,18 @@
             <div class="form-group label-floating is-empty">
               <label class="control-label light type-18" for="html"><sup class="text-gray">*</sup> Detail
                 of solution:</label>
-              <textarea required id="html" type="description" class="form-control" formControlName="html"></textarea>
+              <textarea required id="html" type="description" class="form-control" formControlName="html" [ngModel]="html"></textarea>
+
+              <div class="content">
+                <div [froalaEditor] [(froalaModel)]="html"></div>
+              </div>
+
             </div>
 
             <div [hidden]="solutionForm.get('html').valid || solutionForm.get('html').untouched"
                  class="alert alert-danger">
               <div *ngIf="solutionForm.get('html').hasError('required')">
-                Description is required!
+                Detail is required!
               </div>
             </div>
           </div>
@@ -66,7 +71,7 @@
 
         <div class="text-center">
           <button type="submit" [disabled]="!solutionForm.valid" class="btn btn-primary btn-fill btn-lg text-center">
-            Create Challenge
+            Create Solution
           </button>
         </div>
       </form>

@@ -36,7 +36,7 @@ export class CategoryService {
     createCategory(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+          'Authorization': `Bearer ${token}`,
             'Content-Type': null
         });
         // console.log("Category " + JSON.stringify(input));

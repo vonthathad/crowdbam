@@ -36,7 +36,7 @@ export class TypeService {
             headers: headers
         });
     }
-    // GET TYPE 
+    // GET TYPE
     getType(id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
@@ -52,7 +52,7 @@ export class TypeService {
     createType(input: any): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+          'Authorization': `Bearer ${token}`,
             'Type-Type': null
         });
         // console.log("Type " + JSON.stringify(input));
@@ -73,7 +73,7 @@ export class TypeService {
     updateType(type: Type, id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+          'Authorization': `Bearer ${token}`,
             'Type-Type': 'application/json'
         });
         console.log(type);
@@ -88,7 +88,7 @@ export class TypeService {
     deleteType(type: Type, id: number): Observable<any[]> {
         var token = this.rest.getToken();
         let headers = new Headers({
-            'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaWMuZGhAZ21haWwuY29tIiwiaWF0IjoxNDg1NjczNjk3fQ.-RV4EcP-g2byk9kijsoAJ-NQaMHFiwwkm71XJpNaTto`,
+          'Authorization': `Bearer ${token}`,
             'Type-Type': 'application/json'
         });
         console.log(type);

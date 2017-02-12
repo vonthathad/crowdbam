@@ -21,6 +21,9 @@ import { CONTENT_PROVIDER } from './services/content.service';
 import { TYPE_PROVIDER } from './services/type.service';
 import { HTML_PROVIDER } from './services/html.service';
 import { ACTION_PROVIDER } from './services/action.service';
+import { SOLUTION_PROVIDER } from './services/solution.service';
+
+
 import {OrderByPipe} from './pipes/orderBy.pipe';
 import {NotContainPipe} from './pipes/notContain.pipe';
 
@@ -58,6 +61,8 @@ import { ChallengeSolutionComponent } from './components/challenge-solution/chal
 import { ChallengeSolutionCreateComponent } from './components/challenge-solution-create/challenge-solution-create.component';
 import { ChallengeSolutionEditComponent } from './components/challenge-solution-edit/challenge-solution-edit.component';
 import { ChallengeWrapperComponent } from './components/challenge-wrapper/challenge-wrapper.component';
+import { CommentComponent } from './components-child/comment/comment.component';
+import { CommentSubComponent } from './components-child/comment-sub/comment-sub.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +106,8 @@ import { ChallengeWrapperComponent } from './components/challenge-wrapper/challe
     ChallengeSolutionEditComponent,
     ChallengeSolutionsComponent,
     ChallengeWrapperComponent,
+    CommentComponent,
+    CommentSubComponent,
   ],
   entryComponents: [FormLoginWrapperComponent],
   imports: [
@@ -123,6 +130,7 @@ import { ChallengeWrapperComponent } from './components/challenge-wrapper/challe
     CONTENT_PROVIDER,
     TYPE_PROVIDER,
     HTML_PROVIDER,
+    SOLUTION_PROVIDER,
     FacebookService,
     ACTION_PROVIDER,
     { provide: LocationStrategy, useClass: PathLocationStrategy },

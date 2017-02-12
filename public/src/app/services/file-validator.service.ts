@@ -28,6 +28,7 @@ export class FileValidatorService {
 
         let file = fileInput.target.files[0];
         console.log("File size " + file.size);
+        console.log("File size type " + typeof file.size);
         return (file.size <= 300000) ? null : { 'isTooBig': true };
     }
     buildErrorMessage(control: any) {
