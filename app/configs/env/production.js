@@ -28,7 +28,7 @@ module.exports = {
     },
     app: {
         id: '170584416691811',
-        name: 'Title',
+        title: 'Title',
         description: 'Description',
         url: process.env.PROTOCOL+'://'+process.env.CHANNEL+'.'+process.env.DOMAIN,
         image: process.env.PROTOCOL+'://'+process.env.CHANNEL+'.'+process.env.DOMAIN+'/sources/ads.jpg'

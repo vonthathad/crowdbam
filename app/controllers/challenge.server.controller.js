@@ -357,8 +357,8 @@ exports.renderChallenge = function(req, res, next) {
     Challenge.findById(req.params.id).exec(function(err,challenge){
         if(challenge){
             var app = {};
-            app.id = config.app;
-            app.name = challenge.title;
+            app.id = config.app.id;
+            app.title = challenge.title;
             app.image = challenge.thumb;
             app.description = challenge.description;
             app.url = config.server.host + '/challenges/' + challenge._id;
