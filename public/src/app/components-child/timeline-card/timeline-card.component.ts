@@ -1,7 +1,7 @@
-import { Input, Output, Component, OnInit, EventEmitter } from '@angular/core';
+import {Input, Output, Component, OnInit, EventEmitter, ViewChild} from '@angular/core';
 
-import { Timeline } from '../../classes/timeline';
-import { DropdownValue } from '../../classes/dropdown-value';
+import {Timeline} from '../../classes/timeline';
+import {DropdownValue} from '../../classes/dropdown-value';
 @Component({
   selector: 'app-timeline-card',
   templateUrl: './timeline-card.component.html',
@@ -14,11 +14,13 @@ export class TimelineCardComponent implements OnInit {
   private inputHidden: boolean;
   private deadline: string;
   private description: string;
-  private hiddenOption :boolean;
+  private hiddenOption: boolean;
   @Input() timeline: Timeline;
   @Input() orderNum: number;
   @Output() updateValue = new EventEmitter();
   @Output() deleteTimeline = new EventEmitter();
+  @ViewChild('calendar') calendar: any;
+
   constructor() {
   }
 
@@ -38,24 +40,35 @@ export class TimelineCardComponent implements OnInit {
     this.dropdownValues.push(new DropdownValue('Other', 'Other'));
     this.otherValue = '';
     // setTimeout(() => {
-      // this.title = { value: this.timeline.title, label: this.timeline.title };
+    // this.title = { value: this.timeline.title, label: this.timeline.title };
     let foundTitle = true;
-    this.dropdownValues.forEach(dropdownValue=>{
-      if(dropdownValue.value == this.timeline.title){
+    this.dropdownValues.forEach(dropdownValue => {
+      if (dropdownValue.value == this.timeline.title) {
         this.title = dropdownValue;
         foundTitle = false;
       }
     })
-    if(foundTitle){
+    if (foundTitle) {
       this.title = this.dropdownValues[0];
     }
+
+    // prevent calendar from receive input
+    let caEle = this.calendar.nativeElement;
+    caEle.addEventListener('keydown', function(e) {
+      e.preventDefault();
+    }, false);
+    caEle.addEventListener('keyup', function(e) {
+      e.preventDefault();
+    }, false);
+
 
     // }, 100)
     this.hiddenOption = false;
   }
-  removeOption(){
+  removeOption() {
     this.hiddenOption = true;
   }
+
   _updateValue() {
 
     this.timeline.title = this.title.value;
@@ -65,8 +78,9 @@ export class TimelineCardComponent implements OnInit {
     } else {
       this.inputHidden = true;
     }
-    this.updateValue.emit({ orderNum: this.orderNum, timeline: this.timeline });
+    this.updateValue.emit({orderNum: this.orderNum, timeline: this.timeline});
   }
+
   _deleteTimeline() {
     this.deleteTimeline.emit(this.orderNum);
   }

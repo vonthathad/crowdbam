@@ -29,8 +29,8 @@
     <a  (click)="_deleteTimeline()" class="btn btn-simple btn-primary"><i class="ion-ios-close large"></i></a>
   </div>
   <div class="col-md-5 event-title">
-    <div class="form-input mt10">
-      <input [(ngModel)]="timeline.deadlineDate" name="deadlineDate" placeholder="Deadline..." class="form-control" ng2-datetime-picker close-on-select="true" (ngModelChange)="_updateValue()"/>
+    <div class="form-input mt10"  >
+      <input  [(ngModel)]="timeline.deadlineDate" name="deadlineDate" placeholder="Deadline..." class="form-control" ng2-datetime-picker close-on-select="true"  (ngModelChange)="_updateValue();" #calendar />
     </div>
     <div class="form-input mt10">
       <select name="title" [(ngModel)]="title" (change)="_updateValue()" placeholder="Title..." class="form-control">
