@@ -37,6 +37,11 @@ export class ActionService {
       callback(res.data.follow);
     });
   }
+  publishChallenge(id,callback){
+    this.cS.actionChallenge(id,'publish').subscribe((res:any) => {
+      callback(res.data);
+    });
+  }
   // get currentUser$() { return this.fc.currentUser$; }
 
 }

@@ -80,7 +80,12 @@
                     </div>
                 </div>
                 <div>
-                    <a *ngIf="user" class="btn btn-block btn-lg btn-primary btn-fill" [routerLink]="['/challenges/', challenge.id , 'solution-create']">Give solution</a>
+                    <a *ngIf="user && user._id != challenge.creator._id && user.role == 'user'" class="btn btn-block btn-lg btn-primary btn-fill" [routerLink]="['/challenges/', challenge.id , 'solution-create']">Give solution</a>
+                    <a *ngIf="user && user._id == challenge.creator._id && user.role == 'user'" class="btn btn-block btn-lg btn-primary btn-fill" [routerLink]="['/challenges/', challenge.id , 'edit']">Edit challenge</a>
+                    <a *ngIf="user && user.role != 'user'" class="btn btn-block btn-lg btn-primary btn-fill" (click)="onPublishChallenge()">
+                      <span *ngIf="challenge.publish">Remove publish</span>
+                      <span *ngIf="!challenge.publish">Publish</span>
+                    </a>
                     <a *ngIf="!user" class="btn btn-block btn-lg btn-primary btn-fill" (click)="uS.openLoginDialog()">Give solution</a>
                 </div>
                 <div class="row btn-social-group">
@@ -102,11 +107,14 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-    <div *ngIf="challenge && user && user._id == challenge.creator._id" class="alert alert-info alert-edit navbar-fixed-bottom">
-        <div class="col-md-8">
-            <p>This challenge cannot be published yet. View your checklist to see what tasks still need to be completed.</p>
+    <div *ngIf="challenge && user && user._id == challenge.creator._id && !challenge.publish" class="alert alert-info alert-edit navbar-fixed-bottom">
+        <div *ngIf="!challenge.review" class="col-md-8">
+            <p >This challenge cannot be published yet. Edit to review.</p>
         </div>
-        <div class="col-md-4 text-right"><a class="btn btn-white" [routerLink]="['/challenges/', challenge.id , 'edit']">Edit Challenge</a></div>
+        <div *ngIf="!challenge.review" class="col-md-4 text-right"><a class="btn btn-white" [routerLink]="['/challenges/', challenge.id , 'edit']">Edit Challenge</a></div>
+        <div *ngIf="challenge.review" class="container">
+          <p>This challenge is reviewing.</p>
+        </div>
 
     </div>
 </section>

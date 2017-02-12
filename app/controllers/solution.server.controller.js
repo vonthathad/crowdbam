@@ -34,7 +34,7 @@ exports.list = function(req,res) {
     var page = parseInt(req.query.page) || 1,
         skip = page > 0 ? ((page - 1) * paging) : 0;
     if (req.query.challenge) {
-        Solution.find({challenge: req.query.challenge})
+        Solution.find({challenge: req.query.challenge},'-html')
             .sort('-created')
             .limit(paging + 1)
             .populate('creator','avatar username displayName')

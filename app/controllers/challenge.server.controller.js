@@ -51,9 +51,12 @@ exports.list = function(req, res) {
     var conds = [];
     var match = {};
     if(!req.query.user || parseInt(req.query.user) != req.user._id){
-        conds.push({ public: true });
-    }
-    if (req.query.review) conds.push({ review: true });
+        if(req.query.review){
+            conds.push({ review: true });
+        } else {
+            conds.push({ publish: true });
+        }
+    };
     if (req.query.category) conds.push({ categories: req.query.category });
     if (req.query.follow) conds.push({ follows: parseInt(req.query.follow) });
     if (req.query.recommendations && req.user._id){
@@ -269,7 +272,7 @@ exports.update = function(req, res) {
     //     });
     // }
 
-    req.body.public = false;
+    req.body.publish = false;
     req.body._id = req.challenge._id;
     req.body.creator = req.user._id;
     Challenge.findByIdAndUpdate(req.challenge._id, req.body).exec(function(err, challenge) {
@@ -281,9 +284,11 @@ exports.review = function(req, res){
     req.challenge.review = true;
     req.challenge.save();
 };
-exports.public = function(req, res){
-    req.challenge.public = true;
+exports.publish = function(req, res){
+
+    req.challenge.publish = !req.challenge.publish;
     req.challenge.save();
+    res.status(200).send({data: req.challenge.publish});
 };
 exports.remove = function(req, res) {
     req.challenge.types.forEach(function(e) {

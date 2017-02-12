@@ -8,7 +8,7 @@
     </div>
     <div class="content clearfix">
       <h3>
-        <a class="author green-dark" [routerLink]="['/users/',comment.creator._id]">{{comment.creator.displayName}}</a>
+        <a class="author green-dark" [routerLink]="['/profiles/',comment.creator._id]">{{comment.creator.displayName}}</a>
         <!--<span>11 minutes ago</span>-->
         <span>{{time | timesince}} ago</span>
       </h3>

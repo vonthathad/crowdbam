@@ -138,6 +138,14 @@ export class ChallengeComponent implements OnInit {
     }
 
   }
+  onPublishChallenge(){
+    if(this.user){
+      this.aS.publishChallenge(this.id,(publish)=>{
+        this.challenge.publish = publish;
+      });
+    }
+
+  }
   onFollowChallenge(){
     if(this.user){
 

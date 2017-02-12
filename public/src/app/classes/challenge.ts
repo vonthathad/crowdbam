@@ -10,6 +10,8 @@ export class Challenge{
      public prize?: number,
      public url?: string,
      public categories?:Category[],
-     public timelines?:Timeline[]
+     public timelines?:Timeline[],
+     public review?: boolean,
+     public publish?: boolean
  ){}
 }

@@ -70,7 +70,7 @@ var ChallengeSchema = new Schema({
         ref: 'Type',
         default: []
     }],
-    public: {
+    publish: {
         type: Boolean,
         default: false
     },

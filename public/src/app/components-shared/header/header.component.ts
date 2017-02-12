@@ -109,6 +109,7 @@ export class HeaderComponent implements OnInit {
       this.searchBegin = false;
       if(this.searchFinished){
         this.page = 1;
+        this.filteredList = [];
         this.searchBegin = true;
         this.searchFinished = false;
         this.loadSearchQuery(this.query,this.page);
