@@ -1,6 +1,23 @@
-<div *ngIf="solutions">
-  <div *ngFor="let solution of solutions">
-    <a (click)="goToSolution(solution)">{{solution.title}}</a>
-    {{solution.description}}
+<div *ngIf="solutions && challenge">
+  <div class="row">
+    <div class="col-md-6" *ngFor="let solution of solutions">
+
+      <div class="card content">
+        <div class="clearfix">
+          <div class="pull-left">
+            <img class="avatar circle" [src]="solution.creator.avatar"> <a class="bold" [routerLink]="['/profiles/',solution.creator._id]">{{solution.creator.displayName}}</a>
+          </div>
+          <div class="pull-right text-gray text-time">
+            {{solution.created | timesince}} ago
+          </div>
+        </div>
+        <div class="divider"></div>
+        <h5 class="bold">{{solution.title}}</h5>
+        <div class="text-gray">{{solution.description}}</div>
+        <a [routerLink]="['/challenges/',challenge._id,'solutions',solution._id]">Read more</a>
+
+      </div>
+    </div>
   </div>
+
 </div>

@@ -1,7 +1,7 @@
 <section class="project-edit bg-grey-100 ">
   <div class="row">
     <div class="project-details-content">
-    <app-challenge-edit-navigator [id]="id"></app-challenge-edit-navigator>
+    <app-challenge-edit-navigator [id]="id" (reviewCall)="onSubmitReview()"></app-challenge-edit-navigator>
 
       <div class="col-md-8 col-md-offset-2 text-center">
         <router-outlet></router-outlet>

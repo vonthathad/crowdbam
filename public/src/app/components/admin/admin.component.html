@@ -1,8 +1,8 @@
-<div *ngIf="challenges">
-  <div *ngFor="let challenge of challenges">
-    <a [routerLink]="['/challenges/',challenge._id]">{{challenge.title}}</a>
-    {{challenge.description}}
-    <img [src]="challenge.creator.avatar" alt="">
-
+<div class="container">
+  <h1 class="text-primary">Need to review</h1>
+  <div *ngIf="challenges" class="row mt10">
+    <div *ngFor="let challenge of challenges" class="col-md-3 col-sm-4">
+      <app-card-challenge [challenge]="challenge"></app-card-challenge>
+    </div>
   </div>
 </div>

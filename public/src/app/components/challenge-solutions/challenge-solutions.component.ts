@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { ChallengeService } from '../../services/challenge.service';
 import { SolutionService } from '../../services/solution.service';
@@ -14,10 +13,9 @@ import { Solution } from '../../classes/solution';
 export class ChallengeSolutionsComponent implements OnInit {
   private challenge: Challenge;
   private solutions: Solution[];
-  constructor(private router: Router,private ss: SolutionService, private cs: ChallengeService) {
+  constructor(private ss: SolutionService, private cs: ChallengeService) {
     cs.challengeSource.subscribe(challenge => this.getSolutions(challenge));
   }
-
   ngOnInit() {
     if(this.cs.challenge) this.getSolutions(this.cs.challenge);
   }
@@ -28,10 +26,7 @@ export class ChallengeSolutionsComponent implements OnInit {
     });
   }
   renderSolutions(solutions){
-    this.solutions = solutions
+    this.solutions = solutions;
     // console.log(res.data);
-  }
-  goToSolution(solution){
-    this.router.navigate([`/challenges/${this.challenge._id}/solutions/${solution._id}`]);
   }
 }

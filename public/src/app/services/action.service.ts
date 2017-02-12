@@ -37,6 +37,16 @@ export class ActionService {
       callback(res.data.follow);
     });
   }
+  publishChallenge(id,callback){
+    this.cS.actionChallenge(id,'publish').subscribe((res:any) => {
+      callback(res.data);
+    });
+  }
+  submitReview(id){
+    this.cS.actionChallenge(id,'review').subscribe(() => {
+      alert('Submit succeed!');
+    });
+  }
   // get currentUser$() { return this.fc.currentUser$; }
 
 }

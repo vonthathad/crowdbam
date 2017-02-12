@@ -2,7 +2,7 @@
 <div class="project-details-nav">
     <div class="container js-project-nav-scroll">
         <div class="row">
-            <div class="project-nav__links col-md-9">
+            <div class="project-nav__links col-sm-9">
                 <a class="tabbed-nav__link" (click)="onBasicClick();changeClass('basics')">
                     <i [ngClass]="{'ion-ios-checkmark text-green': current == 'basics', 'ion-ios-circle-outline': current != 'basics'}"></i> Basics
                 </a>
@@ -22,8 +22,8 @@
                     <i class="ion-ios-circle-outline"></i> About Us
                 </a>-->
             </div>
-            <div class="project-nav__buttons col-md-3 hidden-xs hidden-md text-right">
-                <a class="btn btn-md btn-primary btn-fill">Submit to Review</a>
+            <div class="project-nav__buttons col-sm-3 text-right">
+                <a class="btn btn-md btn-primary btn-fill" (click)="onSubmitReview()">Submit to Review</a>
             </div>
         </div>
     </div>

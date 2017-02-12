@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import {TypeService} from '../../services/type.service';
@@ -12,6 +12,7 @@ import { Type } from '../../classes/type';
 export class ChallengeEditNavigatorComponent implements OnInit {
   private current: string;
   private types: Type[];
+  @Output() reviewCall = new EventEmitter();
   @Input() private id: number;
   constructor(private router: Router, private route: ActivatedRoute, private ts: TypeService) {
     ts.types$.subscribe(types => this.renderTypes(types));
@@ -37,5 +38,9 @@ export class ChallengeEditNavigatorComponent implements OnInit {
   }
   changeClass(current) {
     this.current = current;
+  }
+  onSubmitReview(){
+    console.log('here');
+    this.reviewCall.next();
   }
 }

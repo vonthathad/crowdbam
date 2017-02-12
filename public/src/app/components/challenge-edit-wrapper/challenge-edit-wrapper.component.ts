@@ -6,6 +6,7 @@ import { ChallengeService } from '../../services/challenge.service';
 import { CategoryService } from '../../services/category.service';
 
 import { Type } from '../../classes/type';
+import {ActionService} from "../../services/action.service";
 
 @Component({
   selector: 'app-challenge-edit-wrapper',
@@ -19,7 +20,7 @@ export class ChallengeEditWrapperComponent implements OnInit {
   private isBasic: boolean;
   private isTimeline: boolean;
   private isHtml: boolean;
-  constructor(private cv: ChallengeService, private ts: TypeService, private route: ActivatedRoute, private cas: CategoryService) {
+  constructor(private aS: ActionService, private cv: ChallengeService, private ts: TypeService, private route: ActivatedRoute, private cas: CategoryService) {
     ts.getTypes()
       .subscribe(res => {
         this.types = res['data']
@@ -50,8 +51,13 @@ export class ChallengeEditWrapperComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      this.cv.getChallenge(this.id).subscribe((res: any) => this.cv.challengeSource.next(res['data']));
+      this.cv.getChallenge(this.id).subscribe((res: any) => {
+        this.cv.challengeSource.next(res['data'])
+      });
     });
+  }
+  onSubmitReview(){
+    this.aS.submitReview(this.id);
   }
 
 }

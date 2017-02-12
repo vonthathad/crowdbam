@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
     } else {
       this.filteredList = challenges;
     }
-    console.log(this.filteredList);
+    // console.log(this.filteredList);
   }
   onClick(event) {
    if (!this.eref.nativeElement.contains(event.target)){
@@ -109,6 +109,7 @@ export class HeaderComponent implements OnInit {
       this.searchBegin = false;
       if(this.searchFinished){
         this.page = 1;
+        this.filteredList = [];
         this.searchBegin = true;
         this.searchFinished = false;
         this.loadSearchQuery(this.query,this.page);
@@ -127,7 +128,7 @@ export class HeaderComponent implements OnInit {
         this.renderChallenges(res.data);
         if(res.isNext) {
           this.maxPage = this.page + 1;
-          console.log(this.maxPage);
+          // console.log(this.maxPage);
         }
       });
   };
@@ -149,7 +150,7 @@ export class HeaderComponent implements OnInit {
     this.isOpeningMenu = !this.isOpeningMenu;
   }
   renderUser(user, obj) {
-    console.log(user);
+    // console.log(user);
     if (obj.from == "queryParam" || obj.from == "localStorage") {
       this.user = new User();
       // console.log("USER" + JSON.stringify(user));
