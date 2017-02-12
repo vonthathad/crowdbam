@@ -49,7 +49,7 @@ export class ValidatedUploadComponent implements DoCheck, OnChanges {
       let img = new Image();
       img.src = e.target.result;
       this.control.setValue(img);
-      if (img.width < 800 || img.height < 500) {
+      if (img.width < 700 || img.height < 400) {
         this.resetImgUpload();
       } else {
         this.imgSrc = e.target.result;
