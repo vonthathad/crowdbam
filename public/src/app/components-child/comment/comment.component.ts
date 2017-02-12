@@ -20,9 +20,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.comments);
-    if(this.comment.modified) this.time = this.comment.modified;
-    else this.time = this.comment.created;
-
+    this.time = this.comment.created;
     this.commentFormOpenned = false;
   }
   onReplyClick(){

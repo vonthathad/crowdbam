@@ -1,15 +1,11 @@
 <form [formGroup]="commentForm" (ngSubmit)="createComment(commentForm)">
-  <div class="form-input-group">
-    <div class="form-input clearfix">
-      <div class="form-group label-floating is-empty">
-        <input required id="comment" type="text" class="form-control" placeholder="Comment here .." formControlName="content"
-               [ngModel]="content">
+    <div class="form-group label-floating clearfix">
+      <textarea required id="comment" type="text" class="form-control" placeholder="Comment here ..." formControlName="content"
+             [ngModel]="content"></textarea>
+      <div class="pull-right mt10">
+        <button type="submit" [disabled]="!commentForm.valid || isSubmitting" class="btn btn-primary btn-fill text-center">
+          Post
+        </button>
       </div>
     </div>
-    <div class="text-center">
-      <button type="submit" [disabled]="!commentForm.valid" class="btn btn-primary btn-fill btn-lg text-center">
-        Post
-      </button>
-    </div>
-  </div>
 </form>

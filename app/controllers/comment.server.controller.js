@@ -65,7 +65,23 @@ exports.create = function (req, res) {
       var comment = new Comment(req.body);
       comment.save(function (err, comment) {
          if (err) return res.status(400).send({messages: getErrorMessage(err)});
-         return res.json({data: comment});
+         Comment.findById(comment._id).populate('creator','displayName avatar username')
+             .exec(function(err,data){
+                if (err) return res.status(400).send({messages: getErrorMessage(err)});
+                return res.json({data: data});
+             });
+         // tmp = {
+         //    content: comment.content,
+         //    created: comment.created,
+         //    creator: {
+         //       _id: req.user._id,
+         //       avatar: req.user.avatar,
+         //       displayName: req.user.displayName,
+         //       username: req.user.username
+         //    }
+         // };
+
+
       });
    } else if (req.body.comment) {
       Comment.findById(req.body.comment, function (err, data) {
@@ -73,8 +89,19 @@ exports.create = function (req, res) {
          req.body.challenge = data.challenge;
          var comment = new Comment(req.body);
          comment.save(function (err, comment) {
+            var tmp = {};
+            tmp = {
+               content: comment.content,
+               created: comment.created,
+               creator: {
+                  _id: req.user._id,
+                  avatar: req.user.avatar,
+                  displayName: req.user.displayName,
+                  username: req.user.username
+               }
+            }
             if (err) return res.status(400).send({messages: getErrorMessage(err)});
-            return res.json({data: comment});
+            return res.json({data: tmp});
          });
       });
    } else {

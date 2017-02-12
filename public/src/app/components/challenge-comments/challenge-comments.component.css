@@ -1,0 +1,13 @@
+.comment-form{
+  margin-left: 75px;
+}
+.comment-from-frame{
+  position: relative;
+}
+.comment-from-frame .avatar{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  z-index: 2;
+}
