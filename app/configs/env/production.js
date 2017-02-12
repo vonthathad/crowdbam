@@ -21,21 +21,21 @@ module.exports = {
       profileFields: ['id', 'displayName', 'email', 'gender']
    },
     email: {
-        username: "crowdbam.com",
-        password: "crowdbam123",
+        username: "crowdbam.system",
+        password: "crowdbam@sgp",
         accountName: "Crowd Bam",
         verifyEmailUrl: "action/verify",
         resetPasswordUrl: "action/reset"
     },
     server: {
-        host: process.env.PROTOCOL+'://'+process.env.CHANNEL+'.'+process.env.DOMAIN,
+        host: process.env.PROTOCOL + '://' + process.env.CHANNEL + '.' + process.env.DOMAIN,
         port: process.env.PORT,
         channel: process.env.CHANNEL
     },
     app: {
         id: '170584416691811',
         title: 'CrowdBam',
-        description: 'Welcome to crowdbam!',
+        description: 'Welcome to CrowdBam!',
         url: process.env.PROTOCOL+'://'+process.env.CHANNEL+'.'+process.env.DOMAIN,
         image: process.env.PROTOCOL+'://'+process.env.CHANNEL+'.'+process.env.DOMAIN+'/sources/ads.jpg'
     }
