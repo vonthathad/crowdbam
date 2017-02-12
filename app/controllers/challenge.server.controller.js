@@ -283,6 +283,7 @@ exports.update = function(req, res) {
 exports.review = function(req, res){
     req.challenge.review = true;
     req.challenge.save();
+    res.status(200).send({data: true});
 };
 exports.publish = function(req, res){
 

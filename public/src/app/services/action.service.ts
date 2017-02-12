@@ -42,6 +42,11 @@ export class ActionService {
       callback(res.data);
     });
   }
+  submitReview(id){
+    this.cS.actionChallenge(id,'review').subscribe(() => {
+      alert('Submit succeed!');
+    });
+  }
   // get currentUser$() { return this.fc.currentUser$; }
 
 }
