@@ -3,15 +3,17 @@
 <div class="row" *ngIf="id && comments" >
   <div class="col-md-8">
     <ul class="project-details-comments">
-      <div class="row clearfix comment-from-frame">
+      <div class="clearfix comment-from-frame">
         <div class="avatar">
           <img *ngIf="user" class="circle img-responsive" [src]="user.avatar" alt="">
         </div>
         <div class="comment-form"><app-comment-form [id]="id" [comments]="comments"></app-comment-form></div>
       </div>
+      <!--<div class="divider"></div>-->
+      <div *ngIf="comments && comments.length" class="content card">
+        <app-comment *ngFor="let comment of comments" [comment]="comment" [comments]="comments" [id]="id"></app-comment>
+      </div>
 
-
-      <app-comment *ngFor="let comment of comments" [comment]="comment" [comments]="comments" [id]="id"></app-comment>
 
 
       <!--<li class="project-details-comment">-->

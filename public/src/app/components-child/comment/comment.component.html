@@ -10,7 +10,7 @@
       <h3>
         <a class="author green-dark" [routerLink]="['/profiles/',comment.creator._id]">{{comment.creator.displayName}}</a>
         <!--<span>11 minutes ago</span>-->
-        <span>{{time | timesince}} ago</span>
+        <span class="text-time type-12">{{time | timesince}} ago</span>
       </h3>
       <p>{{comment.content}}</p>
       <span class="loading icon-loading-small" style="display:none;"></span>
@@ -25,7 +25,9 @@
       <a class="type-12 mt10" *ngIf="!comment.comment" (click)="onReplyClick()">Reply</a>
       <div class="mt10">
         <app-comment-form *ngIf="commentFormOpenned" [id]="id" [comment]="comment" [comments]="comments"></app-comment-form>
-        <app-comment *ngFor="let comment of comment.comments" [comment]="comment" [comments]="comments"></app-comment>
+        <div class="mt10">
+          <app-comment *ngFor="let comment of comment.comments" [comment]="comment" [comments]="comments"></app-comment>
+        </div>
       </div>
     </div>
   </div>

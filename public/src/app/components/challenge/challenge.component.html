@@ -16,7 +16,7 @@
                     <img class="circle project-details-avatar" [src]="challenge.creator.avatar">
                 </div>
                 <div>
-                    By <span class="bold">{{challenge.creator.displayName}}</span>
+                    By <a [routerLink]="['/profiles/',challenge.creator._id]"><span class="bold">{{challenge.creator.displayName}}</span></a>
                 </div>
             </div>
             <div class="col-md-8 text-left">
