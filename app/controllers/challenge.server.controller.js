@@ -220,7 +220,7 @@ exports.uploadFile = function(req, res) {
     });
     form.on('progress', function(bytesReceived) {
 
-        if (bytesReceived > 300000) {
+        if (bytesReceived > 2000000) {
             form._error();
             console.log('Loi nhan');
             return res.status(400).send();
@@ -229,7 +229,7 @@ exports.uploadFile = function(req, res) {
     form.on('file', function(name, file) {
         console.log(file);
         count++;
-        if (file.size < 300000 && count == 1) {
+        if ((file.type == 'image/jpeg' || file.type == 'image/png' || file.type == 'application/msword' || file.type == 'application/pdf') && file.size < 2000000 && count == 1) {
             var arrSplit = file.path.split('/');
             var name = arrSplit[arrSplit.length - 1];
             return res.json({ link: config.server.host + '/' + cDir + '/' + name });

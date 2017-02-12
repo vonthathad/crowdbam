@@ -47,13 +47,12 @@
 
 
         <div class="form-input-group">
-          <div class="number-circle">2</div>
+          <div class="number-circle">3</div>
           <div class="form-input clearfix">
-            <div class="form-group label-floating is-empty">
+            <div class="form-group label-floating is-empty text-left">
               <label class="control-label light type-18" for="html"><sup class="text-gray">*</sup> Detail
                 of solution:</label>
-              <textarea required id="html" type="description" class="form-control" formControlName="html" [ngModel]="html"></textarea>
-
+              <input required id="html" type="hidden" class="form-control" formControlName="html" [ngModel]="html">
               <div class="content">
                 <div [froalaEditor] [(froalaModel)]="html"></div>
               </div>

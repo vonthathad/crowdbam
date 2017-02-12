@@ -83,6 +83,10 @@
   background: #2f4c8a;
   border-color: #2f4c8a;
 }
+.btn-primary.btn-fill:hover,.btn-primary.btn-fill:focus,.btn-primary.btn-fill:active{
+  background: #235ad4;
+  color: #fff;
+}
 .display-none {
   display: none
 }
