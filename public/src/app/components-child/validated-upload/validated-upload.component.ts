@@ -1,4 +1,4 @@
-import { Component, Input, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, DoCheck, SimpleChanges } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
 import { FileValidatorService } from '../../services/file-validator.service'
 
@@ -7,7 +7,7 @@ import { FileValidatorService } from '../../services/file-validator.service'
   templateUrl: './validated-upload.component.html',
   styleUrls: ['./validated-upload.component.css']
 })
-export class ValidatedUploadComponent implements DoCheck, OnChanges {
+export class ValidatedUploadComponent implements DoCheck {
   @Input() control: FormControl = new FormControl();
   @Input() private imgSrc: string;
   private errorMessages: Array<string> = [];
@@ -29,20 +29,17 @@ export class ValidatedUploadComponent implements DoCheck, OnChanges {
     this.control.setValue(fileInput);
 
     this.fileInput = fileInput;
-    if (fileInput.target.files && fileInput.target.files[0]) {
+    if (fileInput.target.value && fileInput.target.files && fileInput.target.files[0]) {
       let file = fileInput.target.files[0];
-      if (file.type.indexOf("image") == -1) {
+
+      if (file.type.indexOf("image") == -1  || file.size > 300000) {
         this.resetImgUpload();
       } else {
         this.renderImg(file);
       }
     }
   }
-  ngOnChanges(changes: SimpleChanges) {
-    let img = new Image();
-    img.src = this.imgSrc;
-    this.control.setValue(img);
-  }
+
   renderImg(file) {
     var reader = new FileReader();
     reader.onload = (e: any) => {

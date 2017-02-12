@@ -20,6 +20,7 @@ export class FileValidatorService {
     isTooSmall(control: any) {
         let img = control.value;
         if (img && typeof img == 'Image') return null;
+        if (img.width == undefined || img.height == undefined ) return null;
         return (img.width >= 700 && img.height >= 400) ? null : { 'isTooSmall': true }
     }
     isTooBig(control: any){
@@ -27,9 +28,7 @@ export class FileValidatorService {
         if (!fileInput.target) return null;
 
         let file = fileInput.target.files[0];
-        console.log("File size " + file.size);
-        console.log("File size type " + typeof file.size);
-        return (file.size <= 300000) ? null : { 'isTooBig': true };
+        return (fileInput.target && file.size <= 300000) ? null : { 'isTooBig': true };
     }
     buildErrorMessage(control: any) {
         this.errorMessage = [];
