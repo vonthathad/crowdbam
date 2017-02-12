@@ -147,7 +147,10 @@
           </div>
         </div>
         <div class="text-center">
-          <button type="submit" [disabled]="!challengeForm.valid" class="btn btn-primary btn-fill btn-lg text-center">Create Challenge</button>
+          <button type="submit" [disabled]="!challengeForm.valid || isSubmitting" class="btn btn-primary btn-fill btn-lg text-center">
+            <span *ngIf="!isSubmitting">Create Challenge</span>
+            <span *ngIf="isSubmitting">Creating ...</span>
+          </button>
         </div>
       </form>
 

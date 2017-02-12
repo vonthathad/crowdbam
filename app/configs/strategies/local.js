@@ -13,12 +13,12 @@ module.exports = function() {
 
             if (!user) {
                 return done(null, false, {
-                    message: 'Tài khoản không tồn tại'
+                    message: "This account isn't exist or wrong password"
                 });
             }
             if (!user.authenticate(password)) {
                 return done(null, false, {
-                    message: 'Sai mật khẩu'
+                    message: "This account isn't exist or wrong password"
                 });
             }
             return done(null, user);

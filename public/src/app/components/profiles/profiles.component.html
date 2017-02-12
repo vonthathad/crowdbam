@@ -15,18 +15,24 @@
 <div class="main-frame bg-grey-200">
   <router-outlet ></router-outlet>
 </div>
-<div *ngIf="current == ''" class="bg-grey-200 about-frame">
+<div *ngIf="selectedUser && current == ''" class="bg-grey-200 about-frame">
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="row">
           <div class="col-md-4 type-16 bold text-gray">Biography:</div>
-          <div class="col-md-8">Not have a biography yet</div>
+          <div class="col-md-8">
+            <span *ngIf="!selectedUser.bio">Not have a biography yet</span>
+            <span *ngIf="selectedUser.bio">{{selectedUser.bio}}</span>
+          </div>
         </div>
         <div class="divider"></div>
         <div class="row">
-          <div class="col-md-4 type-18 bold text-gray">Website:</div>
-          <div class="col-md-8">Not have a website yet</div>
+          <div class="col-md-4 type-16 bold text-gray">Website:</div>
+          <div class="col-md-8">
+            <span *ngIf="!selectedUser.website">Not have a website yet</span>
+            <span *ngIf="selectedUser.website">{{selectedUser.website}}</span>
+          </div>
         </div>
       </div>
 

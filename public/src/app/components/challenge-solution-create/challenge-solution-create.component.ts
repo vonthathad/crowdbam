@@ -15,6 +15,9 @@ import { Solution } from '../../classes/solution';
 export class ChallengeSolutionCreateComponent implements OnInit {
   private solutionForm: FormGroup;
   private challengeId: number;
+  private isSubmitting: boolean = false;
+  hiddend: boolean = true;
+
   constructor(private route: ActivatedRoute,private cs: ChallengeService, private us: UserService, private ss: SolutionService,private fb: FormBuilder) {
   }
 
@@ -46,12 +49,19 @@ export class ChallengeSolutionCreateComponent implements OnInit {
     });
   }
   createSolution({value, valid}: {value: Solution, valid: boolean}){
+    this.isSubmitting = true;
     console.log(value);
     if (this.us.isLoggedIn() && this.challengeId) {
       value.challenge = this.challengeId;
         this.ss
           .createSolution(value)
-          .subscribe(s => this.suceed(s['data']), error => console.error(JSON.stringify(error)));
+          .subscribe(s => {
+            this.suceed(s['data']);
+            this.isSubmitting = false;
+          }, error => {
+            console.error(JSON.stringify(error));
+            this.isSubmitting = false;
+          });
     } else {
       this.us.openLoginDialog();
     }

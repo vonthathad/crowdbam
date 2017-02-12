@@ -10,31 +10,33 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
   styleUrls: ['./form-login.component.css']
 })
 export class FormLoginComponent implements OnInit {
-
+  private isSubmitting: boolean = false;
   private loginForm: FormGroup;
-  private errorEmail: string;  
+  private errorLogin: boolean;
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-  
+
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
- 
+
   loginLocal({ value, valid }: { value: User, valid: boolean }) {
-    console.log("VELI " + JSON.stringify(value) + valid);
+    this.errorLogin = false;
+    this.isSubmitting = true;
     if (valid) {
       let user: any = new Object();
       user.username = value.email;
       user.password = value.password;
       this.userService
         .login(user)
-        .subscribe(data => this.succeed(data["user"]), error => this.fail(error), () => console.log("Complete"));
+        .subscribe(data => this.succeed(data["user"]), error => this.fail(error));
     }
   }
   succeed(user: User) {
+    this.isSubmitting = false;
     alert("Login successful");
     localStorage.setItem("token", user.token);
     // console.log("Login successful " + JSON.stringify(user));
@@ -43,8 +45,9 @@ export class FormLoginComponent implements OnInit {
     // location.reload();
   }
   fail(e) {
-    // this.error.email = (JSON.parse(e._body)).message;
-    console.error("Error " + e);
+    this.isSubmitting = false;
+    this.errorLogin = true;
+    console.error(e);
   }
   onForgotPasswordClick(){
     this.userService.closeLoginDialog();

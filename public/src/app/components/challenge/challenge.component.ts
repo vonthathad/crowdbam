@@ -133,6 +133,8 @@ export class ChallengeComponent implements OnInit {
   onShareFacebook(){
     if(this.user){
       this.aS.shareFacebook(window.location.href, this.id);
+    } else {
+      this.uS.openLoginDialog();
     }
 
   }
@@ -142,6 +144,8 @@ export class ChallengeComponent implements OnInit {
       this.aS.followChallenge(this.id,(isFollow)=>{
           this.isFollow = isFollow;
       });
+    } else {
+      this.uS.openLoginDialog();
     }
 
   }

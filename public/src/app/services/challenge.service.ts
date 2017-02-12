@@ -83,6 +83,17 @@ export class ChallengeService {
             headers: headers
         });
     }
+    deleteChallenge(id: number): Observable<any[]> {
+      var token = this.rest.getToken();
+      let headers = new Headers({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
+      return this.rest.delete({
+        url: `api/challenges/${id}`,
+        headers: headers
+      });
+    }
     actionChallenge(id: number,action:string): Observable<any[]> {
       var token = this.rest.getToken();
       let headers = new Headers({

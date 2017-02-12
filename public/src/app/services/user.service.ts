@@ -33,7 +33,6 @@ export class UserService {
         });
     }
     login(user): Observable<any[]> {
-        console.log(JSON.stringify(user));
         let headers = new Headers({
             'Content-Type': 'application/json'
         });
@@ -55,6 +54,18 @@ export class UserService {
     }
     passUser(user){
         this.loggedUserSource.next(user);
+    }
+    updateUser(user: User): Observable<any[]> {
+      var token = this.rest.getToken();
+      let headers = new Headers({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
+      return this.rest.put({
+        url: `api/users/${this.user._id}`,
+        body: user,
+        headers: headers
+      });
     }
     getInfo(id):Observable<any[]> {
       let headers = new Headers({

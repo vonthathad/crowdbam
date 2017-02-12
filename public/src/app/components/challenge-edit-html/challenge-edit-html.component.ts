@@ -16,6 +16,7 @@ export class ChallengeEditHtmlComponent implements OnInit {
   private isCreated: boolean;
   private subRoute: any;
   private subParentRoute: any;
+  private isSubmitting: boolean = false;
   private inform: string;
   private showButton: boolean;
   constructor(private route: ActivatedRoute, private cs: ContentService) { }
@@ -77,6 +78,7 @@ export class ChallengeEditHtmlComponent implements OnInit {
     }catch(e){}
   }
   createContent() {
+    this.isSubmitting = true;
     let input = {
       id: this.id,
       type: this.type,
@@ -84,6 +86,7 @@ export class ChallengeEditHtmlComponent implements OnInit {
     }
     console.log(this.html);
     this.cs.createContent(input).subscribe(res => {
+      this.isSubmitting = false;
       console.log(res);
       this.informShow(res['message']);
       this.isCreated = true;
@@ -91,11 +94,13 @@ export class ChallengeEditHtmlComponent implements OnInit {
     },
       err => {
         console.log(err);
+        this.isSubmitting = false;
         this.inform = JSON.parse(err['_body']).messages;
       });
 
   }
   updateContent() {
+    this.isSubmitting = true;
     let input = {
       id: this.id,
       type: this.type,
@@ -104,7 +109,7 @@ export class ChallengeEditHtmlComponent implements OnInit {
     console.log(this.html);
     this.cs.updateContent(input).subscribe(res => {
       console.log(res);
-
+      this.isSubmitting = false;
       this.informShow(res['message']);
       alert('Update successful');
     });
@@ -114,11 +119,13 @@ export class ChallengeEditHtmlComponent implements OnInit {
     let input = {
       id: this.id,
       type: this.type
-    }
+    };
+    this.isSubmitting = true;
     this.cs.deleteContent(input).subscribe(res => {
       console.log(res);
       this.html = ''
       this.informShow(res['message']);
+      this.isSubmitting = false;
       this.isCreated = false;
       alert('Delete successful');
     });

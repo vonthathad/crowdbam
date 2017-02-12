@@ -152,10 +152,7 @@ export class HeaderComponent implements OnInit {
     if (obj.from == "queryParam" || obj.from == "localStorage") {
       this.user = new User();
       // console.log("USER" + JSON.stringify(user));
-      this.user._id = user._id;
-      this.user.token = user.accessToken;
-      this.user.displayName = user.displayName;
-      this.user.avatar = user.avatar;
+      this.user = user;
       // if (obj.from == "queryParam" || obj.from == "localStorage") {
       // this.us.loggedUserSource.next(this.user);
       // }

@@ -83,6 +83,10 @@
   background: #2f4c8a;
   border-color: #2f4c8a;
 }
+.btn-primary.btn-fill:hover,.btn-primary.btn-fill:focus,.btn-primary.btn-fill:active{
+  background: #235ad4;
+  color: #fff;
+}
 .display-none {
   display: none
 }
@@ -492,6 +496,13 @@ a:hover{
   }
 }
 
+@media (max-width: 640px) {
+  .site-nav__middle{
+    border-bottom: 1px #ddd solid;
+  }
+}
+
+
 .site-nav--primary .site-nav__right {
   flex: 2;
   order: 3
@@ -578,6 +589,9 @@ a:hover{
 .site-nav__item--logo .crowdbam-logo {
   width: 152px;
   display: flex;
+  align-items: center;
+  align-self: center;
+  align-content: center;
   margin: auto
 }
 

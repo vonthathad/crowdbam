@@ -27,6 +27,7 @@ import { ChallengeSolutionsComponent } from './components/challenge-solutions/ch
 import { ChallengeSolutionEditComponent } from './components/challenge-solution-edit/challenge-solution-edit.component';
 import { ChallengeSolutionCreateComponent } from './components/challenge-solution-create/challenge-solution-create.component';
 import {FollowChallengesComponent} from "./components/follow-challenges/follow-challenges.component";
+import {ProfileSettingsComponent} from "./components/profile-settings/profile-settings.component";
 
 const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -77,7 +78,7 @@ const routes: Routes = [
       children: [
         { path: 'follows', component: FollowChallengesComponent },
         { path: 'challenges', component: FollowChallengesComponent },
-        { path: 'settings', component: FollowChallengesComponent }
+        { path: 'settings', component: ProfileSettingsComponent }
       ]
     },
     { path: 'forgot-password', component: ForgotPasswordComponent },
