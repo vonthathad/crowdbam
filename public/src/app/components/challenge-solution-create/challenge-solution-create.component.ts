@@ -16,7 +16,7 @@ export class ChallengeSolutionCreateComponent implements OnInit {
   private solutionForm: FormGroup;
   private challengeId: number;
   private isSubmitting: boolean = false;
-  hiddend: boolean = true;
+
 
   constructor(private route: ActivatedRoute,private router: Router, cs: ChallengeService, private us: UserService, private ss: SolutionService,private fb: FormBuilder) {
   }
