@@ -281,6 +281,10 @@ exports.review = function(req, res){
     req.challenge.review = true;
     req.challenge.save();
 };
+exports.public = function(req, res){
+    req.challenge.public = true;
+    req.challenge.save();
+};
 exports.remove = function(req, res) {
     req.challenge.types.forEach(function(e) {
         Type.findByIdAndRemove(e).exec();

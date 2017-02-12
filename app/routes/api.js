@@ -28,6 +28,8 @@ module.exports = function (router) {
         .put(users.requiresLogin,challenges.follow);
     router.route('/challenges/:challengeID/review')
         .put(users.requiresLogin,challenges.hasAuthorization,challenges.review);
+    router.route('/challenges/:challengeID/public')
+        .put(users.requiresLogin,users.isManager,challenges.public);
     router.route('/challenges/:challengeID/share')
         .put(users.requiresLogin,challenges.share);
     router.route('/challenges/:challengeID/file')

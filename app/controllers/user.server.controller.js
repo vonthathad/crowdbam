@@ -32,6 +32,14 @@ exports.authLogout = function (req, res) {
 exports.authSignin = function (req, res) {
     return res.status(200).send({ user: req.user });
 };
+exports.isManager = function(req, res, next) {
+    if (req.user.role !== 'admin' && req.user.role !== 'manager') {
+        return res.status(403).send({
+            messages: ["You aren't Manager"]
+        });
+    }
+    next();
+};
 exports.authSignup = function (req, res) {
     if (!req.user) {
         var user = new User();
