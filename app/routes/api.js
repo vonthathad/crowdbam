@@ -30,8 +30,8 @@ module.exports = function (router) {
         .put(users.requiresLogin,challenges.hasAuthorization,challenges.review);
     router.route('/challenges/:challengeID/share')
         .put(users.requiresLogin,challenges.share);
-    router.route('/challenges/:challengeID/image')
-        .post(users.requiresLogin,challenges.hasAuthorization,challenges.uploadImage);
+    router.route('/challenges/:challengeID/file')
+        .post(users.requiresLogin,challenges.hasAuthorization,challenges.uploadFile);
     router.param('challengeID', challenges.challengeByID);
     
     /* CATEGORY */
@@ -90,4 +90,10 @@ module.exports = function (router) {
     //     .put(users.requiresLogin,timelines.checkChallengeExist,timelines.hasAuthorization,timelines.update)
     //     .delete(users.requiresLogin,timelines.checkChallengeExist,timelines.hasAuthorization,timelines.remove);
     // router.param('timelineID', timelines.timelineByID);
+    
+    /* USER */
+    router.route('/users/:userID')
+        .get(users.getInfo)
+        .put(users.requiresLogin,users.checkUser,users.update);
+    router.param('userID', users.userByID);
 };

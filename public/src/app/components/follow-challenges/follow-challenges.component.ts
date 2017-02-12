@@ -1,7 +1,7 @@
 
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import {ChallengeService} from "../../services/challenge.service";
 import {Challenge} from "../../classes/challenge";
 
@@ -15,14 +15,20 @@ export class FollowChallengesComponent implements OnInit {
   private params: Object;
   private hasMore: boolean;
   private isLoading: boolean;
-  constructor(private route: ActivatedRoute,private challengeService: ChallengeService) { }
+  constructor(private route: ActivatedRoute,private router: Router,private challengeService: ChallengeService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.parent.params.subscribe(params => {
+      console.log('param route', params["id"]);
       this.params = {};
       this.params["paging"] = 4;
       this.params["page"] = 1;
-      this.params["follow"] = params["id"];
+      if(this.router.url.toString().indexOf("follow")>-1){
+        this.params["follow"] = params["id"];
+      } else {
+        this.params["user"] = params["id"];
+      }
+
       this.loadChallenges();
     });
   }

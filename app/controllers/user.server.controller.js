@@ -278,16 +278,7 @@ exports.loadUser = function (req, res, next) {
     res.json({ data: req.selectedUser });
 };
 
-exports.updateUser = function (req, res, next) {
-    var dataChange = {};
-    if (req.body.avatar) dataChange.avatar = req.body.avatar;
-    if (req.body.username) dataChange.username = req.body.username;
-    if (req.body.displayName) dataChange.displayName = req.body.displayName;
-    if (req.body.mobile) dataChange.mobile = req.body.mobile;
-    req.user.update(dataChange, function () {
-        res.status(200).send();
-    })
-};
+
 exports.userByUsername = function (req, res, next, id) {
     User.findOne({ username: id }, '-password -salt -token -isVerified -providerData')
         .exec(function (err, user) {
@@ -330,4 +321,42 @@ exports.renderAngular = function(req, res, next) {
         next();
     }
 
+}
+
+/* API */
+exports.checkUser = function(req,res,next){
+    if (req.user._id == req.selectedUser._id){
+        next();
+    } else {
+        return res.status(403).send({
+            message: "You doesn't have a permission"
+        });
+    }
+}
+exports.update = function (req, res, next) {
+    var dataChange = {};
+    if (req.body.avatar) dataChange.avatar = req.body.avatar;
+    if (req.body.username) dataChange.username = req.body.username;
+    if (req.body.displayName) dataChange.displayName = req.body.displayName;
+    if (req.body.bio) dataChange.bio = req.body.bio;
+    if (req.body.website) dataChange.website = req.body.website;
+    req.user.update(dataChange, function () {
+        res.status(200).send();
+    })
+};
+exports.userByID = function (req, res, next, id) {
+    User.findById(id, 'displayName username avatar bio website created')
+        .exec(function (err, user) {
+            if (err) {
+                return next(err);
+            }
+            if (!user) {
+                return next(new Error('Failed to load user ' + id));
+            }
+            req.selectedUser = user;
+            next();
+        });
+};
+exports.getInfo = function(req,res){
+    res.json({data: req.selectedUser});
 }

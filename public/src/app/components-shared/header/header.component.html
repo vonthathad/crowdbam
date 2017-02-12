@@ -71,10 +71,10 @@
             My stuff
           </h3>
           <ul class="js-dropdown_group dd-menu">
-            <li><a href="/recommendations?ref=user_menu">Recommended for you</a></li>
-            <li><a href="/profile/665783157?ref=user_menu">Profile</a></li>
-            <li><a href="/profile/backings?ref=user_menu">Follow projects</a></li>
-            <li><a href="/profile/projects?ref=user_menu">My projects</a></li>
+            <li><a [routerLink]="['/recommendations']" (click)="onToggleMenu()">Recommended for you</a></li>
+            <li><a [routerLink]="['/profiles',user._id]" (click)="onToggleMenu()">Profile</a></li>
+            <li><a [routerLink]="['/profiles',user._id,'follows']" (click)="onToggleMenu()">Follow challenges</a></li>
+            <li><a [routerLink]="['/profiles',user._id,'challenges']" (click)="onToggleMenu()">My challenges</a></li>
           </ul>
 
         </div>
@@ -83,8 +83,8 @@
             Settings
           </h3>
           <ul class="js-dropdown_group dd-menu">
-            <li><a href="/settings/profile?ref=user_menu">Edit profile</a></li>
-            <li><a href="/settings/notifications?ref=user_menu">Notifications</a></li>
+            <li><a [routerLink]="['/profiles',user._id,'settings']"  (click)="onToggleMenu()">Edit profile</a></li>
+            <!--<li><a href="/settings/notifications?ref=user_menu">Notifications</a></li>-->
           </ul>
         </div>
       </div>

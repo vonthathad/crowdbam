@@ -78,7 +78,7 @@ exports.get = function(req,res){
 exports.update = function(req,res){
     var obj = {};
     if(req.body.title) obj.title = req.body.title;
-    if(req.body.description) obj.title = req.body.description;
+    if(req.body.description) obj.description = req.body.description;
     if(req.body.html) obj.html = req.body.html;
     obj.modified =  Date.now();
     Solution.findByIdAndUpdate(req.solution._id,obj,function(err,solution){

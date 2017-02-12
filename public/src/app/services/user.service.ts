@@ -56,6 +56,16 @@ export class UserService {
     passUser(user){
         this.loggedUserSource.next(user);
     }
+    getInfo(id):Observable<any[]> {
+      let headers = new Headers({
+        'Authorization': `Bearer CRzytqL1lv1o8FaogFa2S4MyYU4F6Z9D`,
+        'Content-Type': 'application/json'
+      });
+      return this.rest.get({
+        url: `api/users/${id}`,
+        headers: headers
+      });
+    };
     getUser(token): Observable<any[]> {
         let headers = new Headers({
             'Authorization': `Bearer ${token}`,
@@ -70,7 +80,7 @@ export class UserService {
         if (this.user) return true;
         return false;
     }
-    
+
     setLoginDialog(dialog) {
         this.loginDialog = dialog;
     }
