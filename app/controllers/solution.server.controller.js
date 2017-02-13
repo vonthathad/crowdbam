@@ -2,6 +2,7 @@
  * Created by andh on 1/29/17.
  */
 var Solution = require('mongoose').model('Solution');
+var Challenge = require('mongoose').model('Challenge');
 var npp = 10;
 var getErrorMessage = function (err) {
     console.log(err);
@@ -34,24 +35,32 @@ exports.list = function(req,res) {
     var page = parseInt(req.query.page) || 1,
         skip = page > 0 ? ((page - 1) * paging) : 0;
     if (req.query.challenge) {
-        Solution.find({challenge: req.query.challenge},'-html')
-            .sort('-created')
-            .limit(paging + 1)
-            .populate('creator','avatar username displayName')
-            .skip(skip)
-            .exec(function (err, solutions) {
-                if (err) return res.status(400).send();
-                var isNext = false;
-                if(solutions.length==(paging+1)){
-                    isNext = true;
-                   solutions.pop();
-                };
-                resdata = {
-                    data: solutions,
-                    isNext: isNext
-                };
-                return res.json(resdata);
-            });
+        Challenge.findById(parseInt(req.query.challenge)).exec(function(err,challenge){
+            if(err || !challenge) return res.status(400).send();
+            if(challenge.creator == req.user._id){
+                Solution.find({challenge: req.query.challenge},'-html')
+                    .sort('-created')
+                    .limit(paging + 1)
+                    .populate('creator','avatar username displayName')
+                    .skip(skip)
+                    .exec(function (err, solutions) {
+                        if (err) return res.status(400).send();
+                        var isNext = false;
+                        if(solutions.length==(paging+1)){
+                            isNext = true;
+                            solutions.pop();
+                        };
+                        resdata = {
+                            data: solutions,
+                            isNext: isNext
+                        };
+                        return res.json(resdata);
+                    });
+            } else {
+                return res.status(403).send({messages: ["You don't have a permission"]});
+            }
+        });
+
     } else {
         return res.status(400).send({
             messages: ["Must have a challenge"]
@@ -76,6 +85,16 @@ exports.create = function(req,res){
 exports.get = function(req,res){
     return res.json({data: req.solution});
 };
+exports.isOwnerOrCreator = function(req,res,next){
+    Challenge.findById(parseInt(req.solution.challenge)).exec(function(err,challenge){
+        if(err || !challenge) return res.status(400).send();
+        if(challenge.creator == req.user._id || req.user._id == req.solution.creator._id){
+            next();
+        } else {
+            return res.status(403).send({messages: ["You don't have a permission"]});
+        }
+    });
+}
 exports.update = function(req,res){
     var obj = {};
     if(req.body.title) obj.title = req.body.title;

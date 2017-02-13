@@ -1,5 +1,26 @@
-<div *ngIf="solution">
-  {{solution.title}}
-  {{solution.description}}
-  <div [innerHtml]="solution.html"></div>
-</div>
+
+<section  *ngIf="solution" class="project-details bg-grey-100">
+  <div class="container">
+    <div class="row project-details-header">
+      <div class="col-md-2 text-left">
+        <div>
+          <img class="circle project-details-avatar" [src]="solution.creator.avatar">
+        </div>
+        <div>
+          By <span class="bold">{{solution.creator.displayName}}</span>
+        </div>
+      </div>
+      <div class="col-md-8 text-left">
+        <h3 class="bold project-details-title type-28">{{solution.title}}</h3>
+        <p class="project-details-des">{{solution.description}}</p>
+      </div>
+    </div>
+    <div class="project-details-main ">
+      <div class="content card">
+        <div [innerHtml]="solution.html"></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

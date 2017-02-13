@@ -50,6 +50,7 @@ export class CommentFormComponent implements OnInit {
 
   succeed(comment) {
     this.isSubmitting = false;
+    this.commentForm.patchValue({content: ''});
     console.log(this.comments);
     if (this.comment) {
       this.comments.forEach((cmt) => {

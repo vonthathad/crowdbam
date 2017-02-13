@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormArray, Validators, FormBuilder } from '@angular/forms';
 
 import { SolutionService } from '../../services/solution.service';
-import { ChallengeService } from '../../services/challenge.service';
 import { UserService } from '../../services/user.service';
 
 import { Solution } from '../../classes/solution';
@@ -21,7 +20,7 @@ export class ChallengeSolutionEditComponent implements OnInit {
   private html: string;
   private user: User;
   private isSubmitting: boolean = false;
-  constructor(private route: ActivatedRoute,private cs: ChallengeService, private us: UserService, private ss: SolutionService,private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute,private router: Router, private us: UserService, private ss: SolutionService,private fb: FormBuilder) {
       us.loggedUserSource.subscribe(user =>{
         this.user = user;
       });
@@ -62,12 +61,12 @@ export class ChallengeSolutionEditComponent implements OnInit {
       value.challenge = this.challengeId;
       this.ss
         .updateSolution(value, this.solutionId)
-        .subscribe(s => this.suceed(s['data']), error => console.error(JSON.stringify(error)));
+        .subscribe(s => this.succeed(s['data']), error => console.error(JSON.stringify(error)));
     } else {
       this.us.openLoginDialog();
     }
   }
-  suceed(s){
-    console.log(s);
+  succeed(s){
+    this.router.navigate([`/challenges/${this.challengeId}/solutions/${this.solutionId}`]);
   }
 }

@@ -92,7 +92,7 @@
                     </div>
                   </div>
                   <div class="alert alert-info alert-edit navbar-fixed-bottom">
-                    <div class="col-md-8"></div>
+                    <div class="col-md-8 text-left"><a [routerLink]="['/challenges/',challenge._id]" class="btn btn-white"><i class="ion-ios-arrow-back"></i> Back</a></div>
                     <div class="col-md-4 text-right"><button [disabled]="isSubmitting" type="submit" class="btn btn-white">
                       <span *ngIf="!isSubmitting">Save changes</span>
                       <span *ngIf="isSubmitting">Saving ...</span>
