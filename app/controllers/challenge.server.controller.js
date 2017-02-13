@@ -154,7 +154,7 @@ exports.create = function(req, res) {
     var content;
     form.on('progress', function(bytesReceived) {
 
-        if (bytesReceived > 300000) {
+        if (bytesReceived > 500000) {
             form._error();
             console.log('Loi nhan');
             return res.status(400).send();
@@ -171,7 +171,7 @@ exports.create = function(req, res) {
     form.on('file', function(name, file) {
         console.log(file);
         count++;
-        if ((file.type == 'image/jpeg' || file.type == 'image/png') && file.size < 300000 && count == 1) {
+        if ((file.type == 'image/jpeg' || file.type == 'image/png') && file.size < 500000 && count == 1) {
             var data = JSON.parse(content);
             var arrSplit = file.path.split('/');
             var name = arrSplit[arrSplit.length - 1];
@@ -224,7 +224,7 @@ exports.uploadFile = function(req, res) {
     });
     form.on('progress', function(bytesReceived) {
 
-        if (bytesReceived > 2000000) {
+        if (bytesReceived > 3000000) {
             form._error();
             console.log('Loi nhan');
             return res.status(400).send();
@@ -233,7 +233,7 @@ exports.uploadFile = function(req, res) {
     form.on('file', function(name, file) {
         console.log(file);
         count++;
-        if ((file.type == 'image/jpeg' || file.type == 'image/png' || file.type == 'application/msword' || file.type == 'application/pdf') && file.size < 2000000 && count == 1) {
+        if ((file.type == 'image/jpeg' || file.type == 'image/png' || file.type == 'application/msword' || file.type == 'application/pdf') && file.size < 3000000 && count == 1) {
             var arrSplit = file.path.split('/');
             var name = arrSplit[arrSplit.length - 1];
             return res.json({ link: config.server.host + '/' + cDir + '/' + name });
