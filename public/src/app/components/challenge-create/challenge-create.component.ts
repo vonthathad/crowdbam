@@ -75,7 +75,7 @@ export class ChallengeCreateComponent implements OnInit {
           .createChallenge(input)
           .subscribe(challenge => {
             this.suceed(challenge['data']);
-            this.isSubmitting = false;
+            // this.isSubmitting = false;
           }, error => {
             console.error(JSON.stringify(error));
             this.isSubmitting = false;
