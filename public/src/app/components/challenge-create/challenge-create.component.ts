@@ -87,7 +87,7 @@ export class ChallengeCreateComponent implements OnInit {
   }
 
   suceed(challenge) {
-    this.router.navigate(['/challenges/' + challenge._id]);
+    location.href = '/challenges/' + challenge._id;
   }
 
   // fileChange() {

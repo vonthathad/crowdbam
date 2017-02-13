@@ -1,13 +1,9 @@
-<div class="form-control">
+<div class="w100">
     <ng-content></ng-content>
-    <div class="row">
-        <div class="col-sm-6" *ngFor="let option of options">
-            <label>
-                <!--<input type="checkbox" (change)="changeCheckbox(option)" [checked]="hasOption(option)" [value]="option.value">{{option.label}}-->
-                <input type="checkbox" [checked]="option.isChoosen" (change)="changeCheckbox(option, $event)"  [value]="option.value"> <span class="type-14 light">{{option.label}}</span>
-                <!--<input type="checkbox" [checked]="isChoosen" (change)="isChoosen = $event.target.checked" [value]="option.value">{{option.label}}-->
-	         </label>
-        </div>
+    <div class="col-sm-6" *ngFor="let option of options">
+            <!--<input type="checkbox" (change)="changeCheckbox(option)" [checked]="hasOption(option)" [value]="option.value">{{option.label}}-->
+            <input type="checkbox" [checked]="option.isChoosen" (change)="changeCheckbox(option, $event)"  [value]="option.value"> <span class="type-14 light">{{option.label}}</span>
+            <!--<input type="checkbox" [checked]="isChoosen" (change)="isChoosen = $event.target.checked" [value]="option.value">{{option.label}}-->
     </div>
     <div [hidden]="isValid || numberOfClicks === 0" class="alert alert-danger">
         <div *ngFor="let errorMessage of errorMessages">

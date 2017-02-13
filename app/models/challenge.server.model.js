@@ -18,7 +18,7 @@ var ChallengeSchema = new Schema({
     description: {
         type: String,
         trim: true,
-        maxlength: 140
+        maxlength: 200
     },
     thumb: {
         type: String,
