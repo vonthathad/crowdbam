@@ -19,7 +19,7 @@ export class ChallengeEditNavigatorComponent implements OnInit {
   }
   renderTypes(types) {
     console.log(types);
-    this.types = types;
+    this.types = types.reverse();
   }
   ngOnInit() {
     this.current = 'basics';
