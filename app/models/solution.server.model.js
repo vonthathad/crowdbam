@@ -24,11 +24,13 @@ var SolutionSchema = new Schema({
     },
     title: {
         type: String,
-        required: 'Title cannot be blank'
+        required: 'Title cannot be blank',
+        maxlength: 50
     },
     description: {
         type: String,
-        required: 'Description cannot be blank'
+        required: 'Description cannot be blank',
+        maxlength: 200
     },
     modified: {
         type: Date
