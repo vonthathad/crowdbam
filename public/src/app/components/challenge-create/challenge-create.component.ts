@@ -32,7 +32,7 @@ export class ChallengeCreateComponent implements OnInit {
     this.categoryService.getCategories().subscribe(res => this.renderCategoryOptions(res['data']));
     this.challengeForm = this.fb.group({
       title: ['', [Validators.required]],
-      description: ['', Validators.compose([Validators.required, Validators.maxLength(140)])],
+      description: ['', Validators.compose([Validators.required, Validators.maxLength(200)])],
       prize: ['', Validators.compose([Validators.required, Validators.pattern("[0-9]+")])],
       img: ['', Validators.compose([this.fvs.hasFile, this.fvs.isFile, this.fvs.isTooSmall, this.fvs.isTooBig])],
       categories: new FormArray([], Validators.compose([this.cvs.requiredArray, this.cvs.maxLengthArray]))

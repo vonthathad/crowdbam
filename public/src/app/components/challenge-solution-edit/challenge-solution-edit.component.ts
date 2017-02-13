@@ -31,7 +31,7 @@ export class ChallengeSolutionEditComponent implements OnInit {
 
     this.solutionForm = this.fb.group({
       title: ['', [Validators.required]],
-      description: ['', Validators.compose([Validators.required, Validators.maxLength(140)])],
+      description: ['', Validators.compose([Validators.required, Validators.maxLength(200)])],
       html: ['', Validators.compose([Validators.required])],
     });
     if(this.us.user){
@@ -52,7 +52,7 @@ export class ChallengeSolutionEditComponent implements OnInit {
         } else {
           location.href = '/';
         }
-        
+
       });
     });
   }
