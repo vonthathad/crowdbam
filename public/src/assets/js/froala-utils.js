@@ -6,12 +6,15 @@ function setUrl() {
     challengeId = challengeURLInfo.split('/')[0];
 
     url = window.location.href;
-    // if(url.indexOf('localhost')) baseUrl = 'http://localhost:8235';
-    // else baseUrl =
+    if(url.indexOf('localhost')) baseUrl = 'http://localhost:8456';
+    else baseUrl = 'http://beta.crowdbam.com/';
+    console.log("baseUrl" + baseUrl);
     // uploadURLcrowd = 'http://localhost:8456/api/challenges/' + challengeId + '/' + type;
-    uploadURLcrowd = 'http://localhost:8456/api/challenges/' + challengeId + '/file';
+    uploadURLcrowd = baseUrl + '/api/challenges/' + challengeId + '/file';
     token = localStorage.getItem("token");
     uploadURLcrowd += '?access_token=' + token;
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
   return uploadURLcrowd;
 }

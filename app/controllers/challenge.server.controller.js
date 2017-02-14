@@ -232,12 +232,15 @@ exports.uploadFile = function(req, res) {
     });
     form.on('file', function(name, file) {
         console.log(file);
+        console.log("F");
         count++;
         if ((file.type == 'image/jpeg' || file.type == 'image/png' || file.type == 'application/msword' || file.type == 'application/pdf') && file.size < 3000000 && count == 1) {
+           console.log("F1");
             var arrSplit = file.path.split('/');
             var name = arrSplit[arrSplit.length - 1];
             return res.json({ link: config.server.host + '/' + cDir + '/' + name });
         } else {
+           console.log("F2");
             fs.unlink(file.path);
             console.log('file qua lon');
             return res.status(400).send();
