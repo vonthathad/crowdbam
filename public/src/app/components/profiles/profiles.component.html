@@ -1,4 +1,4 @@
-
+<div class="relative">
 <div *ngIf="selectedUser"  class="bg-grey-400 text-center">
   <div class="container">
     <div><img class="avatar" [src]="selectedUser.avatar"></div>
@@ -13,7 +13,7 @@
   <app-profile-navigator [selectedUser]="selectedUser" [isMine]="isMine" [current]="current"></app-profile-navigator>
 </div>
 <div class="main-frame bg-grey-200">
-  <router-outlet ></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 <div *ngIf="selectedUser && current == ''" class="bg-grey-200 about-frame">
   <div class="container">
@@ -38,5 +38,18 @@
 
     </div>
   </div>
-
+</div>
+<div *ngIf="categories && user && isMine && !user.recommendations.length" class="popup-recommendations bg-grey-400 text-center">
+    <h1 class="text-primary">One more step.</h1>
+    <p class="type-18">Choose your favorite categories</p>
+    <div class="row categories-frame">
+      <div class="col-md-8 col-md-offset-2">
+        <a *ngFor="let category of categories" (click)="chooseCategory(category)"  class="btn btn-primary" [ngClass]="{'btn-fill': category.isChoose}"><i *ngIf="category.isChoose" class="ion-ios-checkmark"></i> {{category.title}}</a>
+      </div>
+    </div>
+    <div class="row text-center">
+      <a (click)="pickAllCategories()" class="btn btn-lg btn-primary btn-simple"><i class="ion-heart"></i> All of them</a>
+      <a (click)="pickCategories()" class="btn btn-lg btn-primary btn-fill">Next to profile</a>
+    </div>
+</div>
 </div>

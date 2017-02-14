@@ -60,12 +60,14 @@ exports.list = function(req, res) {
     if (req.query.category) conds.push({ categories: req.query.category });
     if (req.query.follow) conds.push({ follows: parseInt(req.query.follow) });
     if (req.query.recommendations && req.user._id){
-        var cateList = [];
-        req.user.recommendations.forEach(function (recommendation) {
-            cateList.push({categories: recommendation});
-        })
-        if(cateList.length){
-            conds.push({$or: cateList});
+        if(req.user.recommendations){
+            var cateList = [];
+            req.user.recommendations.forEach(function (recommendation) {
+                cateList.push({categories: recommendation});
+            })
+            if(cateList.length){
+                conds.push({$or: cateList});
+            }
         }
     };
     if (req.query.user) conds.push({ creator: parseInt(req.query.user) });

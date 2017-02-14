@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router, NavigationEnd } from '@angular/router';
 import {UserService} from "../../services/user.service";
 import {User} from "../../classes/user";
+import {Category} from "../../classes/category";
+import {CategoryService} from "../../services/category.service";
 @Component({
   selector: 'app-profiles',
   templateUrl: './profiles.component.html',
@@ -11,15 +13,19 @@ export class ProfilesComponent implements OnInit {
   private id : number;
   private selectedUser: User;
   private isMine: boolean = false;
-  private userId: string;
+  private user: User;
   private current: string;
-  constructor(private route: ActivatedRoute,private router: Router,private uS: UserService) {
+  private categories: Category[];
+  constructor(private route: ActivatedRoute,private router: Router,private uS: UserService,private categoryService: CategoryService) {
     uS.loggedUserSource.subscribe(user=>{
-      this.userId = user._id;
+      this.user = user;
     })
   }
 
   ngOnInit() {
+    this.categoryService.getCategories().subscribe((res: any)=>{
+      this.categories = res.data;
+    });
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
         let arrUrl =event.url.split('?')[0].split('/');
@@ -34,14 +40,14 @@ export class ProfilesComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params["id"];
       if(this.uS.user){
-        this.userId =this.uS.user._id;
-        if(parseInt(this.userId) == this.id){
+        this.user =this.uS.user;
+        if(parseInt(this.user._id) == this.id){
           this.isMine = true;
         };
       } else {
         this.uS.loggedUserSource.subscribe(user=>{
-          this.userId = user._id;
-          if(parseInt(this.userId) == this.id){
+          this.user = user;
+          if(parseInt(this.user._id) == this.id){
             this.isMine = true;
           };
         })
@@ -51,5 +57,29 @@ export class ProfilesComponent implements OnInit {
           this.selectedUser = res.data;
       });
     });
+  }
+  chooseCategory(category){
+    category.isChoose = !category.isChoose;
+  }
+  pickCategories(){
+    let arr = [];
+    this.categories.forEach((category)=>{
+      if(category.isChoose) arr.push(category.id);
+    });
+    this.user.recommendations = arr;
+    this.updateUser();
+  }
+  updateUser(){
+    this.uS.updateUser(this.user).subscribe((s) =>{
+        this.uS.passUser(this.user);
+    }, error => console.error(JSON.stringify(error)));
+  }
+  pickAllCategories(){
+    let arr = [];
+    this.categories.forEach((category)=>{
+      arr.push(category.id);
+    });
+    this.user.recommendations = arr;
+    this.updateUser();
   }
 }

@@ -7,7 +7,7 @@ function setUrl() {
 
     url = window.location.href;
     if(url.indexOf('localhost')) baseUrl = 'http://localhost:8456';
-    else baseUrl = 'http://beta.crowdbam.com/';
+    else baseUrl =  window.location.protocol + '//' + window.location.hostname;
     console.log("baseUrl" + baseUrl);
     // uploadURLcrowd = 'http://localhost:8456/api/challenges/' + challengeId + '/' + type;
     uploadURLcrowd = baseUrl + '/api/challenges/' + challengeId + '/file';

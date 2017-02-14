@@ -341,8 +341,11 @@ exports.update = function (req, res, next) {
     if (req.body.displayName) dataChange.displayName = req.body.displayName;
     if (req.body.bio) dataChange.bio = req.body.bio;
     if (req.body.website) dataChange.website = req.body.website;
-    req.user.update(dataChange, function () {
-        res.status(200).send();
+    console.log(req.body.recommendations);
+    if (req.body.recommendations) dataChange.recommendations = req.body.recommendations;
+    req.user.update(dataChange, function (err) {
+        console.log(err);
+        res.status(200).send({data: dataChange});
     })
 };
 exports.userByID = function (req, res, next, id) {

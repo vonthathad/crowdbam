@@ -57,9 +57,10 @@
             <span class="site-nav__item-label">Enter Search</span>
           </a>
 
-          <a *ngIf="user" (click)="onToggleMenu()" class="site-nav__item site-nav__item--user bg-grey-200" aria-label="User dropdown menu" data-toggle="dropdown" aria-expanded="false">
+          <a *ngIf="user" class="site-nav__item site-nav__item--user bg-grey-200" aria-label="User dropdown menu" data-toggle="dropdown" aria-expanded="false">
             <div class="notification-indicator-and-avatar">
-              <img class="site-nav__user-avatar" [src]="user.avatar"><span class="hidden-xs"> {{user.displayName.split(' ')[0]}} <i class="ion-arrow-down-b"></i></span>
+              <a [routerLink]="['/profiles/',user._id]" *ngIf="!user.recommendations.length" class=" btn noti-user text-danger"><i class="ion-android-alert"></i></a>
+              <img (click)="onToggleMenu()" class="site-nav__user-avatar" [src]="user.avatar"><span (click)="onToggleMenu()" class="hidden-xs"> {{user.displayName.split(' ')[0]}} <i class="ion-arrow-down-b"></i></span>
             </div>
           </a>
 

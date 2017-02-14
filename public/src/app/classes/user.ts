@@ -9,6 +9,7 @@ export class User {
         public role?: string,
         public email?: string,
         public password?: string,
-        public token?: string
+        public token?: string,
+        public recommendations ?: string[]
     ) { }
 }

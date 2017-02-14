@@ -8,6 +8,7 @@ import {Challenge} from "../../classes/challenge";
 import {ChallengeService} from "../../services/challenge.service";
 
 
+
 @Component({
   host: {
     '(document:click)':'onClick($event)'
@@ -18,6 +19,7 @@ import {ChallengeService} from "../../services/challenge.service";
 })
 export class HeaderComponent implements OnInit {
   private user: User;
+  
   // private isExploringHide: boolean = false;
   // private isExploringTrans: boolean = false;
   private query = '';
@@ -35,6 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+
     let token;
     this.route.queryParams.subscribe(queryParam => {
       token = queryParam['token'];

@@ -24,10 +24,12 @@ export class ProfileSettingsComponent implements OnInit {
   }
   updateUser({value, valid}: {value: User, valid: boolean}){
     this.uS.updateUser(value)
-      .subscribe(s => this.suceed(s['data']), error => console.error(JSON.stringify(error)));
+      .subscribe((s) => this.suceed(s["data"]), error => console.error(JSON.stringify(error)));
   }
   suceed(data){
-    alert(data);
+    this.user = Object.assign({}, this.user, data);
+    this.uS.passUser(this.user);
+    this.router.navigate([`/profiles/${this.id}`]);
   }
   ngOnInit() {
     this.route.parent.params.subscribe(params => {
