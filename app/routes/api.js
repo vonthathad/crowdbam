@@ -33,7 +33,7 @@ module.exports = function (router) {
     router.route('/challenges/:challengeID/share')
         .put(users.requiresLogin,challenges.share);
     router.route('/challenges/:challengeID/file')
-        .post(users.requiresLogin,challenges.hasAuthorization,challenges.uploadFile);
+        .post(users.requiresLogin,challenges.uploadFile);
     router.param('challengeID', challenges.challengeByID);
     
     /* CATEGORY */
