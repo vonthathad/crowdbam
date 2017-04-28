@@ -45,12 +45,14 @@ export class ValidatedUploadComponent implements DoCheck {
     reader.onload = (e: any) => {
       let img = new Image();
       img.src = e.target.result;
-      this.control.setValue(img);
-      if (img.width < 700 || img.height < 400) {
-        this.resetImgUpload();
-      } else {
-        this.imgSrc = e.target.result;
-      }
+      img.onload = () => {
+        this.control.setValue(img);
+        if (img.width < 700 || img.height < 400) {
+          this.resetImgUpload();
+        } else {
+          this.imgSrc = e.target.result;
+        }
+      };
     }
     reader.readAsDataURL(file);
   }

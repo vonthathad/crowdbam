@@ -26,8 +26,6 @@ export class ValidatedMulticheckboxComponent implements DoCheck, OnChanges {
     // var tempOption = this.options;
     // this.options = null;
     // this.options
-    console.log(this.options);
-
     var currentScheduleControls: FormArray = this.model as FormArray;
     if (this.options) {
       this.options.forEach(option => {
@@ -36,7 +34,6 @@ export class ValidatedMulticheckboxComponent implements DoCheck, OnChanges {
         }
       });
     }
-    console.log(currentScheduleControls.value);
   }
   // public hasOption(option): boolean {
   //   return (this.model.value.indexOf(option) > -1);

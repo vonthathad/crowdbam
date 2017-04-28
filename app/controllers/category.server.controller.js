@@ -43,6 +43,7 @@ exports.update = function(req,res){
     });
 };
 exports.remove = function(req,res){
+    console.log(req.category);
     Challenge.update({categories: req.category._id},{$pull: {"categories":req.category._id}},{ multi: true }).exec(function(err,challenges){
         if(err) return res.status(400).send({messages: getErrorMessage(err)});
         req.category.remove(function(err,category){

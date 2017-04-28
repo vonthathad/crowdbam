@@ -52,7 +52,6 @@ exports.create = function(req,res){
 
 };
 exports.get = function(req,res){
-
     Content.findOne({challenge: req.challenge._id, type: req.type._id},function(err,content){
         if(err) return res.status(400).send();
         return res.json({data: content});

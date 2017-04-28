@@ -50,26 +50,23 @@ export class ChallengeCreateComponent implements OnInit {
       )
     });
   }
-
+ 
   createChallenge({value, valid}: {value: Challenge, valid: boolean}) {
     // console.log( this.fileInput.nativeElement.files[0]);
-
     let fileInput = this.vuc.fileInput;
     // console.log(this.fileInput.target.files[0]);
     if (this.us.isLoggedIn()) {
-      // alert(1234);
       // console.log(JSON.stringify(value));
       this.isSubmitting = true;
       if (fileInput && fileInput.target && fileInput.target.files && fileInput.target.files[0]) {
         let input = new FormData();
         let fi = fileInput.target.files[0];
         // let fi = this.fileInput.nativeElement.files[0];
-
         var tempCategories: any = value.categories;
         value.categories = [];
         tempCategories.forEach((category) => value.categories.push(category.value));
-
         input.append("file", fi);
+        value['img'] = null;
         input.append("content", JSON.stringify(value));
         this.challengeService
           .createChallenge(input)

@@ -60,7 +60,7 @@ export class ChallengeEditHtmlComponent implements OnInit {
         }
         console.log(this.html);
       },
-      err =>{},
+      err =>{console.log(err)},
       ()=>{this.showButton = true});
     });
   // }catch(e){}

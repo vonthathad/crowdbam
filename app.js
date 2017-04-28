@@ -42,8 +42,8 @@ app.use(session({
   secret: "CROWDBAM"
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/dist')));
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public/dist')));
 app.use(express.static(path.join(__dirname, 'public/uploaded')));
 app.use(passport.initialize());
 // app.use(passport.session());

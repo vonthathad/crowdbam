@@ -1,5 +1,6 @@
 module.exports = {
-    database: 'mongodb://admin:crowdbam123@188.166.247.131:63432/crowdbam',
+    // database: 'mongodb://admin:crowdbam123@188.166.247.131:63432/crowdbam',
+    database: 'mongodb://localhost:27017/crowdbam',
     key: {
         privateKey: 'PRIVATEKEYGOESHERE',
         tokenExpiry: 1 * 30 * 1000 * 60 //1 hour
@@ -27,7 +28,8 @@ module.exports = {
         resetPasswordUrl: "action/reset"
     },
     server: {
-        host: process.env.PROTOCOL + '://' + process.env.CHANNEL + '.' + process.env.DOMAIN,
+        // host: process.env.PROTOCOL + '://' + process.env.CHANNEL + '.' + process.env.DOMAIN,
+        host: 'http://localhost:8456',
         port: process.env.PORT,
         channel: process.env.CHANNEL
     },
